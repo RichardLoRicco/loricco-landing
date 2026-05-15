@@ -7,7 +7,7 @@ const values = [
   {
     title: "Craft over volume",
     description:
-      "Every app we build gets our full attention. We'd rather ship three great apps than thirty forgettable ones.",
+      "Every app we build gets our full attention. We'd rather ship a few great apps than thirty forgettable ones.",
   },
   {
     title: "Design is the product",
@@ -25,13 +25,14 @@ const mascots = [
   { src: "/apps/atlas/icon.png", alt: "Atlas mascot", color: "#B08630" },
   { src: "/apps/grilltonight/icon.png", alt: "Grill Tonight icon", color: "#D4652A" },
   { src: "/apps/milo/icon.png", alt: "Milo mascot", color: "#6FA3AB" },
+  { src: "/apps/claro/icon.png", alt: "Claro mascot", color: "#6B8F71" },
 ];
 
 export default function About() {
   return (
-    <section id="about" className="relative px-6 py-32">
+    <section id="about" className="relative scroll-mt-24 px-6 py-32">
       {/* Divider line */}
-      <div className="mx-auto mb-32 max-w-6xl border-t border-border-light" />
+      <div className="mx-auto mb-20 max-w-6xl border-t border-border-light" />
 
       <div className="mx-auto max-w-6xl">
         <div className="grid gap-16 lg:grid-cols-2 lg:gap-24">
@@ -79,8 +80,8 @@ export default function About() {
                 <p className="text-sm font-semibold text-foreground">
                   Richard LoRicco
                 </p>
-                <p className="text-xs leading-relaxed text-text-muted">
-                  Software engineer, recovering attorney, and builder of things people actually use.
+                <p className="text-sm leading-relaxed text-text-secondary">
+                  Software engineer. JD. MBA. Open-source contributor. I build apps and help startups and small businesses put AI and software to work.
                 </p>
               </div>
             </motion.div>

@@ -14,7 +14,7 @@ const apps = [
     image: "/apps/atlas/mascot.png",
     imageAlt: "Atlas the bear mascot",
     imageSize: 220,
-    url: "https://atlas-landing-puce.vercel.app/",
+    url: "https://atlas.loriccoandco.com/",
     color: "#B08630",
     colorGlow: "rgba(176, 134, 48, 0.12)",
     colorLight: "rgba(176, 134, 48, 0.06)",
@@ -52,11 +52,27 @@ const apps = [
     colorLight: "rgba(111, 163, 171, 0.06)",
     colorBorder: "rgba(111, 163, 171, 0.15)",
   },
+  {
+    number: "04",
+    name: "Claro",
+    tagline: "Quit drinking, one day at a time.",
+    category: "Health & Wellness",
+    description:
+      "A calm sobriety companion for cravings, streaks, guided breathing, and no-shame recovery support.",
+    image: "/apps/claro/mascot.png",
+    imageAlt: "Claro the elephant mascot waving",
+    imageSize: 200,
+    url: "https://claro.loriccoandco.com/",
+    color: "#6B8F71",
+    colorGlow: "rgba(107, 143, 113, 0.12)",
+    colorLight: "rgba(107, 143, 113, 0.06)",
+    colorBorder: "rgba(107, 143, 113, 0.15)",
+  },
 ];
 
 export default function Portfolio() {
   return (
-    <section id="apps" className="relative px-6 py-32">
+    <section id="apps" className="relative scroll-mt-24 px-6 py-32">
       <div className="mx-auto max-w-6xl">
         {/* Section header */}
         <motion.div
@@ -75,13 +91,14 @@ export default function Portfolio() {
         </motion.div>
 
         {/* App cards — visual grid */}
-        <div className="grid gap-6 md:grid-cols-3">
+        <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-4">
           {apps.map((app, i) => (
             <motion.a
               key={app.name}
               href={app.url}
               target="_blank"
               rel="noopener noreferrer"
+              aria-label={`${app.name}: ${app.tagline} Opens in a new tab.`}
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
@@ -158,18 +175,19 @@ export default function Portfolio() {
                 {/* Learn more + accent line */}
                 <div className="mt-6 flex items-center gap-2">
                   <span
-                    className="text-xs font-medium opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                    className="text-xs font-medium opacity-60 transition-opacity duration-300 md:opacity-0 md:group-hover:opacity-100"
                     style={{ color: app.color }}
                   >
                     Learn more
                   </span>
                   <svg
-                    className="h-3 w-3 opacity-0 transition-all duration-300 group-hover:translate-x-1 group-hover:opacity-100"
+                    className="h-3 w-3 opacity-60 transition-all duration-300 md:opacity-0 md:group-hover:translate-x-1 md:group-hover:opacity-100"
                     style={{ color: app.color }}
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
                     strokeWidth={2}
+                    aria-hidden="true"
                   >
                     <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>

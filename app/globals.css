@@ -6,7 +6,7 @@
   --color-surface: #121214;
   --color-surface-elevated: #1A1A1E;
   --color-text-secondary: #8A8A8E;
-  --color-text-muted: #4A4A4E;
+  --color-text-muted: #767679;
   --color-border: #2A2A2E;
   --color-border-light: #1E1E22;
   --color-cream: #E8DCC8;
@@ -25,6 +25,8 @@ body {
   background: var(--color-background);
   color: var(--color-foreground);
   font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-border) var(--color-background);
 }
 
 /* ── Subtle grain texture ── */
@@ -112,4 +114,13 @@ body::after {
   outline: 2px solid var(--color-cream);
   outline-offset: 2px;
   border-radius: 4px;
+}
+
+/* ── Forced colors (Windows High Contrast) ── */
+@media (forced-colors: active) {
+  .text-cream-gradient {
+    -webkit-text-fill-color: unset;
+    background: none;
+    color: LinkText;
+  }
 }

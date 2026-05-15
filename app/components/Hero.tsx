@@ -4,9 +4,9 @@ import { motion } from "motion/react";
 
 export default function Hero() {
   return (
-    <section className="relative flex min-h-screen items-center justify-center overflow-hidden px-6">
+    <section aria-label="Introduction" className="relative flex min-h-screen items-center justify-center overflow-hidden px-6">
       {/* Background atmosphere */}
-      <div className="pointer-events-none absolute inset-0">
+      <div className="pointer-events-none absolute inset-0" aria-hidden="true">
         {/* Radial glow — warm cream center */}
         <div
           className="animate-pulse-soft absolute left-1/2 top-1/3 h-[600px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full"
@@ -31,11 +31,11 @@ export default function Hero() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
           className="mb-8 inline-flex items-center gap-2 rounded-full border border-border px-4 py-1.5"
         >
           <span className="h-1.5 w-1.5 rounded-full bg-cream" />
-          <span className="text-xs font-medium tracking-widest text-text-secondary uppercase">
+          <span className="text-xs font-medium tracking-widest text-text-muted uppercase">
             App Development Studio
           </span>
         </motion.div>
@@ -44,8 +44,8 @@ export default function Hero() {
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.6 }}
-          className="font-display text-5xl font-extrabold leading-[1.05] tracking-tight sm:text-7xl md:text-8xl"
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="font-display text-5xl font-bold leading-[1.05] tracking-tight sm:text-7xl md:text-7xl"
         >
           LoRicco{" "}
           <span className="text-cream-gradient">&</span>{" "}
@@ -56,19 +56,19 @@ export default function Hero() {
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.9 }}
+          transition={{ duration: 0.5, delay: 0.5 }}
           className="mx-auto mt-6 max-w-lg text-lg leading-relaxed text-text-secondary sm:text-xl"
         >
-          We craft mobile experiences that people
+          We build software and partner with
           <br className="hidden sm:block" />
-          {" "}reach for every day.
+          {" "}startups on AI and engineering.
         </motion.p>
 
         {/* CTA */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 1.1 }}
+          transition={{ duration: 0.5, delay: 0.6 }}
           className="mt-10 flex items-center justify-center gap-4"
         >
           <a
@@ -82,6 +82,7 @@ export default function Hero() {
               viewBox="0 0 24 24"
               stroke="currentColor"
               strokeWidth={2}
+              aria-hidden="true"
             >
               <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
             </svg>
@@ -93,8 +94,9 @@ export default function Hero() {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.6, duration: 0.8 }}
+        transition={{ delay: 1.0, duration: 0.6 }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2"
+        aria-hidden="true"
       >
         <div className="flex flex-col items-center gap-2">
           <div className="h-8 w-px bg-gradient-to-b from-transparent to-text-muted" />

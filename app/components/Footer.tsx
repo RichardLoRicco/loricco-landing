@@ -1,9 +1,10 @@
 import Image from "next/image";
 
 const appLinks = [
-  { name: "Atlas", icon: "/apps/atlas/icon.png", color: "#B08630", url: "https://atlas-landing-puce.vercel.app/" },
+  { name: "Atlas", icon: "/apps/atlas/icon.png", color: "#B08630", url: "https://atlas.loriccoandco.com/" },
   { name: "Grill Tonight", icon: "/apps/grilltonight/icon.png", color: "#D4652A", url: "https://grilltonight-landing.vercel.app/" },
   { name: "Milo", icon: "/apps/milo/icon.png", color: "#6FA3AB", url: "https://quitwithmilo.com/" },
+  { name: "Claro", icon: "/apps/claro/icon.png", color: "#6B8F71", url: "https://claro.loriccoandco.com/" },
 ];
 
 export default function Footer() {
@@ -26,8 +27,8 @@ export default function Footer() {
                   href={app.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group relative"
-                  title={app.name}
+                  className="group relative p-1.5"
+                  aria-label={`${app.name} — opens in a new tab`}
                 >
                   <div className="h-8 w-8 overflow-hidden rounded-lg border border-border-light transition-all duration-300 group-hover:border-border group-hover:scale-110">
                     <Image
@@ -51,7 +52,7 @@ export default function Footer() {
           </p>
           <a
             href="mailto:admin@loriccoandco.com"
-            className="text-xs text-text-muted transition-colors duration-300 hover:text-cream"
+            className="text-xs text-text-secondary underline decoration-text-muted transition-colors duration-300 hover:text-cream"
           >
             admin@loriccoandco.com
           </a>
