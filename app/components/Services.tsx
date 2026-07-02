@@ -8,7 +8,7 @@ const services = [
     verb: "Build",
     title: "Websites & Software",
     description:
-      "Fast, modern websites for businesses that want to be found — structured so search engines rank them and AI assistants like ChatGPT recommend them. When you need more than a site, we build custom web apps too.",
+      "Fast, modern websites for businesses that want to be found. We structure them so search engines rank them and AI assistants like ChatGPT recommend them. When you need more than a site, we build custom web apps too.",
     offerings: [
       "Web design & development",
       "SEO & site structure best practices",
@@ -41,10 +41,10 @@ const services = [
     verb: "Integrate",
     title: "AI Consulting & Integration",
     description:
-      "We help companies put AI to work in their products, websites, and internal workflows — from new features to automated pipelines. We'll be straight with you about what AI can do and what it can't.",
+      "We help companies put AI to work in their products, websites, and internal workflows, from new features to automated pipelines. We'll be straight with you about what AI can do and what it can't.",
     offerings: [
       "AI strategy & roadmaps",
-      "AI-powered product features",
+      "AI product features",
       "Workflow & pipeline automation",
       "Agents, RAG & search systems",
     ],
@@ -76,7 +76,7 @@ const services = [
     verb: "Advise",
     title: "Engineering & Business Consulting",
     description:
-      "Engineering and business strategy from one advisor — a software engineer with an MBA and JD who's worked in both the business and legal worlds. Plus AI training for teams.",
+      "Engineering and business strategy from one advisor: a software engineer with an MBA and JD who's worked in both the business and legal worlds. Plus AI training for teams.",
     offerings: [
       "Architecture & code reviews",
       "Pitch decks, projections & competitive analysis",
@@ -126,8 +126,8 @@ export default function Services() {
             <span className="text-cream-gradient">Advise.</span>
           </h2>
           <p className="mt-6 text-lg leading-relaxed text-text-secondary">
-            Whether you&apos;re a startup or a small business, client work
-            falls into three lanes. Here&apos;s what each one covers.
+            Client work falls into three lanes. Here&apos;s what each one
+            covers.
           </p>
         </motion.div>
 
@@ -156,7 +156,7 @@ export default function Services() {
                   {service.icon}
                 </div>
                 <span className="font-display text-xs font-bold tracking-widest text-cream/40 uppercase">
-                  {service.number} — {service.verb}
+                  {service.number} · {service.verb}
                 </span>
               </div>
 

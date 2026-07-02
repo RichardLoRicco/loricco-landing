@@ -12,7 +12,7 @@ const values = [
   {
     title: "Design is the product",
     description:
-      "We don't treat design as a layer on top of engineering. The interface is the experience — it has to feel right.",
+      "We don't treat design as a layer on top of engineering. The interface is the experience, and it has to feel right.",
   },
   {
     title: "Ship and iterate",
@@ -55,7 +55,7 @@ export default function About() {
             <p className="mt-6 max-w-md text-lg leading-relaxed text-text-secondary">
               LoRicco & Co is an independent software studio. We ship our own
               apps and work directly with clients on websites, AI, and
-              strategy. Either way, we care about the details — from how a
+              strategy. Either way, we care about the details, from how a
               button feels to how a business gets found.
             </p>
 

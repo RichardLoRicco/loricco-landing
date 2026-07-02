@@ -6,7 +6,7 @@ export default function StructuredData() {
     name: "LoRicco & Co",
     url: "https://loriccoandco.com",
     description:
-      "Independent software studio and consultancy. LoRicco & Co builds websites optimized for search and AI discoverability, integrates AI into products and workflows, and advises startups and small businesses on engineering and business strategy — while shipping its own iOS apps.",
+      "Independent software studio and consultancy. LoRicco & Co builds websites optimized for search and AI discoverability, integrates AI into products and workflows, and advises startups and small businesses on engineering and business strategy. The studio also ships its own iOS apps.",
     email: "admin@loriccoandco.com",
     address: {
       "@type": "PostalAddress",
@@ -70,7 +70,7 @@ export default function StructuredData() {
             "@type": "Service",
             name: "AI Consulting & Integration",
             description:
-              "AI strategy, product features, workflow automation, and agent/RAG systems — integrating AI into products, websites, and internal operations.",
+              "AI strategy, product features, workflow automation, and agent/RAG systems for products, websites, and internal operations.",
           },
         },
         {

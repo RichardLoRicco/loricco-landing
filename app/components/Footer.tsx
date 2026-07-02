@@ -28,7 +28,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group relative p-1.5"
-                  aria-label={`${app.name} — opens in a new tab`}
+                  aria-label={`${app.name}, opens in a new tab`}
                 >
                   <div className="h-8 w-8 overflow-hidden rounded-lg border border-border-light transition-all duration-300 group-hover:border-border group-hover:scale-110">
                     <Image

@@ -59,7 +59,7 @@ export default function Hero() {
           transition={{ duration: 0.5, delay: 0.5 }}
           className="mx-auto mt-6 max-w-lg text-lg leading-relaxed text-text-secondary sm:text-xl"
         >
-          We ship our own apps — and build websites, AI, and
+          We ship our own apps and build websites, AI, and
           <br className="hidden sm:block" />
           {" "}strategy for businesses that want the same craft.
         </motion.p>

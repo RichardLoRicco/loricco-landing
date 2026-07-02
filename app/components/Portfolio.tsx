@@ -10,7 +10,7 @@ const apps = [
     tagline: "Your daily fuel to stay moving.",
     category: "Fitness & Motivation",
     description:
-      "Swipe through powerful fitness quotes, build unbreakable streaks, and let Atlas the bear keep you accountable — one day at a time.",
+      "Swipe through powerful fitness quotes, build unbreakable streaks, and let Atlas the bear keep you accountable, one day at a time.",
     image: "/apps/atlas/mascot.png",
     imageAlt: "Atlas the bear mascot",
     imageSize: 220,
@@ -26,9 +26,9 @@ const apps = [
     tagline: "Should you grill tonight?",
     category: "Weather & Utility",
     description:
-      "Real-time weather analysis, a clear YES/NO verdict, and practical tips — so you stop guessing and start grilling.",
+      "Real-time weather analysis, a clear YES/NO verdict, and practical tips so you stop guessing and start grilling.",
     image: "/apps/grilltonight/icon.png",
-    imageAlt: "Grill Tonight app icon — a blazing grill",
+    imageAlt: "Grill Tonight app icon, a blazing grill",
     imageSize: 180,
     url: "https://grilltonight-landing.vercel.app/",
     color: "#D4652A",
@@ -42,7 +42,7 @@ const apps = [
     tagline: "Quit nicotine, one breath at a time.",
     category: "Health & Wellness",
     description:
-      "A calm companion through cravings — guided breathing, smart tracking, and gentle motivation to help you quit for good.",
+      "A calm companion through cravings, with guided breathing, smart tracking, and gentle motivation to help you quit for good.",
     image: "/apps/milo/mascot.png",
     imageAlt: "Milo the otter mascot waving",
     imageSize: 200,
@@ -89,8 +89,8 @@ export default function Portfolio() {
             We ship our own products.
           </h2>
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-text-secondary">
-            Everything we recommend to clients, we practice here — live on the
-            App Store, in real users&apos; hands.
+            Everything we recommend to clients, we practice here. These apps
+            are live on the App Store, in real users&apos; hands.
           </p>
         </motion.div>
 
