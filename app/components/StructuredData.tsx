@@ -116,6 +116,8 @@ export default function StructuredData() {
         applicationCategory: "HealthApplication",
         operatingSystem: "iOS",
         url: "https://atlas.loriccoandco.com/",
+        installUrl:
+          "https://apps.apple.com/us/app/atlas-fitness-motivation/id6760481617",
         description:
           "Daily fitness motivation app with quotes, streaks, and accountability.",
       },
@@ -125,7 +127,9 @@ export default function StructuredData() {
         name: "Grill Tonight",
         applicationCategory: "UtilitiesApplication",
         operatingSystem: "iOS",
-        url: "https://apps.apple.com/us/app/grill-tonight/id6760918522",
+        url: "https://grilltonight-landing.vercel.app/",
+        installUrl:
+          "https://apps.apple.com/us/app/grill-tonight/id6760918522",
         description:
           "Real-time weather analysis with a clear yes/no verdict on whether to grill tonight.",
       },
@@ -135,7 +139,9 @@ export default function StructuredData() {
         name: "Milo",
         applicationCategory: "HealthApplication",
         operatingSystem: "iOS",
-        url: "https://apps.apple.com/us/app/milo-quit-vaping-smoking/id6758960403",
+        url: "https://quitwithmilo.com/",
+        installUrl:
+          "https://apps.apple.com/us/app/milo-quit-vaping-smoking/id6758960403",
         description:
           "Quit-nicotine companion with craving support, streak tracking, and guided breathing.",
       },
@@ -146,6 +152,8 @@ export default function StructuredData() {
         applicationCategory: "HealthApplication",
         operatingSystem: "iOS",
         url: "https://claro.loriccoandco.com/",
+        installUrl:
+          "https://apps.apple.com/us/app/claro-quit-drinking-tracker/id6762022094",
         description:
           "Sobriety companion for quitting alcohol with cravings support, streaks, and guided breathing.",
       },
