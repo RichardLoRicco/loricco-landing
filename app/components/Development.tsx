@@ -75,8 +75,8 @@ export default function Development() {
             className="max-w-xl text-base leading-relaxed text-text-secondary lg:justify-self-end"
           >
             A few more apps are moving through build, polish, and launch prep.
-            They are not all public yet, but they are part of the portfolio we
-            are actively shaping.
+            They&apos;re not all public yet, but they&apos;re part of the
+            portfolio we&apos;re actively shaping.
           </motion.p>
         </div>
 

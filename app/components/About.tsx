@@ -7,7 +7,7 @@ const values = [
   {
     title: "Craft over volume",
     description:
-      "Every app we build gets our full attention. We'd rather ship a few great apps than thirty forgettable ones.",
+      "Every app and every client project gets our full attention. We'd rather ship a few great things than thirty forgettable ones.",
   },
   {
     title: "Design is the product",
@@ -17,7 +17,7 @@ const values = [
   {
     title: "Ship and iterate",
     description:
-      "We believe in getting real apps into real hands. Feedback from users teaches us more than any roadmap.",
+      "We believe in shipping early and improving from there. Feedback from users teaches us more than any roadmap.",
   },
 ];
 
@@ -81,7 +81,7 @@ export default function About() {
                   Richard LoRicco
                 </p>
                 <p className="text-sm leading-relaxed text-text-secondary">
-                  Software engineer. JD. MBA. Open-source contributor. I build apps and help startups and small businesses put AI and software to work.
+                  Software engineer. JD. MBA. Open-source contributor. I build apps and websites, and help startups and small businesses with AI and strategy.
                 </p>
               </div>
             </motion.div>

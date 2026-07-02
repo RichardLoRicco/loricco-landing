@@ -126,8 +126,8 @@ export default function Services() {
             <span className="text-cream-gradient">Advise.</span>
           </h2>
           <p className="mt-6 text-lg leading-relaxed text-text-secondary">
-            Websites, AI, and strategy for startups and small businesses —
-            built with the same craft we put into our own apps.
+            Whether you&apos;re a startup or a small business, client work
+            falls into three lanes. Here&apos;s what each one covers.
           </p>
         </motion.div>
 

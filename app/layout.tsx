@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "LoRicco & Co — Software Studio & Consultancy",
     description:
-      "Web development, AI consulting, and engineering & business advisory for startups and small businesses — from an independent studio that ships its own apps.",
+      "Web development, AI integration, and engineering & business consulting for startups and small businesses — from an independent studio that ships its own apps.",
     type: "website",
     siteName: "LoRicco & Co",
     locale: "en_US",
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "LoRicco & Co — Software Studio & Consultancy",
     description:
-      "Web development, AI consulting, and engineering & business advisory for startups and small businesses — from an independent studio that ships its own apps.",
+      "Web development, AI integration, and engineering & business consulting for startups and small businesses — from an independent studio that ships its own apps.",
   },
   alternates: {
     canonical: "/",
