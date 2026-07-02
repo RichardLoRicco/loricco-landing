@@ -19,22 +19,22 @@ const syne = Syne({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://loriccoandco.com"),
-  title: "LoRicco & Co — iOS App Studio & AI Consulting",
+  title: "LoRicco & Co — Software Studio & Consultancy",
   description:
-    "LoRicco & Co is an independent iOS app studio and AI consulting practice. Explore our apps — Atlas, Grill Tonight, Milo, and Claro — plus in-development work like BowelBuddy, Haven, and Hark.",
+    "LoRicco & Co builds websites, integrates AI, and advises on engineering and business strategy for startups and small businesses — and ships its own iOS apps, including Atlas, Grill Tonight, Milo, and Claro. Based in Connecticut.",
   openGraph: {
-    title: "LoRicco & Co — iOS App Studio & AI Consulting",
+    title: "LoRicco & Co — Software Studio & Consultancy",
     description:
-      "Independent iOS app studio and AI consulting practice. We build thoughtful apps and help companies integrate AI.",
+      "Web development, AI consulting, and engineering & business advisory for startups and small businesses — from an independent studio that ships its own apps.",
     type: "website",
     siteName: "LoRicco & Co",
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "LoRicco & Co — iOS App Studio & AI Consulting",
+    title: "LoRicco & Co — Software Studio & Consultancy",
     description:
-      "Independent iOS app studio and AI consulting practice. We build thoughtful apps and help companies integrate AI.",
+      "Web development, AI consulting, and engineering & business advisory for startups and small businesses — from an independent studio that ships its own apps.",
   },
   alternates: {
     canonical: "/",

@@ -47,16 +47,16 @@ export default function About() {
               About
             </span>
             <h2 className="font-display mt-3 text-4xl font-bold leading-[1.1] tracking-tight sm:text-5xl">
-              We build apps
+              We build software
               <br />
               <span className="text-cream-gradient">people love</span>{" "}
               to use.
             </h2>
             <p className="mt-6 max-w-md text-lg leading-relaxed text-text-secondary">
-              LoRicco & Co is an independent app studio focused on building
-              thoughtful, well-crafted mobile experiences. We care about the
-              details — from how a button feels to how a feature fits into
-              someone&apos;s daily life.
+              LoRicco & Co is an independent software studio. We ship our own
+              apps and work directly with clients on websites, AI, and
+              strategy. Either way, we care about the details — from how a
+              button feels to how a business gets found.
             </p>
 
             {/* Founder */}

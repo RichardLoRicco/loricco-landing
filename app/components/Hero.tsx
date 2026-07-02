@@ -36,7 +36,7 @@ export default function Hero() {
         >
           <span className="h-1.5 w-1.5 rounded-full bg-cream" />
           <span className="text-xs font-medium tracking-widest text-text-muted uppercase">
-            App Development Studio
+            Software Studio &amp; Consultancy
           </span>
         </motion.div>
 
@@ -59,9 +59,9 @@ export default function Hero() {
           transition={{ duration: 0.5, delay: 0.5 }}
           className="mx-auto mt-6 max-w-lg text-lg leading-relaxed text-text-secondary sm:text-xl"
         >
-          We build software and partner with
+          We ship our own apps — and build websites, AI, and
           <br className="hidden sm:block" />
-          {" "}startups on AI and engineering.
+          {" "}strategy for businesses that want the same craft.
         </motion.p>
 
         {/* CTA */}
@@ -72,10 +72,10 @@ export default function Hero() {
           className="mt-10 flex items-center justify-center gap-4"
         >
           <a
-            href="#apps"
+            href="#services"
             className="group inline-flex items-center gap-2 rounded-full bg-cream px-6 py-3 text-sm font-semibold text-background transition-all duration-300 hover:bg-foreground hover:shadow-[0_0_30px_rgba(232,220,200,0.15)]"
           >
-            View our apps
+            Work with us
             <svg
               className="h-4 w-4 transition-transform duration-300 group-hover:translate-y-0.5"
               fill="none"
@@ -86,6 +86,12 @@ export default function Hero() {
             >
               <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
             </svg>
+          </a>
+          <a
+            href="#apps"
+            className="inline-flex items-center gap-2 rounded-full border border-border px-6 py-3 text-sm font-semibold text-text-secondary transition-all duration-300 hover:border-cream/40 hover:text-foreground"
+          >
+            See our apps
           </a>
         </motion.div>
       </div>

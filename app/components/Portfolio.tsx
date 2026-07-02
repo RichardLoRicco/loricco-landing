@@ -83,11 +83,15 @@ export default function Portfolio() {
           className="mb-20"
         >
           <span className="text-xs font-medium tracking-widest text-text-muted uppercase">
-            Portfolio
+            Our Apps
           </span>
           <h2 className="font-display mt-3 text-4xl font-bold tracking-tight sm:text-5xl">
-            Our Apps
+            We ship our own products.
           </h2>
+          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-text-secondary">
+            Everything we recommend to clients, we practice here — live on the
+            App Store, in real users&apos; hands.
+          </p>
         </motion.div>
 
         {/* App cards — visual grid */}
