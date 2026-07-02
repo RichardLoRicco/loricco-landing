@@ -5,9 +5,49 @@ import { motion } from "motion/react";
 const services = [
   {
     number: "01",
-    title: "AI Integration",
+    verb: "Build",
+    title: "Websites & Software",
     description:
-      "We help companies weave AI into their products, websites, and internal workflows — not as a gimmick, but as a real multiplier. From intelligent features to automated pipelines, we build AI that actually ships.",
+      "Fast, modern websites for businesses that want to be found. We structure them so search engines rank them and AI assistants like ChatGPT recommend them. When you need more than a site, we build custom web apps too.",
+    offerings: [
+      "Web design & development",
+      "SEO & site structure best practices",
+      "AI discoverability (AEO)",
+      "Custom web apps",
+    ],
+    icon: (
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden="true"
+      >
+        {/* Browser window icon */}
+        <rect x="2" y="4" width="20" height="16" rx="2" />
+        <line x1="2" y1="9" x2="22" y2="9" />
+        <path d="M5.5 6.5h.01" />
+        <path d="M8.5 6.5h.01" />
+        <path d="M10 17l3-5 3 5" opacity="0.6" />
+      </svg>
+    ),
+  },
+  {
+    number: "02",
+    verb: "Integrate",
+    title: "AI Consulting & Integration",
+    description:
+      "We help companies put AI to work in their products, websites, and internal workflows, from new features to automated pipelines. We'll be straight with you about what AI can do and what it can't.",
+    offerings: [
+      "AI strategy & roadmaps",
+      "AI product features",
+      "Workflow & pipeline automation",
+      "Agents, RAG & search systems",
+    ],
     icon: (
       <svg
         width="24"
@@ -32,34 +72,17 @@ const services = [
     ),
   },
   {
-    number: "02",
-    title: "Software Engineering",
-    description:
-      "Architecture reviews, code quality audits, and technical strategy for teams that want to build things right. We bring the same craft-first mindset from our apps to your engineering challenges.",
-    icon: (
-      <svg
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        aria-hidden="true"
-      >
-        {/* Code / architecture icon */}
-        <polyline points="16 18 22 12 16 6" />
-        <polyline points="8 6 2 12 8 18" />
-        <line x1="12" y1="2" x2="12" y2="22" opacity="0.3" />
-      </svg>
-    ),
-  },
-  {
     number: "03",
-    title: "AI Education & Training",
+    verb: "Advise",
+    title: "Engineering & Business Consulting",
     description:
-      "Hands-on workshops and training for teams ready to understand what AI can actually do — and what it can't. We cut through the noise and teach practical skills your people can use today.",
+      "Engineering and business strategy from one advisor: a software engineer with an MBA and JD who's worked in both the business and legal worlds. Plus AI training for teams.",
+    offerings: [
+      "Architecture & code reviews",
+      "Pitch decks, projections & competitive analysis",
+      "Startup & small business strategy",
+      "AI workshops & team training",
+    ],
     icon: (
       <svg
         width="24"
@@ -72,12 +95,9 @@ const services = [
         strokeLinejoin="round"
         aria-hidden="true"
       >
-        {/* Lightbulb icon */}
-        <path d="M9 18h6" />
-        <path d="M10 22h4" />
-        <path d="M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z" />
-        <line x1="12" y1="9" x2="12" y2="12" />
-        <line x1="10" y1="11" x2="14" y2="11" />
+        {/* Compass icon */}
+        <circle cx="12" cy="12" r="10" />
+        <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" />
       </svg>
     ),
   },
@@ -85,7 +105,7 @@ const services = [
 
 export default function Services() {
   return (
-    <section id="services" className="relative scroll-mt-24 px-6 py-32" aria-label="Consulting services">
+    <section id="services" className="relative scroll-mt-24 px-6 py-32" aria-label="Services">
       {/* Divider line */}
       <div className="mx-auto mb-20 max-w-6xl border-t border-border-light" />
 
@@ -99,16 +119,15 @@ export default function Services() {
           className="mb-20 max-w-2xl"
         >
           <span className="text-xs font-medium tracking-widest text-text-muted uppercase">
-            Services
+            What we do
           </span>
           <h2 className="font-display mt-3 text-4xl font-bold leading-[1.1] tracking-tight sm:text-5xl">
-            Beyond apps,{" "}
-            <span className="text-cream-gradient">we consult.</span>
+            Build. Integrate.{" "}
+            <span className="text-cream-gradient">Advise.</span>
           </h2>
           <p className="mt-6 text-lg leading-relaxed text-text-secondary">
-            The same engineering rigor and design thinking behind our apps —
-            applied to your team&apos;s toughest problems. AI strategy,
-            architecture, and education for companies that build.
+            Client work falls into three lanes. Here&apos;s what each one
+            covers.
           </p>
         </motion.div>
 
@@ -131,13 +150,13 @@ export default function Services() {
                 }}
               />
 
-              {/* Icon + number row */}
+              {/* Icon + verb row */}
               <div className="relative mb-6 flex items-center gap-4">
                 <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-border-light bg-surface-elevated text-cream transition-colors duration-300 group-hover:border-cream/20">
                   {service.icon}
                 </div>
-                <span className="font-display text-xs font-bold text-cream/40">
-                  {service.number}
+                <span className="font-display text-xs font-bold tracking-widest text-cream/40 uppercase">
+                  {service.number} · {service.verb}
                 </span>
               </div>
 
@@ -147,9 +166,25 @@ export default function Services() {
               </h3>
 
               {/* Description */}
-              <p className="relative mt-3 flex-1 text-sm leading-relaxed text-text-secondary">
+              <p className="relative mt-3 text-sm leading-relaxed text-text-secondary">
                 {service.description}
               </p>
+
+              {/* Offerings */}
+              <ul className="relative mt-6 flex flex-1 flex-col gap-2.5">
+                {service.offerings.map((offering) => (
+                  <li
+                    key={offering}
+                    className="flex items-start gap-2.5 text-sm text-text-secondary"
+                  >
+                    <span
+                      className="mt-[7px] h-1 w-1 shrink-0 rounded-full bg-cream/50"
+                      aria-hidden="true"
+                    />
+                    {offering}
+                  </li>
+                ))}
+              </ul>
 
               {/* Subtle bottom accent line on hover */}
               <div className="relative mt-8 overflow-hidden rounded-full">
@@ -172,7 +207,7 @@ export default function Services() {
             href="#contact"
             className="group inline-flex items-center gap-2 text-sm font-medium text-cream transition-colors duration-300 hover:text-foreground"
           >
-            Interested in working together?
+            Tell us about your project
             <svg
               className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
               fill="none"
@@ -189,7 +224,7 @@ export default function Services() {
             </svg>
           </a>
           <p className="mt-2 text-xs text-text-muted">
-            Let&apos;s start a conversation.
+            Most projects start with a short conversation.
           </p>
         </motion.div>
       </div>

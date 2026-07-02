@@ -29,14 +29,14 @@ export default function Contact() {
               Get in touch
             </span>
             <h2 className="font-display mx-auto mt-4 max-w-lg text-3xl font-bold tracking-tight sm:text-5xl">
-              Have an idea?
+              Have a project?
               <br />
               <span className="text-cream-gradient">Let&apos;s talk.</span>
             </h2>
             <p className="mx-auto mt-4 max-w-md text-text-secondary">
-              Whether you have feedback on one of our apps, want to
-              collaborate, or just want to say hello — we&apos;d love to hear
-              from you.
+              Need a website that gets found, help putting AI to work, or a
+              second opinion on your product or business? Tell us what
+              you&apos;re working on. App feedback and hellos are welcome too.
             </p>
 
             <motion.div
