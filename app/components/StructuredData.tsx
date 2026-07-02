@@ -97,7 +97,7 @@ export default function StructuredData() {
             "@type": "Service",
             name: "AI Education & Training",
             description:
-              "Hands-on AI workshops and practical training for teams.",
+              "AI workshops and practical training for teams.",
           },
         },
       ],

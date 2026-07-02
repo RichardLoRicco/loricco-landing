@@ -41,7 +41,7 @@ const services = [
     verb: "Integrate",
     title: "AI Consulting & Integration",
     description:
-      "We help companies weave AI into their products, websites, and internal workflows — not as a gimmick, but as a real multiplier. From intelligent features to automated pipelines, we build AI that actually ships.",
+      "We help companies put AI to work in their products, websites, and internal workflows — from new features to automated pipelines. We'll be straight with you about what AI can do and what it can't.",
     offerings: [
       "AI strategy & roadmaps",
       "AI-powered product features",
@@ -76,7 +76,7 @@ const services = [
     verb: "Advise",
     title: "Engineering & Business Consulting",
     description:
-      "Engineering strategy and business strategy from one advisor — a software engineer with an MBA and JD who has consulted for the Connecticut Small Business Development Center. Plus hands-on AI training for teams ready to use it.",
+      "Engineering and business strategy from one advisor — a software engineer with an MBA and JD who's worked in both the business and legal worlds. Plus AI training for teams.",
     offerings: [
       "Architecture & code reviews",
       "Pitch decks, projections & competitive analysis",
