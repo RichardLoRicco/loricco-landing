@@ -191,7 +191,7 @@ export default function Studio() {
           </h2>
           <p className="mt-5 text-lg leading-relaxed text-body-muted">
             Every recommendation I make to clients gets tested here first.
-            Seven products designed, built, and operated end to end — App
+            Seven products designed, built, and operated end to end: App
             Store review, subscriptions, analytics, support, all of it.
           </p>
         </motion.div>

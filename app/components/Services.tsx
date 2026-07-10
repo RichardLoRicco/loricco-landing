@@ -8,7 +8,7 @@ const services = [
     title: "Website Rebuilds",
     outcome: "Credibility",
     description:
-      "Outdated WordPress or Squarespace site into a fast, modern build that makes your practice look like it's run well — because it is. SEO-safe migration included: your URLs, rankings, and search history survive the move.",
+      "Outdated WordPress or Squarespace site into a fast, modern build that makes your practice look like it's run well, because it is. SEO-safe migration included: your URLs, rankings, and search history survive the move.",
     offerings: [
       "Next.js builds",
       "SEO-safe migration",
@@ -21,7 +21,7 @@ const services = [
     title: "Content & AI-Search Visibility",
     outcome: "Discoverability",
     description:
-      "Monthly publishing that gets your firm found — in Google, and in the AI tools your clients now ask first: ChatGPT, Claude, Perplexity, AI Overviews. For law firms, every piece passes attorney-advertising compliance review.",
+      "Monthly publishing that gets your firm found, both in Google and in the AI tools your clients now ask first: ChatGPT, Claude, Perplexity, AI Overviews. For law firms, every piece passes attorney-advertising compliance review.",
     offerings: [
       "Blog & social retainers",
       "Local SEO",
@@ -34,7 +34,7 @@ const services = [
     title: "AI Consulting & Integration",
     outcome: "Ownership",
     description:
-      "Practical AI put to work inside your operations — intake, research, documentation, content workflows, internal tools. Straight answers about what AI can do and what it can't, from someone who builds with it daily.",
+      "Practical AI put to work inside your operations: intake, research, documentation, content workflows, internal tools. Straight answers about what AI can do and what it can't, from someone who builds with it daily.",
     offerings: [
       "Workflow automation",
       "AI product features",
@@ -78,7 +78,7 @@ export default function Services() {
             The work, in four registers.
           </h2>
           <p className="mt-5 text-lg leading-relaxed text-body-muted">
-            Everything below is delivered by one person — no handoffs, no
+            Everything below is delivered by one person. No handoffs, no
             account managers, no junior staff learning on your budget.
           </p>
         </motion.div>
@@ -112,7 +112,7 @@ export default function Services() {
               {/* Outcome + offerings */}
               <div className="md:pt-1">
                 <p className="font-mono text-[10px] tracking-[0.16em] text-text-muted uppercase">
-                  Outcome —{" "}
+                  Outcome /{" "}
                   <span className="text-foreground">{service.outcome}</span>
                 </p>
                 <ul className="mt-4 flex flex-wrap gap-2 md:flex-col md:gap-2.5">

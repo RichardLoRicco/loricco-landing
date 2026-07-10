@@ -26,7 +26,7 @@ export default function Contact() {
 
           <div className="relative grid gap-10 px-8 py-14 sm:px-14 sm:py-18 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
             <div>
-              <p className="kicker text-data-ink">§ Final — Get in touch</p>
+              <p className="kicker text-data-ink">§ Final / Get in touch</p>
               <h2 className="font-display mt-4 max-w-xl text-3xl font-bold leading-[1.1] tracking-tight text-data-hi sm:text-5xl">
                 Start with the{" "}
                 <span className="editorial font-medium text-cobalt-bright">
@@ -36,7 +36,7 @@ export default function Contact() {
               <p className="mt-5 max-w-lg text-[15px] leading-relaxed text-data-ink">
                 Tell me about your firm, your startup, or your site. Most
                 engagements begin with a short working session and a written
-                review of where you stand — no pitch deck, no pressure.
+                review of where you stand. No pitch deck, no pressure.
               </p>
 
               <div className="mt-9 flex flex-wrap items-center gap-5">
@@ -55,12 +55,12 @@ export default function Contact() {
             {/* Mono manifest */}
             <div className="hidden border-l border-white/10 pl-10 font-mono text-[12px] leading-[2.3] text-data-ink lg:block" aria-hidden="true">
               <p className="text-data-hi">LCO / ENGAGEMENT MANIFEST</p>
-              <p>PRINCIPAL — R.T. LoRicco</p>
-              <p>DISCIPLINES — JD · MBA · SWE</p>
-              <p>BASE — Connecticut, USA</p>
-              <p>SEQUENCE — Diagnose → Improve</p>
+              <p>PRINCIPAL / R.T. LoRicco</p>
+              <p>DISCIPLINES / JD · MBA · SWE</p>
+              <p>BASE / Connecticut, USA</p>
+              <p>SEQUENCE / Diagnose → Improve</p>
               <p>
-                STATUS —{" "}
+                STATUS /{" "}
                 <span className="text-cobalt-bright">accepting clients</span>
               </p>
             </div>

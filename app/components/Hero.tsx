@@ -144,7 +144,7 @@ export default function Hero() {
               <span className="editorial text-[15px] text-foreground">
                 The site is losing work it should be winning.
               </span>{" "}
-              Twelve findings follow, ranked by impact on inquiries — three need
+              Twelve findings follow, ranked by impact on inquiries. Three need
               attention before anything else matters.
             </p>
 

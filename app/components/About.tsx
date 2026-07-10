@@ -8,7 +8,7 @@ const principles = [
     id: "01",
     title: "Preserve what has value",
     description:
-      "A redesign should never cost you the search equity you spent years earning. URLs, rankings, and content history are assets — I treat them like an attorney treats the record.",
+      "A redesign should never cost you the search equity you spent years earning. URLs, rankings, and content history are assets. I treat them like an attorney treats the record.",
   },
   {
     id: "02",
@@ -20,7 +20,7 @@ const principles = [
     id: "03",
     title: "You own everything",
     description:
-      "Domain, code, content, analytics, accounts — all yours from day one. If we part ways, you keep a working system, not a hostage.",
+      "Domain, code, content, analytics, accounts: all yours from day one. If we part ways, you keep a working system, not a hostage.",
   },
 ];
 
@@ -43,7 +43,7 @@ export default function About() {
               <span className="editorial font-medium">One</span> desk.
             </h2>
             <p className="mt-6 max-w-lg text-lg leading-relaxed text-body-muted">
-              Most business websites fail for more than one reason — unclear
+              Most business websites fail for more than one reason: unclear
               positioning, stale content, weak technical structure, missing
               trust signals. Fixing that takes more than a designer. I look at
               the whole system: how clients decide, what search engines and AI

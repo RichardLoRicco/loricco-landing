@@ -7,7 +7,7 @@ const steps = [
     id: "01",
     verb: "Diagnose",
     detail:
-      "A written findings review of your current site and visibility — evidence first, ranked by impact on inquiries.",
+      "A written findings review of your current site and visibility. Evidence first, ranked by impact on inquiries.",
   },
   {
     id: "02",
@@ -19,7 +19,7 @@ const steps = [
     id: "03",
     verb: "Build",
     detail:
-      "Production-grade implementation with search equity preserved — URLs, redirects, structured data, Search Console.",
+      "Production-grade implementation with search equity preserved: URLs, redirects, structured data, Search Console.",
   },
   {
     id: "04",
@@ -53,7 +53,7 @@ export default function Process() {
             </h2>
           </div>
           <p className="max-w-xs font-mono text-[12px] leading-relaxed text-data-ink">
-            The same sequence runs every engagement — website, content, or AI.
+            The same sequence runs every engagement: website, content, or AI.
           </p>
         </motion.div>
 
