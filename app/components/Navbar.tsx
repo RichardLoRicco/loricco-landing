@@ -6,8 +6,8 @@ import { motion, AnimatePresence } from "motion/react";
 
 const navLinks = [
   { label: "Services", href: "#services" },
-  { label: "Apps", href: "#apps" },
-  { label: "In Development", href: "#development" },
+  { label: "How I Work", href: "#process" },
+  { label: "The Studio", href: "#studio" },
   { label: "About", href: "#about" },
   { label: "Contact", href: "#contact" },
 ];
@@ -45,12 +45,12 @@ export default function Navbar() {
   return (
     <motion.nav
       aria-label="Main navigation"
-      initial={{ opacity: 0, y: -20 }}
+      initial={{ opacity: 0, y: -12 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, delay: 0.2 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+      transition={{ duration: 0.4, delay: 0.1 }}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-background/80 backdrop-blur-xl border-b border-border-light"
+          ? "bg-background/90 backdrop-blur-xl border-b border-line"
           : "bg-transparent"
       }`}
     >
@@ -59,7 +59,7 @@ export default function Navbar() {
           href="/"
           className="font-display text-lg font-bold tracking-tight text-foreground"
         >
-          LoRicco <span className="text-cream">&</span> Co
+          LoRicco <span className="editorial font-medium text-cobalt">&</span> Co.
         </Link>
 
         {/* Desktop nav */}
@@ -68,11 +68,17 @@ export default function Navbar() {
             <a
               key={link.href}
               href={link.href}
-              className="text-sm text-text-secondary transition-colors duration-300 hover:text-foreground"
+              className="text-sm font-medium text-body-muted transition-colors duration-200 hover:text-cobalt"
             >
               {link.label}
             </a>
           ))}
+          <a
+            href="mailto:admin@loriccoandco.com"
+            className="rounded-[3px] bg-foreground px-4 py-2 text-sm font-semibold text-background transition-colors duration-200 hover:bg-cobalt"
+          >
+            Book a call
+          </a>
         </div>
 
         {/* Mobile toggle */}
@@ -107,8 +113,8 @@ export default function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3 }}
-            className="overflow-hidden border-b border-border-light bg-background/95 backdrop-blur-xl md:hidden"
+            transition={{ duration: 0.25 }}
+            className="overflow-hidden border-b border-line bg-background/95 backdrop-blur-xl md:hidden"
           >
             <div className="flex flex-col gap-4 px-6 py-6">
               {navLinks.map((link) => (
@@ -116,11 +122,18 @@ export default function Navbar() {
                   key={link.href}
                   href={link.href}
                   onClick={() => setMobileOpen(false)}
-                  className="font-display text-lg text-text-secondary transition-colors hover:text-foreground"
+                  className="font-display text-lg text-body-muted transition-colors hover:text-cobalt"
                 >
                   {link.label}
                 </a>
               ))}
+              <a
+                href="mailto:admin@loriccoandco.com"
+                onClick={() => setMobileOpen(false)}
+                className="mt-2 inline-flex w-fit rounded-[3px] bg-foreground px-4 py-2 text-sm font-semibold text-background"
+              >
+                Book a call
+              </a>
             </div>
           </motion.div>
         )}

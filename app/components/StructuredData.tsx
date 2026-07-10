@@ -6,7 +6,7 @@ export default function StructuredData() {
     name: "LoRicco & Co",
     url: "https://loriccoandco.com",
     description:
-      "Independent software studio and consultancy. LoRicco & Co builds websites optimized for search and AI discoverability, integrates AI into products and workflows, and advises startups and small businesses on engineering and business strategy. The studio also ships its own iOS apps.",
+      "LoRicco & Co rebuilds outdated websites with SEO-safe migration, runs content and AI-search visibility programs, and brings practical AI to law firms, professional practices, and startups. The principal is a Connecticut-admitted attorney, MBA, and software engineer. The studio also ships its own iOS apps.",
     email: "admin@loriccoandco.com",
     address: {
       "@type": "PostalAddress",
@@ -17,8 +17,8 @@ export default function StructuredData() {
     areaServed: "United States",
     founder: {
       "@type": "Person",
-      name: "Richard LoRicco",
-      jobTitle: "Founder & Software Engineer",
+      name: "Richard T. LoRicco",
+      jobTitle: "Principal — Attorney (LL.M., J.D., MBA) and Software Engineer",
       url: "https://www.richardloricco.com",
       sameAs: [
         "https://www.linkedin.com/in/richard-loricco-esq",
@@ -43,9 +43,10 @@ export default function StructuredData() {
       "https://linktr.ee/richardloricco",
     ],
     knowsAbout: [
-      "Web development",
+      "Website redesign and SEO-safe migration",
       "Search engine optimization",
-      "AI discoverability (answer engine optimization)",
+      "AI-search visibility (answer engine optimization, generative engine optimization)",
+      "Content strategy and attorney-advertising compliance",
       "AI integration and consulting",
       "Software architecture",
       "iOS app development",
@@ -59,9 +60,18 @@ export default function StructuredData() {
           "@type": "Offer",
           itemOffered: {
             "@type": "Service",
-            name: "Web Development & AI Discoverability",
+            name: "Website Rebuilds with SEO-Safe Migration",
             description:
-              "Design and development of fast, modern websites structured for search engine ranking and AI assistant discoverability, including SEO best practices, structured data, and custom web applications.",
+              "Redesign of outdated websites into fast, modern builds with search equity preserved: URL preservation, redirects, structured data, and Search Console setup. Serving law firms, professional practices, and local businesses.",
+          },
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Content & AI-Search Visibility",
+            description:
+              "Monthly content production with local SEO and AI-search visibility (AEO/GEO) so businesses get surfaced by ChatGPT, Claude, Perplexity, and Google AI Overviews. Attorney-advertising compliance review for law firms.",
           },
         },
         {
