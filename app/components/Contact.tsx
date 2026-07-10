@@ -4,83 +4,66 @@ import { motion } from "motion/react";
 
 export default function Contact() {
   return (
-    <section id="contact" className="relative scroll-mt-24 px-6 py-32">
+    <section id="contact" className="relative scroll-mt-24 px-6 py-28" aria-label="Contact">
       <div className="mx-auto max-w-6xl">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6 }}
-          className="relative overflow-hidden rounded-3xl border border-border-light"
+          transition={{ duration: 0.5 }}
+          className="relative overflow-hidden rounded-[4px] bg-data-bg"
         >
-          {/* Background glow */}
+          {/* Faint cobalt blueprint grid on ink */}
           <div
+            className="pointer-events-none absolute inset-0 opacity-[0.06]"
             aria-hidden="true"
-            className="animate-gradient-shift pointer-events-none absolute inset-0"
             style={{
-              background:
-                "linear-gradient(135deg, rgba(176,134,48,0.04) 0%, rgba(212,101,42,0.04) 33%, rgba(111,163,171,0.04) 66%, rgba(232,220,200,0.04) 100%)",
-              backgroundSize: "200% 200%",
+              backgroundImage:
+                "linear-gradient(rgba(143,160,255,0.6) 1px, transparent 1px), linear-gradient(90deg, rgba(143,160,255,0.6) 1px, transparent 1px)",
+              backgroundSize: "56px 56px",
             }}
           />
 
-          <div className="relative px-8 py-16 text-center sm:px-16 sm:py-24">
-            <span className="text-xs font-medium tracking-widest text-text-muted uppercase">
-              Get in touch
-            </span>
-            <h2 className="font-display mx-auto mt-4 max-w-lg text-3xl font-bold tracking-tight sm:text-5xl">
-              Have an idea?
-              <br />
-              <span className="text-cream-gradient">Let&apos;s talk.</span>
-            </h2>
-            <p className="mx-auto mt-4 max-w-md text-text-secondary">
-              Whether you have feedback on one of our apps, want to
-              collaborate, or just want to say hello — we&apos;d love to hear
-              from you.
-            </p>
+          <div className="relative grid gap-10 px-8 py-14 sm:px-14 sm:py-18 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
+            <div>
+              <p className="kicker text-data-ink">§ Final / Get in touch</p>
+              <h2 className="font-display mt-4 max-w-xl text-3xl font-bold leading-[1.1] tracking-tight text-data-hi sm:text-5xl">
+                Start with the{" "}
+                <span className="editorial font-medium text-cobalt-bright">
+                  evidence.
+                </span>
+              </h2>
+              <p className="mt-5 max-w-lg text-[15px] leading-relaxed text-data-ink">
+                Tell me about your firm, your startup, or your site. Most
+                engagements begin with a short working session and a written
+                review of where you stand. No pitch deck, no pressure.
+              </p>
 
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="mt-10"
-            >
-              <a
-                href="mailto:admin@loriccoandco.com"
-                className="group inline-flex items-center gap-3 rounded-full bg-cream px-8 py-4 text-sm font-semibold text-background transition-all duration-300 hover:bg-foreground hover:shadow-[0_0_40px_rgba(232,220,200,0.12)]"
-              >
-                <svg
-                  className="h-4 w-4"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={2}
-                  aria-hidden="true"
+              <div className="mt-9 flex flex-wrap items-center gap-5">
+                <a
+                  href="mailto:admin@loriccoandco.com"
+                  className="rounded-[3px] bg-cobalt px-7 py-4 text-sm font-semibold text-white transition-all duration-200 hover:bg-cobalt-bright hover:text-data-bg"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                  />
-                </svg>
-                admin@loriccoandco.com
-                <svg
-                  className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={2}
-                  aria-hidden="true"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M17 8l4 4m0 0l-4 4m4-4H3"
-                  />
-                </svg>
-              </a>
-            </motion.div>
+                  admin@loriccoandco.com
+                </a>
+                <span className="font-mono text-[12px] text-data-ink">
+                  REPLIES / within one business day
+                </span>
+              </div>
+            </div>
+
+            {/* Mono manifest */}
+            <div className="hidden border-l border-white/10 pl-10 font-mono text-[12px] leading-[2.3] text-data-ink lg:block" aria-hidden="true">
+              <p className="text-data-hi">LCO / ENGAGEMENT MANIFEST</p>
+              <p>PRINCIPAL / R.T. LoRicco</p>
+              <p>DISCIPLINES / JD · MBA · SWE</p>
+              <p>BASE / Connecticut, USA</p>
+              <p>SEQUENCE / Diagnose → Improve</p>
+              <p>
+                STATUS /{" "}
+                <span className="text-cobalt-bright">accepting clients</span>
+              </p>
+            </div>
           </div>
         </motion.div>
       </div>

@@ -1,20 +1,45 @@
 @import "tailwindcss";
 
+/*
+  LoRicco & Co. — "Engineered Counsel" design language (Variant B: Character)
+  Vellum ground, ink, cobalt accent. Bricolage Grotesque / Fraunces / Spline Sans Mono.
+  Dark is reserved for the engineering voice: data strips, process, terminal moments.
+*/
+
 @theme inline {
-  --color-background: #08080A;
-  --color-foreground: #EDEDEF;
-  --color-surface: #121214;
-  --color-surface-elevated: #1A1A1E;
-  --color-text-secondary: #8A8A8E;
-  --color-text-muted: #767679;
-  --color-border: #2A2A2E;
-  --color-border-light: #1E1E22;
-  --color-cream: #E8DCC8;
-  --color-atlas-gold: #B08630;
-  --color-grill-ember: #D4652A;
-  --color-milo-teal: #6FA3AB;
-  --font-sans: var(--font-dm-sans);
-  --font-display: var(--font-syne);
+  /* Ground */
+  --color-background: #faf7f0; /* vellum */
+  --color-card: #fffdf8;
+  --color-foreground: #1a1814; /* ink */
+  --color-body-muted: #52504a;
+  --color-text-muted: #8b8880;
+  --color-line: #e8e3d6;
+  --color-line-strong: #d3cdbd;
+
+  /* Brand accent */
+  --color-cobalt: #2038c8;
+  --color-cobalt-deep: #182ea6;
+  --color-cobalt-wash: #eaedfa;
+  --color-cobalt-bright: #8fa0ff; /* cobalt legible on dark ink ground */
+
+  /* Diagnostic palette (shared with client documents) */
+  --color-good: #2a6a44;
+  --color-good-wash: #e9f1e8;
+  --color-warn: #8a6412;
+  --color-warn-wash: #f7f0db;
+  --color-crit: #a8351f;
+  --color-crit-wash: #f9ece6;
+
+  /* Engineering voice (dark moments) */
+  --color-data-bg: #1a1814;
+  --color-data-ink: #a29f97;
+  --color-data-hi: #f0ede6;
+
+  /* Type */
+  --font-display: var(--font-bricolage);
+  --font-sans: var(--font-bricolage);
+  --font-serif: var(--font-fraunces);
+  --font-mono: var(--font-spline-mono);
 }
 
 html {
@@ -24,103 +49,90 @@ html {
 body {
   background: var(--color-background);
   color: var(--color-foreground);
-  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  font-family: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
   scrollbar-width: thin;
-  scrollbar-color: var(--color-border) var(--color-background);
+  scrollbar-color: var(--color-line-strong) var(--color-background);
 }
 
-/* ── Subtle grain texture ── */
+/* ── Whisper of paper grain ── */
 body::after {
   content: "";
   position: fixed;
   inset: 0;
   z-index: 9999;
   pointer-events: none;
-  opacity: 0.03;
+  opacity: 0.022;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
   background-repeat: repeat;
 }
 
-/* ── Animations ── */
-@keyframes gradient-shift {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
+/* ── Recurring brand devices ── */
+
+/* Mono kicker label: SECTION / 02 style */
+.kicker {
+  font-family: var(--font-spline-mono), monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
 }
 
-@keyframes pulse-soft {
-  0%, 100% { opacity: 0.4; }
-  50% { opacity: 0.7; }
+/* Serif editorial voice — used sparingly, where trust is built */
+.editorial {
+  font-family: var(--font-fraunces), serif;
+  font-style: italic;
 }
 
-@keyframes line-draw {
-  from { stroke-dashoffset: 1000; }
-  to { stroke-dashoffset: 0; }
+/* Hairline rule with mono label */
+.rule-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
-
-.animate-gradient-shift {
-  background-size: 200% 200%;
-  animation: gradient-shift 8s ease-in-out infinite;
-}
-
-.animate-pulse-soft {
-  animation: pulse-soft 4s ease-in-out infinite;
-}
-
-/* ── Cream accent text ── */
-.text-cream-gradient {
-  background: linear-gradient(135deg, #E8DCC8 0%, #D4C9B0 50%, #C8B898 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+.rule-label::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--color-line);
 }
 
 /* ── Selection ── */
 ::selection {
-  background: rgba(232, 220, 200, 0.2);
-  color: #E8DCC8;
+  background: rgba(32, 56, 200, 0.14);
+  color: var(--color-cobalt-deep);
 }
 
 /* ── Scrollbar ── */
 ::-webkit-scrollbar {
   width: 6px;
 }
-
 ::-webkit-scrollbar-track {
   background: var(--color-background);
 }
-
 ::-webkit-scrollbar-thumb {
-  background: var(--color-border);
+  background: var(--color-line-strong);
   border-radius: 3px;
 }
-
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-text-muted);
 }
 
 /* ── Accessibility ── */
 @media (prefers-reduced-motion: reduce) {
-  .animate-gradient-shift,
-  .animate-pulse-soft {
-    animation: none;
-  }
-
   html {
     scroll-behavior: auto;
   }
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-cream);
+  outline: 2px solid var(--color-cobalt);
   outline-offset: 2px;
-  border-radius: 4px;
+  border-radius: 2px;
 }
 
 /* ── Forced colors (Windows High Contrast) ── */
 @media (forced-colors: active) {
-  .text-cream-gradient {
-    -webkit-text-fill-color: unset;
-    background: none;
-    color: LinkText;
+  .kicker {
+    color: CanvasText;
   }
 }
