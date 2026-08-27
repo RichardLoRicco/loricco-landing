@@ -35,12 +35,21 @@ export const metadata: Metadata = {
     type: "website",
     siteName: "LoRicco & Co",
     locale: "en_US",
+    images: [
+      {
+        url: "/og.png",
+        width: 1200,
+        height: 630,
+        alt: "LoRicco & Co: Technical questions. Counsel-grade answers. Portrait of principal Richard T. LoRicco.",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "LoRicco & Co | Websites, AI & Technical Consulting",
     description:
       "Websites and AI systems, practical AI training, technical consulting for law firms, and startup advisory from an attorney, MBA, and software engineer.",
+    images: ["/og.png"],
   },
   alternates: {
     canonical: "/",

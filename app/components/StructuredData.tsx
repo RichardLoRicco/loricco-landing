@@ -19,6 +19,7 @@ export default function StructuredData() {
       "@type": "Person",
       name: "Richard T. LoRicco",
       jobTitle: "Principal: Attorney (LL.M., J.D., MBA) and Software Engineer",
+      image: "https://loriccoandco.com/portrait-bw.jpg",
       url: "https://www.richardloricco.com",
       sameAs: [
         "https://www.linkedin.com/in/richard-loricco-esq",

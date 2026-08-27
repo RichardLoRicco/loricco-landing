@@ -62,17 +62,22 @@ export default function About() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: 0.15 }}
-              className="mt-10 flex items-start gap-5 border-t border-line pt-8"
+              className="mt-10 grid gap-6 border-t border-line pt-8 sm:grid-cols-[150px_1fr]"
             >
-              <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-[4px] border border-line-strong">
-                <Image
-                  src="/founder.png"
-                  alt="Richard T. LoRicco"
-                  width={56}
-                  height={56}
-                  className="h-full w-full object-cover"
-                />
-              </div>
+              <figure className="w-[150px]">
+                <div className="relative overflow-hidden rounded-[4px] border border-line-strong bg-card shadow-[0_12px_24px_-16px_rgba(26,24,20,0.35)]">
+                  <Image
+                    src="/portrait-bw.jpg"
+                    alt="Richard T. LoRicco, in a suit and tie"
+                    width={300}
+                    height={375}
+                    className="h-full w-full object-cover"
+                  />
+                </div>
+                <figcaption className="mt-2 font-mono text-[9px] tracking-[0.1em] whitespace-nowrap text-text-muted uppercase">
+                  Principal / New Haven, CT
+                </figcaption>
+              </figure>
               <div>
                 <p className="font-display text-[15px] font-bold">
                   Richard T. LoRicco
