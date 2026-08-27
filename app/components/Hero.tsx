@@ -64,8 +64,9 @@ export default function Hero() {
           >
             I build and run websites and AI systems for firms and small
             businesses, teach lawyers and business teams how to put AI to
-            work, and consult with law firms on the technology inside their
-            cases. I do the thinking and the work myself.
+            work, consult with law firms on the technology inside their
+            cases, and advise startups and owners on strategy. I do the
+            thinking and the work myself.
           </motion.p>
 
           <motion.div

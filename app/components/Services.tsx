@@ -42,6 +42,19 @@ const services = [
       "Firm technology guidance",
     ],
   },
+  {
+    section: "§ 04",
+    title: "Business & Startup Advisory",
+    outcome: "An informed second opinion",
+    description:
+      "I advise startups and owners on pitch decks, financial projections, competitive analysis, go-to-market strategy, and architecture reviews. I read the deck, the contract, and the codebase myself; the MBA, the legal training, and the engineering sit at the same desk.",
+    offerings: [
+      "Pitch decks & projections",
+      "Competitive analysis",
+      "Go-to-market strategy",
+      "Architecture & code reviews",
+    ],
+  },
 ];
 
 export default function Services() {
@@ -62,7 +75,7 @@ export default function Services() {
         >
           <p className="kicker rule-label text-text-muted">The Practice</p>
           <h2 className="font-display mt-5 text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl">
-            Three parts. One desk.
+            Four parts. One desk.
           </h2>
           <p className="mt-5 text-lg leading-relaxed text-body-muted">
             Everything below is delivered by one person. No handoffs, no
@@ -79,7 +92,7 @@ export default function Services() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.45, delay: i * 0.08 }}
-              className="group grid gap-4 border-t border-line py-10 transition-colors duration-300 md:grid-cols-[110px_1fr_260px] md:gap-10"
+              className="group grid gap-4 border-t border-line py-10 transition-colors duration-300 last:border-b md:grid-cols-[110px_1fr_260px] md:gap-10"
             >
               {/* § number */}
               <div className="font-mono text-sm font-medium text-cobalt">
@@ -120,33 +133,6 @@ export default function Services() {
             </motion.article>
           ))}
 
-          {/* The quiet fourth row: advisory */}
-          <motion.article
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.45, delay: 0.24 }}
-            className="grid gap-4 border-t border-b border-line py-7 md:grid-cols-[110px_1fr_260px] md:gap-10"
-          >
-            <div className="editorial text-lg text-text-muted">&amp;</div>
-            <div>
-              <h3 className="font-display text-lg font-bold tracking-tight text-body-muted">
-                Business &amp; Startup Advisory
-              </h3>
-              <p className="mt-2 max-w-xl text-[14px] leading-relaxed text-text-muted">
-                A few advisory projects at a time: pitch decks, projections,
-                competitive analysis, architecture reviews, and practical uses
-                of AI. Where it fits, this work folds into an engagement
-                above.
-              </p>
-            </div>
-            <div className="md:pt-1">
-              <p className="font-mono text-[10px] tracking-[0.16em] text-text-muted uppercase">
-                Outcome /{" "}
-                <span className="text-body-muted">An informed second opinion</span>
-              </p>
-            </div>
-          </motion.article>
         </div>
 
         {/* CTA line */}

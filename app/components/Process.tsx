@@ -7,7 +7,7 @@ const steps = [
     id: "01",
     verb: "Diagnose",
     detail:
-      "Most engagements start with a written analysis: a technical memo, a findings review, or a workflow audit. I start from the evidence.",
+      "Most engagements start with a written analysis: a technical memo, a findings review, a workflow audit, or a strategy review. I start from the evidence.",
   },
   {
     id: "02",
@@ -19,7 +19,7 @@ const steps = [
     id: "03",
     verb: "Build",
     detail:
-      "Then I write the memo, build the site or the agent, or run the training. I do the work myself.",
+      "Then I write the memo, build the site or the agent, prepare the deck, or run the training. I do the work myself.",
   },
   {
     id: "04",
@@ -53,8 +53,8 @@ export default function Process() {
             </h2>
           </div>
           <p className="max-w-xs font-mono text-[12px] leading-relaxed text-data-ink">
-            I use the same sequence for websites, training, and case
-            consulting.
+            I use the same sequence for websites, training, consulting, and
+            advisory.
           </p>
         </motion.div>
 

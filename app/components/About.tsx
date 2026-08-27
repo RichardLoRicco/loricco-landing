@@ -51,9 +51,9 @@ export default function About() {
             <p className="mt-6 max-w-lg text-lg leading-relaxed text-body-muted">
               A firm&apos;s website goes stale and stops pulling its weight.
               A team buys AI tools nobody uses. A case turns on carrier
-              records. I work across all three because I&apos;ve worked
-              inside all three: production software, business operations, and
-              law practice.
+              records. An owner needs a straight read on a plan. I work
+              across all of it because I&apos;ve worked inside all of it:
+              production software, business operations, and law practice.
             </p>
 
             {/* Founder */}
