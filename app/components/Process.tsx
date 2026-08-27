@@ -7,25 +7,25 @@ const steps = [
     id: "01",
     verb: "Diagnose",
     detail:
-      "A written findings review of your current site and visibility. Evidence first, ranked by impact on inquiries.",
+      "Every engagement starts with a written analysis: a technical memo, a findings review, or a workflow audit. Evidence first.",
   },
   {
     id: "02",
     verb: "Clarify",
     detail:
-      "Positioning, messaging, and intake paths settled before anything gets built. The strategy is the deliverable.",
+      "What the evidence means and what to do about it, in plain English, ranked by impact. The strategy is a deliverable, not a pitch.",
   },
   {
     id: "03",
     verb: "Build",
     detail:
-      "Production-grade implementation with search equity preserved: URLs, redirects, structured data, Search Console.",
+      "The memo, the site, the agent, the training. Production grade, delivered by the same person you talked to.",
   },
   {
     id: "04",
     verb: "Improve",
     detail:
-      "Ongoing care, publishing, and AI-search monitoring so the site keeps compounding instead of quietly going stale.",
+      "Retainers, monitoring, and follow-up so the work keeps compounding instead of quietly going stale.",
   },
 ];
 
@@ -53,7 +53,8 @@ export default function Process() {
             </h2>
           </div>
           <p className="max-w-xs font-mono text-[12px] leading-relaxed text-data-ink">
-            The same sequence runs every engagement: website, content, or AI.
+            The same sequence runs every engagement: case, website, or
+            classroom.
           </p>
         </motion.div>
 

@@ -6,18 +6,24 @@ import { motion } from "motion/react";
 const principles = [
   {
     id: "01",
-    title: "Preserve what has value",
+    title: "Discretion is the default",
     description:
-      "A redesign should never cost you the search equity you spent years earning. URLs, rankings, and content history are assets. I treat them like an attorney treats the record.",
+      "Consulting work for counsel is structured to protect privilege and work product, and client matters never become marketing material. There are no case studies on this page for a reason.",
   },
   {
     id: "02",
     title: "Plain English, no hype",
     description:
-      "You'll get straight answers about what's broken, what it costs to fix, and what AI can and can't do for you. No jargon, no upsell theater.",
+      "You'll get straight answers about what the records show, what's broken, what it costs to fix, and what AI can and can't do for you. No jargon, no upsell theater.",
   },
   {
     id: "03",
+    title: "Preserve what has value",
+    description:
+      "A rebuild should never cost you the search equity you spent years earning. URLs, rankings, and content history are assets. I treat them like an attorney treats the record.",
+  },
+  {
+    id: "04",
     title: "You own everything",
     description:
       "Domain, code, content, analytics, accounts: all yours from day one. If we part ways, you keep a working system, not a hostage.",
@@ -43,11 +49,12 @@ export default function About() {
               <span className="editorial font-medium">One</span> desk.
             </h2>
             <p className="mt-6 max-w-lg text-lg leading-relaxed text-body-muted">
-              Most business websites fail for more than one reason: unclear
-              positioning, stale content, weak technical structure, missing
-              trust signals. Fixing that takes more than a designer. I look at
-              the whole system: how clients decide, what search engines and AI
-              tools understand, and what you can actually maintain.
+              Most technical problems land on a desk that only understands
+              half of them. A case turns on carrier records. A firm&apos;s
+              website quietly stops producing clients. A team buys AI tools
+              nobody uses. I work across all three because I&apos;ve worked
+              inside all three: law practice, business operations, and
+              production software.
             </p>
 
             {/* Founder */}

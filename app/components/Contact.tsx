@@ -34,7 +34,7 @@ export default function Contact() {
                 </span>
               </h2>
               <p className="mt-5 max-w-lg text-[15px] leading-relaxed text-data-ink">
-                Tell me about your firm, your startup, or your site. Most
+                Tell me about the case, the site, or the team. Most
                 engagements begin with a short working session and a written
                 review of where you stand. No pitch deck, no pressure.
               </p>
@@ -57,6 +57,7 @@ export default function Contact() {
               <p className="text-data-hi">LCO / ENGAGEMENT MANIFEST</p>
               <p>PRINCIPAL / R.T. LoRicco</p>
               <p>DISCIPLINES / JD · MBA · SWE</p>
+              <p>PRACTICE / counsel · systems · training</p>
               <p>BASE / Connecticut, USA</p>
               <p>SEQUENCE / Diagnose → Improve</p>
               <p>

@@ -25,22 +25,22 @@ const splineSansMono = Spline_Sans_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://loriccoandco.com"),
-  title: "LoRicco & Co | Websites, Content & AI for Firms and Startups",
+  title: "LoRicco & Co | Technical Consulting, Websites & AI for Law Firms and Small Businesses",
   description:
-    "LoRicco & Co rebuilds outdated websites, runs content and AI-search visibility, and brings practical AI to law firms, professional practices, and startups. One principal: attorney, MBA, and software engineer. Based in Connecticut.",
+    "LoRicco & Co provides technical consulting for law firms, builds and operates websites and AI systems, and teaches practical AI to lawyers and small businesses. One principal: attorney, MBA, and software engineer. Based in Connecticut.",
   openGraph: {
-    title: "LoRicco & Co | Websites, Content & AI for Firms and Startups",
+    title: "LoRicco & Co | Technical Consulting, Websites & AI for Law Firms and Small Businesses",
     description:
-      "Website rebuilds, content and AI-search visibility, and practical AI consulting for professional practices and startups, from a principal who is an attorney, MBA, and software engineer.",
+      "Technical consulting for law firms, website and AI-system builds, and practical AI education for lawyers and small businesses, from a principal who is an attorney, MBA, and software engineer.",
     type: "website",
     siteName: "LoRicco & Co",
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "LoRicco & Co | Websites, Content & AI for Firms and Startups",
+    title: "LoRicco & Co | Technical Consulting, Websites & AI for Law Firms and Small Businesses",
     description:
-      "Website rebuilds, content and AI-search visibility, and practical AI consulting for professional practices and startups, from a principal who is an attorney, MBA, and software engineer.",
+      "Technical consulting for law firms, website and AI-system builds, and practical AI education for lawyers and small businesses, from a principal who is an attorney, MBA, and software engineer.",
   },
   alternates: {
     canonical: "/",

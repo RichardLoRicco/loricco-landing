@@ -5,54 +5,41 @@ import { motion } from "motion/react";
 const services = [
   {
     section: "§ 01",
-    title: "Website Rebuilds",
-    outcome: "Credibility",
+    title: "Technical Consulting for Law Firms",
+    outcome: "Command of the record",
     description:
-      "Outdated WordPress or Squarespace site into a fast, modern build that makes your practice look like it's run well, because it is. SEO-safe migration included: your URLs, rankings, and search history survive the move.",
+      "When a case turns on technology, I work for counsel: reading the discovery, decoding carrier and platform records, and writing plain-English analysis you can build a strategy on. Retained by the attorney and structured to protect work product. The same desk handles the firm's own technology decisions.",
     offerings: [
-      "Next.js builds",
-      "SEO-safe migration",
-      "Structured data",
-      "Intake paths",
+      "Digital evidence & discovery analysis",
+      "Technical memos for counsel",
+      "Questions for opposing experts",
+      "Firm technology decisions",
     ],
   },
   {
     section: "§ 02",
-    title: "Content & AI-Search Visibility",
-    outcome: "Discoverability",
+    title: "Websites & AI Systems",
+    outcome: "A system that compounds",
     description:
-      "Monthly publishing that gets your firm found, both in Google and in the AI tools your clients now ask first: ChatGPT, Claude, Perplexity, AI Overviews. For law firms, every piece passes attorney-advertising compliance review.",
+      "Outdated site into a fast, credible build that preserves your search equity, then kept working: publishing with compliance review, SEO and AI-search visibility, and AI agents wired into intake and operations. You own the domain, the code, the content, and the accounts from day one.",
     offerings: [
-      "Blog & social retainers",
-      "Local SEO",
-      "AEO / GEO",
-      "Compliance review",
+      "Next.js rebuilds, SEO-safe migration",
+      "Care, content & visibility retainers",
+      "AI-search visibility (AEO / GEO)",
+      "AI agents, built & operated",
     ],
   },
   {
     section: "§ 03",
-    title: "AI Consulting & Integration",
-    outcome: "Ownership",
+    title: "AI Education & Training",
+    outcome: "Force multiplication",
     description:
-      "Practical AI put to work inside your operations: intake, research, documentation, content workflows, internal tools. Straight answers about what AI can do and what it can't, from someone who builds with it daily.",
+      "Hands-on training for lawyers and small-business teams: what the tools actually do, where they fail, and how to fold them into real work without compliance surprises. Taught by someone who builds with them daily, not from a slide deck.",
     offerings: [
-      "Workflow automation",
-      "AI product features",
-      "Agents & RAG systems",
-      "Team training",
-    ],
-  },
-  {
-    section: "§ 04",
-    title: "Startup & Business Advisory",
-    outcome: "Intake",
-    description:
-      "Engineering and business strategy from one advisor who has sat on every side of the table: architecture reviews, pitch decks, projections, competitive analysis, and the legal-adjacent judgment most technical advisors can't offer.",
-    offerings: [
-      "Architecture & code review",
-      "Pitch decks & projections",
-      "Go-to-market strategy",
-      "Fractional advisory",
+      "Law-firm workshops",
+      "Small-business sessions",
+      "Workflow playbooks",
+      "Follow-up office hours",
     ],
   },
 ];
@@ -62,7 +49,7 @@ export default function Services() {
     <section
       id="services"
       className="relative scroll-mt-24 px-6 py-28"
-      aria-label="Services"
+      aria-label="The practice"
     >
       <div className="mx-auto max-w-6xl">
         {/* Section header */}
@@ -73,9 +60,9 @@ export default function Services() {
           transition={{ duration: 0.5 }}
           className="mb-4 max-w-2xl"
         >
-          <p className="kicker rule-label text-text-muted">Services</p>
+          <p className="kicker rule-label text-text-muted">The Practice</p>
           <h2 className="font-display mt-5 text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl">
-            The work, in four registers.
+            Three parts. One desk.
           </h2>
           <p className="mt-5 text-lg leading-relaxed text-body-muted">
             Everything below is delivered by one person. No handoffs, no
@@ -92,7 +79,7 @@ export default function Services() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.45, delay: i * 0.08 }}
-              className="group grid gap-4 border-t border-line py-10 transition-colors duration-300 last:border-b md:grid-cols-[110px_1fr_240px] md:gap-10"
+              className="group grid gap-4 border-t border-line py-10 transition-colors duration-300 md:grid-cols-[110px_1fr_260px] md:gap-10"
             >
               {/* § number */}
               <div className="font-mono text-sm font-medium text-cobalt">
@@ -132,6 +119,33 @@ export default function Services() {
               </div>
             </motion.article>
           ))}
+
+          {/* The quiet fourth row: advisory */}
+          <motion.article
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.45, delay: 0.24 }}
+            className="grid gap-4 border-t border-b border-line py-7 md:grid-cols-[110px_1fr_260px] md:gap-10"
+          >
+            <div className="editorial text-lg text-text-muted">&amp;</div>
+            <div>
+              <h3 className="font-display text-lg font-bold tracking-tight text-body-muted">
+                Business &amp; Startup Advisory
+              </h3>
+              <p className="mt-2 max-w-xl text-[14px] leading-relaxed text-text-muted">
+                A smaller line, kept deliberately small: pitch decks,
+                projections, competitive analysis, architecture reviews, and
+                advising owners on using AI as a force multiplier. Where it
+                fits, it folds into the work above.
+              </p>
+            </div>
+            <div className="md:pt-1">
+              <p className="font-mono text-[10px] tracking-[0.16em] text-text-muted uppercase">
+                Outcome / <span className="text-body-muted">Leverage</span>
+              </p>
+            </div>
+          </motion.article>
         </div>
 
         {/* CTA line */}
@@ -143,7 +157,7 @@ export default function Services() {
           className="mt-12 text-[15px] text-body-muted"
         >
           <span className="editorial text-lg text-foreground">
-            Not sure which register you need?
+            Not sure which part you need?
           </span>{" "}
           Most engagements start with a short working session and a written
           review of where you stand.{" "}
