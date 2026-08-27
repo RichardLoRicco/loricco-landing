@@ -7,25 +7,25 @@ const steps = [
     id: "01",
     verb: "Diagnose",
     detail:
-      "Every engagement starts with a written analysis: a technical memo, a findings review, or a workflow audit. Evidence first.",
+      "Most engagements start with a written analysis: a technical memo, a findings review, or a workflow audit. I start from the evidence.",
   },
   {
     id: "02",
     verb: "Clarify",
     detail:
-      "What the evidence means and what to do about it, in plain English, ranked by impact. The strategy is a deliverable, not a pitch.",
+      "I explain what the evidence means and what to do about it, in plain English, ranked by impact. The recommendation goes in writing.",
   },
   {
     id: "03",
     verb: "Build",
     detail:
-      "The memo, the site, the agent, the training. Production grade, delivered by the same person you talked to.",
+      "Then I write the memo, build the site or the agent, or run the training. I do the work myself.",
   },
   {
     id: "04",
     verb: "Improve",
     detail:
-      "Retainers, monitoring, and follow-up so the work keeps compounding instead of quietly going stale.",
+      "Retainers, monitoring, and follow-up so the work doesn't quietly go stale.",
   },
 ];
 
@@ -53,8 +53,8 @@ export default function Process() {
             </h2>
           </div>
           <p className="max-w-xs font-mono text-[12px] leading-relaxed text-data-ink">
-            The same sequence runs every engagement: case, website, or
-            classroom.
+            I use the same sequence for case consulting, websites, and
+            training.
           </p>
         </motion.div>
 

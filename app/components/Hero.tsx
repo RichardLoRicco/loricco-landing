@@ -62,10 +62,10 @@ export default function Hero() {
             transition={{ duration: 0.45, delay: 0.4 }}
             className="mt-7 max-w-xl text-lg leading-relaxed text-body-muted"
           >
-            I consult for law firms on the technology inside their cases, build
-            and run websites and AI systems for firms and small businesses, and
-            teach both how to put AI to work. One principal does the thinking
-            and the work.
+            I consult with law firms on the technology inside their cases,
+            build and run websites and AI systems for firms and small
+            businesses, and teach lawyers and business teams how to put AI to
+            work. I do the thinking and the work myself.
           </motion.p>
 
           <motion.div
@@ -121,6 +121,7 @@ export default function Hero() {
           className="relative hidden lg:block"
           aria-hidden="true"
         >
+          <div className="relative">
           {/* Backing sheets: the other two deliverables in the file */}
           <div className="absolute inset-0 translate-x-6 translate-y-6 rounded-[4px] border border-line bg-card/50">
             <p className="absolute right-3 bottom-1 font-mono text-[9px] tracking-[0.14em] text-text-muted uppercase">
@@ -174,10 +175,10 @@ export default function Hero() {
 
             <p className="px-6 pb-5 text-[13px] leading-relaxed text-body-muted">
               <span className="editorial text-[15px] text-foreground">
-                The pattern in the records tells a different story.
+                The records don&apos;t support the timeline as presented.
               </span>{" "}
-              Carrier logs decoded, timelines rebuilt, and the technology
-              explained so counsel can use it.
+              I decoded the carrier logs, rebuilt the timeline, and explained
+              the technology in terms counsel can use.
             </p>
 
             {/* Engineering-voice data strip */}
@@ -189,14 +190,15 @@ export default function Hero() {
                 SOURCES DECODED <b className="font-medium text-data-hi">6</b>
               </span>
               <span>
-                JARGON SURVIVING <b className="font-medium text-data-hi">0</b>
+                QUESTIONS FOR CROSS <b className="font-medium text-data-hi">9</b>
               </span>
             </div>
+          </div>
           </div>
 
           {/* Margin annotation */}
           <p className="relative mt-12 pl-1 font-mono text-[11px] text-text-muted">
-            ↑ every engagement produces a document you can act on
+            ↑ most engagements start with a written review you can act on
           </p>
         </motion.div>
       </div>

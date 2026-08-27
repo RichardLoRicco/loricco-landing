@@ -59,7 +59,7 @@ const apps: App[] = [
     tagline: "Quit drinking, one day at a time.",
     category: "Health & Wellness",
     description:
-      "A calm sobriety companion for cravings, streaks, guided breathing, and no-shame recovery support.",
+      "Cravings, streaks, guided breathing, and no-shame support for quitting alcohol.",
     image: "/apps/claro/mascot.png",
     imageAlt: "Claro the elephant mascot waving",
     url: "https://claro.loriccoandco.com/",
@@ -71,7 +71,7 @@ const apps: App[] = [
     tagline: "Track your gut without making it weird.",
     category: "Digestive Health",
     description:
-      "Private bowel movement logging, pattern insights, and doctor-ready context for digestive health.",
+      "Private bowel movement logging, pattern insights, and context you can bring to your doctor.",
     image: "/apps/bowelbuddy/mascot.png",
     imageAlt: "BowelBuddy mascot waving",
     color: "#7FA37A",
@@ -190,9 +190,10 @@ export default function Studio() {
             <br />I ship my own software.
           </h2>
           <p className="mt-5 text-lg leading-relaxed text-body-muted">
-            Every recommendation I make to clients gets tested here first.
-            Seven products designed, built, and operated end to end: App
-            Store review, subscriptions, analytics, support, all of it.
+            This is where I test the product and engineering advice I give
+            clients. Four products are live and three are in development, all
+            built by me solo. For the live ones I run everything: App Store
+            review, subscriptions, analytics, support.
           </p>
         </motion.div>
 
@@ -245,8 +246,8 @@ export default function Studio() {
               <span className="editorial text-[15px] text-foreground">
                 Why this matters to clients:
               </span>{" "}
-              I don&apos;t hand you advice I haven&apos;t bet my own products
-              on.
+              the product and engineering advice I give has already been
+              tested on my own apps.
             </p>
           </motion.div>
         </div>

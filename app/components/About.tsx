@@ -8,7 +8,7 @@ const principles = [
     id: "01",
     title: "Discretion is the default",
     description:
-      "Consulting work for counsel is structured to protect privilege and work product, and client matters never become marketing material. There are no case studies on this page for a reason.",
+      "Consulting work for counsel is structured with privilege and work-product protection in mind, and client matters never become marketing material. That's why there are no case studies on this page.",
   },
   {
     id: "02",
@@ -20,13 +20,13 @@ const principles = [
     id: "03",
     title: "Preserve what has value",
     description:
-      "A rebuild should never cost you the search equity you spent years earning. URLs, rankings, and content history are assets. I treat them like an attorney treats the record.",
+      "A rebuild shouldn't cost you the search equity you spent years earning. URLs, rankings, and content history are assets. I inventory them before anything changes.",
   },
   {
     id: "04",
     title: "You own everything",
     description:
-      "Domain, code, content, analytics, accounts: all yours from day one. If we part ways, you keep a working system, not a hostage.",
+      "Domain, code, content, analytics, accounts: set up so you control them from day one. If we part ways, you keep a working system, not a hostage.",
   },
 ];
 
@@ -49,12 +49,11 @@ export default function About() {
               <span className="editorial font-medium">One</span> desk.
             </h2>
             <p className="mt-6 max-w-lg text-lg leading-relaxed text-body-muted">
-              Most technical problems land on a desk that only understands
-              half of them. A case turns on carrier records. A firm&apos;s
-              website quietly stops producing clients. A team buys AI tools
-              nobody uses. I work across all three because I&apos;ve worked
-              inside all three: law practice, business operations, and
-              production software.
+              A case turns on carrier records. A firm&apos;s website goes
+              stale and stops pulling its weight. A team buys AI tools nobody
+              uses. I work across all three because I&apos;ve worked inside
+              all three: law practice, business operations, and production
+              software.
             </p>
 
             {/* Founder */}
@@ -82,10 +81,11 @@ export default function About() {
                   Attorney (LL.M., J.D., MBA) · Software Engineer
                 </p>
                 <p className="mt-2.5 max-w-md text-sm leading-relaxed text-body-muted">
-                  Connecticut-admitted attorney and software engineer with a
-                  background across law, real estate, finance, and production
-                  web and AI systems. Built and shipped full-stack products,
-                  open-source tooling, and the studio&apos;s own apps.
+                  I&apos;m a Connecticut-admitted attorney and software
+                  engineer. I&apos;ve worked across law, real estate, finance,
+                  and production web and AI systems, and I&apos;ve shipped
+                  full-stack products, open-source tools, and the
+                  studio&apos;s own apps.
                 </p>
               </div>
             </motion.div>

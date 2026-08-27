@@ -47,7 +47,7 @@ export default function Contact() {
                   admin@loriccoandco.com
                 </a>
                 <span className="font-mono text-[12px] text-data-ink">
-                  REPLIES / within one business day
+                  REPLIES / usually one business day
                 </span>
               </div>
             </div>

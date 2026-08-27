@@ -6,39 +6,39 @@ const services = [
   {
     section: "§ 01",
     title: "Technical Consulting for Law Firms",
-    outcome: "Command of the record",
+    outcome: "The technology, explained",
     description:
-      "When a case turns on technology, I work for counsel: reading the discovery, decoding carrier and platform records, and writing plain-English analysis you can build a strategy on. Retained by the attorney and structured to protect work product. The same desk handles the firm's own technology decisions.",
+      "When a case turns on technology, I work for counsel: reading the discovery, decoding carrier and platform records, and writing plain-English analysis you can build a strategy on. I'm retained by the attorney, with the engagement structured around work-product protection. I also advise firms on their own technology decisions.",
     offerings: [
       "Digital evidence & discovery analysis",
       "Technical memos for counsel",
       "Questions for opposing experts",
-      "Firm technology decisions",
+      "Firm technology guidance",
     ],
   },
   {
     section: "§ 02",
     title: "Websites & AI Systems",
-    outcome: "A system that compounds",
+    outcome: "Systems you own",
     description:
-      "Outdated site into a fast, credible build that preserves your search equity, then kept working: publishing with compliance review, SEO and AI-search visibility, and AI agents wired into intake and operations. You own the domain, the code, the content, and the accounts from day one.",
+      "I rebuild outdated sites, migrate them without discarding the search equity you've already earned, and keep them working after launch: publishing with compliance review, SEO and AI-search visibility, and AI agents built into intake and operations. You control the domain, the code, the content, and the accounts from day one.",
     offerings: [
       "Next.js rebuilds, SEO-safe migration",
-      "Care, content & visibility retainers",
-      "AI-search visibility (AEO / GEO)",
+      "Site care, content & visibility retainers",
+      "Visibility in Google and AI answers",
       "AI agents, built & operated",
     ],
   },
   {
     section: "§ 03",
     title: "AI Education & Training",
-    outcome: "Force multiplication",
+    outcome: "A team that can use AI",
     description:
-      "Hands-on training for lawyers and small-business teams: what the tools actually do, where they fail, and how to fold them into real work without compliance surprises. Taught by someone who builds with them daily, not from a slide deck.",
+      "Hands-on training for lawyers and small-business teams: what the tools actually do, where they fail, and how to fold them into real work without compliance surprises. I teach from what I build every day.",
     offerings: [
       "Law-firm workshops",
       "Small-business sessions",
-      "Workflow playbooks",
+      "Written workflow guides",
       "Follow-up office hours",
     ],
   },
@@ -134,15 +134,16 @@ export default function Services() {
                 Business &amp; Startup Advisory
               </h3>
               <p className="mt-2 max-w-xl text-[14px] leading-relaxed text-text-muted">
-                A smaller line, kept deliberately small: pitch decks,
-                projections, competitive analysis, architecture reviews, and
-                advising owners on using AI as a force multiplier. Where it
-                fits, it folds into the work above.
+                A few advisory projects at a time: pitch decks, projections,
+                competitive analysis, architecture reviews, and practical uses
+                of AI. Where it fits, this work folds into an engagement
+                above.
               </p>
             </div>
             <div className="md:pt-1">
               <p className="font-mono text-[10px] tracking-[0.16em] text-text-muted uppercase">
-                Outcome / <span className="text-body-muted">Leverage</span>
+                Outcome /{" "}
+                <span className="text-body-muted">An informed second opinion</span>
               </p>
             </div>
           </motion.article>
@@ -159,8 +160,8 @@ export default function Services() {
           <span className="editorial text-lg text-foreground">
             Not sure which part you need?
           </span>{" "}
-          Most engagements start with a short working session and a written
-          review of where you stand.{" "}
+          That&apos;s what the first working session is for: a short
+          conversation and a written review of where you stand.{" "}
           <a
             href="mailto:admin@loriccoandco.com"
             className="font-medium text-cobalt underline decoration-cobalt/30 underline-offset-4 transition-colors hover:decoration-cobalt"
