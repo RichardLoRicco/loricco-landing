@@ -59,7 +59,7 @@ const apps: App[] = [
     tagline: "Quit drinking, one day at a time.",
     category: "Health & Wellness",
     description:
-      "A calm sobriety companion for cravings, streaks, guided breathing, and no-shame recovery support.",
+      "Cravings, streaks, guided breathing, and no-shame support for quitting alcohol.",
     image: "/apps/claro/mascot.png",
     imageAlt: "Claro the elephant mascot waving",
     url: "https://claro.loriccoandco.com/",
@@ -71,7 +71,7 @@ const apps: App[] = [
     tagline: "Track your gut without making it weird.",
     category: "Digestive Health",
     description:
-      "Private bowel movement logging, pattern insights, and doctor-ready context for digestive health.",
+      "Private bowel movement logging, pattern insights, and context you can bring to your doctor.",
     image: "/apps/bowelbuddy/mascot.png",
     imageAlt: "BowelBuddy mascot waving",
     color: "#7FA37A",
@@ -97,6 +97,39 @@ const apps: App[] = [
     image: "/apps/hark/logo-v2.png",
     imageAlt: "Hark logo mark",
     color: "#5EA5E8",
+    status: "development",
+  },
+  {
+    name: "Toucan",
+    tagline: "One can't. Two can.",
+    category: "Habits & Accountability",
+    description:
+      "A shared streak for two people. If either of you skips, it dies for both.",
+    image: "/apps/toucan/mascot.png",
+    imageAlt: "Toucan mascot",
+    color: "#E03A0E",
+    status: "development",
+  },
+  {
+    name: "Fridge Chef",
+    tagline: "Your fridge, tonight's dinner.",
+    category: "Cooking & AI",
+    description:
+      "Take a photo of what's in your fridge and get three dinners you can actually make tonight.",
+    image: "/apps/fridgechef/icon.png",
+    imageAlt: "Fridge Chef app icon",
+    color: "#5B8A63",
+    status: "development",
+  },
+  {
+    name: "Quiet Hours",
+    tagline: "Evidence without eavesdropping.",
+    category: "Legal & Documentation",
+    description:
+      "A bedside decibel monitor that logs loud nighttime events and turns them into a report you can hand your landlord.",
+    image: "/apps/quiethours/icon.png",
+    imageAlt: "Quiet Hours app icon",
+    color: "#4A5578",
     status: "development",
   },
 ];
@@ -190,9 +223,10 @@ export default function Studio() {
             <br />I ship my own software.
           </h2>
           <p className="mt-5 text-lg leading-relaxed text-body-muted">
-            Every recommendation I make to clients gets tested here first.
-            Seven products designed, built, and operated end to end: App
-            Store review, subscriptions, analytics, support, all of it.
+            This is where I test the product and engineering advice I give
+            clients. Four products are live and six are in development, all
+            built by me solo. For the live ones I run everything: App Store
+            review, subscriptions, analytics, support.
           </p>
         </motion.div>
 
@@ -238,15 +272,15 @@ export default function Studio() {
           >
             <p className="font-mono text-[12px] leading-[1.9] text-text-muted">
               SHIPPED / 4<br />
-              IN PIPELINE / 3<br />
+              IN PIPELINE / 6<br />
               PLATFORMS / iOS · WEB
             </p>
             <p className="mt-6 text-[13.5px] leading-relaxed text-body-muted">
               <span className="editorial text-[15px] text-foreground">
                 Why this matters to clients:
               </span>{" "}
-              I don&apos;t hand you advice I haven&apos;t bet my own products
-              on.
+              the product and engineering advice I give has already been
+              tested on my own apps.
             </p>
           </motion.div>
         </div>

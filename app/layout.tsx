@@ -25,22 +25,31 @@ const splineSansMono = Spline_Sans_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://loriccoandco.com"),
-  title: "LoRicco & Co | Websites, Content & AI for Firms and Startups",
+  title: "LoRicco & Co | Websites, AI & Technical Consulting",
   description:
-    "LoRicco & Co rebuilds outdated websites, runs content and AI-search visibility, and brings practical AI to law firms, professional practices, and startups. One principal: attorney, MBA, and software engineer. Based in Connecticut.",
+    "LoRicco & Co builds and operates websites and AI systems, teaches practical AI to lawyers and small businesses, provides technical consulting for law firms, and advises startups. One principal: attorney, MBA, and software engineer. Based in Connecticut.",
   openGraph: {
-    title: "LoRicco & Co | Websites, Content & AI for Firms and Startups",
+    title: "LoRicco & Co | Websites, AI & Technical Consulting",
     description:
-      "Website rebuilds, content and AI-search visibility, and practical AI consulting for professional practices and startups, from a principal who is an attorney, MBA, and software engineer.",
+      "Websites and AI systems, practical AI training, technical consulting for law firms, and startup advisory from an attorney, MBA, and software engineer.",
     type: "website",
     siteName: "LoRicco & Co",
     locale: "en_US",
+    images: [
+      {
+        url: "/og.png",
+        width: 1200,
+        height: 630,
+        alt: "LoRicco & Co: Technical questions. Counsel-grade answers. Portrait of principal Richard T. LoRicco.",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "LoRicco & Co | Websites, Content & AI for Firms and Startups",
+    title: "LoRicco & Co | Websites, AI & Technical Consulting",
     description:
-      "Website rebuilds, content and AI-search visibility, and practical AI consulting for professional practices and startups, from a principal who is an attorney, MBA, and software engineer.",
+      "Websites and AI systems, practical AI training, technical consulting for law firms, and startup advisory from an attorney, MBA, and software engineer.",
+    images: ["/og.png"],
   },
   alternates: {
     canonical: "/",

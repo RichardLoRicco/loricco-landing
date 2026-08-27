@@ -6,21 +6,27 @@ import { motion } from "motion/react";
 const principles = [
   {
     id: "01",
-    title: "Preserve what has value",
+    title: "Discretion is the default",
     description:
-      "A redesign should never cost you the search equity you spent years earning. URLs, rankings, and content history are assets. I treat them like an attorney treats the record.",
+      "Consulting work for counsel is structured with privilege and work-product protection in mind, and client matters never become marketing material. That's why there are no case studies on this page.",
   },
   {
     id: "02",
     title: "Plain English, no hype",
     description:
-      "You'll get straight answers about what's broken, what it costs to fix, and what AI can and can't do for you. No jargon, no upsell theater.",
+      "You'll get straight answers about what the records show, what's broken, what it costs to fix, and what AI can and can't do for you. No jargon, no upsell theater.",
   },
   {
     id: "03",
+    title: "Preserve what has value",
+    description:
+      "A rebuild shouldn't cost you the search equity you spent years earning. URLs, rankings, and content history are assets. I inventory them before anything changes.",
+  },
+  {
+    id: "04",
     title: "You own everything",
     description:
-      "Domain, code, content, analytics, accounts: all yours from day one. If we part ways, you keep a working system, not a hostage.",
+      "Domain, code, content, analytics, accounts: set up so you control them from day one. If we part ways, you keep a working system, not a hostage.",
   },
 ];
 
@@ -43,11 +49,11 @@ export default function About() {
               <span className="editorial font-medium">One</span> desk.
             </h2>
             <p className="mt-6 max-w-lg text-lg leading-relaxed text-body-muted">
-              Most business websites fail for more than one reason: unclear
-              positioning, stale content, weak technical structure, missing
-              trust signals. Fixing that takes more than a designer. I look at
-              the whole system: how clients decide, what search engines and AI
-              tools understand, and what you can actually maintain.
+              A firm&apos;s website goes stale and stops pulling its weight.
+              A team buys AI tools nobody uses. A case turns on carrier
+              records. An owner needs a straight read on a plan. I work
+              across all of it because I&apos;ve worked inside all of it:
+              production software, business operations, and law practice.
             </p>
 
             {/* Founder */}
@@ -56,17 +62,22 @@ export default function About() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: 0.15 }}
-              className="mt-10 flex items-start gap-5 border-t border-line pt-8"
+              className="mt-10 grid gap-6 border-t border-line pt-8 sm:grid-cols-[150px_1fr]"
             >
-              <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-[4px] border border-line-strong">
-                <Image
-                  src="/founder.png"
-                  alt="Richard T. LoRicco"
-                  width={56}
-                  height={56}
-                  className="h-full w-full object-cover"
-                />
-              </div>
+              <figure className="w-[150px]">
+                <div className="relative overflow-hidden rounded-[4px] border border-line-strong bg-card shadow-[0_12px_24px_-16px_rgba(26,24,20,0.35)]">
+                  <Image
+                    src="/portrait-bw.jpg"
+                    alt="Richard T. LoRicco, in a suit and tie"
+                    width={300}
+                    height={375}
+                    className="h-full w-full object-cover"
+                  />
+                </div>
+                <figcaption className="mt-2 font-mono text-[9px] tracking-[0.1em] whitespace-nowrap text-text-muted uppercase">
+                  Principal / New Haven, CT
+                </figcaption>
+              </figure>
               <div>
                 <p className="font-display text-[15px] font-bold">
                   Richard T. LoRicco
@@ -75,10 +86,11 @@ export default function About() {
                   Attorney (LL.M., J.D., MBA) · Software Engineer
                 </p>
                 <p className="mt-2.5 max-w-md text-sm leading-relaxed text-body-muted">
-                  Connecticut-admitted attorney and software engineer with a
-                  background across law, real estate, finance, and production
-                  web and AI systems. Built and shipped full-stack products,
-                  open-source tooling, and the studio&apos;s own apps.
+                  I&apos;m a Connecticut-admitted attorney and software
+                  engineer. I&apos;ve worked across law, real estate, finance,
+                  and production web and AI systems, and I&apos;ve shipped
+                  full-stack products, open-source tools, and the
+                  studio&apos;s own apps.
                 </p>
               </div>
             </motion.div>

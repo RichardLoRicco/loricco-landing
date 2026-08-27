@@ -7,25 +7,25 @@ const steps = [
     id: "01",
     verb: "Diagnose",
     detail:
-      "A written findings review of your current site and visibility. Evidence first, ranked by impact on inquiries.",
+      "Most engagements start with a written analysis: a technical memo, a findings review, a workflow audit, or a strategy review. I start from the evidence.",
   },
   {
     id: "02",
     verb: "Clarify",
     detail:
-      "Positioning, messaging, and intake paths settled before anything gets built. The strategy is the deliverable.",
+      "I explain what the evidence means and what to do about it, in plain English, ranked by impact. The recommendation goes in writing.",
   },
   {
     id: "03",
     verb: "Build",
     detail:
-      "Production-grade implementation with search equity preserved: URLs, redirects, structured data, Search Console.",
+      "Then I write the memo, build the site or the agent, prepare the deck, or run the training. I do the work myself.",
   },
   {
     id: "04",
     verb: "Improve",
     detail:
-      "Ongoing care, publishing, and AI-search monitoring so the site keeps compounding instead of quietly going stale.",
+      "Retainers, monitoring, and follow-up so the work doesn't quietly go stale.",
   },
 ];
 
@@ -53,7 +53,8 @@ export default function Process() {
             </h2>
           </div>
           <p className="max-w-xs font-mono text-[12px] leading-relaxed text-data-ink">
-            The same sequence runs every engagement: website, content, or AI.
+            I use the same sequence for websites, training, consulting, and
+            advisory.
           </p>
         </motion.div>
 

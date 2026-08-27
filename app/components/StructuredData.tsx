@@ -6,7 +6,7 @@ export default function StructuredData() {
     name: "LoRicco & Co",
     url: "https://loriccoandco.com",
     description:
-      "LoRicco & Co rebuilds outdated websites with SEO-safe migration, runs content and AI-search visibility programs, and brings practical AI to law firms, professional practices, and startups. The principal is a Connecticut-admitted attorney, MBA, and software engineer. The studio also ships its own iOS apps.",
+      "LoRicco & Co builds and operates websites and AI systems with SEO-safe migration and AI-search visibility, delivers practical AI education for lawyers and small businesses, and provides technical consulting for law firms (digital evidence and discovery analysis for counsel). The principal is a Connecticut-admitted attorney, MBA, and software engineer. The studio also ships its own iOS apps.",
     email: "admin@loriccoandco.com",
     address: {
       "@type": "PostalAddress",
@@ -19,6 +19,7 @@ export default function StructuredData() {
       "@type": "Person",
       name: "Richard T. LoRicco",
       jobTitle: "Principal: Attorney (LL.M., J.D., MBA) and Software Engineer",
+      image: "https://loriccoandco.com/portrait-bw.jpg",
       url: "https://www.richardloricco.com",
       sameAs: [
         "https://www.linkedin.com/in/richard-loricco-esq",
@@ -47,7 +48,9 @@ export default function StructuredData() {
       "Search engine optimization",
       "AI-search visibility (answer engine optimization, generative engine optimization)",
       "Content strategy and attorney-advertising compliance",
-      "AI integration and consulting",
+      "AI agents and workflow automation",
+      "AI education and training for lawyers and small businesses",
+      "Litigation technology and digital evidence consulting",
       "Software architecture",
       "iOS app development",
       "Business and startup strategy",
@@ -78,27 +81,9 @@ export default function StructuredData() {
           "@type": "Offer",
           itemOffered: {
             "@type": "Service",
-            name: "AI Consulting & Integration",
+            name: "AI Agents & Integration",
             description:
-              "AI strategy, product features, workflow automation, and agent/RAG systems for products, websites, and internal operations.",
-          },
-        },
-        {
-          "@type": "Offer",
-          itemOffered: {
-            "@type": "Service",
-            name: "Software Engineering Consulting",
-            description:
-              "Architecture reviews, code quality audits, and technical strategy for engineering teams.",
-          },
-        },
-        {
-          "@type": "Offer",
-          itemOffered: {
-            "@type": "Service",
-            name: "Business & Startup Consulting",
-            description:
-              "Pitch decks, financial projections, competitive analysis, and go-to-market strategy for startups and small businesses.",
+              "AI agents and workflow automation designed, built, and operated for law firms and small businesses: intake, follow-up, research, documentation, and internal tools.",
           },
         },
         {
@@ -107,7 +92,25 @@ export default function StructuredData() {
             "@type": "Service",
             name: "AI Education & Training",
             description:
-              "AI workshops and practical training for teams.",
+              "Hands-on AI workshops and training for lawyers and small-business teams, tailored to real workflows and compliance constraints.",
+          },
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Technical Consulting for Law Firms",
+            description:
+              "Digital evidence and discovery analysis, technical memos for counsel, plain-English explanation of the technology in a case, and guidance on firm technology decisions. Retained by counsel and structured as non-testifying consulting to protect work product.",
+          },
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Business & Startup Advisory",
+            description:
+              "Pitch decks, financial projections, competitive analysis, architecture reviews, and go-to-market strategy for startups and small businesses.",
           },
         },
       ],

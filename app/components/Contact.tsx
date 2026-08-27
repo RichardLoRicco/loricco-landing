@@ -34,9 +34,10 @@ export default function Contact() {
                 </span>
               </h2>
               <p className="mt-5 max-w-lg text-[15px] leading-relaxed text-data-ink">
-                Tell me about your firm, your startup, or your site. Most
-                engagements begin with a short working session and a written
-                review of where you stand. No pitch deck, no pressure.
+                Tell me about the site, the team, the case, or the business.
+                Most engagements begin with a short working session and a
+                written review of where you stand. No canned pitch, no
+                pressure.
               </p>
 
               <div className="mt-9 flex flex-wrap items-center gap-5">
@@ -47,7 +48,7 @@ export default function Contact() {
                   admin@loriccoandco.com
                 </a>
                 <span className="font-mono text-[12px] text-data-ink">
-                  REPLIES / within one business day
+                  REPLIES / usually one business day
                 </span>
               </div>
             </div>
@@ -57,6 +58,7 @@ export default function Contact() {
               <p className="text-data-hi">LCO / ENGAGEMENT MANIFEST</p>
               <p>PRINCIPAL / R.T. LoRicco</p>
               <p>DISCIPLINES / JD · MBA · SWE</p>
+              <p>PRACTICE / systems · training · counsel · advisory</p>
               <p>BASE / Connecticut, USA</p>
               <p>SEQUENCE / Diagnose → Improve</p>
               <p>

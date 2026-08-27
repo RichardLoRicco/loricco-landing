@@ -5,54 +5,54 @@ import { motion } from "motion/react";
 const services = [
   {
     section: "§ 01",
-    title: "Website Rebuilds",
-    outcome: "Credibility",
+    title: "Websites & AI Systems",
+    outcome: "Systems you own",
     description:
-      "Outdated WordPress or Squarespace site into a fast, modern build that makes your practice look like it's run well, because it is. SEO-safe migration included: your URLs, rankings, and search history survive the move.",
+      "I rebuild outdated sites, migrate them without discarding the search equity you've already earned, and keep them working after launch: publishing with compliance review, SEO and AI-search visibility, and AI agents built into intake and operations. You control the domain, the code, the content, and the accounts from day one.",
     offerings: [
-      "Next.js builds",
-      "SEO-safe migration",
-      "Structured data",
-      "Intake paths",
+      "Next.js rebuilds, SEO-safe migration",
+      "Site care, content & visibility retainers",
+      "Visibility in Google and AI answers",
+      "AI agents, built & operated",
     ],
   },
   {
     section: "§ 02",
-    title: "Content & AI-Search Visibility",
-    outcome: "Discoverability",
+    title: "AI Education & Training",
+    outcome: "A team that can use AI",
     description:
-      "Monthly publishing that gets your firm found, both in Google and in the AI tools your clients now ask first: ChatGPT, Claude, Perplexity, AI Overviews. For law firms, every piece passes attorney-advertising compliance review.",
+      "Hands-on training for lawyers and small-business teams: what the tools actually do, where they fail, and how to fold them into real work without compliance surprises. I teach from what I build every day.",
     offerings: [
-      "Blog & social retainers",
-      "Local SEO",
-      "AEO / GEO",
-      "Compliance review",
+      "Law-firm workshops",
+      "Small-business sessions",
+      "Written workflow guides",
+      "Follow-up office hours",
     ],
   },
   {
     section: "§ 03",
-    title: "AI Consulting & Integration",
-    outcome: "Ownership",
+    title: "Technical Consulting for Law Firms",
+    outcome: "The technology, explained",
     description:
-      "Practical AI put to work inside your operations: intake, research, documentation, content workflows, internal tools. Straight answers about what AI can do and what it can't, from someone who builds with it daily.",
+      "When a case turns on technology, I work for counsel: reading the discovery, decoding carrier and platform records, and writing plain-English analysis you can build a strategy on. I'm retained by the attorney, with the engagement structured around work-product protection. I also advise firms on their own technology decisions.",
     offerings: [
-      "Workflow automation",
-      "AI product features",
-      "Agents & RAG systems",
-      "Team training",
+      "Digital evidence & discovery analysis",
+      "Technical memos for counsel",
+      "Questions for opposing experts",
+      "Firm technology guidance",
     ],
   },
   {
     section: "§ 04",
-    title: "Startup & Business Advisory",
-    outcome: "Intake",
+    title: "Business & Startup Advisory",
+    outcome: "An informed second opinion",
     description:
-      "Engineering and business strategy from one advisor who has sat on every side of the table: architecture reviews, pitch decks, projections, competitive analysis, and the legal-adjacent judgment most technical advisors can't offer.",
+      "I advise startups and owners on pitch decks, financial projections, competitive analysis, go-to-market strategy, and architecture reviews. I read the deck, the contract, and the codebase myself; the MBA, the legal training, and the engineering sit at the same desk.",
     offerings: [
-      "Architecture & code review",
       "Pitch decks & projections",
+      "Competitive analysis",
       "Go-to-market strategy",
-      "Fractional advisory",
+      "Architecture & code reviews",
     ],
   },
 ];
@@ -62,7 +62,7 @@ export default function Services() {
     <section
       id="services"
       className="relative scroll-mt-24 px-6 py-28"
-      aria-label="Services"
+      aria-label="The practice"
     >
       <div className="mx-auto max-w-6xl">
         {/* Section header */}
@@ -73,9 +73,9 @@ export default function Services() {
           transition={{ duration: 0.5 }}
           className="mb-4 max-w-2xl"
         >
-          <p className="kicker rule-label text-text-muted">Services</p>
+          <p className="kicker rule-label text-text-muted">The Practice</p>
           <h2 className="font-display mt-5 text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl">
-            The work, in four registers.
+            Four parts. One desk.
           </h2>
           <p className="mt-5 text-lg leading-relaxed text-body-muted">
             Everything below is delivered by one person. No handoffs, no
@@ -92,7 +92,7 @@ export default function Services() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.45, delay: i * 0.08 }}
-              className="group grid gap-4 border-t border-line py-10 transition-colors duration-300 last:border-b md:grid-cols-[110px_1fr_240px] md:gap-10"
+              className="group grid gap-4 border-t border-line py-10 transition-colors duration-300 last:border-b md:grid-cols-[110px_1fr_260px] md:gap-10"
             >
               {/* § number */}
               <div className="font-mono text-sm font-medium text-cobalt">
@@ -132,6 +132,7 @@ export default function Services() {
               </div>
             </motion.article>
           ))}
+
         </div>
 
         {/* CTA line */}
@@ -143,10 +144,10 @@ export default function Services() {
           className="mt-12 text-[15px] text-body-muted"
         >
           <span className="editorial text-lg text-foreground">
-            Not sure which register you need?
+            Not sure which part you need?
           </span>{" "}
-          Most engagements start with a short working session and a written
-          review of where you stand.{" "}
+          That&apos;s what the first working session is for: a short
+          conversation and a written review of where you stand.{" "}
           <a
             href="mailto:admin@loriccoandco.com"
             className="font-medium text-cobalt underline decoration-cobalt/30 underline-offset-4 transition-colors hover:decoration-cobalt"

@@ -5,7 +5,7 @@ import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
 
 const navLinks = [
-  { label: "Services", href: "#services" },
+  { label: "The Practice", href: "#services" },
   { label: "How I Work", href: "#process" },
   { label: "The Studio", href: "#studio" },
   { label: "About", href: "#about" },
