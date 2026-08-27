@@ -57,7 +57,7 @@ export default function Contact() {
               <p className="text-data-hi">LCO / ENGAGEMENT MANIFEST</p>
               <p>PRINCIPAL / R.T. LoRicco</p>
               <p>DISCIPLINES / JD · MBA · SWE</p>
-              <p>PRACTICE / counsel · systems · training</p>
+              <p>PRACTICE / systems · training · counsel</p>
               <p>BASE / Connecticut, USA</p>
               <p>SEQUENCE / Diagnose → Improve</p>
               <p>

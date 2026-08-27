@@ -49,11 +49,11 @@ export default function About() {
               <span className="editorial font-medium">One</span> desk.
             </h2>
             <p className="mt-6 max-w-lg text-lg leading-relaxed text-body-muted">
-              A case turns on carrier records. A firm&apos;s website goes
-              stale and stops pulling its weight. A team buys AI tools nobody
-              uses. I work across all three because I&apos;ve worked inside
-              all three: law practice, business operations, and production
-              software.
+              A firm&apos;s website goes stale and stops pulling its weight.
+              A team buys AI tools nobody uses. A case turns on carrier
+              records. I work across all three because I&apos;ve worked
+              inside all three: production software, business operations, and
+              law practice.
             </p>
 
             {/* Founder */}

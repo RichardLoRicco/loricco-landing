@@ -5,19 +5,6 @@ import { motion } from "motion/react";
 const services = [
   {
     section: "§ 01",
-    title: "Technical Consulting for Law Firms",
-    outcome: "The technology, explained",
-    description:
-      "When a case turns on technology, I work for counsel: reading the discovery, decoding carrier and platform records, and writing plain-English analysis you can build a strategy on. I'm retained by the attorney, with the engagement structured around work-product protection. I also advise firms on their own technology decisions.",
-    offerings: [
-      "Digital evidence & discovery analysis",
-      "Technical memos for counsel",
-      "Questions for opposing experts",
-      "Firm technology guidance",
-    ],
-  },
-  {
-    section: "§ 02",
     title: "Websites & AI Systems",
     outcome: "Systems you own",
     description:
@@ -30,7 +17,7 @@ const services = [
     ],
   },
   {
-    section: "§ 03",
+    section: "§ 02",
     title: "AI Education & Training",
     outcome: "A team that can use AI",
     description:
@@ -40,6 +27,19 @@ const services = [
       "Small-business sessions",
       "Written workflow guides",
       "Follow-up office hours",
+    ],
+  },
+  {
+    section: "§ 03",
+    title: "Technical Consulting for Law Firms",
+    outcome: "The technology, explained",
+    description:
+      "When a case turns on technology, I work for counsel: reading the discovery, decoding carrier and platform records, and writing plain-English analysis you can build a strategy on. I'm retained by the attorney, with the engagement structured around work-product protection. I also advise firms on their own technology decisions.",
+    offerings: [
+      "Digital evidence & discovery analysis",
+      "Technical memos for counsel",
+      "Questions for opposing experts",
+      "Firm technology guidance",
     ],
   },
 ];

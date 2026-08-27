@@ -53,8 +53,8 @@ export default function Process() {
             </h2>
           </div>
           <p className="max-w-xs font-mono text-[12px] leading-relaxed text-data-ink">
-            I use the same sequence for case consulting, websites, and
-            training.
+            I use the same sequence for websites, training, and case
+            consulting.
           </p>
         </motion.div>
 

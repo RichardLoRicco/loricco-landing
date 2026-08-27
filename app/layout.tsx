@@ -25,22 +25,22 @@ const splineSansMono = Spline_Sans_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://loriccoandco.com"),
-  title: "LoRicco & Co | Technical Consulting, Websites & AI",
+  title: "LoRicco & Co | Websites, AI & Technical Consulting",
   description:
-    "LoRicco & Co provides technical consulting for law firms, builds and operates websites and AI systems, and teaches practical AI to lawyers and small businesses. One principal: attorney, MBA, and software engineer. Based in Connecticut.",
+    "LoRicco & Co builds and operates websites and AI systems, teaches practical AI to lawyers and small businesses, and provides technical consulting for law firms. One principal: attorney, MBA, and software engineer. Based in Connecticut.",
   openGraph: {
-    title: "LoRicco & Co | Technical Consulting, Websites & AI",
+    title: "LoRicco & Co | Websites, AI & Technical Consulting",
     description:
-      "Technical consulting for law firms, websites and AI systems, and practical AI training for lawyers and small businesses, from an attorney turned software engineer.",
+      "Websites and AI systems, practical AI training for lawyers and small businesses, and technical consulting for law firms, from an attorney turned software engineer.",
     type: "website",
     siteName: "LoRicco & Co",
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "LoRicco & Co | Technical Consulting, Websites & AI",
+    title: "LoRicco & Co | Websites, AI & Technical Consulting",
     description:
-      "Technical consulting for law firms, websites and AI systems, and practical AI training for lawyers and small businesses, from an attorney turned software engineer.",
+      "Websites and AI systems, practical AI training for lawyers and small businesses, and technical consulting for law firms, from an attorney turned software engineer.",
   },
   alternates: {
     canonical: "/",

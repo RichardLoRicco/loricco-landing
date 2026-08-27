@@ -99,6 +99,39 @@ const apps: App[] = [
     color: "#5EA5E8",
     status: "development",
   },
+  {
+    name: "Toucan",
+    tagline: "One can't. Two can.",
+    category: "Habits & Accountability",
+    description:
+      "A shared streak for two people. If either of you skips, it dies for both.",
+    image: "/apps/toucan/mascot.png",
+    imageAlt: "Toucan mascot",
+    color: "#E03A0E",
+    status: "development",
+  },
+  {
+    name: "Fridge Chef",
+    tagline: "Your fridge, tonight's dinner.",
+    category: "Cooking & AI",
+    description:
+      "Take a photo of what's in your fridge and get three dinners you can actually make tonight.",
+    image: "/apps/fridgechef/icon.png",
+    imageAlt: "Fridge Chef app icon",
+    color: "#5B8A63",
+    status: "development",
+  },
+  {
+    name: "Quiet Hours",
+    tagline: "Evidence without eavesdropping.",
+    category: "Legal & Documentation",
+    description:
+      "A bedside decibel monitor that logs loud nighttime events and turns them into a report you can hand your landlord.",
+    image: "/apps/quiethours/icon.png",
+    imageAlt: "Quiet Hours app icon",
+    color: "#4A5578",
+    status: "development",
+  },
 ];
 
 function StatusChip({ status }: { status: AppStatus }) {
@@ -191,7 +224,7 @@ export default function Studio() {
           </h2>
           <p className="mt-5 text-lg leading-relaxed text-body-muted">
             This is where I test the product and engineering advice I give
-            clients. Four products are live and three are in development, all
+            clients. Four products are live and six are in development, all
             built by me solo. For the live ones I run everything: App Store
             review, subscriptions, analytics, support.
           </p>
@@ -239,7 +272,7 @@ export default function Studio() {
           >
             <p className="font-mono text-[12px] leading-[1.9] text-text-muted">
               SHIPPED / 4<br />
-              IN PIPELINE / 3<br />
+              IN PIPELINE / 6<br />
               PLATFORMS / iOS · WEB
             </p>
             <p className="mt-6 text-[13.5px] leading-relaxed text-body-muted">

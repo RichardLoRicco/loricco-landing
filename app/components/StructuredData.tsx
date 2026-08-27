@@ -6,7 +6,7 @@ export default function StructuredData() {
     name: "LoRicco & Co",
     url: "https://loriccoandco.com",
     description:
-      "LoRicco & Co provides technical consulting for law firms (digital evidence and discovery analysis for counsel), builds and operates websites and AI systems with SEO-safe migration and AI-search visibility, and delivers practical AI education for lawyers and small businesses. The principal is a Connecticut-admitted attorney, MBA, and software engineer. The studio also ships its own iOS apps.",
+      "LoRicco & Co builds and operates websites and AI systems with SEO-safe migration and AI-search visibility, delivers practical AI education for lawyers and small businesses, and provides technical consulting for law firms (digital evidence and discovery analysis for counsel). The principal is a Connecticut-admitted attorney, MBA, and software engineer. The studio also ships its own iOS apps.",
     email: "admin@loriccoandco.com",
     address: {
       "@type": "PostalAddress",
@@ -43,13 +43,13 @@ export default function StructuredData() {
       "https://linktr.ee/richardloricco",
     ],
     knowsAbout: [
-      "Litigation technology and digital evidence consulting",
       "Website redesign and SEO-safe migration",
       "Search engine optimization",
       "AI-search visibility (answer engine optimization, generative engine optimization)",
       "Content strategy and attorney-advertising compliance",
       "AI agents and workflow automation",
       "AI education and training for lawyers and small businesses",
+      "Litigation technology and digital evidence consulting",
       "Software architecture",
       "iOS app development",
       "Business and startup strategy",
@@ -58,15 +58,6 @@ export default function StructuredData() {
       "@type": "OfferCatalog",
       name: "Services",
       itemListElement: [
-        {
-          "@type": "Offer",
-          itemOffered: {
-            "@type": "Service",
-            name: "Technical Consulting for Law Firms",
-            description:
-              "Digital evidence and discovery analysis, technical memos for counsel, plain-English explanation of the technology in a case, and guidance on firm technology decisions. Retained by counsel and structured as non-testifying consulting to protect work product.",
-          },
-        },
         {
           "@type": "Offer",
           itemOffered: {
@@ -101,6 +92,15 @@ export default function StructuredData() {
             name: "AI Education & Training",
             description:
               "Hands-on AI workshops and training for lawyers and small-business teams, tailored to real workflows and compliance constraints.",
+          },
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Technical Consulting for Law Firms",
+            description:
+              "Digital evidence and discovery analysis, technical memos for counsel, plain-English explanation of the technology in a case, and guidance on firm technology decisions. Retained by counsel and structured as non-testifying consulting to protect work product.",
           },
         },
         {

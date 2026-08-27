@@ -62,10 +62,10 @@ export default function Hero() {
             transition={{ duration: 0.45, delay: 0.4 }}
             className="mt-7 max-w-xl text-lg leading-relaxed text-body-muted"
           >
-            I consult with law firms on the technology inside their cases,
-            build and run websites and AI systems for firms and small
-            businesses, and teach lawyers and business teams how to put AI to
-            work. I do the thinking and the work myself.
+            I build and run websites and AI systems for firms and small
+            businesses, teach lawyers and business teams how to put AI to
+            work, and consult with law firms on the technology inside their
+            cases. I do the thinking and the work myself.
           </motion.p>
 
           <motion.div
@@ -98,7 +98,7 @@ export default function Hero() {
             transition={{ duration: 0.5, delay: 0.75 }}
             className="mt-14 flex flex-wrap items-center gap-x-3 gap-y-2"
           >
-            {["Case Consulting", "Websites & AI", "Education", "Advisory"].map(
+            {["Websites & AI", "Education", "Case Consulting", "Advisory"].map(
               (area, i) => (
                 <span key={area} className="flex items-center gap-3">
                   {i > 0 && (
@@ -125,12 +125,12 @@ export default function Hero() {
           {/* Backing sheets: the other two deliverables in the file */}
           <div className="absolute inset-0 translate-x-6 translate-y-6 rounded-[4px] border border-line bg-card/50">
             <p className="absolute right-3 bottom-1 font-mono text-[9px] tracking-[0.14em] text-text-muted uppercase">
-              03 / Training Syllabus
+              Training Syllabus
             </p>
           </div>
           <div className="absolute inset-0 translate-x-3 translate-y-3 rounded-[4px] border border-line bg-card/70">
             <p className="absolute left-4 bottom-1 font-mono text-[9px] tracking-[0.14em] text-text-muted uppercase">
-              02 / Website Findings Review
+              Website Findings Review
             </p>
           </div>
 
@@ -145,7 +145,7 @@ export default function Hero() {
             {/* Doc header */}
             <div className="border-b border-line px-6 pt-5 pb-4">
               <p className="font-mono text-[10px] tracking-[0.18em] text-text-muted uppercase">
-                01 / Technical Analysis Memo
+                Technical Analysis Memo
               </p>
               <p className="font-display mt-1.5 text-lg font-semibold tracking-tight">
                 State v. <Redacted width={104} />
