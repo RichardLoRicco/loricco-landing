@@ -1,32 +1,31 @@
 "use client";
 
-import Image from "next/image";
 import { motion } from "motion/react";
 
 const principles = [
   {
     id: "01",
-    title: "Discretion is the default",
+    title: "Client matters stay private",
     description:
-      "Consulting work for counsel is structured with privilege and work-product protection in mind, and client matters never become marketing material. That's why there are no case studies on this page.",
+      "Consulting work for counsel is structured with privilege and work-product protection in mind, and I don't turn client matters into marketing material. That's why you won't find case studies on this page.",
   },
   {
     id: "02",
-    title: "Plain English, no hype",
+    title: "Straight answers",
     description:
-      "You'll get straight answers about what the records show, what's broken, what it costs to fix, and what AI can and can't do for you. No jargon, no upsell theater.",
+      "You'll get a direct answer on what the records show, what's broken, what it costs to fix, and what AI can and can't do for you, including when the answer is that you don't need me.",
   },
   {
     id: "03",
-    title: "Preserve what has value",
+    title: "Keep what's working",
     description:
-      "A rebuild shouldn't cost you the search equity you spent years earning. URLs, rankings, and content history are assets. I inventory them before anything changes.",
+      "A rebuild shouldn't cost you the search rankings you spent years earning. I inventory your URLs, rankings, and content before anything changes, and the migration is planned around keeping them.",
   },
   {
     id: "04",
     title: "You own everything",
     description:
-      "Domain, code, content, analytics, accounts: set up so you control them from day one. If we part ways, you keep a working system, not a hostage.",
+      "The domain, code, content, analytics, and accounts are set up in your name from the first day. If we part ways, you keep a working system and everything needed to run it.",
   },
 ];
 
@@ -44,55 +43,41 @@ export default function About() {
           >
             <p className="kicker rule-label text-text-muted">About · The Principal</p>
             <h2 className="font-display mt-5 text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl">
-              Three careers.
+              About the
               <br />
-              <span className="editorial font-medium">One</span> desk.
+              <span className="editorial font-medium">principal</span>
             </h2>
             <p className="mt-6 max-w-lg text-lg leading-relaxed text-body-muted">
-              A firm&apos;s website goes stale and stops pulling its weight.
-              A team buys AI tools nobody uses. A case turns on carrier
-              records. An owner needs a straight read on a plan. I work
-              across all of it because I&apos;ve worked inside all of it:
-              production software, business operations, and law practice.
+              I practiced law, worked in real estate and finance, and then
+              moved into building production software. The four service
+              lines on this page are the four kinds of problems I kept
+              getting asked to solve: a firm website that stopped
+              bringing in work, AI tools a team bought and never used, a case
+              that turned on carrier records, and a business plan that needed
+              a straight read.
             </p>
 
-            {/* Founder */}
+            {/* Founder (portrait lives in the hero) */}
             <motion.div
               initial={{ opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: 0.15 }}
-              className="mt-10 grid gap-6 border-t border-line pt-8 sm:grid-cols-[150px_1fr]"
+              className="mt-10 border-t border-line pt-8"
             >
-              <figure className="w-[150px]">
-                <div className="relative overflow-hidden rounded-[4px] border border-line-strong bg-card shadow-[0_12px_24px_-16px_rgba(26,24,20,0.35)]">
-                  <Image
-                    src="/portrait-bw.jpg"
-                    alt="Richard T. LoRicco, in a suit and tie"
-                    width={300}
-                    height={375}
-                    className="h-full w-full object-cover"
-                  />
-                </div>
-                <figcaption className="mt-2 font-mono text-[9px] tracking-[0.1em] whitespace-nowrap text-text-muted uppercase">
-                  Principal / New Haven, CT
-                </figcaption>
-              </figure>
-              <div>
-                <p className="font-display text-[15px] font-bold">
-                  Richard T. LoRicco
-                </p>
-                <p className="mt-0.5 font-mono text-[11px] tracking-[0.1em] text-cobalt uppercase">
-                  Attorney (LL.M., J.D., MBA) · Software Engineer
-                </p>
-                <p className="mt-2.5 max-w-md text-sm leading-relaxed text-body-muted">
-                  I&apos;m a Connecticut-admitted attorney and software
-                  engineer. I&apos;ve worked across law, real estate, finance,
-                  and production web and AI systems, and I&apos;ve shipped
-                  full-stack products, open-source tools, and the
-                  studio&apos;s own apps.
-                </p>
-              </div>
+              <p className="font-display text-[15px] font-bold">
+                Richard T. LoRicco
+              </p>
+              <p className="mt-0.5 font-mono text-[11px] tracking-[0.1em] text-cobalt uppercase">
+                Attorney (LL.M., J.D., MBA) · Software Engineer · New Haven, CT
+              </p>
+              <p className="mt-2.5 max-w-md text-sm leading-relaxed text-body-muted">
+                I&apos;m a Connecticut-admitted attorney and software
+                engineer. I&apos;ve worked across law, real estate, finance,
+                and production web and AI systems, and I&apos;ve shipped
+                full-stack products, open-source tools, and the
+                studio&apos;s own apps.
+              </p>
             </motion.div>
           </motion.div>
 

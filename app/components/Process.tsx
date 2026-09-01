@@ -7,25 +7,25 @@ const steps = [
     id: "01",
     verb: "Diagnose",
     detail:
-      "Most engagements start with a written analysis: a technical memo, a findings review, a workflow audit, or a strategy review. I start from the evidence.",
+      "Most engagements start with a written review of what's there: a technical memo, a website findings report, a workflow audit, or a read on a business plan.",
   },
   {
     id: "02",
     verb: "Clarify",
     detail:
-      "I explain what the evidence means and what to do about it, in plain English, ranked by impact. The recommendation goes in writing.",
+      "I explain what I found and what I'd do about it, in plain English and ranked by impact. The recommendation goes in writing so you can act on it or get a second opinion.",
   },
   {
     id: "03",
     verb: "Build",
     detail:
-      "Then I write the memo, build the site or the agent, prepare the deck, or run the training. I do the work myself.",
+      "Then I do the work: the memo, the website or the agent, the deck, or the training session.",
   },
   {
     id: "04",
     verb: "Improve",
     detail:
-      "Retainers, monitoring, and follow-up so the work doesn't quietly go stale.",
+      "Retainers, monitoring, and follow-up, so the work keeps paying for itself after launch.",
   },
 ];
 
@@ -53,8 +53,8 @@ export default function Process() {
             </h2>
           </div>
           <p className="max-w-xs font-mono text-[12px] leading-relaxed text-data-ink">
-            I use the same sequence for websites, training, consulting, and
-            advisory.
+            The same four steps apply whether the engagement is a website, a
+            training, a case, or a business plan.
           </p>
         </motion.div>
 

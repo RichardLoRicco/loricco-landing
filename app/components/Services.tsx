@@ -6,9 +6,9 @@ const services = [
   {
     section: "§ 01",
     title: "Websites & AI Systems",
-    outcome: "Systems you own",
+    outcome: "You own the result",
     description:
-      "I rebuild outdated sites, migrate them without discarding the search equity you've already earned, and keep them working after launch: publishing with compliance review, SEO and AI-search visibility, and AI agents built into intake and operations. You control the domain, the code, the content, and the accounts from day one.",
+      "I rebuild outdated websites without losing the search rankings you've already earned, then keep them working after launch with content, SEO and AI-search visibility, and AI agents for intake and day-to-day operations. The domain, the code, the content, and every account are in your name from the start.",
     offerings: [
       "Next.js rebuilds, SEO-safe migration",
       "Site care, content & visibility retainers",
@@ -19,9 +19,9 @@ const services = [
   {
     section: "§ 02",
     title: "AI Education & Training",
-    outcome: "A team that can use AI",
+    outcome: "Staff who use the tools",
     description:
-      "Hands-on training for lawyers and small-business teams: what the tools actually do, where they fail, and how to fold them into real work without compliance surprises. I teach from what I build every day.",
+      "Hands-on training for lawyers and small-business teams on what these tools do well, where they fail, and how to use them in real work without creating a compliance problem. I teach from the systems I build and run every day.",
     offerings: [
       "Law-firm workshops",
       "Small-business sessions",
@@ -32,9 +32,9 @@ const services = [
   {
     section: "§ 03",
     title: "Technical Consulting for Law Firms",
-    outcome: "The technology, explained",
+    outcome: "Analysis counsel can use",
     description:
-      "When a case turns on technology, I work for counsel: reading the discovery, decoding carrier and platform records, and writing plain-English analysis you can build a strategy on. I'm retained by the attorney, with the engagement structured around work-product protection. I also advise firms on their own technology decisions.",
+      "When a case turns on technology, I work for the attorney. I read the discovery, decode carrier and platform records, and write a plain-English analysis counsel can build a strategy on. The engagement is structured with work-product protection in mind. I also advise firms on their own technology decisions.",
     offerings: [
       "Digital evidence & discovery analysis",
       "Technical memos for counsel",
@@ -45,9 +45,9 @@ const services = [
   {
     section: "§ 04",
     title: "Business & Startup Advisory",
-    outcome: "An informed second opinion",
+    outcome: "A second opinion",
     description:
-      "I advise startups and owners on pitch decks, financial projections, competitive analysis, go-to-market strategy, and architecture reviews. I read the deck, the contract, and the codebase myself; the MBA, the legal training, and the engineering sit at the same desk.",
+      "I advise startups and business owners on pitch decks, financial projections, competitive analysis, go-to-market strategy, and architecture reviews. I read the deck, the contract, and the codebase myself, so the business, legal, and technical questions get answered by the same person.",
     offerings: [
       "Pitch decks & projections",
       "Competitive analysis",
@@ -75,11 +75,11 @@ export default function Services() {
         >
           <p className="kicker rule-label text-text-muted">The Practice</p>
           <h2 className="font-display mt-5 text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl">
-            Four parts. One desk.
+            What I do
           </h2>
           <p className="mt-5 text-lg leading-relaxed text-body-muted">
-            Everything below is delivered by one person. No handoffs, no
-            account managers, no junior staff learning on your budget.
+            Four service lines, all delivered by me. There is no account
+            manager between us and no junior staff doing the work.
           </p>
         </motion.div>
 
@@ -144,17 +144,17 @@ export default function Services() {
           className="mt-12 text-[15px] text-body-muted"
         >
           <span className="editorial text-lg text-foreground">
-            Not sure which part you need?
+            Not sure which of these you need?
           </span>{" "}
-          That&apos;s what the first working session is for: a short
-          conversation and a written review of where you stand.{" "}
+          Most engagements start with a short call and a written review of
+          where things stand.{" "}
           <a
             href="mailto:admin@loriccoandco.com"
             className="font-medium text-cobalt underline decoration-cobalt/30 underline-offset-4 transition-colors hover:decoration-cobalt"
           >
-            Start there
-          </a>
-          .
+            Email me
+          </a>{" "}
+          and we&apos;ll figure it out from there.
         </motion.p>
       </div>
     </section>
