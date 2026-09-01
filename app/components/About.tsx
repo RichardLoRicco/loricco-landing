@@ -48,10 +48,10 @@ export default function About() {
               <span className="editorial font-medium">principal</span>
             </h2>
             <p className="mt-6 max-w-lg text-lg leading-relaxed text-body-muted">
-              I practiced law, worked in real estate and finance, and then
-              moved into building production software. The four service
-              lines on this page are the four kinds of problems I kept
-              getting asked to solve: a firm website that stopped
+              I practiced law, consulted for startups, and then moved into
+              building production software. The four service lines on this
+              page are the four kinds of problems I kept getting asked to
+              solve: a firm website that stopped
               bringing in work, AI tools a team bought and never used, a case
               that turned on carrier records, and a business plan that needed
               a straight read.
@@ -73,9 +73,9 @@ export default function About() {
               </p>
               <p className="mt-2.5 max-w-md text-sm leading-relaxed text-body-muted">
                 I&apos;m a Connecticut-admitted attorney and software
-                engineer. I&apos;ve worked across law, real estate, finance,
-                and production web and AI systems, and I&apos;ve shipped
-                full-stack products, open-source tools, and the
+                engineer. I&apos;ve practiced law, consulted for startups,
+                and built production web and AI systems, and I&apos;ve
+                shipped full-stack products, open-source tools, and the
                 studio&apos;s own apps.
               </p>
             </motion.div>
