@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "motion/react";
 
 const navLinks = [
   { label: "The Practice", href: "#services" },
+  { label: "Work", href: "#work" },
   { label: "How I Work", href: "#process" },
   { label: "The Studio", href: "#studio" },
   { label: "About", href: "#about" },
@@ -77,7 +78,7 @@ export default function Navbar() {
             href="mailto:admin@loriccoandco.com"
             className="rounded-[3px] bg-foreground px-4 py-2 text-sm font-semibold text-background transition-colors duration-200 hover:bg-cobalt"
           >
-            Book a call
+            Get in touch
           </a>
         </div>
 
@@ -132,7 +133,7 @@ export default function Navbar() {
                 onClick={() => setMobileOpen(false)}
                 className="mt-2 inline-flex w-fit rounded-[3px] bg-foreground px-4 py-2 text-sm font-semibold text-background"
               >
-                Book a call
+                Get in touch
               </a>
             </div>
           </motion.div>

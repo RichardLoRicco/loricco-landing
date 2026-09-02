@@ -92,7 +92,7 @@ export default function StructuredData() {
             "@type": "Service",
             name: "AI Education & Training",
             description:
-              "Hands-on AI workshops and training for lawyers and small-business teams, tailored to real workflows and compliance constraints.",
+              "Hands-on AI workshops and training for lawyers and small-business teams, built around real workflows and compliance constraints.",
           },
         },
         {

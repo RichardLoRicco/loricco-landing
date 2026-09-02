@@ -28,16 +28,16 @@ export default function Contact() {
             <div>
               <p className="kicker text-data-ink">§ Final / Get in touch</p>
               <h2 className="font-display mt-4 max-w-xl text-3xl font-bold leading-[1.1] tracking-tight text-data-hi sm:text-5xl">
-                Start with the{" "}
+                Tell me what{" "}
                 <span className="editorial font-medium text-cobalt-bright">
-                  evidence.
+                  you&apos;re working on.
                 </span>
               </h2>
               <p className="mt-5 max-w-lg text-[15px] leading-relaxed text-data-ink">
-                Tell me about the site, the team, the case, or the business.
-                Most engagements begin with a short working session and a
-                written review of where you stand. No canned pitch, no
-                pressure.
+                Send me a note about the website, the team, the case, or the
+                business. I&apos;ll reply with a few questions, and if it
+                makes sense we&apos;ll set up a short call and I&apos;ll
+                follow up with a written review.
               </p>
 
               <div className="mt-9 flex flex-wrap items-center gap-5">

@@ -217,16 +217,17 @@ export default function Studio() {
           transition={{ duration: 0.5 }}
           className="mb-14 max-w-2xl"
         >
-          <p className="kicker rule-label text-text-muted">The Studio · Exhibit A</p>
+          <p className="kicker rule-label text-text-muted">The Studio · Exhibit B</p>
           <h2 className="font-display mt-5 text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl">
-            Proof of craft:
-            <br />I ship my own software.
+            I also build and ship
+            <br />
+            my own apps.
           </h2>
           <p className="mt-5 text-lg leading-relaxed text-body-muted">
-            This is where I test the product and engineering advice I give
-            clients. Four products are live and six are in development, all
-            built by me solo. For the live ones I run everything: App Store
-            review, subscriptions, analytics, support.
+            Four are live on the App Store and six are in development, all
+            built by me. For the live ones I handle App Store review,
+            subscriptions, analytics, and support myself, which is where most
+            of the product advice I give clients comes from.
           </p>
         </motion.div>
 
@@ -277,10 +278,10 @@ export default function Studio() {
             </p>
             <p className="mt-6 text-[13.5px] leading-relaxed text-body-muted">
               <span className="editorial text-[15px] text-foreground">
-                Why this matters to clients:
+                Why it&apos;s on this page:
               </span>{" "}
-              the product and engineering advice I give has already been
-              tested on my own apps.
+              the advice I give clients on product and engineering has been
+              tested on my own apps first.
             </p>
           </motion.div>
         </div>
