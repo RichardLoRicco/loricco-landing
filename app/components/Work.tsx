@@ -28,7 +28,7 @@ const projects: Project[] = [
     imageAlt:
       "Homepage of omnicanhelp.com: headline reading Physical therapy, aquatic therapy and chiropractic care, with a photo of a warm-water therapy pool",
     description:
-      "A physical, aquatic, and chiropractic therapy practice with five Connecticut offices. I rebuilt the Squarespace site as a bilingual Next.js site with an appointment-request form running on HIPAA-eligible AWS infrastructure, then took over content and AI-search visibility on retainer.",
+      "A physical, aquatic, and chiropractic therapy practice with five Connecticut offices. I rebuilt the Squarespace site as a bilingual Next.js site with an appointment-request form running on HIPAA-eligible AWS infrastructure, and I handle content and AI-search visibility for the practice.",
     data: [
       ["Lighthouse", "94 · 100 · 100 · 100"],
       ["Live since", "Aug 2026"],
@@ -43,7 +43,7 @@ const projects: Project[] = [
     imageAlt:
       "Homepage of loriccolaw.com: headline reading Three generations of New Haven injury attorneys",
     description:
-      "A personal injury and criminal defense firm that has practiced in New Haven since 1956. I rebuilt the outdated site as a bilingual Next.js site, kept the URLs and rankings it already had, and added a compliance-reviewed blog and pages for the surrounding towns. I run the content and AI-search work on a monthly retainer.",
+      "A personal injury and criminal defense firm that has practiced in New Haven since 1956. I rebuilt the outdated site as a bilingual Next.js site, kept the URLs and rankings it already had, and added a compliance-reviewed blog and pages for the surrounding towns. I also handle the firm's content and AI-search visibility.",
     data: [
       ["Lighthouse", "100 · 100 · 100 · 100"],
       ["Live since", "May 2026"],
@@ -74,9 +74,8 @@ export default function Work() {
             and still run.
           </h2>
           <p className="mt-5 text-lg leading-relaxed text-body-muted">
-            Both are live and on a monthly retainer, so anything this page
-            says about how I build and run a site can be checked against
-            them.
+            Both are live, so anything this page says about how I build and
+            run a site can be checked against them.
           </p>
         </motion.div>
 
