@@ -21,21 +21,6 @@ type Project = {
 */
 const projects: Project[] = [
   {
-    name: "The LoRicco Law Firm",
-    url: "https://loriccolaw.com/",
-    host: "loriccolaw.com",
-    image: "/work/loriccolaw.jpg",
-    imageAlt:
-      "Homepage of loriccolaw.com: headline reading Three generations of New Haven injury attorneys",
-    description:
-      "A personal injury and criminal defense firm that has practiced in New Haven since 1956. I rebuilt the outdated site as a bilingual Next.js site, kept the URLs and rankings it already had, and added a compliance-reviewed blog and pages for the surrounding towns. I run the content and AI-search work on a monthly retainer.",
-    data: [
-      ["Lighthouse", "100 · 100 · 100 · 100"],
-      ["Live since", "May 2026"],
-      ["Languages", "EN · ES"],
-    ],
-  },
-  {
     name: "Omni Physical & Aquatic Therapy",
     url: "https://www.omnicanhelp.com/",
     host: "omnicanhelp.com",
@@ -47,6 +32,21 @@ const projects: Project[] = [
     data: [
       ["Lighthouse", "94 · 100 · 100 · 100"],
       ["Live since", "Aug 2026"],
+      ["Languages", "EN · ES"],
+    ],
+  },
+  {
+    name: "The LoRicco Law Firm",
+    url: "https://loriccolaw.com/",
+    host: "loriccolaw.com",
+    image: "/work/loriccolaw.jpg",
+    imageAlt:
+      "Homepage of loriccolaw.com: headline reading Three generations of New Haven injury attorneys",
+    description:
+      "A personal injury and criminal defense firm that has practiced in New Haven since 1956. I rebuilt the outdated site as a bilingual Next.js site, kept the URLs and rankings it already had, and added a compliance-reviewed blog and pages for the surrounding towns. I run the content and AI-search work on a monthly retainer.",
+    data: [
+      ["Lighthouse", "100 · 100 · 100 · 100"],
+      ["Live since", "May 2026"],
       ["Languages", "EN · ES"],
     ],
   },
