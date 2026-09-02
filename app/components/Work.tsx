@@ -153,9 +153,8 @@ export default function Work() {
           className="mt-8 max-w-2xl font-mono text-[12px] leading-relaxed text-text-muted"
         >
           Lighthouse figures are mobile runs from September 2026 (performance,
-          accessibility, best practices, SEO). The LoRicco Law Firm is my
-          family&apos;s practice. Consulting matters for counsel are not shown
-          here, for the reasons described below.
+          accessibility, best practices, SEO). Consulting matters for counsel
+          are not shown here, for the reasons described below.
         </motion.p>
       </div>
     </section>
