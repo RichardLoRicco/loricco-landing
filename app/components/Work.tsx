@@ -28,7 +28,7 @@ const projects: Project[] = [
     imageAlt:
       "Homepage of omnicanhelp.com: headline reading Physical therapy, aquatic therapy and chiropractic care, with a photo of a warm-water therapy pool",
     description:
-      "A physical, aquatic, and chiropractic therapy practice with five Connecticut offices. I rebuilt the Squarespace site as a bilingual Next.js site with an appointment-request form running on HIPAA-eligible AWS infrastructure, then took over content, AI-search visibility, and the Google reviews program on retainer.",
+      "A physical, aquatic, and chiropractic therapy practice with five Connecticut offices. I rebuilt the Squarespace site as a bilingual Next.js site with an appointment-request form running on HIPAA-eligible AWS infrastructure, then took over content and AI-search visibility on retainer.",
     data: [
       ["Lighthouse", "94 · 100 · 100 · 100"],
       ["Live since", "Aug 2026"],
