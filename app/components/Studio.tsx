@@ -217,7 +217,7 @@ export default function Studio() {
           transition={{ duration: 0.5 }}
           className="mb-14 max-w-2xl"
         >
-          <p className="kicker rule-label text-text-muted">The Studio · Exhibit A</p>
+          <p className="kicker rule-label text-text-muted">The Studio · Exhibit B</p>
           <h2 className="font-display mt-5 text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl">
             I also build and ship
             <br />
