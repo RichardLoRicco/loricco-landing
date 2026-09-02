@@ -67,15 +67,14 @@ export default function Work() {
           transition={{ duration: 0.5 }}
           className="mb-14 max-w-2xl"
         >
-          <p className="kicker rule-label text-text-muted">Selected work · Exhibit A</p>
+          <p className="kicker rule-label text-text-muted">Selected work</p>
           <h2 className="font-display mt-5 text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl">
             Two websites I rebuilt
             <br />
             and still run.
           </h2>
           <p className="mt-5 text-lg leading-relaxed text-body-muted">
-            Both are live, so anything this page says about how I build and
-            run a site can be checked against them.
+            Both sites are live and linked below.
           </p>
         </motion.div>
 

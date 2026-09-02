@@ -35,7 +35,7 @@ const apps: App[] = [
     tagline: "Should you grill tonight?",
     category: "Weather & Utility",
     description:
-      "Real-time weather analysis with a clear YES/NO verdict, so you stop guessing and start grilling.",
+      "Checks current weather and gives a simple yes-or-no recommendation for grilling tonight.",
     image: "/apps/grilltonight/icon.png",
     imageAlt: "Grill Tonight app icon, a blazing grill",
     url: "https://grilltonight-landing.vercel.app/",
@@ -47,7 +47,7 @@ const apps: App[] = [
     tagline: "Quit nicotine, one breath at a time.",
     category: "Health & Wellness",
     description:
-      "A calm companion through cravings, with guided breathing, smart tracking, and gentle motivation.",
+      "Tracks cravings and nicotine-free streaks, with breathing exercises for difficult moments.",
     image: "/apps/milo/mascot.png",
     imageAlt: "Milo the otter mascot waving",
     url: "https://quitwithmilo.com/",
@@ -82,7 +82,7 @@ const apps: App[] = [
     tagline: "Support for the messy middle.",
     category: "Breakup Recovery",
     description:
-      "Mood-aware recovery support with SOS tools and a guided path through the first hard weeks.",
+      "Tracks mood after a breakup and provides SOS exercises for difficult moments during the first weeks.",
     image: "/apps/haven/mascot.png",
     imageAlt: "Haven companion mascot",
     color: "#B48895",
@@ -217,17 +217,16 @@ export default function Studio() {
           transition={{ duration: 0.5 }}
           className="mb-14 max-w-2xl"
         >
-          <p className="kicker rule-label text-text-muted">The Studio · Exhibit B</p>
+          <p className="kicker rule-label text-text-muted">The Studio</p>
           <h2 className="font-display mt-5 text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl">
             I also build and ship
             <br />
             my own apps.
           </h2>
           <p className="mt-5 text-lg leading-relaxed text-body-muted">
-            Four are live on the App Store and six are in development, all
-            built by me. For the live ones I handle App Store review,
-            subscriptions, analytics, and support myself, which is where most
-            of the product advice I give clients comes from.
+            Four are live on the App Store and six are in development. I build
+            them and handle App Store review, subscriptions, analytics, and
+            support. That work informs the product advice I give clients.
           </p>
         </motion.div>
 

@@ -5,15 +5,15 @@ import { motion } from "motion/react";
 const services = [
   {
     section: "§ 01",
-    title: "Websites & AI Systems",
-    outcome: "You own the result",
+    title: "Websites & AI Tools",
+    outcome: "You own the site and accounts",
     description:
-      "I rebuild outdated websites without losing the search rankings you've already earned, then keep them working after launch with content, SEO and AI-search visibility, and AI agents for intake and day-to-day operations. The domain, the code, the content, and every account are in your name from the start.",
+      "I rebuild outdated websites without throwing away the search rankings they already have. After launch, I can maintain the site, publish content, improve how it appears in Google and AI answers, and build AI tools for intake or routine work. The domain, code, content, and accounts stay in your name.",
     offerings: [
-      "Next.js rebuilds, SEO-safe migration",
-      "Site care, content & visibility retainers",
+      "Website rebuilds without losing rankings",
+      "Ongoing site care and content",
       "Visibility in Google and AI answers",
-      "AI agents, built & operated",
+      "AI tools for intake and routine work",
     ],
   },
   {
@@ -21,7 +21,7 @@ const services = [
     title: "AI Education & Training",
     outcome: "Staff who use the tools",
     description:
-      "Hands-on training for lawyers and small-business teams on what these tools do well, where they fail, and how to use them in real work without creating a compliance problem. I teach from the systems I build and run every day.",
+      "Training for lawyers and small-business teams on what AI tools do well, where they fail, and how to use them without creating a compliance problem. The sessions use examples from the systems I build and run every day.",
     offerings: [
       "Law-firm workshops",
       "Small-business sessions",
@@ -34,7 +34,7 @@ const services = [
     title: "Technical Consulting for Law Firms",
     outcome: "Analysis counsel can use",
     description:
-      "When a case turns on technology, I work for the attorney. I read the discovery, decode carrier and platform records, and write a plain-English analysis counsel can build a strategy on. The engagement is structured with work-product protection in mind. I also advise firms on their own technology decisions.",
+      "When a case turns on technology, I work for the attorney. I read the discovery, interpret carrier and platform records, and explain what the records show in writing. The engagement is structured with work-product protection in mind. I also advise firms on their own technology decisions.",
     offerings: [
       "Digital evidence & discovery analysis",
       "Technical memos for counsel",
@@ -62,7 +62,7 @@ export default function Services() {
     <section
       id="services"
       className="relative scroll-mt-24 px-6 py-28"
-      aria-label="The practice"
+      aria-label="Services"
     >
       <div className="mx-auto max-w-6xl">
         {/* Section header */}
@@ -73,13 +73,13 @@ export default function Services() {
           transition={{ duration: 0.5 }}
           className="mb-4 max-w-2xl"
         >
-          <p className="kicker rule-label text-text-muted">The Practice</p>
+          <p className="kicker rule-label text-text-muted">Services</p>
           <h2 className="font-display mt-5 text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl">
             What I do
           </h2>
           <p className="mt-5 text-lg leading-relaxed text-body-muted">
-            Four service lines, all delivered by me. There is no account
-            manager between us and no junior staff doing the work.
+            I handle each engagement myself. There is no account manager
+            between us and no junior staff doing the work.
           </p>
         </motion.div>
 
@@ -143,11 +143,8 @@ export default function Services() {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="mt-12 text-[15px] text-body-muted"
         >
-          <span className="editorial text-lg text-foreground">
-            Not sure which of these you need?
-          </span>{" "}
-          Most engagements start with a short call and a written review of
-          where things stand.{" "}
+          Some problems cross more than one service. Most engagements start
+          with a short call and a written review of where things stand.{" "}
           <a
             href="mailto:admin@loriccoandco.com"
             className="font-medium text-cobalt underline decoration-cobalt/30 underline-offset-4 transition-colors hover:decoration-cobalt"

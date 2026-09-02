@@ -41,9 +41,9 @@ export default function Hero() {
             transition={{ duration: 0.45, delay: 0.05 }}
             className="font-display text-[2.6rem] leading-[1.05] font-bold tracking-tight sm:text-6xl"
           >
-            Technical questions.
+            Websites, AI, and
             <br />
-            <span className="editorial font-medium">Counsel-grade</span> answers.
+            <span className="editorial font-medium">technical consulting.</span>
           </motion.h1>
 
           {/*
@@ -74,7 +74,7 @@ export default function Hero() {
               href="#services"
               className="group font-mono text-[13px] text-foreground transition-colors duration-200 hover:text-cobalt"
             >
-              See the practice{" "}
+              See what I do{" "}
               <span className="inline-block transition-transform duration-200 group-hover:translate-y-0.5">
                 ↓
               </span>

@@ -26,7 +26,7 @@ export default function Contact() {
 
           <div className="relative grid gap-10 px-8 py-14 sm:px-14 sm:py-18 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
             <div>
-              <p className="kicker text-data-ink">§ Final / Get in touch</p>
+              <p className="kicker text-data-ink">Contact</p>
               <h2 className="font-display mt-4 max-w-xl text-3xl font-bold leading-[1.1] tracking-tight text-data-hi sm:text-5xl">
                 Tell me what{" "}
                 <span className="editorial font-medium text-cobalt-bright">
@@ -55,12 +55,12 @@ export default function Contact() {
 
             {/* Mono manifest */}
             <div className="hidden border-l border-white/10 pl-10 font-mono text-[12px] leading-[2.3] text-data-ink lg:block" aria-hidden="true">
-              <p className="text-data-hi">LCO / ENGAGEMENT MANIFEST</p>
+              <p className="text-data-hi">LCO / PROJECT DETAILS</p>
               <p>PRINCIPAL / R.T. LoRicco</p>
-              <p>DISCIPLINES / JD · MBA · SWE</p>
-              <p>PRACTICE / systems · training · counsel · advisory</p>
+              <p>BACKGROUND / JD · MBA · SWE</p>
+              <p>WORK / websites · training · consulting · advisory</p>
               <p>BASE / Connecticut, USA</p>
-              <p>SEQUENCE / Diagnose → Improve</p>
+              <p>PROCESS / review → work → follow-up</p>
               <p>
                 STATUS /{" "}
                 <span className="text-cobalt-bright">accepting clients</span>

@@ -25,7 +25,7 @@ const steps = [
     id: "04",
     verb: "Improve",
     detail:
-      "Retainers, monitoring, and follow-up, so the work keeps paying for itself after launch.",
+      "For ongoing work, I monitor the system, handle updates, and revisit it when the underlying needs change.",
   },
 ];
 
@@ -45,7 +45,7 @@ export default function Process() {
           className="mb-16 flex flex-wrap items-end justify-between gap-6"
         >
           <div>
-            <p className="kicker text-data-ink">Operating sequence</p>
+            <p className="kicker text-data-ink">How I work</p>
             <h2 className="font-display mt-4 text-3xl font-bold tracking-tight text-data-hi sm:text-4xl">
               Diagnose <span className="text-cobalt-bright">→</span> Clarify{" "}
               <span className="text-cobalt-bright">→</span> Build{" "}

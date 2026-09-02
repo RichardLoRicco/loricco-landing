@@ -6,7 +6,7 @@ export default function StructuredData() {
     name: "LoRicco & Co",
     url: "https://loriccoandco.com",
     description:
-      "LoRicco & Co builds and operates websites and AI systems with SEO-safe migration and AI-search visibility, delivers practical AI education for lawyers and small businesses, and provides technical consulting for law firms (digital evidence and discovery analysis for counsel). The principal is a Connecticut-admitted attorney, MBA, and software engineer. The studio also ships its own iOS apps.",
+      "LoRicco & Co rebuilds and operates websites, develops AI tools, trains lawyers and small businesses, analyzes digital evidence for counsel, and advises startups. The principal is a Connecticut-admitted attorney, MBA, and software engineer. The studio also publishes iOS apps.",
     email: "admin@loriccoandco.com",
     address: {
       "@type": "PostalAddress",
@@ -65,7 +65,7 @@ export default function StructuredData() {
             "@type": "Service",
             name: "Website Rebuilds with SEO-Safe Migration",
             description:
-              "Redesign of outdated websites into fast, modern builds with search equity preserved: URL preservation, redirects, structured data, and Search Console setup. Serving law firms, professional practices, and local businesses.",
+              "Website redesigns for law firms, professional practices, and local businesses, including URL preservation, redirects, structured data, and Search Console setup.",
           },
         },
         {
@@ -74,7 +74,7 @@ export default function StructuredData() {
             "@type": "Service",
             name: "Content & AI-Search Visibility",
             description:
-              "Monthly content production with local SEO and AI-search visibility (AEO/GEO) so businesses get surfaced by ChatGPT, Claude, Perplexity, and Google AI Overviews. Attorney-advertising compliance review for law firms.",
+              "Ongoing content, local SEO, and work to improve how a business appears in search engines and AI-generated answers, with attorney-advertising review for law firms.",
           },
         },
         {
@@ -83,7 +83,7 @@ export default function StructuredData() {
             "@type": "Service",
             name: "AI Agents & Integration",
             description:
-              "AI agents and workflow automation designed, built, and operated for law firms and small businesses: intake, follow-up, research, documentation, and internal tools.",
+              "AI tools for law firms and small businesses, including intake, follow-up, research, documentation, and internal workflows.",
           },
         },
         {
@@ -92,7 +92,7 @@ export default function StructuredData() {
             "@type": "Service",
             name: "AI Education & Training",
             description:
-              "Hands-on AI workshops and training for lawyers and small-business teams, built around real workflows and compliance constraints.",
+              "AI workshops for lawyers and small-business teams covering day-to-day use, common failures, and compliance concerns.",
           },
         },
         {
@@ -101,7 +101,7 @@ export default function StructuredData() {
             "@type": "Service",
             name: "Technical Consulting for Law Firms",
             description:
-              "Digital evidence and discovery analysis, technical memos for counsel, plain-English explanation of the technology in a case, and guidance on firm technology decisions. Retained by counsel and structured as non-testifying consulting to protect work product.",
+              "Digital evidence and discovery analysis, written explanations of technical records, questions for opposing experts, and advice on law-firm technology. Retained by counsel and structured as non-testifying consulting with work-product protection in mind.",
           },
         },
         {
