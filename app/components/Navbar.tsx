@@ -2,24 +2,28 @@
 
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { motion, AnimatePresence, useScroll, useSpring } from "motion/react";
+import { SECTIONS, useActiveSection } from "./ActiveSection";
 
-const navLinks = [
-  { label: "Services", href: "#services" },
-  { label: "Work", href: "#work" },
-  { label: "How I Work", href: "#process" },
-  { label: "The Studio", href: "#studio" },
-  { label: "About", href: "#about" },
-  { label: "Contact", href: "#contact" },
-];
+const navLinks = SECTIONS.map((s) => ({
+  id: s.id,
+  label: s.id === "work" ? "Work" : s.label,
+  href: `#${s.id}`,
+}));
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const toggleRef = useRef<HTMLButtonElement>(null);
+  const active = useActiveSection();
+
+  // Reading-progress hairline along the bottom edge of the bar.
+  const { scrollYProgress } = useScroll();
+  const progress = useSpring(scrollYProgress, { stiffness: 120, damping: 30, mass: 0.3 });
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 40);
+    handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -48,10 +52,10 @@ export default function Navbar() {
       aria-label="Main navigation"
       initial={{ opacity: 0, y: -12 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4, delay: 0.1 }}
+      transition={{ duration: 0.5, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-background/90 backdrop-blur-xl border-b border-line"
+          ? "bg-background/85 backdrop-blur-xl border-b border-line"
           : "bg-transparent"
       }`}
     >
@@ -64,19 +68,26 @@ export default function Navbar() {
         </Link>
 
         {/* Desktop nav */}
-        <div className="hidden items-center gap-8 md:flex">
-          {navLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="text-sm font-medium text-body-muted transition-colors duration-200 hover:text-cobalt"
-            >
-              {link.label}
-            </a>
-          ))}
+        <div className="hidden items-center gap-7 md:flex">
+          {navLinks.map((link) => {
+            const isActive = active === link.id;
+            return (
+              <a
+                key={link.href}
+                href={link.href}
+                aria-current={isActive ? "true" : undefined}
+                className={`u-link text-sm font-medium transition-colors duration-200 ${
+                  isActive ? "text-cobalt" : "text-body-muted hover:text-foreground"
+                }`}
+              >
+                {link.label}
+              </a>
+            );
+          })}
           <a
             href="mailto:admin@loriccoandco.com"
-            className="rounded-[3px] bg-foreground px-4 py-2 text-sm font-semibold text-background transition-colors duration-200 hover:bg-cobalt"
+            className="btn bg-foreground px-4 py-2 text-sm font-semibold text-background"
+            style={{ ["--btn-fill" as string]: "var(--color-cobalt)" }}
           >
             Get in touch
           </a>
@@ -104,6 +115,15 @@ export default function Navbar() {
         </button>
       </div>
 
+      {/* Reading progress: a cobalt hairline that grows along the bottom edge */}
+      <motion.div
+        aria-hidden="true"
+        className={`absolute bottom-[-1px] left-0 h-px w-full origin-left bg-cobalt transition-opacity duration-300 ${
+          scrolled ? "opacity-100" : "opacity-0"
+        }`}
+        style={{ scaleX: progress }}
+      />
+
       {/* Mobile menu */}
       <AnimatePresence>
         {mobileOpen && (
@@ -118,13 +138,16 @@ export default function Navbar() {
             className="overflow-hidden border-b border-line bg-background/95 backdrop-blur-xl md:hidden"
           >
             <div className="flex flex-col gap-4 px-6 py-6">
-              {navLinks.map((link) => (
+              {navLinks.map((link, i) => (
                 <a
                   key={link.href}
                   href={link.href}
                   onClick={() => setMobileOpen(false)}
-                  className="font-display text-lg text-body-muted transition-colors hover:text-cobalt"
+                  className="flex items-baseline gap-4 font-display text-lg text-body-muted transition-colors hover:text-cobalt"
                 >
+                  <span className="font-mono text-[11px] text-cobalt tnum">
+                    0{i + 1}
+                  </span>
                   {link.label}
                 </a>
               ))}

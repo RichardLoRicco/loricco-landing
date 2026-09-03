@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
+import { SplitLines } from "./ui/Reveal";
 
 const principles = [
   {
@@ -42,11 +43,15 @@ export default function About() {
             transition={{ duration: 0.5 }}
           >
             <p className="kicker rule-label text-text-muted">About</p>
-            <h2 className="font-display mt-5 text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl">
-              About the
-              <br />
-              <span className="editorial font-medium">principal</span>
-            </h2>
+            <SplitLines
+              className="font-display mt-5 text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl"
+              lines={[
+                "About the",
+                <span key="l2" className="editorial font-medium">
+                  principal
+                </span>,
+              ]}
+            />
             <p className="mt-6 max-w-lg text-lg leading-relaxed text-body-muted">
               I practiced law, consulted for startups, and then moved into
               building production software. The services on this page grew
@@ -88,14 +93,14 @@ export default function About() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-60px" }}
                 transition={{ duration: 0.4, delay: i * 0.1 }}
-                className="border-t border-line py-7 last:border-b"
+                className="ledger-row group border-t border-line py-7 last:border-b"
               >
                 <div className="flex items-baseline gap-4">
                   <span className="shrink-0 font-mono text-[12px] font-medium whitespace-nowrap text-cobalt">
                     {principle.id} /
                   </span>
                   <div>
-                    <h3 className="font-display text-lg font-bold tracking-tight">
+                    <h3 className="font-display text-lg font-bold tracking-tight transition-colors duration-300 group-hover:text-cobalt">
                       {principle.title}
                     </h3>
                     <p className="mt-2 text-sm leading-relaxed text-body-muted">
