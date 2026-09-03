@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "motion/react";
+import { FadeUp, SplitLines } from "./ui/Reveal";
 
 type AppStatus = "live" | "development";
 
@@ -35,7 +36,7 @@ const apps: App[] = [
     tagline: "Should you grill tonight?",
     category: "Weather & Utility",
     description:
-      "Real-time weather analysis with a clear YES/NO verdict, so you stop guessing and start grilling.",
+      "Checks current weather and gives a simple yes-or-no recommendation for grilling tonight.",
     image: "/apps/grilltonight/icon.png",
     imageAlt: "Grill Tonight app icon, a blazing grill",
     url: "https://grilltonight-landing.vercel.app/",
@@ -47,7 +48,7 @@ const apps: App[] = [
     tagline: "Quit nicotine, one breath at a time.",
     category: "Health & Wellness",
     description:
-      "A calm companion through cravings, with guided breathing, smart tracking, and gentle motivation.",
+      "Tracks cravings and nicotine-free streaks, with breathing exercises for difficult moments.",
     image: "/apps/milo/mascot.png",
     imageAlt: "Milo the otter mascot waving",
     url: "https://quitwithmilo.com/",
@@ -82,7 +83,7 @@ const apps: App[] = [
     tagline: "Support for the messy middle.",
     category: "Breakup Recovery",
     description:
-      "Mood-aware recovery support with SOS tools and a guided path through the first hard weeks.",
+      "Tracks mood after a breakup and provides SOS exercises for difficult moments during the first weeks.",
     image: "/apps/haven/mascot.png",
     imageAlt: "Haven companion mascot",
     color: "#B48895",
@@ -149,7 +150,7 @@ function StatusChip({ status }: { status: AppStatus }) {
   );
 }
 
-function AppCardInner({ app }: { app: App }) {
+function AppCardInner({ app, index }: { app: App; index: number }) {
   return (
     <>
       {/* Top accent hairline in app color */}
@@ -166,12 +167,23 @@ function AppCardInner({ app }: { app: App }) {
           style={{ backgroundColor: app.color }}
           aria-hidden="true"
         />
+        {/* App-colored lamp that comes up on hover */}
+        <div
+          className="absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+          style={{
+            background: `radial-gradient(180px circle at 50% 60%, ${app.color}33, transparent 70%)`,
+          }}
+          aria-hidden="true"
+        />
+        <span className="absolute top-3 left-4 font-mono text-[10px] tracking-[0.14em] text-text-muted tnum">
+          {String(index + 1).padStart(2, "0")} / {String(apps.length).padStart(2, "0")}
+        </span>
         <Image
           src={app.image}
           alt={app.imageAlt}
           width={104}
           height={104}
-          className="relative h-24 w-24 object-contain drop-shadow-lg transition-transform duration-300 group-hover:scale-105"
+          className="relative h-24 w-24 object-contain drop-shadow-lg transition-transform duration-500 [transition-timing-function:var(--ease-out-expo)] group-hover:-translate-y-1 group-hover:scale-[1.08]"
         />
       </div>
 
@@ -203,33 +215,29 @@ function AppCardInner({ app }: { app: App }) {
 }
 
 const cardClass =
-  "group relative flex flex-col overflow-hidden rounded-[4px] border border-line bg-card transition-all duration-300 hover:-translate-y-0.5 hover:border-line-strong hover:shadow-[0_16px_32px_-20px_rgba(26,24,20,0.3)]";
+  "group relative flex flex-col overflow-hidden rounded-[4px] border border-line bg-card transition-all duration-500 [transition-timing-function:var(--ease-out-expo)] hover:-translate-y-1 hover:border-line-strong hover:shadow-[0_24px_40px_-24px_rgba(26,24,20,0.35)]";
 
 export default function Studio() {
   return (
     <section id="studio" className="relative scroll-mt-24 px-6 py-28" aria-label="The studio">
       <div className="mx-auto max-w-6xl">
         {/* Section header */}
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.5 }}
-          className="mb-14 max-w-2xl"
-        >
-          <p className="kicker rule-label text-text-muted">The Studio · Exhibit B</p>
-          <h2 className="font-display mt-5 text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl">
-            I also build and ship
-            <br />
-            my own apps.
-          </h2>
-          <p className="mt-5 text-lg leading-relaxed text-body-muted">
-            Four are live on the App Store and six are in development, all
-            built by me. For the live ones I handle App Store review,
-            subscriptions, analytics, and support myself, which is where most
-            of the product advice I give clients comes from.
-          </p>
-        </motion.div>
+        <div className="mb-14 max-w-2xl">
+          <FadeUp>
+            <p className="kicker rule-label text-text-muted">The Studio</p>
+          </FadeUp>
+          <SplitLines
+            className="font-display mt-5 text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl"
+            lines={["I also build and ship", "my own apps."]}
+          />
+          <FadeUp delay={0.15}>
+            <p className="mt-5 text-lg leading-relaxed text-body-muted">
+              Four are live on the App Store and six are in development. I build
+              them and handle App Store review, subscriptions, analytics, and
+              support. That work informs the product advice I give clients.
+            </p>
+          </FadeUp>
+        </div>
 
         {/* App grid */}
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
@@ -247,7 +255,7 @@ export default function Studio() {
                 transition={{ duration: 0.4, delay: (i % 4) * 0.07 }}
                 className={cardClass}
               >
-                <AppCardInner app={app} />
+                <AppCardInner app={app} index={i} />
               </motion.a>
             ) : (
               <motion.article
@@ -258,7 +266,7 @@ export default function Studio() {
                 transition={{ duration: 0.4, delay: (i % 4) * 0.07 }}
                 className={cardClass}
               >
-                <AppCardInner app={app} />
+                <AppCardInner app={app} index={i} />
               </motion.article>
             )
           )}

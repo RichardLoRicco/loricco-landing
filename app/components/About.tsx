@@ -1,13 +1,14 @@
 "use client";
 
 import { motion } from "motion/react";
+import { SplitLines } from "./ui/Reveal";
 
 const principles = [
   {
     id: "01",
     title: "Client matters stay private",
     description:
-      "Consulting work for counsel is structured with privilege and work-product protection in mind, and I don't turn client matters into marketing material. That's why you won't find case studies on this page.",
+      "Consulting work for counsel is structured with privilege and work-product protection in mind. I don't turn those matters into marketing material or publish case studies about them.",
   },
   {
     id: "02",
@@ -41,20 +42,23 @@ export default function About() {
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.5 }}
           >
-            <p className="kicker rule-label text-text-muted">About · The Principal</p>
-            <h2 className="font-display mt-5 text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl">
-              About the
-              <br />
-              <span className="editorial font-medium">principal</span>
-            </h2>
+            <p className="kicker rule-label text-text-muted">About</p>
+            <SplitLines
+              className="font-display mt-5 text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl"
+              lines={[
+                "About the",
+                <span key="l2" className="editorial font-medium">
+                  principal
+                </span>,
+              ]}
+            />
             <p className="mt-6 max-w-lg text-lg leading-relaxed text-body-muted">
               I practiced law, consulted for startups, and then moved into
-              building production software. The four service lines on this
-              page are the four kinds of problems I kept getting asked to
-              solve: a firm website that stopped
-              bringing in work, AI tools a team bought and never used, a case
-              that turned on carrier records, and a business plan that needed
-              a straight read.
+              building production software. The services on this page grew
+              out of problems people kept bringing me. Their firm website had
+              stopped bringing in work. Their team bought AI tools but never
+              used them. Their case turned on carrier records. Their business
+              plan needed a straight read.
             </p>
 
             {/* Founder (portrait lives in the hero) */}
@@ -73,10 +77,9 @@ export default function About() {
               </p>
               <p className="mt-2.5 max-w-md text-sm leading-relaxed text-body-muted">
                 I&apos;m a Connecticut-admitted attorney and software
-                engineer. I&apos;ve practiced law, consulted for startups,
-                and built production web and AI systems, and I&apos;ve
-                shipped full-stack products, open-source tools, and the
-                studio&apos;s own apps.
+                engineer with an LL.M., J.D., and MBA. My work has included
+                legal practice, startup consulting, production web and AI
+                systems, open-source tools, and the studio&apos;s apps.
               </p>
             </motion.div>
           </motion.div>
@@ -90,14 +93,14 @@ export default function About() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-60px" }}
                 transition={{ duration: 0.4, delay: i * 0.1 }}
-                className="border-t border-line py-7 last:border-b"
+                className="ledger-row group border-t border-line py-7 last:border-b"
               >
                 <div className="flex items-baseline gap-4">
                   <span className="shrink-0 font-mono text-[12px] font-medium whitespace-nowrap text-cobalt">
                     {principle.id} /
                   </span>
                   <div>
-                    <h3 className="font-display text-lg font-bold tracking-tight">
+                    <h3 className="font-display text-lg font-bold tracking-tight transition-colors duration-300 group-hover:text-cobalt">
                       {principle.title}
                     </h3>
                     <p className="mt-2 text-sm leading-relaxed text-body-muted">
