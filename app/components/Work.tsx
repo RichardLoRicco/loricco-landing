@@ -180,21 +180,20 @@ export default function Work() {
     <section
       id="work"
       className="relative scroll-mt-24 overflow-hidden px-6 py-28 lg:py-36"
-      aria-label="Selected work"
+      aria-label="Selected client work"
     >
       <div className="mx-auto max-w-6xl">
         <div className="max-w-2xl">
           <FadeUp>
-            <p className="kicker rule-label text-text-muted">Selected work</p>
+            <p className="kicker rule-label text-text-muted">Websites</p>
           </FadeUp>
           <SplitLines
             className="font-display mt-5 text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl"
-            lines={["Two websites I rebuilt", "and still run."]}
+            lines={["Selected client work"]}
           />
           <FadeUp delay={0.15}>
             <p className="mt-5 text-lg leading-relaxed text-body-muted">
-              Both sites are live and linked below. The screenshots are the
-              full homepages as they stand today.
+              Websites I&apos;ve rebuilt and continue to maintain.
             </p>
           </FadeUp>
         </div>

@@ -10,7 +10,6 @@ import { FadeUp, SplitLines } from "./ui/Reveal";
   Update these when the Work or Studio sections change.
 */
 const facts: [string, string][] = [
-  ["Sites in production", "02"],
   ["Apps on the App Store", "04"],
   ["Lighthouse, loriccolaw.com", "100 · 100 · 100 · 100"],
   ["Base", "New Haven, CT"],
@@ -167,13 +166,11 @@ export default function Hero() {
 
       {/* ── Facts ledger ── */}
       <FadeUp immediate delay={0.5} y={12} className="relative mx-auto mt-16 w-full max-w-6xl lg:mt-20">
-        <dl className="grid grid-cols-2 border-y border-line bg-background/60 backdrop-blur-sm lg:grid-cols-4">
-          {facts.map(([label, value], i) => (
+        <dl className="grid grid-cols-1 border-y border-line bg-background/60 backdrop-blur-sm sm:grid-cols-3">
+          {facts.map(([label, value]) => (
             <div
               key={label}
-              className={`px-5 py-5 ${i % 2 === 0 ? "border-r border-line" : ""} ${
-                i < 2 ? "border-b border-line lg:border-b-0" : ""
-              } ${i === 2 ? "lg:border-r lg:border-line" : ""}`}
+              className="border-b border-line px-5 py-5 last:border-b-0 sm:border-r sm:border-b-0 sm:last:border-r-0"
             >
               <dt className="kicker text-[10px] text-text-muted">{label}</dt>
               <dd className="mt-2 font-mono text-[15px] font-medium text-foreground tnum">
