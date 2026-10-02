@@ -43,7 +43,7 @@ export const metadata: Metadata = {
         url: "/og.png",
         width: 1200,
         height: 630,
-        alt: "LoRicco & Co website with a portrait of principal Richard T. LoRicco.",
+        alt: "LoRicco & Co.: Attorney & engineer, with a portrait of Richard T. LoRicco.",
       },
     ],
   },
