@@ -4,13 +4,14 @@ import Image from "next/image";
 import { useEffect, useRef, type ReactNode } from "react";
 import Blueprint from "./Blueprint";
 import { FadeUp, SplitLines } from "./ui/Reveal";
+import { counts, pad2 } from "../lib/apps";
 
 /*
   Every figure here is checkable elsewhere on the page or on the linked sites.
   Update these when the Work or Studio sections change.
 */
 const facts: [string, string][] = [
-  ["Apps on the App Store", "04"],
+  ["Apps on the App Store", pad2(counts.live)],
   ["Lighthouse, loriccolaw.com", "100 · 100 · 100 · 100"],
   ["Base", "New Haven, CT"],
 ];

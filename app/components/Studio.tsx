@@ -3,295 +3,522 @@
 import Image from "next/image";
 import { motion } from "motion/react";
 import { FadeUp, SplitLines } from "./ui/Reveal";
+import { apps, counts, featuredApp, pad2, spell, type AppStatus, type FeaturedTheme, type StudioApp } from "../lib/apps";
 
-type AppStatus = "live" | "development";
+const gridApps = apps.filter((a) => a !== featuredApp);
+const liveGrid = gridApps.filter((a) => a.status === "live");
+const reviewGrid = gridApps.filter((a) => a.status === "review");
+const devGrid = gridApps.filter((a) => a.status === "development");
 
-type App = {
-  name: string;
-  tagline: string;
-  category: string;
-  description: string;
-  image: string;
-  imageAlt: string;
-  url?: string;
-  color: string;
-  status: AppStatus;
+const statusLabel: Record<AppStatus, string> = {
+  live: "Live",
+  review: "In review",
+  development: "In dev",
 };
 
-const apps: App[] = [
-  {
-    name: "Atlas",
-    tagline: "Your daily fuel to stay moving.",
-    category: "Fitness & Motivation",
-    description:
-      "Daily fitness motivation with quotes, streaks, and Atlas the bear keeping you accountable.",
-    image: "/apps/atlas/mascot.png",
-    imageAlt: "Atlas the bear mascot",
-    url: "https://atlas.loriccoandco.com/",
-    color: "#B08630",
-    status: "live",
-  },
-  {
-    name: "Grill Tonight",
-    tagline: "Should you grill tonight?",
-    category: "Weather & Utility",
-    description:
-      "Checks current weather and gives a simple yes-or-no recommendation for grilling tonight.",
-    image: "/apps/grilltonight/icon.png",
-    imageAlt: "Grill Tonight app icon, a blazing grill",
-    url: "https://grilltonight-landing.vercel.app/",
-    color: "#D4652A",
-    status: "live",
-  },
-  {
-    name: "Milo",
-    tagline: "Quit nicotine, one breath at a time.",
-    category: "Health & Wellness",
-    description:
-      "Tracks cravings and nicotine-free streaks, with breathing exercises for difficult moments.",
-    image: "/apps/milo/mascot.png",
-    imageAlt: "Milo the otter mascot waving",
-    url: "https://quitwithmilo.com/",
-    color: "#6FA3AB",
-    status: "live",
-  },
-  {
-    name: "Claro",
-    tagline: "Quit drinking, one day at a time.",
-    category: "Health & Wellness",
-    description:
-      "Cravings, streaks, guided breathing, and no-shame support for quitting alcohol.",
-    image: "/apps/claro/mascot.png",
-    imageAlt: "Claro the elephant mascot waving",
-    url: "https://claro.loriccoandco.com/",
-    color: "#6B8F71",
-    status: "live",
-  },
-  {
-    name: "BowelBuddy",
-    tagline: "Track your gut without making it weird.",
-    category: "Digestive Health",
-    description:
-      "Private bowel movement logging, pattern insights, and context you can bring to your doctor.",
-    image: "/apps/bowelbuddy/mascot.png",
-    imageAlt: "BowelBuddy mascot waving",
-    color: "#7FA37A",
-    status: "development",
-  },
-  {
-    name: "Haven",
-    tagline: "Support for the messy middle.",
-    category: "Breakup Recovery",
-    description:
-      "Tracks mood after a breakup and provides SOS exercises for difficult moments during the first weeks.",
-    image: "/apps/haven/mascot.png",
-    imageAlt: "Haven companion mascot",
-    color: "#B48895",
-    status: "development",
-  },
-  {
-    name: "Hark",
-    tagline: "Scripts that follow your voice.",
-    category: "Voice Teleprompter",
-    description:
-      "An on-device teleprompter that scrolls with your pace, pauses, and ad-libs.",
-    image: "/apps/hark/logo-v2.png",
-    imageAlt: "Hark logo mark",
-    color: "#5EA5E8",
-    status: "development",
-  },
-  {
-    name: "Toucan",
-    tagline: "One can't. Two can.",
-    category: "Habits & Accountability",
-    description:
-      "A shared streak for two people. If either of you skips, it dies for both.",
-    image: "/apps/toucan/mascot.png",
-    imageAlt: "Toucan mascot",
-    color: "#E03A0E",
-    status: "development",
-  },
-  {
-    name: "Fridge Chef",
-    tagline: "Your fridge, tonight's dinner.",
-    category: "Cooking & AI",
-    description:
-      "Take a photo of what's in your fridge and get three dinners you can actually make tonight.",
-    image: "/apps/fridgechef/icon.png",
-    imageAlt: "Fridge Chef app icon",
-    color: "#5B8A63",
-    status: "development",
-  },
-  {
-    name: "Quiet Hours",
-    tagline: "Evidence without eavesdropping.",
-    category: "Legal & Documentation",
-    description:
-      "A bedside decibel monitor that logs loud nighttime events and turns them into a report you can hand your landlord.",
-    image: "/apps/quiethours/icon.png",
-    imageAlt: "Quiet Hours app icon",
-    color: "#4A5578",
-    status: "development",
-  },
-];
-
-function StatusChip({ status }: { status: AppStatus }) {
-  if (status === "live") {
-    return (
-      <span className="rounded-[2px] border border-good bg-good-wash px-2 py-0.5 font-mono text-[10px] tracking-[0.08em] text-good">
-        LIVE
-      </span>
-    );
-  }
+function StatusChip({ status, onDark = false }: { status: AppStatus; onDark?: boolean }) {
+  const tone = onDark
+    ? status === "review"
+      ? "border-[#e8c46a]/60 bg-[#e8c46a]/10 text-[#f1d892]"
+      : "border-white/30 text-data-hi"
+    : status === "live"
+      ? "border-good bg-good-wash text-good"
+      : status === "review"
+        ? "border-warn bg-warn-wash text-warn"
+        : "border-line-strong bg-background text-text-muted";
   return (
-    <span className="rounded-[2px] border border-line-strong bg-background px-2 py-0.5 font-mono text-[10px] tracking-[0.08em] text-text-muted">
-      IN DEV
+    <span
+      className={`inline-flex shrink-0 items-center gap-1.5 rounded-[2px] border px-2 py-0.5 font-mono text-[10px] tracking-[0.08em] uppercase ${tone}`}
+    >
+      {status === "live" && (
+        <span className="h-1.5 w-1.5 rounded-full bg-current" aria-hidden="true" />
+      )}
+      {statusLabel[status]}
     </span>
   );
 }
 
-function AppCardInner({ app, index }: { app: App; index: number }) {
+/* App icons are full-bleed squares; the iOS mask is applied here. */
+function AppIcon({ app, size }: { app: StudioApp; size: number }) {
   return (
-    <>
-      {/* Top accent hairline in app color */}
-      <div
-        className="h-[3px] w-full"
-        style={{ backgroundColor: app.color }}
-        aria-hidden="true"
+    <span
+      className="relative block shrink-0 overflow-hidden rounded-[22.5%] shadow-[0_1px_0_rgba(26,24,20,0.06),0_10px_22px_-12px_rgba(26,24,20,0.45)] ring-1 ring-black/5"
+      style={{
+        width: size,
+        height: size,
+        backgroundColor: app.iconIsMascot ? `${app.color}26` : undefined,
+      }}
+    >
+      <Image
+        src={app.icon}
+        alt={app.iconAlt}
+        width={size}
+        height={size}
+        sizes={`${size}px`}
+        className={app.iconIsMascot ? "h-full w-full scale-[0.86] object-contain" : "h-full w-full object-cover"}
       />
+    </span>
+  );
+}
 
-      {/* Image area */}
-      <div className="relative flex h-36 items-center justify-center overflow-hidden">
-        <div
-          className="absolute inset-0 opacity-[0.07] transition-opacity duration-300 group-hover:opacity-[0.12]"
-          style={{ backgroundColor: app.color }}
-          aria-hidden="true"
-        />
-        {/* App-colored lamp that comes up on hover */}
-        <div
-          className="absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-          style={{
-            background: `radial-gradient(180px circle at 50% 60%, ${app.color}33, transparent 70%)`,
-          }}
-          aria-hidden="true"
-        />
-        <span className="absolute top-3 left-4 font-mono text-[10px] tracking-[0.14em] text-text-muted tnum">
-          {String(index + 1).padStart(2, "0")} / {String(apps.length).padStart(2, "0")}
-        </span>
-        <Image
-          src={app.image}
-          alt={app.imageAlt}
-          width={104}
-          height={104}
-          className="relative h-24 w-24 object-contain drop-shadow-lg transition-transform duration-500 [transition-timing-function:var(--ease-out-expo)] group-hover:-translate-y-1 group-hover:scale-[1.08]"
-        />
-      </div>
+function ArrowOut() {
+  return (
+    <svg viewBox="0 0 12 12" className="h-2.5 w-2.5" aria-hidden="true">
+      <path d="M3.5 2.5h6v6M9.5 2.5 2.5 9.5" fill="none" stroke="currentColor" strokeWidth="1.4" />
+    </svg>
+  );
+}
 
-      {/* Content */}
-      <div className="flex flex-1 flex-col border-t border-line px-5 pt-4 pb-5">
-        <div className="flex items-center justify-between gap-2">
-          <h3 className="font-display text-lg font-bold tracking-tight">
-            {app.name}
-          </h3>
-          <StatusChip status={app.status} />
-        </div>
-        <p className="editorial mt-0.5 text-[13px]" style={{ color: app.color }}>
-          {app.tagline}
-        </p>
-        <p className="mt-2.5 flex-1 text-[13px] leading-relaxed text-body-muted">
-          {app.description}
-        </p>
-        <p className="mt-4 font-mono text-[10px] tracking-[0.14em] text-text-muted uppercase">
-          {app.category}
-          {app.url && (
-            <span className="ml-2 inline-block text-cobalt opacity-0 transition-opacity duration-200 group-hover:opacity-100">
-              VISIT →
-            </span>
-          )}
-        </p>
-      </div>
-    </>
+function AppLinks({ app }: { app: StudioApp }) {
+  const linkClass =
+    "inline-flex min-h-9 items-center gap-1.5 rounded-[3px] border px-3 font-mono text-[11px] tracking-[0.08em] uppercase transition-colors duration-200";
+  if (!app.siteUrl && !app.appStoreUrl) {
+    return (
+      <p className="font-mono text-[11px] tracking-[0.08em] text-text-muted uppercase">
+        Site coming soon
+      </p>
+    );
+  }
+  return (
+    <div className="flex flex-wrap gap-2">
+      {app.appStoreUrl && (
+        <a
+          href={app.appStoreUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`${app.name} on the App Store (opens in a new tab)`}
+          className={`${linkClass} border-foreground bg-foreground text-background hover:border-cobalt hover:bg-cobalt`}
+        >
+          App Store <ArrowOut />
+        </a>
+      )}
+      {app.siteUrl && (
+        <a
+          href={app.siteUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`${app.name} website (opens in a new tab)`}
+          className={`${linkClass} border-line-strong text-foreground hover:border-cobalt hover:text-cobalt`}
+        >
+          Website <ArrowOut />
+        </a>
+      )}
+    </div>
   );
 }
 
 const cardClass =
-  "group relative flex flex-col overflow-hidden rounded-[4px] border border-line bg-card transition-all duration-500 [transition-timing-function:var(--ease-out-expo)] hover:-translate-y-1 hover:border-line-strong hover:shadow-[0_24px_40px_-24px_rgba(26,24,20,0.35)]";
+  "group relative flex h-full flex-col overflow-hidden rounded-[4px] border border-line bg-card transition-[transform,border-color,box-shadow] duration-500 [transition-timing-function:var(--ease-out-expo)] hover:-translate-y-1 hover:border-line-strong hover:shadow-[0_24px_40px_-24px_rgba(26,24,20,0.35)] focus-within:border-line-strong";
+
+/* App-colored hairline plus a lamp that comes up behind the icon on hover. */
+function CardAccent({ color }: { color: string }) {
+  return (
+    <>
+      <div className="h-[3px] w-full" style={{ backgroundColor: color }} aria-hidden="true" />
+      <div
+        className="pointer-events-none absolute inset-x-0 top-0 h-40 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+        style={{ background: `radial-gradient(220px circle at 52px 40px, ${color}2e, transparent 70%)` }}
+        aria-hidden="true"
+      />
+    </>
+  );
+}
+
+function meta(app: StudioApp) {
+  const parts = [app.category];
+  if (app.price) parts.push(app.price);
+  if (app.since) parts.push(`Since ${app.since}`);
+  if (app.note) parts.push(app.note);
+  return parts;
+}
+
+function LiveCard({ app }: { app: StudioApp }) {
+  return (
+    <article className={cardClass}>
+      <CardAccent color={app.color} />
+      <div className="relative flex flex-1 flex-col p-5 sm:p-6">
+        <div className="flex items-start justify-between gap-3">
+          <AppIcon app={app} size={60} />
+          <StatusChip status={app.status} />
+        </div>
+        <h4 className="font-display mt-5 text-xl font-bold tracking-tight">{app.name}</h4>
+        <p className="editorial mt-1 text-[15px] leading-snug text-foreground">{app.tagline}</p>
+        <p className="mt-3 flex-1 text-[13.5px] leading-relaxed text-body-muted">{app.description}</p>
+        <p className="mt-5 border-t border-line pt-4 font-mono text-[10px] leading-[1.8] tracking-[0.12em] text-text-muted uppercase">
+          {meta(app).join(" · ")}
+        </p>
+        <div className="mt-4">
+          <AppLinks app={app} />
+        </div>
+      </div>
+    </article>
+  );
+}
+
+function DevCard({ app }: { app: StudioApp }) {
+  return (
+    <article className={cardClass}>
+      <CardAccent color={app.color} />
+      <div className="relative flex flex-1 flex-col p-5">
+        <div className="flex items-center gap-3.5">
+          <AppIcon app={app} size={48} />
+          <div className="min-w-0 flex-1">
+            <h4 className="font-display truncate text-[17px] font-bold tracking-tight">{app.name}</h4>
+            <p className="mt-1 font-mono text-[10px] tracking-[0.12em] text-text-muted uppercase">
+              {app.category}
+              {app.note && <span className="text-foreground"> · {app.note}</span>}
+            </p>
+          </div>
+        </div>
+        <p className="editorial mt-4 text-[14.5px] leading-snug text-foreground">{app.tagline}</p>
+        <p className="mt-2 flex-1 text-[13px] leading-relaxed text-body-muted">{app.description}</p>
+        <div className="mt-4 flex flex-wrap items-center justify-between gap-x-3 gap-y-3 border-t border-line pt-4">
+          <AppLinks app={app} />
+          <StatusChip status={app.status} />
+        </div>
+      </div>
+    </article>
+  );
+}
+
+function Reveal({ i, children, className = "" }: { i: number; children: React.ReactNode; className?: string }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-40px" }}
+      transition={{ duration: 0.45, delay: (i % 4) * 0.07, ease: [0.16, 1, 0.3, 1] }}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+function GroupHeading({ id, label, count }: { id: string; label: string; count: number }) {
+  return (
+    <div className="mb-6 flex items-center gap-3">
+      <h3 id={id} className="kicker text-foreground">
+        {label}
+      </h3>
+      <span className="font-mono text-[11px] text-text-muted tnum">/ {pad2(count)}</span>
+      <span className="h-px flex-1 bg-line" aria-hidden="true" />
+    </div>
+  );
+}
+
+/* A phone-shaped frame around a real screenshot. */
+function Phone({ src, alt, className = "", priority = false }: { src: string; alt: string; className?: string; priority?: boolean }) {
+  return (
+    <div
+      className={`relative aspect-[1320/2868] overflow-hidden rounded-[18%/8.3%] border-[5px] border-(--ft-bezel) bg-(--ft-bezel) shadow-[0_30px_60px_-20px_rgba(0,0,0,0.75),0_0_0_1px_rgba(255,255,255,0.08)] ${className}`}
+    >
+      <Image
+        src={src}
+        alt={alt}
+        fill
+        sizes="(min-width: 1024px) 220px, 30vw"
+        priority={priority}
+        className="rounded-[15%/7%] object-cover"
+      />
+    </div>
+  );
+}
+
+/* The theme's colours as CSS variables, so the panel's classes stay static. */
+function themeVars(t: FeaturedTheme): React.CSSProperties {
+  return {
+    "--ft-border": t.border,
+    "--ft-text": t.text,
+    "--ft-accent": t.accent,
+    "--ft-body": t.body,
+    "--ft-label": t.label,
+    "--ft-btn": t.button.bg,
+    "--ft-btn-text": t.button.text,
+    "--btn-fill": t.button.hoverBg,
+    "--ft-btn-hover-text": t.button.hoverText,
+    "--ft-bezel": t.bezel,
+  } as React.CSSProperties;
+}
+
+/* The tagline, with the theme's highlight (if it ends the line) in the accent. */
+function Headline({ text, highlight }: { text: string; highlight?: string }) {
+  if (!highlight || !text.endsWith(highlight)) return <>{text}</>;
+  return (
+    <>
+      {text.slice(0, text.length - highlight.length)}
+      <span className="text-(--ft-accent)">{highlight}</span>
+    </>
+  );
+}
+
+function Stages({ stages, label }: { stages: NonNullable<FeaturedTheme["stages"]>; label?: string }) {
+  return (
+    <ol className="mt-7 grid max-w-md grid-cols-5 gap-1.5 sm:gap-2.5" aria-label={label}>
+      {stages.map((stage, i) => (
+        <li key={stage.label} className="min-w-0">
+          <span
+            className="relative block aspect-square overflow-hidden rounded-[22%] bg-[radial-gradient(80%_70%_at_50%_35%,#2a2e35_0%,#202329_70%)] ring-1 ring-white/8"
+            style={i === stages.length - 1 ? { boxShadow: `0 0 0 1.5px ${stage.color}, 0 8px 28px -8px ${stage.color}80` } : undefined}
+          >
+            <Image src={stage.src} alt="" fill sizes="(min-width: 640px) 76px, 18vw" className="object-cover" />
+          </span>
+          <span
+            className="mt-2 block truncate text-center font-mono text-[9.5px] tracking-[0.04em] uppercase sm:text-[10px] sm:tracking-[0.1em]"
+            style={{ color: stage.color }}
+          >
+            {stage.label}
+          </span>
+        </li>
+      ))}
+    </ol>
+  );
+}
+
+function Featured({ app }: { app: StudioApp }) {
+  const theme = app.featuredTheme;
+  if (!theme) return null;
+  const shots = app.screenshots ?? [];
+  return (
+    <motion.article
+      aria-labelledby={`featured-${app.slug}`}
+      initial={{ opacity: 0, y: 28 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-60px" }}
+      transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+      className={`${theme.surface} relative overflow-hidden rounded-[4px] border border-(--ft-border) text-(--ft-text)`}
+      style={themeVars(theme)}
+    >
+      <div className="relative grid gap-10 p-6 sm:p-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:gap-6 lg:p-12">
+        {/* Copy */}
+        <div className="flex flex-col">
+          <p className="kicker flex items-center gap-3 text-(--ft-accent)">
+            <span>{theme.kicker[0]}</span>
+            <span className="h-px w-8 bg-(--ft-accent) opacity-40" aria-hidden="true" />
+            <span>{theme.kicker[1]}</span>
+          </p>
+
+          <div className="mt-7 flex items-center gap-4">
+            <AppIcon app={app} size={64} />
+            <div>
+              <h3 id={`featured-${app.slug}`} className="font-display text-2xl font-bold tracking-tight">
+                {app.name}
+              </h3>
+              <div className="mt-1.5">
+                <StatusChip status={app.status} onDark />
+              </div>
+            </div>
+          </div>
+
+          <p className="font-display mt-8 text-[2.1rem] leading-[1.05] font-bold tracking-tight sm:text-5xl">
+            <Headline text={app.tagline} highlight={theme.highlight} />
+          </p>
+          <p className="mt-5 max-w-md text-[15px] leading-relaxed text-(--ft-body)">{app.description}</p>
+
+          {theme.stages && theme.stages.length > 0 && <Stages stages={theme.stages} label={theme.stagesLabel} />}
+
+          <dl className="mt-8 grid max-w-md grid-cols-3 gap-4 border-t border-white/12 pt-5 font-mono text-[10px] tracking-[0.12em] uppercase">
+            <div>
+              <dt className="text-(--ft-label)">Price</dt>
+              <dd className="mt-1.5 text-[12px] text-(--ft-text)">
+                {app.price}
+                {app.priceNote && <span className="mt-1 block text-[10px] text-(--ft-body)">{app.priceNote}</span>}
+              </dd>
+            </div>
+            <div>
+              <dt className="text-(--ft-label)">Platform</dt>
+              <dd className="mt-1.5 text-[12px] text-(--ft-text)">iPhone</dd>
+            </div>
+            <div>
+              <dt className="text-(--ft-label)">Status</dt>
+              <dd className="mt-1.5 text-[12px] text-(--ft-text)">{app.note ?? statusLabel[app.status]}</dd>
+            </div>
+          </dl>
+
+          {app.siteUrl && (
+            <div className="mt-8">
+              <a
+                href={app.siteUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${app.name} website, ${new URL(app.siteUrl).host} (opens in a new tab)`}
+                className="btn inline-flex items-center gap-2 bg-(--ft-btn) px-5 py-3 text-sm font-semibold text-(--ft-btn-text) hover:text-(--ft-btn-hover-text) focus-visible:outline-(--ft-accent)"
+              >
+                Visit the {app.name} site <span className="btn-arrow">→</span>
+              </a>
+            </div>
+          )}
+        </div>
+
+        {/* Real screenshots */}
+        {shots.length >= 3 && (
+          <div className="relative mx-auto flex w-full max-w-[520px] items-center justify-center lg:max-w-none" aria-label={`${app.name} screenshots`} role="group">
+            <motion.div
+              initial={{ opacity: 0, y: 40, rotate: 0 }}
+              whileInView={{ opacity: 1, y: 18, rotate: -7 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.9, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+              className="relative z-0 -mr-[9%] w-[31%] origin-bottom-right"
+            >
+              <Phone src={shots[1].src} alt={shots[1].alt} />
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+              className="relative z-10 w-[38%]"
+            >
+              <Phone src={shots[0].src} alt={shots[0].alt} />
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 40, rotate: 0 }}
+              whileInView={{ opacity: 1, y: 18, rotate: 7 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.9, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
+              className="relative z-0 -ml-[9%] w-[31%] origin-bottom-left"
+            >
+              <Phone src={shots[2].src} alt={shots[2].alt} />
+            </motion.div>
+          </div>
+        )}
+      </div>
+    </motion.article>
+  );
+}
+
+/*
+  The dev grid is 2 columns at sm and 4 at lg. The closing note takes the
+  cells left in the last row so it never sits alone beside empty space; when
+  it spans a whole row it lays out side by side. Literal class names so
+  Tailwind picks them up.
+*/
+const lgLeft = 4 - (devGrid.length % 4);
+const smFull = devGrid.length % 2 === 0;
+const noteSpan = {
+  className: [
+    smFull ? "sm:col-span-2" : "",
+    ({ 1: "", 2: "lg:col-span-2", 3: "lg:col-span-3", 4: "lg:col-span-4" } as const)[lgLeft as 1 | 2 | 3 | 4],
+  ].join(" "),
+  wideLayout: [
+    smFull ? "sm:flex-row sm:items-end sm:gap-10" : "",
+    lgLeft >= 2 ? "lg:flex-row lg:items-end lg:gap-10" : "lg:flex-col lg:items-stretch lg:gap-0",
+  ].join(" "),
+  wideText: [
+    smFull ? "sm:mt-0 sm:max-w-md" : "",
+    lgLeft >= 2 ? "lg:mt-0 lg:max-w-md" : "lg:mt-6 lg:max-w-none",
+  ].join(" "),
+};
 
 export default function Studio() {
   return (
     <section id="studio" className="relative scroll-mt-24 px-6 py-28" aria-label="The studio">
       <div className="mx-auto max-w-6xl">
         {/* Section header */}
-        <div className="mb-14 max-w-2xl">
-          <FadeUp>
-            <p className="kicker rule-label text-text-muted">The Studio</p>
-          </FadeUp>
-          <SplitLines
-            className="font-display mt-5 text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl"
-            lines={["I also build and ship", "my own apps."]}
-          />
-          <FadeUp delay={0.15}>
-            <p className="mt-5 text-lg leading-relaxed text-body-muted">
-              Four are live on the App Store and six are in development. I build
-              them and handle App Store review, subscriptions, analytics, and
-              support. That work informs the product advice I give clients.
-            </p>
+        <div className="mb-14 grid gap-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
+          <div className="max-w-2xl">
+            <FadeUp>
+              <p className="kicker rule-label text-text-muted">The Studio</p>
+            </FadeUp>
+            <SplitLines
+              className="font-display mt-5 text-[1.85rem] font-bold leading-[1.05] tracking-tight min-[400px]:text-4xl sm:text-5xl lg:text-6xl"
+              lines={["I also build and ship", "my own apps."]}
+            />
+            <FadeUp delay={0.15}>
+              <p className="mt-5 text-lg leading-relaxed text-body-muted">
+                {spell(counts.live)[0].toUpperCase() + spell(counts.live).slice(1)} are live on the
+                App Store, {spell(counts.review)} is in App Review, and {spell(counts.development)} more
+                are in development. I build them and handle App Store review, subscriptions,
+                analytics, and support. That work informs the product advice I give clients.
+              </p>
+            </FadeUp>
+          </div>
+
+          {/* Ledger */}
+          <FadeUp delay={0.2}>
+            <dl className="grid grid-cols-3 gap-px overflow-hidden rounded-[4px] border border-line bg-line lg:min-w-[340px]">
+              {(
+                [
+                  ["Live", counts.live, "text-good"],
+                  ["In review", counts.review, "text-warn"],
+                  ["In dev", counts.development, "text-foreground"],
+                ] as const
+              ).map(([label, n, tone]) => (
+                <div key={label} className="bg-card px-4 py-4">
+                  <dt className="font-mono text-[10px] tracking-[0.14em] text-text-muted uppercase">{label}</dt>
+                  <dd className={`font-display mt-1 text-3xl font-bold tnum ${tone}`}>{pad2(n)}</dd>
+                </div>
+              ))}
+            </dl>
           </FadeUp>
         </div>
 
-        {/* App grid */}
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {apps.map((app, i) =>
-            app.url ? (
-              <motion.a
-                key={app.name}
-                href={app.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`${app.name}: ${app.tagline} Opens in a new tab.`}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-40px" }}
-                transition={{ duration: 0.4, delay: (i % 4) * 0.07 }}
-                className={cardClass}
-              >
-                <AppCardInner app={app} index={i} />
-              </motion.a>
-            ) : (
-              <motion.article
-                key={app.name}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-40px" }}
-                transition={{ duration: 0.4, delay: (i % 4) * 0.07 }}
-                className={cardClass}
-              >
-                <AppCardInner app={app} index={i} />
-              </motion.article>
-            )
-          )}
+        {featuredApp && <Featured app={featuredApp} />}
 
-          {/* Closing annotation card */}
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-40px" }}
-            transition={{ duration: 0.4, delay: 0.28 }}
-            className="flex flex-col justify-between rounded-[4px] border border-dashed border-line-strong p-5"
-          >
-            <p className="font-mono text-[12px] leading-[1.9] text-text-muted">
-              SHIPPED / 4<br />
-              IN PIPELINE / 6<br />
-              PLATFORMS / iOS · WEB
-            </p>
-            <p className="mt-6 text-[13.5px] leading-relaxed text-body-muted">
-              <span className="editorial text-[15px] text-foreground">
-                Why it&apos;s on this page:
-              </span>{" "}
-              the advice I give clients on product and engineering has been
-              tested on my own apps first.
-            </p>
-          </motion.div>
+        {/* On the App Store */}
+        <div className="mt-16" role="group" aria-labelledby="studio-live">
+          <GroupHeading id="studio-live" label="On the App Store" count={liveGrid.length} />
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-6">
+            {liveGrid.map((app, i) => (
+              <Reveal
+                key={app.slug}
+                i={i}
+                className={`${i < 2 ? "lg:col-span-3" : "lg:col-span-2"} ${
+                  i === liveGrid.length - 1 && liveGrid.length % 2 === 1 ? "sm:col-span-2 lg:col-span-2" : ""
+                }`}
+              >
+                <LiveCard app={app} />
+              </Reveal>
+            ))}
+          </div>
+        </div>
+
+        {/* In App Review (apps in review that aren't featured) */}
+        {reviewGrid.length > 0 && (
+          <div className="mt-16" role="group" aria-labelledby="studio-review">
+            <GroupHeading id="studio-review" label="In App Review" count={reviewGrid.length} />
+            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              {reviewGrid.map((app, i) => (
+                <Reveal key={app.slug} i={i}>
+                  <LiveCard app={app} />
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* In development */}
+        <div className="mt-16" role="group" aria-labelledby="studio-dev">
+          <GroupHeading id="studio-dev" label="In development" count={devGrid.length} />
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {devGrid.map((app, i) => (
+              <Reveal key={app.slug} i={i}>
+                <DevCard app={app} />
+              </Reveal>
+            ))}
+
+            {/* Closing annotation card: fills whatever is left of the last row */}
+            <Reveal i={devGrid.length} className={noteSpan.className}>
+              <div
+                className={`flex h-full flex-col justify-between rounded-[4px] border border-dashed border-line-strong p-5 ${noteSpan.wideLayout}`}
+              >
+                <p className="font-mono text-[12px] leading-[1.9] text-text-muted">
+                  SHIPPED / {pad2(counts.live)}
+                  <br />
+                  IN REVIEW / {pad2(counts.review)}
+                  <br />
+                  IN DEVELOPMENT / {pad2(counts.development)}
+                  <br />
+                  PLATFORM / iPHONE
+                </p>
+                <p className={`mt-6 text-[13.5px] leading-relaxed text-body-muted ${noteSpan.wideText}`}>
+                  <span className="editorial text-[15px] text-foreground">Why it&apos;s on this page:</span>{" "}
+                  the advice I give clients on product and engineering has been tested on my own apps
+                  first.
+                </p>
+              </div>
+            </Reveal>
+          </div>
         </div>
       </div>
     </section>
