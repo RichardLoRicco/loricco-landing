@@ -152,7 +152,7 @@ function Figure() {
           <Tag
             swatch="bg-eng"
             style={{
-              // Inside the plane's bottom-left corner: clear of the Law tag at any width
+              // Inside the plane's bottom-left corner: clear of the Law tag at every supported width
               left: `${planes[2].x}%`,
               top: `${planes[2].y + planes[2].h}%`,
               transform: "translate(6px, calc(-100% - 6px))",
