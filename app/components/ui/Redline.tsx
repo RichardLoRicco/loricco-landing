@@ -116,18 +116,21 @@ export function Sheet({ rows, caption, className = "" }: { rows: SheetRow[]; cap
         </div>
       </div>
 
-      <table className="w-full border-collapse text-left">
+      <table role="table" className="w-full border-collapse text-left">
         <caption className="sr-only">{caption}</caption>
         <tbody>
           {rows.map((row, i) => {
             const isSel = i === selected;
             return (
+              /* Explicit roles: Safari drops table semantics when rows are display: grid */
               <tr
+                role="row"
                 key={row.label}
                 onMouseEnter={() => setSelected(i)}
                 className={`${cols} cursor-cell border-b border-line last:border-b-0`}
               >
                 <td
+                  role="cell"
                   aria-hidden="true"
                   className={`flex items-center justify-center border-r border-line text-[10px] tnum transition-colors ${
                     isSel ? "bg-ins-wash text-ins" : "bg-gutter text-text-muted"
@@ -135,21 +138,26 @@ export function Sheet({ rows, caption, className = "" }: { rows: SheetRow[]; cap
                 >
                   {i + 1}
                 </td>
-                <th scope="row" className="border-r border-line px-3 py-2.5 text-[11px] font-normal text-body-muted">
+                <th scope="row" role="rowheader" className="border-r border-line px-3 py-2.5 text-[11px] font-normal text-body-muted">
                   {row.label}
                 </th>
-                <td className="relative p-0">
+                <td role="cell" className="relative p-0">
                   <button
                     type="button"
                     aria-pressed={isSel}
                     onClick={() => setSelected(i)}
                     onFocus={() => setSelected(i)}
+                    aria-describedby={`sheet-formula-${i}`}
                     className={`block h-full w-full cursor-cell px-3 py-2.5 text-left font-medium text-foreground tnum focus-visible:outline-offset-[-2px] ${
                       isSel ? "bg-ins-wash outline-2 -outline-offset-2 outline-ins outline-solid" : ""
                     }`}
                   >
                     {row.value}
                   </button>
+                  {/* The formula bar is visual only, so each cell carries its formula for screen readers */}
+                  <span id={`sheet-formula-${i}`} className="sr-only">
+                    Formula: {row.formula}
+                  </span>
                   {isSel && <span aria-hidden="true" className="absolute -right-px -bottom-px h-1.5 w-1.5 bg-ins" />}
                 </td>
               </tr>
