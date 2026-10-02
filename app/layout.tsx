@@ -1,25 +1,28 @@
 import type { Metadata } from "next";
-import { Bricolage_Grotesque, Fraunces, Spline_Sans_Mono } from "next/font/google";
-import Providers from "./components/Providers";
+import { Archivo, JetBrains_Mono, Newsreader } from "next/font/google";
+import Motion from "./components/Motion";
 import StructuredData from "./components/StructuredData";
 import "./globals.css";
 
-const bricolage = Bricolage_Grotesque({
-  variable: "--font-bricolage",
+const archivo = Archivo({
+  variable: "--font-archivo",
   subsets: ["latin"],
+  axes: ["wdth"],
   display: "swap",
 });
 
-const fraunces = Fraunces({
-  variable: "--font-fraunces",
+const newsreader = Newsreader({
+  variable: "--font-newsreader",
   subsets: ["latin"],
-  style: ["normal", "italic"],
+  style: ["italic"],
+  weight: ["400"],
   display: "swap",
 });
 
-const splineSansMono = Spline_Sans_Mono({
-  variable: "--font-spline-mono",
+const jetbrains = JetBrains_Mono({
+  variable: "--font-jetbrains",
   subsets: ["latin"],
+  weight: ["400", "500"],
   display: "swap",
 });
 
@@ -64,10 +67,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${bricolage.variable} ${fraunces.variable} ${splineSansMono.variable} antialiased`}
+        className={`${archivo.variable} ${newsreader.variable} ${jetbrains.variable}`}
       >
         <StructuredData />
-        <Providers>{children}</Providers>
+        <Motion>{children}</Motion>
       </body>
     </html>
   );

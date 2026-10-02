@@ -1,75 +1,58 @@
 import Image from "next/image";
 import { liveApps } from "../lib/apps";
-
-/* The footer row shows the apps that are live on the App Store. */
-const appLinks = liveApps.map((app) => ({
-  name: app.name,
-  icon: app.icon,
-  url: app.siteUrl ?? app.appStoreUrl ?? "#studio",
-}));
+import { PROFILES } from "../lib/site";
+import Wordmark from "./Wordmark";
 
 export default function Footer() {
+  const year = new Date().getFullYear();
+
   return (
-    <footer className="border-t border-line px-6 py-12">
-      <div className="mx-auto flex max-w-6xl flex-col gap-8">
-        {/* Top row — wordmark + document identifier + app icons */}
-        <div className="flex flex-col items-center justify-between gap-6 sm:flex-row">
+    <footer data-dark className="overflow-hidden bg-night text-night-ink">
+      <div className="mx-auto max-w-[1320px] px-5 sm:px-8">
+        <div className="grid gap-10 border-t border-night-rule py-12 sm:grid-cols-[1fr_2fr]">
           <div>
-            <span className="font-display text-sm font-bold tracking-tight">
-              LoRicco <span className="editorial font-medium text-cobalt">&</span> Co.
-            </span>
-            <p className="mt-1 font-mono text-[10px] tracking-[0.16em] text-text-muted uppercase">
-              Attorney · MBA · Engineer
-            </p>
-          </div>
-
-          {/* App icons */}
-          <div className="flex items-center gap-4">
-            <span className="font-mono text-[10px] tracking-[0.14em] text-text-muted uppercase">
-              The studio
-            </span>
-            <div className="flex items-center gap-2.5">
-              {appLinks.map((app) => (
-                <a
-                  key={app.name}
-                  href={app.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group p-1"
-                  aria-label={`${app.name}, opens in a new tab`}
-                >
-                  <div className="h-8 w-8 overflow-hidden rounded-[22.5%] border border-line transition-all duration-200 group-hover:border-line-strong group-hover:-translate-y-0.5">
-                    <Image
-                      src={app.icon}
-                      alt=""
-                      width={32}
-                      height={32}
-                      sizes="32px"
-                      className="h-full w-full object-cover"
-                    />
-                  </div>
-                </a>
+            <p className="label text-[10px] text-night-soft">Elsewhere</p>
+            <ul className="mt-3 flex flex-wrap gap-x-5 gap-y-2">
+              {PROFILES.map((p) => (
+                <li key={p.label}>
+                  <a href={p.href} target="_blank" rel="noopener noreferrer" className="line-link pb-0.5 text-[15px] font-medium">
+                    {p.label}
+                    <span className="sr-only"> (opens in a new tab)</span>
+                  </a>
+                </li>
               ))}
-            </div>
+            </ul>
+          </div>
+
+          <div>
+            <p className="label text-[10px] text-night-soft">On the App Store</p>
+            <ul className="mt-3 flex flex-wrap gap-2.5">
+              {liveApps.map((app) => (
+                <li key={app.slug}>
+                  <a
+                    href={app.siteUrl ?? app.appStoreUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`${app.name} (opens in a new tab)`}
+                    title={app.name}
+                    className="block h-10 w-10 overflow-hidden rounded-[23%] ring-1 ring-white/10 transition-transform duration-300 hover:-translate-y-1"
+                  >
+                    <Image src={app.icon} alt="" width={40} height={40} sizes="40px" className="h-full w-full object-cover" />
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
+      </div>
 
-        {/* Bottom row — identifier + copyright + email */}
-        <div className="flex flex-col items-center justify-between gap-3 border-t border-line pt-6 sm:flex-row">
-          <p className="font-mono text-[11px] text-text-muted">
-            LCO / LORICCOANDCO.COM / {new Date().getFullYear()}
-          </p>
-          <p className="text-xs text-text-muted">
-            &copy; {new Date().getFullYear()} LoRicco &amp; Co. LLC. All rights
-            reserved.
-          </p>
-          <a
-            href="mailto:admin@loriccoandco.com"
-            className="font-mono text-[11px] text-body-muted underline decoration-line-strong underline-offset-4 transition-colors duration-200 hover:text-cobalt hover:decoration-cobalt"
-          >
-            admin@loriccoandco.com
-          </a>
-        </div>
+      <div className="mx-auto max-w-[1600px] px-3 sm:px-5">
+        <Wordmark />
+      </div>
+
+      <div className="mx-auto flex max-w-[1320px] flex-col gap-2 px-5 pt-6 pb-8 text-[12.5px] text-night-soft sm:flex-row sm:justify-between sm:px-8">
+        <p>&copy; {year} LoRicco &amp; Co. LLC</p>
+        <p>New Haven, Connecticut</p>
       </div>
     </footer>
   );

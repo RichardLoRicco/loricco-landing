@@ -1,5 +1,4 @@
-import Navbar from "./components/Navbar";
-import MarginIndex from "./components/MarginIndex";
+import Header from "./components/Header";
 import Hero from "./components/Hero";
 import Services from "./components/Services";
 import Work from "./components/Work";
@@ -13,14 +12,13 @@ export default function Home() {
   return (
     <>
       <a
-        href="#main-content"
-        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:rounded-[3px] focus:bg-cobalt focus:px-6 focus:py-3 focus:text-sm focus:font-semibold focus:text-white"
+        href="#main"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:bg-ink focus:px-5 focus:py-3 focus:text-sm focus:font-semibold focus:text-paper"
       >
         Skip to main content
       </a>
-      <Navbar />
-      <MarginIndex />
-      <main id="main-content">
+      <Header />
+      <main id="main">
         <Hero />
         <Services />
         <Work />
