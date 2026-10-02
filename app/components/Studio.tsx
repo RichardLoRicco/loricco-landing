@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { motion } from "motion/react";
 import { FadeUp, SplitLines } from "./ui/Reveal";
-import { Clause } from "./ui/Redline";
+import { Clause } from "./ui/Marks";
 import { apps, counts, featuredApp, pad2, spell, type AppStatus, type FeaturedTheme, type StudioApp } from "../lib/apps";
 
 const gridApps = apps.filter((a) => a !== featuredApp);
@@ -88,7 +88,7 @@ function AppLinks({ app }: { app: StudioApp }) {
           target="_blank"
           rel="noopener noreferrer"
           aria-label={`${app.name} on the App Store (opens in a new tab)`}
-          className={`${linkClass} border-foreground bg-foreground text-background hover:border-ins hover:bg-ins`}
+          className={`${linkClass} border-foreground bg-foreground text-background hover:border-accent hover:bg-accent`}
         >
           App Store <ArrowOut />
         </a>
@@ -99,7 +99,7 @@ function AppLinks({ app }: { app: StudioApp }) {
           target="_blank"
           rel="noopener noreferrer"
           aria-label={`${app.name} website (opens in a new tab)`}
-          className={`${linkClass} border-line-strong text-foreground hover:border-ins hover:text-ins`}
+          className={`${linkClass} border-line-strong text-foreground hover:border-accent hover:text-accent`}
         >
           Website <ArrowOut />
         </a>
@@ -174,7 +174,7 @@ function DevRow({ app }: { app: StudioApp }) {
       </div>
 
       <div className="min-w-0">
-        <h4 className="font-display text-[17px] font-bold tracking-tight transition-colors duration-300 group-focus-within:text-ins group-hover:text-ins">
+        <h4 className="font-display text-[17px] font-bold tracking-tight transition-colors duration-300 group-focus-within:text-accent group-hover:text-accent">
           {app.name}
         </h4>
         <p className="mt-1 text-[14px] leading-snug font-medium text-foreground">{app.tagline}</p>
@@ -275,10 +275,9 @@ function Reveal({ i, children, className = "" }: { i: number; children: React.Re
   );
 }
 
-function GroupHeading({ id, num, label, count }: { id: string; num: string; label: string; count: number }) {
+function GroupHeading({ id, label, count }: { id: string; label: string; count: number }) {
   return (
     <div className="mb-6 flex items-center gap-3">
-      <span className="font-mono text-[11px] font-medium text-ins tnum">{num}</span>
       <h3 id={id} className="kicker text-foreground">
         {label}
       </h3>
@@ -528,7 +527,7 @@ export default function Studio() {
 
         {/* On the App Store */}
         <div className="mt-16" role="group" aria-labelledby="studio-live">
-          <GroupHeading id="studio-live" num="5.1" label="On the App Store" count={liveGrid.length} />
+          <GroupHeading id="studio-live" label="On the App Store" count={liveGrid.length} />
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-6">
             {liveGrid.map((app, i) => (
               <Reveal
@@ -548,7 +547,7 @@ export default function Studio() {
             app has screenshots, otherwise its card */}
         {reviewGrid.length > 0 && (
           <div className="mt-16" role="group" aria-labelledby="studio-review">
-            <GroupHeading id="studio-review" num="5.2" label="In App Review" count={reviewGrid.length} />
+            <GroupHeading id="studio-review" label="In App Review" count={reviewGrid.length} />
             <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {reviewGrid.map((app, i) =>
                 (app.screenshots?.length ?? 0) >= 3 ? (
@@ -567,7 +566,7 @@ export default function Studio() {
 
         {/* In development: ledger rows */}
         <div className="mt-16" role="group" aria-labelledby="studio-dev">
-          <GroupHeading id="studio-dev" num={reviewGrid.length > 0 ? "5.3" : "5.2"} label="In development" count={devGrid.length} />
+          <GroupHeading id="studio-dev" label="In development" count={devGrid.length} />
           <div className="border-b border-line">
             {devGrid.map((app, i) => (
               <Reveal key={app.slug} i={i}>

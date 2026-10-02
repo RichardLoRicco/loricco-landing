@@ -1,37 +1,32 @@
 import type { Metadata } from "next";
-import { Archivo, Martian_Mono } from "next/font/google";
+import { Fragment_Mono, Schibsted_Grotesk } from "next/font/google";
 import Providers from "./components/Providers";
 import StructuredData from "./components/StructuredData";
 import "./globals.css";
 
 /*
-  "Redline": one variable family carries the whole voice. Display runs wide
-  and heavy; the second voice is the same family in italic. Martian Mono for
-  labels and figures.
-
-  The italic is its own instance and isn't preloaded: it only sets a few
-  display lines, and preloading it with the upright file pushed the hero
-  paragraph (the LCP element) back by about half a second.
+  "Three Disciplines": one sturdy grotesk does all the talking, from heavy
+  display to body; italic is its own instance and isn't preloaded (it only
+  sets a few display words). Fragment Mono for small labels.
 */
-const archivo = Archivo({
-  variable: "--font-archivo",
+const schibsted = Schibsted_Grotesk({
+  variable: "--font-schibsted",
   subsets: ["latin"],
-  axes: ["wdth"],
   display: "swap",
 });
 
-const archivoItalic = Archivo({
-  variable: "--font-archivo-italic",
+const schibstedItalic = Schibsted_Grotesk({
+  variable: "--font-schibsted-italic",
   subsets: ["latin"],
   style: ["italic"],
-  axes: ["wdth"],
   display: "swap",
   preload: false,
 });
 
-const martianMono = Martian_Mono({
-  variable: "--font-martian",
+const fragmentMono = Fragment_Mono({
+  variable: "--font-fragment",
   subsets: ["latin"],
+  weight: "400",
   display: "swap",
 });
 
@@ -76,11 +71,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${archivo.variable} ${archivoItalic.variable} ${martianMono.variable} antialiased`}
+        className={`${schibsted.variable} ${schibstedItalic.variable} ${fragmentMono.variable} antialiased`}
       >
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:rounded-[3px] focus:bg-ins focus:px-6 focus:py-3 focus:text-sm focus:font-semibold focus:text-white"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:rounded-[3px] focus:bg-accent focus:px-6 focus:py-3 focus:text-sm focus:font-semibold focus:text-white"
         >
           Skip to main content
         </a>

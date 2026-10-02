@@ -15,7 +15,7 @@ import {
 } from "motion/react";
 import { useStill } from "./ui/useStill";
 import { FadeUp, SplitLines } from "./ui/Reveal";
-import { Clause, Comment } from "./ui/Redline";
+import { Clause, Comment, DISCIPLINES, type Discipline } from "./ui/Marks";
 
 type Project = {
   name: string;
@@ -30,9 +30,10 @@ type Project = {
   /*
     Review comments pinned to the homepage as it scrolls past. `at` is the
     scroll progress (0 to 1) at which that part of the capture is in the
-    frame. Each comment only restates a fact from the description above.
+    frame. Each comment only restates a fact from the description above and
+    is tagged with the discipline it speaks to.
   */
-  comments: { at: number; text: string }[];
+  comments: { at: number; text: string; d: Discipline }[];
 };
 
 /*
@@ -59,10 +60,9 @@ const projects: Project[] = [
       ["Stack", "Next.js · AWS"],
     ],
     comments: [
-      { at: 0, text: "Bilingual site, in English and Spanish." },
-      { at: 0.08, text: "Appointment requests run on HIPAA-eligible AWS infrastructure." },
-      { at: 0.32, text: "Physical, aquatic, and chiropractic care, each with its own pages." },
-      { at: 0.9, text: "Five Connecticut offices, rebuilt from the old Squarespace site." },
+      { at: 0, d: "eng", text: "Rebuilt from Squarespace as a bilingual Next.js site." },
+      { at: 0.12, d: "law", text: "Appointment requests run on HIPAA-eligible AWS infrastructure." },
+      { at: 0.6, d: "biz", text: "Content and AI-search visibility are handled after launch." },
     ],
   },
   {
@@ -82,9 +82,9 @@ const projects: Project[] = [
       ["Stack", "Next.js · Vercel"],
     ],
     comments: [
-      { at: 0, text: "Rebuilt on Next.js, keeping the URLs and rankings the old site had." },
-      { at: 0.55, text: "Practice-area and town pages, plus a compliance-reviewed blog." },
-      { at: 0.88, text: "Bilingual site, in English and Spanish." },
+      { at: 0, d: "eng", text: "Rebuilt as a bilingual Next.js site, in English and Spanish." },
+      { at: 0.4, d: "biz", text: "The URLs and rankings the old site had were kept." },
+      { at: 0.72, d: "law", text: "Practice-area and town pages, plus a compliance-reviewed blog." },
     ],
   },
 ];
@@ -223,11 +223,11 @@ function BrowserFrame({
           </span>
           {linked ? (
             <span className="font-mono text-[10px] text-text-muted uppercase tnum" aria-hidden="true">
-              Scroll / <motion.span className="text-ins">{readout}</motion.span>
+              Scroll / <motion.span className="text-accent">{readout}</motion.span>
             </span>
           ) : (
             <span
-              className="hidden font-mono text-[10px] text-text-muted uppercase transition-colors duration-300 group-hover:text-ins lg:inline motion-reduce:lg:hidden"
+              className="hidden font-mono text-[10px] text-text-muted uppercase transition-colors duration-300 group-hover:text-accent lg:inline motion-reduce:lg:hidden"
               aria-hidden="true"
             >
               Hover to scroll
@@ -263,7 +263,10 @@ function BrowserFrame({
                   exit={{ opacity: 0, y: -6 }}
                   transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
                 >
-                  <Comment meta={`Review ${active + 1} / ${project.comments.length}`}>
+                  <Comment
+                    discipline={project.comments[active].d}
+                    meta={`${active + 1} / ${project.comments.length}`}
+                  >
                     {project.comments[active].text}
                   </Comment>
                 </motion.div>
@@ -276,7 +279,7 @@ function BrowserFrame({
       {/* Caption line */}
       <div className="mt-3 flex items-center justify-between font-mono text-[11px] text-text-muted uppercase">
         <span>Full page / captured Sep 2026</span>
-        <span className="flex items-center gap-1.5 text-ins">
+        <span className="flex items-center gap-1.5 text-accent">
           Visit <span className="btn-arrow">→</span>
         </span>
       </div>
@@ -339,7 +342,7 @@ function Exhibit({ project, index }: { project: Project; index: number }) {
                 {project.exhibit}
               </span>
               <p className="kicker flex flex-1 items-center gap-3 pb-1 text-text-muted">
-                <span className="font-medium text-ins tnum">2.{index + 1}</span>
+                <span className="text-foreground tnum">0{index + 1}</span>
                 <span className="text-line-strong" aria-hidden="true">/</span>
                 Exhibit {project.exhibit}
                 <span className="h-px flex-1 bg-line" aria-hidden="true" />
@@ -359,7 +362,9 @@ function Exhibit({ project, index }: { project: Project; index: number }) {
           {linked ? (
             <ul className="sr-only">
               {project.comments.map((c) => (
-                <li key={c.text}>{c.text}</li>
+                <li key={c.text}>
+                {DISCIPLINES[c.d].label}: {c.text}
+              </li>
               ))}
             </ul>
           ) : (
@@ -367,9 +372,7 @@ function Exhibit({ project, index }: { project: Project; index: number }) {
               <ul className="flex flex-col gap-2">
                 {project.comments.map((c) => (
                   <li key={c.text} className="flex gap-2.5 text-[13.5px] leading-snug text-body-muted">
-                    <span className="font-mono text-ins" aria-hidden="true">
-                      +
-                    </span>
+                    <span aria-hidden="true" className={`mt-1.5 h-2 w-2 shrink-0 ${DISCIPLINES[c.d].fill}`} />
                     {c.text}
                   </li>
                 ))}

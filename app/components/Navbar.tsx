@@ -5,6 +5,7 @@ import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence, useScroll, useSpring } from "motion/react";
 import { useActiveSection } from "./ActiveSection";
 import { SECTIONS } from "../lib/sections";
+import { Mark } from "./ui/Marks";
 
 const navLinks = SECTIONS.map((s) => ({
   id: s.id,
@@ -63,9 +64,11 @@ export default function Navbar() {
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-5">
         <Link
           href="/"
-          className="font-display text-lg font-bold tracking-tight text-foreground"
+          aria-label="LoRicco & Co., home"
+          className="inline-flex items-center gap-2.5 font-display text-lg font-bold tracking-tight text-foreground"
         >
-          LoRicco <span className="editorial font-medium text-ins">&</span> Co.
+          <Mark className="text-[20px]" />
+          LoRicco &amp; Co.
         </Link>
 
         {/* Desktop nav */}
@@ -78,7 +81,7 @@ export default function Navbar() {
                 href={link.href}
                 aria-current={isActive ? "true" : undefined}
                 className={`u-link text-sm font-medium transition-colors duration-200 ${
-                  isActive ? "text-ins" : "text-body-muted hover:text-foreground"
+                  isActive ? "text-accent" : "text-body-muted hover:text-foreground"
                 }`}
               >
                 {link.label}
@@ -88,7 +91,7 @@ export default function Navbar() {
           <a
             href="mailto:admin@loriccoandco.com"
             className="btn bg-foreground px-4 py-2 text-sm font-semibold text-background"
-            style={{ ["--btn-fill" as string]: "var(--color-ins)" }}
+            style={{ ["--btn-fill" as string]: "var(--color-accent)" }}
           >
             Get in touch
           </a>
@@ -119,7 +122,7 @@ export default function Navbar() {
       {/* Reading progress: an insert-green hairline that grows along the bottom edge */}
       <motion.div
         aria-hidden="true"
-        className={`absolute bottom-[-1px] left-0 h-px w-full origin-left bg-ins transition-opacity duration-300 ${
+        className={`absolute bottom-[-1px] left-0 h-px w-full origin-left bg-accent transition-opacity duration-300 ${
           scrolled ? "opacity-100" : "opacity-0"
         }`}
         style={{ scaleX: progress }}
@@ -144,9 +147,9 @@ export default function Navbar() {
                   key={link.href}
                   href={link.href}
                   onClick={() => setMobileOpen(false)}
-                  className="flex items-baseline gap-4 font-display text-lg text-body-muted transition-colors hover:text-ins"
+                  className="flex items-baseline gap-4 font-display text-lg text-body-muted transition-colors hover:text-accent"
                 >
-                  <span className="font-mono text-[11px] text-ins tnum">
+                  <span className="font-mono text-[11px] text-accent tnum">
                     {i + 1}
                   </span>
                   {link.label}

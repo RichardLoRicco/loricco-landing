@@ -2,7 +2,8 @@
 
 import { motion } from "motion/react";
 import { SplitLines } from "./ui/Reveal";
-import { Clause } from "./ui/Redline";
+import { Clause, DISCIPLINES, type Discipline } from "./ui/Marks";
+import { counts, spell } from "../lib/apps";
 
 const principles = [
   {
@@ -28,6 +29,33 @@ const principles = [
     title: "You own everything",
     description:
       "The domain, code, content, analytics, and accounts are set up in your name from the first day. If we part ways, you keep a working system and everything needed to run it.",
+  },
+];
+
+const credentials: { d: Discipline; facts: string[] }[] = [
+  {
+    d: "law",
+    facts: [
+      "Connecticut-admitted attorney, LL.M. and J.D.",
+      "Legal research and technical consulting for other attorneys",
+      "Compliance review of law-firm content",
+    ],
+  },
+  {
+    d: "biz",
+    facts: [
+      "MBA",
+      "Startup consulting: pitch decks, projections, go-to-market",
+      "Websites built around intake and search visibility",
+    ],
+  },
+  {
+    d: "eng",
+    facts: [
+      "Production web and AI systems",
+      `${spell(counts.live)[0].toUpperCase() + spell(counts.live).slice(1)} apps live on the App Store`,
+      "Open-source tools",
+    ],
   },
 ];
 
@@ -57,22 +85,6 @@ export default function About() {
               business plans that needed an outside assessment.
             </p>
 
-            {/* Credentials (the portrait lives in the hero, the name in the heading) */}
-            <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: 0.15 }}
-              className="mt-10 border-t border-line pt-8"
-            >
-              <p className="font-mono text-[11px] tracking-[0.1em] text-ins uppercase">
-                Attorney (LL.M., J.D., MBA) · Software Engineer · New Haven, CT
-              </p>
-              <p className="mt-2.5 max-w-md text-sm leading-relaxed text-body-muted">
-                I&apos;m admitted to practice law in Connecticut. I also build
-                open-source tools and the iOS apps shown below.
-              </p>
-            </motion.div>
           </motion.div>
 
           {/* Right: principles */}
@@ -87,11 +99,11 @@ export default function About() {
                 className="ledger-row group border-t border-line py-7 last:border-b"
               >
                 <div className="flex items-baseline gap-4">
-                  <span className="shrink-0 font-mono text-[12px] font-medium whitespace-nowrap text-ins">
-                    4.{i + 1}
+                  <span className="shrink-0 font-mono text-[12px] whitespace-nowrap text-foreground tnum">
+                    0{i + 1}
                   </span>
                   <div>
-                    <h3 className="font-display text-lg font-bold tracking-tight transition-colors duration-300 group-hover:text-ins">
+                    <h3 className="font-display text-lg font-bold tracking-tight transition-colors duration-300 group-hover:text-accent">
                       {principle.title}
                     </h3>
                     <p className="mt-2 text-sm leading-relaxed text-body-muted">
@@ -102,6 +114,31 @@ export default function About() {
               </motion.div>
             ))}
           </div>
+        </div>
+
+        {/* One practice, three disciplines: only facts stated elsewhere on the page */}
+        <div className="mt-20 grid gap-px bg-line sm:grid-cols-3">
+          {credentials.map((c, i) => (
+            <motion.div
+              key={c.d}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.45, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
+              className="bg-background pb-8 sm:px-8 sm:first:pl-0 sm:last:pr-0"
+            >
+              <span aria-hidden="true" className={`block h-1 w-full ${DISCIPLINES[c.d].fill}`} />
+              <h3 className="font-display mt-6 text-2xl font-bold tracking-tight">{DISCIPLINES[c.d].label}</h3>
+              <ul className="mt-4 space-y-2.5 text-[15px] leading-snug text-body-muted">
+                {c.facts.map((f) => (
+                  <li key={f} className="flex gap-3">
+                    <span aria-hidden="true" className="mt-[0.55em] h-1 w-1 shrink-0 bg-foreground" />
+                    {f}
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>

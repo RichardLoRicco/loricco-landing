@@ -1,46 +1,165 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef, type ReactNode } from "react";
-import Blueprint from "./Blueprint";
+import { useEffect, useRef, type CSSProperties } from "react";
 import { FadeUp, SplitLines } from "./ui/Reveal";
-import { Clause, Comment } from "./ui/Redline";
+import { Mark } from "./ui/Marks";
 
-/* The exhibit card leans a few degrees toward the cursor. */
-function TiltCard({ children, className = "" }: { children: ReactNode; className?: string }) {
+/*
+  The figure: the portrait with three planes, one per discipline, laid over
+  the jacket (never the face). Coordinates are percentages of the photo box;
+  planes may overhang its edges. Where all three overlap is the AI box,
+  computed from the planes so it always matches them.
+*/
+type Plane = { key: "law" | "biz" | "eng"; fill: string; x: number; y: number; w: number; h: number; depth: number };
+
+const planes: Plane[] = [
+  // Overhanging the photo's edges, so most of each plane reads as true colour on chalk;
+  // the triple overlap falls on the white shirt, where the multiply stays clean.
+  { key: "law", fill: "bg-law", x: -14, y: 64, w: 70, h: 36, depth: 0.5 },
+  { key: "biz", fill: "bg-biz", x: 46, y: 58, w: 66, h: 34, depth: 0.85 },
+  { key: "eng", fill: "bg-eng", x: 34, y: 78, w: 38, h: 40, depth: 1.2 },
+];
+
+const overlap = {
+  x: Math.max(...planes.map((p) => p.x)),
+  y: Math.max(...planes.map((p) => p.y)),
+  r: Math.min(...planes.map((p) => p.x + p.w)),
+  b: Math.min(...planes.map((p) => p.y + p.h)),
+};
+
+const box = (x: number, y: number, w: number, h: number): CSSProperties => ({
+  left: `${x}%`,
+  top: `${y}%`,
+  width: `${w}%`,
+  height: `${h}%`,
+});
+
+/* An opaque label tag: never set on the blended colour itself. */
+function Tag({ children, style, swatch }: { children: string; style: CSSProperties; swatch?: string }) {
+  return (
+    <span
+      aria-hidden="true"
+      style={style}
+      className="absolute z-20 inline-flex items-center gap-1.5 border border-foreground bg-background px-1.5 py-0.5 font-mono text-[10px] tracking-[0.06em] whitespace-nowrap text-foreground uppercase"
+    >
+      {swatch && <span className={`h-1.5 w-1.5 ${swatch}`} />}
+      {children}
+    </span>
+  );
+}
+
+function Figure() {
   const ref = useRef<HTMLDivElement>(null);
 
+  // The planes drift with the cursor at three depths (about 10px at most), not on touch or reduced motion.
   useEffect(() => {
     const el = ref.current;
-    if (!el) return;
+    const host = el?.closest("section");
+    if (!el || !host) return;
     if (window.matchMedia("(hover: none)").matches) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
     const move = (e: PointerEvent) => {
       const r = el.getBoundingClientRect();
-      const px = (e.clientX - r.left) / r.width;
-      const py = (e.clientY - r.top) / r.height;
-      el.style.setProperty("--ry", `${((px - 0.5) * 9).toFixed(2)}deg`);
-      el.style.setProperty("--rx", `${((0.5 - py) * 9).toFixed(2)}deg`);
-      el.style.setProperty("--mx", `${e.clientX - r.left}px`);
-      el.style.setProperty("--my", `${e.clientY - r.top}px`);
+      const dx = Math.max(-1, Math.min(1, (e.clientX - (r.left + r.width / 2)) / (r.width * 1.5)));
+      const dy = Math.max(-1, Math.min(1, (e.clientY - (r.top + r.height / 2)) / (r.height * 1.5)));
+      el.style.setProperty("--dx", dx.toFixed(3));
+      el.style.setProperty("--dy", dy.toFixed(3));
     };
     const leave = () => {
-      el.style.setProperty("--rx", "0deg");
-      el.style.setProperty("--ry", "0deg");
+      el.style.setProperty("--dx", "0");
+      el.style.setProperty("--dy", "0");
     };
-    el.addEventListener("pointermove", move, { passive: true });
-    el.addEventListener("pointerleave", leave);
+    host.addEventListener("pointermove", move, { passive: true });
+    host.addEventListener("pointerleave", leave);
     return () => {
-      el.removeEventListener("pointermove", move);
-      el.removeEventListener("pointerleave", leave);
+      host.removeEventListener("pointermove", move);
+      host.removeEventListener("pointerleave", leave);
     };
   }, []);
 
   return (
-    <div ref={ref} className={`tilt ${className}`}>
-      {children}
-    </div>
+    <figure className="relative">
+      <div ref={ref} className="relative isolate">
+        {/* Registration marks at the photo's corners */}
+        {[
+          "-left-3 -top-3 border-t border-l",
+          "-right-3 -top-3 border-t border-r",
+          "-left-3 -bottom-3 border-b border-l",
+          "-right-3 -bottom-3 border-b border-r",
+        ].map((pos) => (
+          <span key={pos} aria-hidden="true" className={`absolute h-3 w-3 border-foreground ${pos}`} />
+        ))}
+
+        <Image
+          src="/portrait-bw.jpg"
+          alt="Richard T. LoRicco, principal of LoRicco & Co., in a suit and tie"
+          width={800}
+          height={1000}
+          priority
+          sizes="(min-width: 1280px) 360px, (min-width: 1024px) 320px, 300px"
+          className="relative aspect-[4/5] w-full object-cover grayscale"
+        />
+
+        {/* The three planes, multiplied, each with a hairline outline */}
+        {planes.map((p) => (
+          <span
+            key={p.key}
+            aria-hidden="true"
+            className={`plane ${p.fill}`}
+            style={{ ...box(p.x, p.y, p.w, p.h), ["--depth" as string]: p.depth } as CSSProperties}
+          />
+        ))}
+        {planes.map((p) => (
+          <span
+            key={`${p.key}-o`}
+            aria-hidden="true"
+            className="plane-outline z-10"
+            style={{ ...box(p.x, p.y, p.w, p.h), ["--depth" as string]: p.depth } as CSSProperties}
+          />
+        ))}
+
+        {/* Where all three meet: AI, drawn as structure rather than colour */}
+        <span
+          aria-hidden="true"
+          className="absolute z-10 border-[1.5px] border-foreground"
+          style={box(overlap.x, overlap.y, overlap.r - overlap.x, overlap.b - overlap.y)}
+        />
+        <Tag style={{ left: `${overlap.r}%`, top: `${overlap.y}%`, transform: "translate(6px, -50%)" }}>AI</Tag>
+
+        <Tag
+          swatch="bg-law"
+          style={{ left: `${planes[0].x}%`, top: `${planes[0].y + planes[0].h}%`, transform: "translate(0, 8px)" }}
+        >
+          Law
+        </Tag>
+        <Tag
+          swatch="bg-biz"
+          style={{
+            right: `${100 - (planes[1].x + planes[1].w)}%`,
+            top: `${planes[1].y}%`,
+            transform: "translate(0, calc(-100% - 6px))",
+          }}
+        >
+          Business
+        </Tag>
+        <Tag
+          swatch="bg-eng"
+          style={{
+            left: `${planes[2].x}%`,
+            top: `${planes[2].y + planes[2].h}%`,
+            transform: "translate(calc(-100% - 6px), -100%)",
+          }}
+        >
+          Engineering
+        </Tag>
+      </div>
+
+      <figcaption className="mt-24 flex items-baseline justify-between font-mono text-[11px] tracking-[0.06em] text-text-muted uppercase">
+        <span>Fig. 1</span>
+        <span className="text-foreground">R.T. LoRicco, principal</span>
+      </figcaption>
+    </figure>
   );
 }
 
@@ -50,116 +169,74 @@ export default function Hero() {
       aria-label="Introduction"
       className="relative overflow-hidden px-6 pt-28 pb-16 sm:pt-32 lg:flex lg:min-h-[100svh] lg:flex-col lg:justify-center lg:pt-32 lg:pb-20"
     >
-      <Blueprint fade />
-
       <div className="relative mx-auto w-full max-w-6xl">
-        {/* Document header: the page is a draft under revision */}
         <FadeUp immediate delay={0} y={8}>
-          <div className="flex items-center justify-between gap-6 font-mono text-[11px] tracking-[0.06em] text-text-muted uppercase">
-            <Clause num="0" rule={false}>LCO / Overview</Clause>
-            <span className="tnum">Rev. Oct 2026</span>
-          </div>
-          <p className="kicker mt-6 text-foreground">Attorney · MBA · Engineer</p>
+          <p className="kicker flex items-center gap-3 text-foreground">
+            <Mark className="text-[18px]" />
+            Attorney · MBA · Engineer
+          </p>
         </FadeUp>
 
-        {/* ── The argument ── */}
         <SplitLines
           as="h1"
           immediate
           /*
-            Phones: "Websites, AI, and" is about 8.6em wide in Archivo at this
-            width setting, so the size tracks the viewport (gutters out,
-            divided by 9) to keep that line whole.
+            Phones: "Websites, AI, and" is about 7.9em wide in this face,
+            so the size tracks the viewport to keep that line whole.
           */
-          className="font-display mt-5 max-w-5xl text-[length:min(2.8rem,calc((100vw-3rem)/9))] leading-[1] sm:text-[3.7rem] lg:text-[5.2rem] xl:text-[5.9rem]"
+          className="font-display mt-6 text-[length:min(3rem,calc((100vw-3rem)/8.3))] leading-[0.98] font-bold sm:text-[4rem] lg:text-[5.4rem] xl:text-[6.2rem]"
           lines={[
             "Websites, AI, and",
-            <span key="l2" className="editorial font-light tracking-[-0.02em] [font-stretch:100%]">
-              <span className="ins-mark">technical consulting.</span>
+            <span key="l2" className="editorial tracking-[-0.02em]">
+              technical consulting.
             </span>,
           ]}
         />
 
-        <div className="mt-10 grid grid-cols-[minmax(0,1fr)] items-start gap-14 lg:mt-14 lg:grid-cols-[minmax(0,1fr)_auto] lg:gap-20">
-          <div className="max-w-xl">
-            {/*
-              Kept out of the entrance animation on purpose: this paragraph is the
-              LCP element on phones, and a delayed fade was costing ~2s of LCP.
-            */}
-            <p className="text-lg leading-relaxed text-body-muted lg:text-[1.15rem]">
-              I&apos;m a Connecticut attorney and software engineer. I rebuild
-              and run websites and AI systems for law firms and small businesses,
-              train lawyers and their staff on AI, do legal research and
-              technical consulting for other attorneys, and advise startups.
-              You work with me directly from the first call to the finished work.
-            </p>
+        <div className="mt-10 grid grid-cols-[minmax(0,1fr)] items-start gap-14 lg:grid-cols-[minmax(0,1fr)_auto] lg:gap-20">
+          <div>
 
-            <FadeUp immediate delay={0.3} className="mt-9 flex flex-wrap items-center gap-x-6 gap-y-4">
-              <a
-                href="mailto:admin@loriccoandco.com"
-                className="btn bg-ins px-6 py-3.5 text-sm font-semibold text-white hover:shadow-[0_14px_30px_-12px_rgba(11,122,75,0.55)]"
-                style={{ ["--btn-fill" as string]: "var(--color-foreground)" }}
-              >
-                Get in touch <span className="btn-arrow">→</span>
-              </a>
-
+            <div className="max-w-xl lg:pt-2">
               {/*
-                The page's one AI suggestion: the secondary link offered as
-                ghost text after a caret, "accepted" (inked and underlined)
-                on hover or focus. The Tab hint only shows on devices with a
-                pointer that hovers.
+                Kept out of the entrance animation on purpose: this paragraph is the
+                LCP element on phones.
               */}
-              <a
-                href="#services"
-                className="group inline-flex items-center gap-2.5 text-[15px] text-ghost transition-colors duration-200 hover:text-foreground focus-visible:text-foreground"
-              >
-                <span className="caret" aria-hidden="true" />
-                <span className="border-b border-dashed border-line-strong pb-0.5 transition-colors group-hover:border-ins group-focus-visible:border-ins">
-                  See what I do
-                </span>
-                <span className="kbd kbd-hint" aria-hidden="true">
-                  Tab ↹
-                </span>
-              </a>
-            </FadeUp>
+              <p className="text-lg leading-relaxed text-body-muted lg:text-[1.15rem]">
+                I&apos;m a Connecticut attorney and software engineer. I rebuild
+                and run websites and AI systems for law firms and small businesses,
+                train lawyers and their staff on AI, do legal research and
+                technical consulting for other attorneys, and advise startups.
+                You work with me directly from the first call to the finished work.
+              </p>
+
+              <FadeUp immediate delay={0.3} className="mt-9 flex flex-wrap items-center gap-x-7 gap-y-4">
+                <a
+                  href="mailto:admin@loriccoandco.com"
+                  className="btn bg-foreground px-6 py-3.5 text-sm font-semibold text-background"
+                  style={{ ["--btn-fill" as string]: "var(--color-eng)" }}
+                >
+                  Get in touch <span className="btn-arrow">→</span>
+                </a>
+                <a
+                  href="#services"
+                  className="group font-mono text-[13px] text-foreground underline decoration-line-strong underline-offset-[6px] transition-colors hover:text-accent hover:decoration-accent"
+                >
+                  See what I do{" "}
+                  <span className="inline-block transition-transform duration-300 group-hover:translate-y-1 motion-reduce:transition-none">
+                    ↓
+                  </span>
+                </a>
+              </FadeUp>
+            </div>
           </div>
 
-          {/* ── The principal, with a review comment pinned to the figure ── */}
           <FadeUp
             immediate
-            delay={0.2}
-            y={24}
-            className="relative mx-auto w-full max-w-[280px] lg:mx-0 lg:w-[310px] xl:w-[330px]"
+            delay={0.15}
+            y={20}
+            className="mx-auto w-full max-w-[300px] px-3 lg:mx-0 lg:w-[320px] lg:max-w-none xl:w-[360px]"
           >
-            <TiltCard>
-              <figure className="relative overflow-hidden rounded-[4px] border border-line-strong bg-card shadow-[0_32px_64px_-28px_rgba(18,19,23,0.4)]">
-                <div className="tilt-sheen z-10" aria-hidden="true" />
-                <div className="p-3 pb-0">
-                  <Image
-                    src="/portrait-bw.jpg"
-                    alt="Richard T. LoRicco, principal of LoRicco & Co., in a suit and tie"
-                    width={800}
-                    height={1000}
-                    priority
-                    sizes="(min-width: 1280px) 330px, (min-width: 1024px) 310px, 280px"
-                    className="aspect-[4/5] w-full rounded-[2px] object-cover"
-                  />
-                </div>
-                <figcaption className="flex items-baseline justify-between gap-4 px-4 py-3 font-mono text-[10.5px] tracking-[0.04em] uppercase">
-                  <span className="text-text-muted">Fig. 1</span>
-                  <span className="font-medium whitespace-nowrap text-foreground">R.T. LoRicco</span>
-                </figcaption>
-              </figure>
-            </TiltCard>
-
-            {/* Review comment, anchored to the figure by a short leader */}
-            <div className="relative mt-5 xl:absolute xl:top-[58%] xl:-left-[13.5rem] xl:mt-0 xl:w-56">
-              <span
-                aria-hidden="true"
-                className="absolute top-1/2 -right-6 hidden h-px w-6 bg-line-strong xl:block"
-              />
-              <Comment meta="Principal">Attorney (LL.M., J.D., MBA) and software engineer, based in New Haven.</Comment>
-            </div>
+            <Figure />
           </FadeUp>
         </div>
       </div>

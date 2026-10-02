@@ -3,11 +3,20 @@
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { FadeUp, SplitLines } from "./ui/Reveal";
-import { Clause } from "./ui/Redline";
+import { Chips, Clause, type Discipline } from "./ui/Marks";
+
+/* Light tints for the title sweep, keyed by a service's lead discipline (never a saturated flood). */
+const tint: Record<Discipline, string> = {
+  law: "rgba(214, 59, 36, 0.14)",
+  biz: "rgba(242, 194, 48, 0.4)",
+  eng: "rgba(31, 75, 209, 0.13)",
+};
+const bar: Record<Discipline, string> = { law: "bg-law", biz: "bg-biz", eng: "bg-eng" };
 
 const services = [
   {
-    section: "1.1",
+    section: "01",
+    disciplines: ["eng", "biz"] as Discipline[],
     num: "01",
     title: "Websites & AI Tools",
     outcome: "You own the site and accounts",
@@ -21,7 +30,8 @@ const services = [
     ],
   },
   {
-    section: "1.2",
+    section: "02",
+    disciplines: ["eng", "law"] as Discipline[],
     num: "02",
     title: "AI Education & Training",
     outcome: "Staff who use the tools",
@@ -35,7 +45,8 @@ const services = [
     ],
   },
   {
-    section: "1.3",
+    section: "03",
+    disciplines: ["law", "eng"] as Discipline[],
     num: "03",
     title: "Research & Consulting for Law Firms",
     outcome: "Work counsel can use",
@@ -50,7 +61,8 @@ const services = [
     ],
   },
   {
-    section: "1.4",
+    section: "04",
+    disciplines: ["biz", "eng"] as Discipline[],
     num: "04",
     title: "Business & Startup Advisory",
     outcome: "A second opinion",
@@ -114,7 +126,7 @@ export default function Services() {
                     animate={{ y: 0, opacity: 1 }}
                     exit={{ y: "-45%", opacity: 0 }}
                     transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                    className="ghost-ins absolute inset-0 font-display text-[10rem] leading-none font-bold"
+                    className="ghost absolute inset-0 font-display text-[10rem] leading-none font-bold"
                     aria-hidden="true"
                   >
                     {services[active].section}
@@ -151,7 +163,7 @@ export default function Services() {
                         >
                           <span
                             className={`font-mono text-[10px] tnum transition-colors duration-300 ${
-                              isActive ? "text-ins" : "text-text-muted"
+                              isActive ? "text-accent" : "text-text-muted"
                             }`}
                           >
                             {service.section}
@@ -193,11 +205,11 @@ export default function Services() {
                   transition={{ duration: 0.5, delay: i * 0.06, ease: [0.16, 1, 0.3, 1] }}
                   className="ledger-row group grid scroll-mt-28 gap-4 border-t border-line py-10 last:border-b md:grid-cols-[72px_1fr_236px] md:gap-8 lg:py-12"
                 >
-                  {/* Clause number, with a change bar when this row is the one in view */}
-                  <div className="relative font-mono text-sm font-medium text-ins tnum">
+                  {/* Number, with a bar in the lead discipline's colour when this row is the one in view */}
+                  <div className="relative font-mono text-sm text-foreground tnum">
                     <span
                       aria-hidden="true"
-                      className={`absolute top-0 -left-4 h-full w-[3px] origin-top bg-ins transition-transform duration-500 motion-reduce:transition-none [transition-timing-function:var(--ease-out-expo)] md:-left-5 ${
+                      className={`absolute top-0 -left-4 h-full w-[3px] origin-top ${bar[service.disciplines[0]]} transition-transform duration-500 motion-reduce:transition-none [transition-timing-function:var(--ease-out-expo)] md:-left-5 ${
                         isActive ? "scale-y-100" : "scale-y-0"
                       }`}
                     />
@@ -208,10 +220,15 @@ export default function Services() {
                   <div>
                     <h3 className="font-display text-2xl font-bold tracking-tight lg:text-[1.9rem]">
                       {/* Highlighter sweep on the row in view, on hover and on focus */}
-                      <span className="hl-sweep" data-on={isActive}>
+                      <span
+                        className="hl-sweep"
+                        data-on={isActive}
+                        style={{ ["--tint" as string]: tint[service.disciplines[0]] }}
+                      >
                         {service.title}
                       </span>
                     </h3>
+                    <Chips of={service.disciplines} className="mt-3" />
                     <p className="mt-3 max-w-xl text-[15px] leading-relaxed text-body-muted">
                       {service.description}
                     </p>
@@ -230,7 +247,7 @@ export default function Services() {
                           className="flex items-center gap-2.5 font-mono text-[12px] text-body-muted"
                         >
                           <span
-                            className={`h-1 shrink-0 bg-ins transition-all duration-500 motion-reduce:transition-none ${
+                            className={`h-1 shrink-0 bg-foreground transition-all duration-500 motion-reduce:transition-none ${
                               isActive ? "w-3" : "w-1"
                             }`}
                             style={{ transitionDelay: isActive ? `${j * 60}ms` : "0ms" }}
@@ -254,7 +271,7 @@ export default function Services() {
             with a short call and a written review of where things stand.{" "}
             <a
               href="mailto:admin@loriccoandco.com"
-              className="u-link font-medium text-ins"
+              className="u-link font-medium text-accent"
             >
               Email me
             </a>{" "}

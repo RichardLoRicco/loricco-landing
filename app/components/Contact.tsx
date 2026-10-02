@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { FadeUp, SplitLines } from "./ui/Reveal";
-import { Clause, Comment } from "./ui/Redline";
 
 const EMAIL = "admin@loriccoandco.com";
 
@@ -28,11 +27,11 @@ function CopyEmail() {
     <button
       type="button"
       onClick={copy}
-      className="group inline-flex items-center gap-2 rounded-[3px] border border-line-strong bg-card px-4 py-3 font-mono text-[11px] tracking-[0.04em] text-foreground transition-colors duration-200 hover:border-ins hover:text-ins"
+      className="group inline-flex items-center gap-2 border border-white/30 px-4 py-3 font-mono text-[11px] tracking-[0.06em] text-data-hi transition-colors duration-200 hover:border-biz hover:text-biz"
       aria-live="polite"
     >
       <span
-        className={`h-1.5 w-1.5 rounded-full transition-colors duration-300 ${copied ? "bg-ins" : "bg-current"}`}
+        className={`h-1.5 w-1.5 rounded-full transition-colors duration-300 ${copied ? "bg-biz" : "bg-current"}`}
         aria-hidden="true"
       />
       {copied ? "COPIED" : "COPY ADDRESS"}
@@ -42,61 +41,58 @@ function CopyEmail() {
 
 export default function Contact() {
   return (
-    <section id="contact" className="section-y relative scroll-mt-24 px-6" aria-label="Contact">
-      <div className="relative mx-auto max-w-6xl">
-        <FadeUp>
-          <Clause num="6">Contact</Clause>
-        </FadeUp>
-
-        <div className="mt-6 grid grid-cols-[minmax(0,1fr)] gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,20rem)] lg:items-end lg:gap-20">
-          <div>
-            <SplitLines
-              className="font-display max-w-2xl text-4xl leading-[1.02] sm:text-5xl lg:text-[4rem]"
-              lines={[
-                "Tell me what",
-                <span key="l2" className="editorial font-light tracking-[-0.02em] [font-stretch:100%]">
-                  you&apos;re working on.
-                </span>,
-              ]}
-            />
-            <FadeUp delay={0.15}>
-              <p className="mt-6 max-w-lg text-[16px] leading-relaxed text-body-muted">
-                Send me a note about the website, the team, the case, or the
-                business. I&apos;ll reply with a few questions, and if it
-                makes sense we&apos;ll set up a short call and I&apos;ll
-                follow up with a written review.
-              </p>
-            </FadeUp>
-          </div>
-
-          <FadeUp delay={0.2}>
-            <Comment meta="Status">
-              <span className="inline-flex items-center gap-2 font-medium text-foreground">
-                <span className="font-mono text-ins" aria-hidden="true">+</span>
-                Accepting clients
-              </span>
-              <span className="mt-1 block">Replies usually come within one business day.</span>
-            </Comment>
+    <section id="contact" className="relative scroll-mt-0 bg-data-bg text-data-hi" aria-label="Contact">
+      <div className="mx-auto grid max-w-[90rem] grid-cols-[minmax(0,1fr)] lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]">
+        {/* The one yellow field on the page: about a third of the band, ink type on it (11.2:1) */}
+        <div className="bg-biz px-6 py-14 text-foreground sm:px-10 lg:py-24 lg:pl-[max(1.5rem,calc((100vw-72rem)/2))]">
+          <FadeUp>
+            {/* Ink on yellow (11.2:1): the muted grey used elsewhere fails here */}
+            <p className="kicker flex items-center gap-3 text-foreground">
+              <span className="tnum">06</span>
+              <span aria-hidden="true">/</span>
+              Contact
+            </p>
           </FadeUp>
+          <SplitLines
+            className="font-display mt-6 max-w-md text-4xl leading-[1.02] font-bold sm:text-5xl lg:text-[3.6rem]"
+            lines={[
+              "Tell me what",
+              <span key="l2" className="editorial tracking-[-0.02em]">
+                you&apos;re working on.
+              </span>,
+            ]}
+          />
         </div>
 
-        {/* The address is the call to action, set at display size as an inserted line */}
-        <FadeUp delay={0.25} className="mt-14 border-t border-line pt-10 lg:mt-16">
-          <a
-            href={`mailto:${EMAIL}`}
-            className="group inline-flex max-w-full items-baseline gap-[0.3em] font-display text-[length:clamp(1.2rem,calc((100vw-3rem)/16.5),4.4rem)] leading-[1.1] font-[760] tracking-[-0.03em] [font-stretch:108%] [overflow-wrap:anywhere]"
-          >
-            <span className="font-mono text-[0.5em] text-ins" aria-hidden="true">+</span>
-            <span className="ins-mark transition-colors duration-300 group-hover:text-ins-deep">{EMAIL}</span>
-            <span className="btn-arrow shrink-0 text-ins" aria-hidden="true">
-              →
-            </span>
-          </a>
-          <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
-            <CopyEmail />
-            <p className="font-mono text-[11px] text-text-muted">J.D. · LL.M. · MBA · Software engineer · Connecticut</p>
-          </div>
-        </FadeUp>
+        <div className="px-6 py-14 sm:px-10 lg:py-24 lg:pr-[max(1.5rem,calc((100vw-72rem)/2))] lg:pl-16">
+          <FadeUp delay={0.1}>
+            <p className="max-w-lg text-[16px] leading-relaxed text-data-ink">
+              Send me a note about the website, the team, the case, or the
+              business. I&apos;ll reply with a few questions, and if it
+              makes sense we&apos;ll set up a short call and I&apos;ll
+              follow up with a written review.
+            </p>
+          </FadeUp>
+
+          <FadeUp delay={0.2} className="mt-12">
+            <p className="font-mono text-[11px] tracking-[0.08em] text-data-ink uppercase">Write to</p>
+            <a
+              href={`mailto:${EMAIL}`}
+              className="group mt-3 inline-flex max-w-full items-baseline gap-[0.3em] font-display text-[length:clamp(1.3rem,calc((100vw-3rem)/14),3.6rem)] leading-[1.1] font-bold tracking-[-0.03em] text-data-hi [overflow-wrap:anywhere] lg:text-[length:clamp(1.6rem,calc((100vw-30rem)/18),3.6rem)]"
+            >
+              <span className="underline decoration-white/25 decoration-2 underline-offset-[0.18em] transition-colors duration-300 group-hover:text-biz group-hover:decoration-biz">
+                {EMAIL}
+              </span>
+              <span className="btn-arrow shrink-0 text-biz" aria-hidden="true">
+                →
+              </span>
+            </a>
+            <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
+              <CopyEmail />
+              <p className="font-mono text-[11px] text-data-ink">Accepting clients / replies usually within one business day</p>
+            </div>
+          </FadeUp>
+        </div>
       </div>
     </section>
   );

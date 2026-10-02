@@ -1,76 +1,73 @@
 @import "tailwindcss";
 
 /*
-  LoRicco & Co. — "Redline"
-  The page is a document under revision. Law (numbered clauses, tracked
-  changes), engineering (the editor gutter, the diff, code review), the MBA
-  (the model and the memo, revised until the numbers hold) and AI (the
-  suggested edit you accept with Tab) all work on the same object.
+  LoRicco & Co. — "Three Disciplines"
+  Law, business and engineering, one practice. Each discipline has a
+  primary: law red, business yellow, engineering blue. They are rationed:
+  ink and chalk carry at least 90% of every screen, the primaries appear as
+  planes, bars and chips, and no primary covers more than about a quarter of
+  a viewport. AI is drawn as the hairline structure where the three meet,
+  never as a colour.
 
-  Insert green is the accent (added, approved, go). Redline red is kept for
-  the double margin rule. Every text pairing below is checked to WCAG AA in
-  the comment beside it.
+  Contrast: every text pairing is noted beside its token. Law red is a fill
+  only (text on it fails AA both ways); red text uses --color-law-ink.
 
-  Motion rule: sections reveal once as they load or scroll into view, and the
-  hero's caret blinks three times. Everything else follows the cursor, a
-  hover or the scroll. Under reduced motion the caret, transforms and
-  scroll-linked effects are off; only brief opacity fades remain.
+  Motion: sections reveal once as they load or scroll into view; everything
+  else follows the cursor, a hover or the scroll. Under reduced motion,
+  transforms and scroll-linked effects are off and only brief opacity fades
+  remain.
 */
 
 @theme inline {
   /* Ground */
-  --color-background: #fafaf7; /* paper */
-  --color-card: #fffffd;
-  --color-foreground: #121317; /* ink, 17.8:1 on paper */
-  --color-body-muted: #45474d; /* 8.9:1 */
-  --color-text-muted: #686a70; /* 5.2:1 on paper, 4.8:1 on the gutter */
-  --color-line: #e4e4de;
-  --color-line-strong: #cfcfc6;
-  --color-gutter: #f1f1ec;
-  --color-ghost: #63666e; /* AI suggestion text: 5.5:1, and 5.1:1 under the cursor spotlight */
+  --color-background: #f3f1ea; /* chalk */
+  --color-card: #fbfaf6;
+  --color-foreground: #121212; /* ink, 16.6:1 on chalk */
+  --color-body-muted: #3f3d38; /* 9.6:1 */
+  --color-text-muted: #67645c; /* 5.2:1 on chalk, 5.7:1 on card */
+  --color-line: #dedad0;
+  --color-line-strong: #c4bfb1;
 
-  /* Insert: the accent */
-  --color-ins: #0b7a4b; /* 5.2:1 on paper; white on it 5.4:1 */
-  --color-ins-deep: #08603b;
-  --color-ins-wash: #dff3e7; /* green on it 4.6:1, ink 16:1 */
-  --color-ins-bright: #6ee7a8; /* insert green on the dark editor, 12.3:1 */
+  /* The three disciplines */
+  --color-law: #d63b24; /* fill only */
+  --color-law-ink: #b42a17; /* red text on chalk, 5.7:1 */
+  --color-biz: #f2c230; /* fill only; ink on it 11.2:1 */
+  --color-eng: #1f4bd1; /* blue; 6.2:1 on chalk both ways */
 
-  /* Redline red: the double margin rule */
-  --color-del: #b3261e; /* 6.3:1 on paper */
+  /* Interactive accent: engineering blue */
+  --color-accent: #1f4bd1;
+  --color-accent-deep: #163aa8;
+  --color-accent-wash: #e3e7f6;
+  --color-accent-bright: #8da8ff; /* on ink, 8.2:1 */
 
-  /* Diagnostic palette */
-  --color-good: #0b7a4b;
-  --color-good-wash: #dff3e7;
+  /* Status (Studio chips, Lighthouse rings) */
+  --color-good: #1d7a4a;
+  --color-good-wash: #e2f1e8;
   --color-warn: #8a6412;
   --color-warn-wash: #f7f0db;
-  --color-crit: #b3261e;
-  --color-crit-wash: #fbe6e2;
+  --color-crit: #b42a17;
+  --color-crit-wash: #f9e7e3;
 
-  /* The dark editor (Process, data strips) */
-  --color-data-bg: #0f1115;
-  --color-data-ink: #a3a6ad; /* 7.8:1 */
-  --color-data-hi: #ecedef;
+  /* Ink panels (Process, Contact, data strips) */
+  --color-data-bg: #141414;
+  --color-data-ink: #a6a39a; /* 7.3:1 */
+  --color-data-hi: #f3f1ea;
 
   /* Type */
-  --font-display: var(--font-archivo);
-  --font-sans: var(--font-archivo);
-  --font-mono: var(--font-martian);
+  --font-display: var(--font-schibsted);
+  --font-sans: var(--font-schibsted);
+  --font-mono: var(--font-fragment);
 
   /* Motion */
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/*
-  Section rhythm. Two light sections meet at 2x this value, so it's kept
-  modest; the dark Process band adds its own inner padding because the
-  colour change already does the separating.
-*/
+/* Section rhythm: two light sections meet at twice this. */
 @utility section-y {
-  padding-block: clamp(4rem, 7vw, 6rem);
+  padding-block: clamp(4.5rem, 8vw, 7rem);
 }
 
-/* Registered so the blueprint spotlight can glide after the cursor with a
-   plain CSS transition instead of a per-frame JS loop. */
+/* Registered so cursor-driven effects can glide with a CSS transition. */
 @property --mx {
   syntax: "<length-percentage>";
   inherits: true;
@@ -89,77 +86,52 @@ html {
 body {
   background: var(--color-background);
   color: var(--color-foreground);
-  font-family: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
+  font-family: var(--font-schibsted), ui-sans-serif, system-ui, sans-serif;
   scrollbar-width: thin;
   scrollbar-color: var(--color-line-strong) var(--color-background);
 }
 
 /*
-  Display type: Archivo pushed wide and heavy for section heads. Unlayered on
-  purpose so it overrides the font-bold utility those headings carry. Width
-  capped at 112% and weight at 760 so it reads engineered, not billboard.
+  Display type: heavy but not billboard. Unlayered so it beats the
+  font-bold utility the headings carry.
 */
 h1.font-display,
 h2.font-display {
-  font-stretch: 112%;
   font-weight: 760;
   letter-spacing: -0.035em;
 }
-h3.font-display,
-h4.font-display {
-  font-stretch: 104%;
-}
 
-/* ── Whisper of paper grain ── */
-body::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  pointer-events: none;
-  opacity: 0.022;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
-  background-repeat: repeat;
-}
-
-/* ── Recurring brand devices ── */
-
-/*
-  Brand devices live in the components layer so utilities can adjust them
-  (text-[10px] on a kicker, for example). Unlayered, they outranked every
-  utility and those adjustments were silently ignored.
-*/
 @layer components {
-  /* Mono kicker label: SECTION / 02 style */
+  /* Small mono label */
   .kicker {
-    font-family: var(--font-martian), monospace;
+    font-family: var(--font-fragment), monospace;
     font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.06em; /* Martian is wide already */
+    font-weight: 400;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
   }
 
-  /* The second voice: the same family, italic. Light weight only at display size. */
+  /* The second voice: the same family, italic, a few display words only. */
   .editorial {
-    font-family: var(--font-archivo-italic), var(--font-archivo), sans-serif;
+    font-family: var(--font-schibsted-italic), var(--font-schibsted), sans-serif;
     font-style: italic;
-    font-weight: 400;
+    font-weight: 500;
   }
 
-  /* Outline-only display numerals: the drafting-table voice */
+  /* Outline numerals */
   .ghost {
     color: transparent;
     -webkit-text-stroke: 1px var(--color-line-strong);
     font-variant-numeric: tabular-nums;
   }
-  .ghost-ins {
+  .ghost-accent {
     color: transparent;
-    -webkit-text-stroke: 1px rgba(11, 122, 75, 0.45);
+    -webkit-text-stroke: 1px rgba(31, 75, 209, 0.45);
     font-variant-numeric: tabular-nums;
   }
   .ghost-bright {
     color: transparent;
-    -webkit-text-stroke: 1px rgba(110, 231, 168, 0.4);
+    -webkit-text-stroke: 1px rgba(243, 241, 234, 0.32);
     font-variant-numeric: tabular-nums;
   }
 
@@ -168,17 +140,15 @@ body::after {
   }
 }
 
-/* ── Blueprint grid with cursor spotlight ──
-   The base grid is always faintly there. The ::after layer is the same grid,
-   brighter, revealed only inside a radial mask centered on the cursor. */
+/* ── Hairline grid with a cursor lamp (ink panels and the 404) ── */
 .blueprint {
   position: absolute;
   inset: 0;
   pointer-events: none;
   overflow: hidden;
-  --grid-ink: rgba(18, 19, 23, 0.4);
-  --lamp: rgba(11, 122, 75, 0.1);
-  --cell: 72px;
+  --grid-ink: rgba(18, 18, 18, 0.35);
+  --lamp: rgba(31, 75, 209, 0.08);
+  --cell: 80px;
   transition:
     --mx 0.28s var(--ease-out-expo),
     --my 0.28s var(--ease-out-expo);
@@ -194,10 +164,10 @@ body::after {
   background-size: var(--cell) var(--cell);
 }
 .blueprint::before {
-  opacity: 0.07;
+  opacity: 0.12;
 }
 .blueprint::after {
-  opacity: 0.6;
+  opacity: 0.5;
   background-image:
     radial-gradient(360px circle at var(--mx) var(--my), var(--lamp), transparent 65%),
     linear-gradient(var(--grid-ink) 1px, transparent 1px),
@@ -210,12 +180,12 @@ body::after {
   -webkit-mask-image: linear-gradient(to bottom, #000 20%, transparent 96%);
 }
 .blueprint-dark {
-  --grid-ink: rgba(110, 231, 168, 0.5);
-  --lamp: rgba(110, 231, 168, 0.12);
-  --cell: 56px;
+  --grid-ink: rgba(243, 241, 234, 0.5);
+  --lamp: rgba(141, 168, 255, 0.1);
+  --cell: 64px;
 }
 .blueprint-dark::before {
-  opacity: 0.09;
+  opacity: 0.08;
 }
 @media (hover: none) {
   .blueprint::after {
@@ -223,23 +193,31 @@ body::after {
   }
 }
 
-/* ── Redline marks ── */
-
-/* Inserted text: insert wash with a green underline, like a tracked insertion. */
-.ins-mark {
-  background: var(--color-ins-wash);
-  box-shadow: inset 0 -2px 0 var(--color-ins);
-  text-decoration: none;
-  padding: 0 0.08em;
-  -webkit-box-decoration-break: clone;
-  box-decoration-break: clone;
+/* ── The three planes over the portrait (hero) ──
+   Hard-edged, multiplied at partial opacity so overlaps make new colours
+   without collapsing to black, each outlined by an ink hairline. */
+.plane {
+  position: absolute;
+  mix-blend-mode: multiply;
+  opacity: 0.56;
+  transform: translate3d(calc(var(--dx, 0) * var(--depth, 1) * 8px), calc(var(--dy, 0) * var(--depth, 1) * 8px), 0);
+  transition: transform 0.6s var(--ease-out-expo);
+  will-change: transform;
 }
-/* A highlight that sweeps in behind a title on hover, focus, or when active. */
+.plane-outline {
+  position: absolute;
+  border: 1px solid rgba(18, 18, 18, 0.55);
+  transform: translate3d(calc(var(--dx, 0) * var(--depth, 1) * 8px), calc(var(--dy, 0) * var(--depth, 1) * 8px), 0);
+  transition: transform 0.6s var(--ease-out-expo);
+  pointer-events: none;
+}
+
+/* A light tint that sweeps behind a title on hover or focus (services). */
 .hl-sweep {
-  background-image: linear-gradient(var(--color-ins-wash), var(--color-ins-wash));
+  background-image: linear-gradient(var(--tint, var(--color-accent-wash)), var(--tint, var(--color-accent-wash)));
   background-repeat: no-repeat;
   background-position: 0 90%;
-  background-size: 0% 40%;
+  background-size: 0% 42%;
   transition: background-size 0.6s var(--ease-out-expo);
   -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
@@ -247,68 +225,7 @@ body::after {
 .hl-sweep[data-on="true"],
 .group:hover .hl-sweep,
 .group:focus-within .hl-sweep {
-  background-size: 100% 40%;
-}
-/* The editor caret: blinks three times on load, then holds (WCAG 2.2.2). */
-.caret {
-  display: inline-block;
-  width: 0.08em;
-  min-width: 2px;
-  height: 0.9em;
-  background: var(--color-ins);
-  vertical-align: -0.08em;
-  animation: caret-blink 1s steps(1, end) 3;
-}
-@keyframes caret-blink {
-  50% {
-    opacity: 0;
-  }
-}
-/* A keyboard key, for the Tab hint on the one AI suggestion. */
-.kbd {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.3em;
-  border: 1px solid var(--color-line-strong);
-  border-bottom-width: 2px;
-  border-radius: 3px;
-  background: var(--color-card);
-  padding: 0.1em 0.45em;
-  font-family: var(--font-martian), monospace;
-  font-size: 10px;
-  line-height: 1.6;
-  color: var(--color-body-muted);
-}
-@media (hover: none) {
-  .kbd-hint {
-    display: none;
-  }
-}
-
-/* ── Exhibit card tilt (portrait) ── */
-.tilt {
-  --rx: 0deg;
-  --ry: 0deg;
-  transform: perspective(1100px) rotateX(var(--rx)) rotateY(var(--ry));
-  transition: transform 0.5s var(--ease-out-expo);
-  transform-style: preserve-3d;
-  will-change: transform;
-}
-.tilt-sheen {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: radial-gradient(
-    300px circle at var(--mx) var(--my),
-    rgba(255, 255, 255, 0.22),
-    transparent 60%
-  );
-  opacity: 0;
-  transition: opacity 0.4s ease;
-  mix-blend-mode: soft-light;
-}
-.tilt:hover .tilt-sheen {
-  opacity: 1;
+  background-size: 100% 42%;
 }
 
 /* ── Site preview: the screenshot scrolls through the real page on hover ──
@@ -421,7 +338,7 @@ body::after {
   left: 0;
   height: 1px;
   width: 100%;
-  background: var(--color-ins);
+  background: var(--color-foreground);
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 0.6s var(--ease-out-expo);
@@ -432,13 +349,11 @@ body::after {
   transform: scaleX(1);
 }
 
-/* ── Selection ── */
 ::selection {
-  background: var(--color-ins-wash);
+  background: var(--color-biz);
   color: var(--color-foreground);
 }
 
-/* ── Scrollbar ── */
 ::-webkit-scrollbar {
   width: 6px;
 }
@@ -449,17 +364,14 @@ body::after {
   background: var(--color-line-strong);
   border-radius: 3px;
 }
-::-webkit-scrollbar-thumb:hover {
-  background: var(--color-text-muted);
-}
 
-/* ── Accessibility ── */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
   .blueprint,
-  .tilt,
+  .plane,
+  .plane-outline,
   .site-preview > img,
   .u-link,
   .btn::before,
@@ -468,37 +380,37 @@ body::after {
   .hl-sweep {
     transition: none !important;
   }
-  .caret {
-    animation: none;
+  .plane,
+  .plane-outline {
+    transform: none !important;
   }
   .site-preview-trigger:hover .site-preview > img,
   .site-preview-trigger:focus-visible .site-preview > img,
   .site-preview-trigger:focus-within .site-preview > img {
     transform: none;
   }
-  .tilt {
-    transform: none;
-  }
 }
 
-/* In the base layer so a component's own focus colour (focus-visible:outline-*) can override it. */
+/* In the base layer so a component's own focus colour can override it. */
 @layer base {
   :focus-visible {
-    outline: 2px solid var(--color-ins);
+    outline: 2px solid var(--color-accent);
     outline-offset: 2px;
     border-radius: 2px;
   }
 }
 
-/* ── Forced colors (Windows High Contrast) ── */
 @media (forced-colors: active) {
   .kicker {
     color: CanvasText;
   }
   .ghost,
-  .ghost-ins,
+  .ghost-accent,
   .ghost-bright {
     color: CanvasText;
     -webkit-text-stroke: 0;
+  }
+  .plane {
+    forced-color-adjust: none;
   }
 }
