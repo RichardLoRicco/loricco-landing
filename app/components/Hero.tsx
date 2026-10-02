@@ -31,8 +31,7 @@ export default function Hero() {
               I rebuild and run websites and AI systems for law firms and small
               businesses, train lawyers and their staff on AI, consult with
               counsel on the technology in their cases, and advise startups.
-              You work with me directly, from the first call to the finished
-              work.
+              You work with me directly.
             </p>
 
             <div className="mt-9 flex flex-wrap items-center gap-x-7 gap-y-4">

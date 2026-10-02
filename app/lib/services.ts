@@ -56,7 +56,7 @@ export const services: Service[] = [
     short: "Startup advisory",
     outcome: "A second opinion",
     description:
-      "I advise startups and business owners on pitch decks, financial projections, competitive analysis, go-to-market strategy, and architecture reviews. I read the deck, the contract, and the codebase myself, so the business, legal, and technical questions get answered by the same person.",
+      "I advise startups and business owners on pitch decks, financial projections, competitive analysis, go-to-market strategy, and architecture reviews. I read the deck, the contract, and the codebase myself, so one person answers the business, legal, and technical questions.",
     offerings: [
       "Pitch decks and projections",
       "Competitive analysis",

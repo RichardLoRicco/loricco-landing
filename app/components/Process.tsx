@@ -9,16 +9,16 @@ const steps = [
   {
     verb: "Recommend",
     detail:
-      "I explain what I found and what I'd do about it, in plain English and ranked by impact. It goes in writing so you can act on it or get a second opinion.",
+      "I explain what I found and what I'd do about it, in plain English, most important first. You get it in writing so you can act on it or get a second opinion.",
   },
   {
     verb: "Build",
-    detail: "Then I do the work: the memo, the website or the AI tool, the deck, or the training session.",
+    detail: "Then I write the memo, build the website or AI tool, draft the deck, or run the training.",
   },
   {
     verb: "Maintain",
     detail:
-      "For ongoing work, I monitor the system, handle updates, and revisit it when your needs change.",
+      "If the work is ongoing, I monitor the system, handle updates, and make changes as you need them.",
   },
 ];
 
@@ -36,7 +36,7 @@ export default function Process() {
               engagement <span className="serif-i text-signal-ink">runs</span>
             </>
           }
-          intro="The same four steps whether it's a website, a training, a case, or a business plan."
+          intro="Websites, training, cases, and business plans all go through the same four steps."
         />
 
         <ol className="mt-16 grid gap-px border border-rule bg-rule sm:grid-cols-2 lg:mt-20 lg:grid-cols-4">

@@ -270,7 +270,7 @@ export const apps: StudioApp[] = [
     name: "Tighter",
     tagline: "How many fit inside a playing card?",
     description:
-      "Print the target, shoot it, photograph it. Tighter finds every hole on your phone and shows whether your groups are getting tighter.",
+      "Print the target, shoot it, and take a photo. Tighter finds every hole on the phone itself and shows whether your groups are getting tighter.",
     category: "Target practice",
     status: "development",
     icon: "/apps/tighter/icon.webp",

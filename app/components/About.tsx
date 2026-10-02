@@ -8,7 +8,7 @@ const principles = [
   },
   {
     title: "Straight answers",
-    body: "You'll get a direct answer on what the records show, what's broken, what it costs to fix, and what AI can and can't do for you, including when the answer is that you don't need me.",
+    body: "I'll tell you what the records show, what's broken, what it costs to fix, and what AI can and can't do for you, including when you don't need me.",
   },
   {
     title: "Keep what's working",
@@ -52,11 +52,11 @@ export default function About() {
               of problems people kept bringing me.
             </p>
             <p className="mt-6 max-w-2xl text-[1.0625rem] leading-[1.65] text-ink-soft">
-              Their firm website had stopped bringing in work. Their team bought
-              AI tools but never used them. Their case turned on carrier records.
-              Their business plan needed a straight read. My work has included
-              legal practice, startup consulting, production web and AI systems,
-              open-source tools, and the studio&apos;s apps.
+              Clients came to me because their website had stopped bringing in
+              work, or their staff weren&apos;t using the AI tools they&apos;d
+              paid for. Lawyers had cases that turned on carrier records, and
+              founders wanted a straight read on a business plan. Outside client
+              work, I&apos;ve also built open-source tools and the studio&apos;s apps.
             </p>
           </div>
 

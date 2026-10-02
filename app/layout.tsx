@@ -30,11 +30,11 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://loriccoandco.com"),
   title: "LoRicco & Co | Websites, AI & Technical Consulting",
   description:
-    "LoRicco & Co rebuilds and operates websites, develops AI tools, trains lawyers and small businesses, analyzes digital evidence for counsel, and advises startups. Led by a Connecticut attorney, MBA, and software engineer.",
+    "LoRicco & Co rebuilds and operates websites, develops AI tools, trains lawyers and small businesses, analyzes digital evidence for counsel, and advises startups. Run by a Connecticut attorney, MBA, and software engineer.",
   openGraph: {
     title: "LoRicco & Co | Websites, AI & Technical Consulting",
     description:
-      "Websites and AI systems, practical AI training, technical consulting for law firms, and startup advisory from an attorney, MBA, and software engineer.",
+      "Websites and AI systems, AI training, technical consulting for law firms, and startup advisory from an attorney, MBA, and software engineer.",
     type: "website",
     siteName: "LoRicco & Co",
     locale: "en_US",
@@ -51,7 +51,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "LoRicco & Co | Websites, AI & Technical Consulting",
     description:
-      "Websites and AI systems, practical AI training, technical consulting for law firms, and startup advisory from an attorney, MBA, and software engineer.",
+      "Websites and AI systems, AI training, technical consulting for law firms, and startup advisory from an attorney, MBA, and software engineer.",
     images: ["/og.png"],
   },
   alternates: {
