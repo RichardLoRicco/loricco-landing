@@ -10,7 +10,7 @@
   never as a colour.
 
   Contrast: every text pairing is noted beside its token. Law red is a fill
-  only (text on it fails AA both ways); red text uses --color-law-ink.
+  only (text on it fails AA both ways), and the page sets no red text.
 
   Motion: sections reveal once as they load or scroll into view; everything
   else follows the cursor, a hover or the scroll. Under reduced motion,
@@ -29,16 +29,14 @@
   --color-line-strong: #c4bfb1;
 
   /* The three disciplines */
-  --color-law: #d63b24; /* fill only */
-  --color-law-ink: #b42a17; /* red text on chalk, 5.7:1 */
+  --color-law: #d63b24; /* fill only: no text on it, and no red text */
   --color-biz: #f2c230; /* fill only; ink on it 11.2:1 */
   --color-eng: #1f4bd1; /* blue; 6.2:1 on chalk both ways */
 
   /* Interactive accent: engineering blue */
   --color-accent: #1f4bd1;
-  --color-accent-deep: #163aa8;
   --color-accent-wash: #e3e7f6;
-  --color-accent-bright: #8da8ff; /* on ink, 8.2:1 */
+  --color-accent-bright: #8da8ff; /* focus ring on ink, 8.2:1 */
 
   /* Status (Studio chips, Lighthouse rings) */
   --color-good: #1d7a4a;
@@ -46,7 +44,6 @@
   --color-warn: #8a6412;
   --color-warn-wash: #f7f0db;
   --color-crit: #b42a17;
-  --color-crit-wash: #f9e7e3;
 
   /* Ink panels (Process, Contact, data strips) */
   --color-data-bg: #141414;
@@ -200,16 +197,16 @@ h2.font-display {
   position: absolute;
   mix-blend-mode: multiply;
   opacity: 0.56;
-  transform: translate3d(calc(var(--dx, 0) * var(--depth, 1) * 8px), calc(var(--dy, 0) * var(--depth, 1) * 8px), 0);
-  transition: transform 0.6s var(--ease-out-expo);
-  will-change: transform;
 }
 .plane-outline {
   position: absolute;
   border: 1px solid rgba(18, 18, 18, 0.55);
-  transform: translate3d(calc(var(--dx, 0) * var(--depth, 1) * 8px), calc(var(--dy, 0) * var(--depth, 1) * 8px), 0);
-  transition: transform 0.6s var(--ease-out-expo);
   pointer-events: none;
+}
+.drift {
+  transform: translate3d(calc(var(--dx, 0) * 8px), calc(var(--dy, 0) * 8px), 0);
+  transition: transform 0.6s var(--ease-out-expo);
+  will-change: transform;
 }
 
 /* A light tint that sweeps behind a title on hover or focus (services). */
@@ -370,8 +367,7 @@ h2.font-display {
     scroll-behavior: auto;
   }
   .blueprint,
-  .plane,
-  .plane-outline,
+  .drift,
   .site-preview > img,
   .u-link,
   .btn::before,
@@ -380,8 +376,7 @@ h2.font-display {
   .hl-sweep {
     transition: none !important;
   }
-  .plane,
-  .plane-outline {
+  .drift {
     transform: none !important;
   }
   .site-preview-trigger:hover .site-preview > img,
@@ -397,6 +392,10 @@ h2.font-display {
     outline: 2px solid var(--color-accent);
     outline-offset: 2px;
     border-radius: 2px;
+  }
+  /* On ink, blue is only 2.6:1; the light blue ring is 8.2:1 */
+  .bg-data-bg :focus-visible {
+    outline-color: var(--color-accent-bright);
   }
 }
 

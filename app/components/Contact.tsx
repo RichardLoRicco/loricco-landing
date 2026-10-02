@@ -42,7 +42,12 @@ function CopyEmail() {
 export default function Contact() {
   return (
     <section id="contact" className="relative scroll-mt-0 bg-data-bg text-data-hi" aria-label="Contact">
-      <div className="mx-auto grid max-w-[90rem] grid-cols-[minmax(0,1fr)] lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]">
+      {/*
+        Full-bleed band. The yellow column is a third of the viewport, or wide
+        enough to reach the page's content edge plus 24rem, whichever is more,
+        so the heading never gets squeezed on very wide screens.
+      */}
+      <div className="grid grid-cols-[minmax(0,1fr)] lg:grid-cols-[max(33.333vw,calc(max(1.5rem,(100vw-72rem)/2)+24rem))_minmax(0,1fr)]">
         {/* The one yellow field on the page: about a third of the band, ink type on it (11.2:1) */}
         <div className="bg-biz px-6 py-14 text-foreground sm:px-10 lg:py-24 lg:pl-[max(1.5rem,calc((100vw-72rem)/2))]">
           <FadeUp>
@@ -78,7 +83,7 @@ export default function Contact() {
             <p className="font-mono text-[11px] tracking-[0.08em] text-data-ink uppercase">Write to</p>
             <a
               href={`mailto:${EMAIL}`}
-              className="group mt-3 inline-flex max-w-full items-baseline gap-[0.3em] font-display text-[length:clamp(1.3rem,calc((100vw-3rem)/14),3.6rem)] leading-[1.1] font-bold tracking-[-0.03em] text-data-hi [overflow-wrap:anywhere] lg:text-[length:clamp(1.6rem,calc((100vw-30rem)/18),3.6rem)]"
+              className="group mt-3 inline-flex max-w-full items-baseline gap-[0.3em] font-display text-[length:clamp(1.3rem,calc((100vw-3rem)/14),3.6rem)] leading-[1.1] font-bold tracking-[-0.03em] text-data-hi [overflow-wrap:anywhere] lg:text-[length:clamp(1.6rem,calc((100vw-30rem)/22),3rem)]"
             >
               <span className="underline decoration-white/25 decoration-2 underline-offset-[0.18em] transition-colors duration-300 group-hover:text-biz group-hover:decoration-biz">
                 {EMAIL}

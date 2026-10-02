@@ -9,16 +9,18 @@ import { Mark } from "./ui/Marks";
   The figure: the portrait with three planes, one per discipline, laid over
   the jacket (never the face). Coordinates are percentages of the photo box;
   planes may overhang its edges. Where all three overlap is the AI box,
-  computed from the planes so it always matches them.
+  computed from the planes. Planes, outlines, the AI box and the tags drift
+  together as one layer (like a print slightly out of register), so the box
+  always bounds the real overlap.
 */
-type Plane = { key: "law" | "biz" | "eng"; fill: string; x: number; y: number; w: number; h: number; depth: number };
+type Plane = { key: "law" | "biz" | "eng"; fill: string; x: number; y: number; w: number; h: number };
 
 const planes: Plane[] = [
   // Overhanging the photo's edges, so most of each plane reads as true colour on chalk;
   // the triple overlap falls on the white shirt, where the multiply stays clean.
-  { key: "law", fill: "bg-law", x: -14, y: 64, w: 70, h: 36, depth: 0.5 },
-  { key: "biz", fill: "bg-biz", x: 46, y: 58, w: 66, h: 34, depth: 0.85 },
-  { key: "eng", fill: "bg-eng", x: 34, y: 78, w: 38, h: 40, depth: 1.2 },
+  { key: "law", fill: "bg-law", x: -10, y: 64, w: 66, h: 36 },
+  { key: "biz", fill: "bg-biz", x: 46, y: 58, w: 60, h: 34 },
+  { key: "eng", fill: "bg-eng", x: 34, y: 78, w: 38, h: 40 },
 ];
 
 const overlap = {
@@ -52,7 +54,7 @@ function Tag({ children, style, swatch }: { children: string; style: CSSProperti
 function Figure() {
   const ref = useRef<HTMLDivElement>(null);
 
-  // The planes drift with the cursor at three depths (about 10px at most), not on touch or reduced motion.
+  // The colour layer drifts with the cursor (8px at most), not on touch or reduced motion.
   useEffect(() => {
     const el = ref.current;
     const host = el?.closest("section");
@@ -82,12 +84,8 @@ function Figure() {
     <figure className="relative">
       <div ref={ref} className="relative isolate">
         {/* Registration marks at the photo's corners */}
-        {[
-          "-left-3 -top-3 border-t border-l",
-          "-right-3 -top-3 border-t border-r",
-          "-left-3 -bottom-3 border-b border-l",
-          "-right-3 -bottom-3 border-b border-r",
-        ].map((pos) => (
+        {/* Bottom-left is left out: the Law tag sits there */}
+        {["-left-3 -top-3 border-t border-l", "-right-3 -top-3 border-t border-r", "-right-3 -bottom-3 border-b border-r"].map((pos) => (
           <span key={pos} aria-hidden="true" className={`absolute h-3 w-3 border-foreground ${pos}`} />
         ))}
 
@@ -101,63 +99,76 @@ function Figure() {
           className="relative aspect-[4/5] w-full object-cover grayscale"
         />
 
-        {/* The three planes, multiplied, each with a hairline outline */}
-        {planes.map((p) => (
-          <span
-            key={p.key}
-            aria-hidden="true"
-            className={`plane ${p.fill}`}
-            style={{ ...box(p.x, p.y, p.w, p.h), ["--depth" as string]: p.depth } as CSSProperties}
-          />
-        ))}
-        {planes.map((p) => (
-          <span
-            key={`${p.key}-o`}
-            aria-hidden="true"
-            className="plane-outline z-10"
-            style={{ ...box(p.x, p.y, p.w, p.h), ["--depth" as string]: p.depth } as CSSProperties}
-          />
-        ))}
+        {/*
+          Two layers that drift together. A transformed layer is its own blend
+          group, so the planes' layer multiplies onto the photo as a whole
+          (and each plane multiplies with the others inside it); the outlines,
+          the AI box and the opaque tags ride in a normal layer above.
+        */}
+        <div aria-hidden="true" className="drift absolute inset-0 mix-blend-multiply">
+          {planes.map((p) => (
+            <span
+              key={p.key}
+              aria-hidden="true"
+              className={`plane ${p.fill}`}
+              style={box(p.x, p.y, p.w, p.h)}
+            />
+          ))}
+        </div>
+        <div aria-hidden="true" className="drift absolute inset-0">
+          {planes.map((p) => (
+            <span
+              key={`${p.key}-o`}
+              aria-hidden="true"
+              className="plane-outline z-10"
+              style={box(p.x, p.y, p.w, p.h)}
+            />
+          ))}
 
-        {/* Where all three meet: AI, drawn as structure rather than colour */}
-        <span
-          aria-hidden="true"
-          className="absolute z-10 border-[1.5px] border-foreground"
-          style={box(overlap.x, overlap.y, overlap.r - overlap.x, overlap.b - overlap.y)}
-        />
-        <Tag style={{ left: `${overlap.r}%`, top: `${overlap.y}%`, transform: "translate(6px, -50%)" }}>AI</Tag>
+          {/* Where all three meet: AI, drawn as structure rather than colour */}
+          <span
+            aria-hidden="true"
+            className="absolute z-10 border-[1.5px] border-foreground"
+            style={box(overlap.x, overlap.y, overlap.r - overlap.x, overlap.b - overlap.y)}
+          />
+          <Tag style={{ left: `${overlap.r}%`, top: `${overlap.y}%`, transform: "translate(6px, -50%)" }}>AI</Tag>
 
-        <Tag
-          swatch="bg-law"
-          style={{ left: `${planes[0].x}%`, top: `${planes[0].y + planes[0].h}%`, transform: "translate(0, 8px)" }}
-        >
-          Law
-        </Tag>
-        <Tag
-          swatch="bg-biz"
-          style={{
-            right: `${100 - (planes[1].x + planes[1].w)}%`,
-            top: `${planes[1].y}%`,
-            transform: "translate(0, calc(-100% - 6px))",
-          }}
-        >
-          Business
-        </Tag>
-        <Tag
-          swatch="bg-eng"
-          style={{
-            left: `${planes[2].x}%`,
-            top: `${planes[2].y + planes[2].h}%`,
-            transform: "translate(calc(-100% - 6px), -100%)",
-          }}
-        >
-          Engineering
-        </Tag>
+          <Tag
+            swatch="bg-law"
+            style={{ left: `${planes[0].x}%`, top: `${planes[0].y + planes[0].h}%`, transform: "translate(0, 8px)" }}
+          >
+            Law
+          </Tag>
+          <Tag
+            swatch="bg-biz"
+            style={{
+              right: `${100 - (planes[1].x + planes[1].w)}%`,
+              top: `${planes[1].y}%`,
+              transform: "translate(0, calc(-100% - 6px))",
+            }}
+          >
+            Business
+          </Tag>
+          <Tag
+            swatch="bg-eng"
+            style={{
+              left: `${planes[2].x}%`,
+              top: `${planes[2].y + planes[2].h}%`,
+              transform: "translate(calc(-100% - 6px), -100%)",
+            }}
+          >
+            Engineering
+          </Tag>
+        </div>
       </div>
 
       <figcaption className="mt-24 flex items-baseline justify-between font-mono text-[11px] tracking-[0.06em] text-text-muted uppercase">
         <span>Fig. 1</span>
         <span className="text-foreground">R.T. LoRicco, principal</span>
+        <span className="sr-only">
+          Three overlapping panels labelled Law, Business and Engineering cover the lower part of the
+          portrait; the area where all three overlap is labelled AI.
+        </span>
       </figcaption>
     </figure>
   );
@@ -194,47 +205,44 @@ export default function Hero() {
         />
 
         <div className="mt-10 grid grid-cols-[minmax(0,1fr)] items-start gap-14 lg:grid-cols-[minmax(0,1fr)_auto] lg:gap-20">
-          <div>
+          <div className="max-w-xl lg:pt-2">
+            {/*
+              Kept out of the entrance animation on purpose: this paragraph is the
+              LCP element on phones.
+            */}
+            <p className="text-lg leading-relaxed text-body-muted lg:text-[1.15rem]">
+              I&apos;m a Connecticut attorney and software engineer. I rebuild
+              and run websites and AI systems for law firms and small businesses,
+              train lawyers and their staff on AI, do legal research and
+              technical consulting for other attorneys, and advise startups.
+              You work with me directly from the first call to the finished work.
+            </p>
 
-            <div className="max-w-xl lg:pt-2">
-              {/*
-                Kept out of the entrance animation on purpose: this paragraph is the
-                LCP element on phones.
-              */}
-              <p className="text-lg leading-relaxed text-body-muted lg:text-[1.15rem]">
-                I&apos;m a Connecticut attorney and software engineer. I rebuild
-                and run websites and AI systems for law firms and small businesses,
-                train lawyers and their staff on AI, do legal research and
-                technical consulting for other attorneys, and advise startups.
-                You work with me directly from the first call to the finished work.
-              </p>
-
-              <FadeUp immediate delay={0.3} className="mt-9 flex flex-wrap items-center gap-x-7 gap-y-4">
-                <a
-                  href="mailto:admin@loriccoandco.com"
-                  className="btn bg-foreground px-6 py-3.5 text-sm font-semibold text-background"
-                  style={{ ["--btn-fill" as string]: "var(--color-eng)" }}
-                >
-                  Get in touch <span className="btn-arrow">→</span>
-                </a>
-                <a
-                  href="#services"
-                  className="group font-mono text-[13px] text-foreground underline decoration-line-strong underline-offset-[6px] transition-colors hover:text-accent hover:decoration-accent"
-                >
-                  See what I do{" "}
-                  <span className="inline-block transition-transform duration-300 group-hover:translate-y-1 motion-reduce:transition-none">
-                    ↓
-                  </span>
-                </a>
-              </FadeUp>
-            </div>
+            <FadeUp immediate delay={0.3} className="mt-9 flex flex-wrap items-center gap-x-7 gap-y-4">
+              <a
+                href="mailto:admin@loriccoandco.com"
+                className="btn bg-foreground px-6 py-3.5 text-sm font-semibold text-background"
+                style={{ ["--btn-fill" as string]: "var(--color-eng)" }}
+              >
+                Get in touch <span className="btn-arrow">→</span>
+              </a>
+              <a
+                href="#services"
+                className="group font-mono text-[13px] text-foreground underline decoration-line-strong underline-offset-[6px] transition-colors hover:text-accent hover:decoration-accent"
+              >
+                See what I do{" "}
+                <span className="inline-block transition-transform duration-300 group-hover:translate-y-1 motion-reduce:transition-none">
+                  ↓
+                </span>
+              </a>
+            </FadeUp>
           </div>
 
           <FadeUp
             immediate
             delay={0.15}
             y={20}
-            className="mx-auto w-full max-w-[300px] px-3 lg:mx-0 lg:w-[320px] lg:max-w-none xl:w-[360px]"
+            className="mx-auto w-full max-w-[300px] px-8 lg:mx-0 lg:w-[340px] lg:max-w-none lg:px-6 xl:w-[380px]"
           >
             <Figure />
           </FadeUp>

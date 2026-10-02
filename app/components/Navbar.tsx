@@ -119,7 +119,7 @@ export default function Navbar() {
         </button>
       </div>
 
-      {/* Reading progress: an insert-green hairline that grows along the bottom edge */}
+      {/* Reading progress: a blue hairline that grows along the bottom edge */}
       <motion.div
         aria-hidden="true"
         className={`absolute bottom-[-1px] left-0 h-px w-full origin-left bg-accent transition-opacity duration-300 ${

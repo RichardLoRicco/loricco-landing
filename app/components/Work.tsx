@@ -212,7 +212,7 @@ function BrowserFrame({
     >
       <div className="relative overflow-hidden rounded-[4px] border border-line-strong bg-card shadow-[0_32px_64px_-32px_rgba(18,19,23,0.35)]">
         {/* Chrome bar */}
-        <div className="flex items-center gap-3 border-b border-line bg-gutter px-3.5 py-2.5">
+        <div className="flex items-center gap-3 border-b border-line bg-background px-3.5 py-2.5">
           <span className="flex gap-1.5" aria-hidden="true">
             <span className="h-2 w-2 rounded-full bg-line-strong" />
             <span className="h-2 w-2 rounded-full bg-line-strong" />

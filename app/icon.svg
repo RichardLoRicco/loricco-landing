@@ -1,9 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <!-- Redline mark: a paper tile, the red double margin rule, and an inserted "+" -->
-  <rect width="64" height="64" rx="10" fill="#fafaf7"/>
-  <rect x="0.5" y="0.5" width="63" height="63" rx="9.5" fill="none" stroke="#cfcfc6"/>
-  <rect x="15" y="10" width="2.5" height="44" fill="#b3261e"/>
-  <rect x="20" y="10" width="2.5" height="44" fill="#b3261e"/>
-  <rect x="31" y="29" width="22" height="7" rx="1" fill="#0b7a4b"/>
-  <rect x="38.5" y="21.5" width="7" height="22" rx="1" fill="#0b7a4b"/>
+  <!-- The three-square mark: law red, business yellow, engineering blue -->
+  <rect width="64" height="64" rx="10" fill="#f3f1ea"/>
+  <rect x="0.5" y="0.5" width="63" height="63" rx="9.5" fill="none" stroke="#c4bfb1"/>
+  <rect x="9" y="25" width="14" height="14" fill="#d63b24"/>
+  <rect x="25" y="25" width="14" height="14" fill="#f2c230"/>
+  <rect x="41" y="25" width="14" height="14" fill="#1f4bd1"/>
 </svg>

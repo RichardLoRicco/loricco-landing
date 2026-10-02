@@ -26,16 +26,11 @@ export function Mark({ className = "" }: { className?: string }) {
 }
 
 /* Which disciplines a piece of work draws on: a square of each colour and its name. */
-export function Chips({ of, dark = false, className = "" }: { of: Discipline[]; dark?: boolean; className?: string }) {
+export function Chips({ of, className = "" }: { of: Discipline[]; className?: string }) {
   return (
     <ul className={`flex flex-wrap gap-x-4 gap-y-1.5 ${className}`} aria-label="Disciplines">
       {of.map((d) => (
-        <li
-          key={d}
-          className={`inline-flex items-center gap-2 font-mono text-[11px] tracking-[0.06em] uppercase ${
-            dark ? "text-data-ink" : "text-text-muted"
-          }`}
-        >
+        <li key={d} className="inline-flex items-center gap-2 font-mono text-[11px] tracking-[0.06em] text-text-muted uppercase">
           <span aria-hidden="true" className={`h-2 w-2 ${DISCIPLINES[d].fill}`} />
           {DISCIPLINES[d].label}
         </li>
@@ -73,34 +68,17 @@ export function Clause({
 }
 
 /* A short review note, tagged with the discipline it speaks to. */
-export function Comment({
-  meta,
-  discipline,
-  children,
-  className = "",
-  tone = "light",
-}: {
-  meta?: ReactNode;
-  discipline?: Discipline;
-  children: ReactNode;
-  className?: string;
-  tone?: "light" | "dark";
-}) {
-  const dark = tone === "dark";
+export function Comment({ meta, discipline, children }: { meta?: ReactNode; discipline: Discipline; children: ReactNode }) {
   return (
-    <div
-      className={`relative border px-4 py-3 text-left ${
-        dark ? "border-white/15 bg-data-bg" : "border-foreground bg-card shadow-[6px_6px_0_0_rgba(18,18,18,0.9)]"
-      } ${className}`}
-    >
+    <div className="relative border border-foreground bg-card px-4 py-3 text-left shadow-[6px_6px_0_0_rgba(18,18,18,0.9)]">
       <div className="flex items-center gap-2">
-        {discipline && <span aria-hidden="true" className={`h-2.5 w-2.5 ${DISCIPLINES[discipline].fill}`} />}
-        <span className={`font-mono text-[11px] tracking-[0.06em] uppercase ${dark ? "text-data-ink" : "text-text-muted"}`}>
-          {discipline ? DISCIPLINES[discipline].label : "Note"}
+        <span aria-hidden="true" className={`h-2.5 w-2.5 ${DISCIPLINES[discipline].fill}`} />
+        <span className="font-mono text-[11px] tracking-[0.06em] text-text-muted uppercase">
+          {DISCIPLINES[discipline].label}
           {meta && <span className="ml-2 normal-case tracking-normal">{meta}</span>}
         </span>
       </div>
-      <div className={`mt-1.5 text-[14px] leading-snug ${dark ? "text-data-hi" : "text-foreground"}`}>{children}</div>
+      <div className="mt-1.5 text-[14px] leading-snug text-foreground">{children}</div>
     </div>
   );
 }

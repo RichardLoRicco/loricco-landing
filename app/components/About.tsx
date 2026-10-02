@@ -84,7 +84,6 @@ export default function About() {
               bought but never used, cases that turned on carrier records, and
               business plans that needed an outside assessment.
             </p>
-
           </motion.div>
 
           {/* Right: principles */}
