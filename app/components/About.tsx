@@ -48,8 +48,8 @@ export default function About() {
               lines={["Richard T.", "LoRicco"]}
             />
             <p className="mt-6 max-w-lg text-lg leading-relaxed text-body-muted">
-              I practiced law, consulted for startups, and then moved into
-              building production software. The services on this page grew
+              I practice law, consult for startups, and build production
+              software. The services on this page grew
               out of problems people kept bringing me, including firm websites
               that had stopped producing new business, AI tools that teams had
               bought but never used, cases that turned on carrier records, and

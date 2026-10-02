@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import { useEffect, useRef } from "react";
-import { animate, motion, useInView, useMotionValue, useReducedMotion, useTransform } from "motion/react";
+import { animate, motion, useInView, useMotionValue, useTransform } from "motion/react";
+import { useStill } from "./ui/useStill";
 import { FadeUp, SplitLines } from "./ui/Reveal";
 
 type Project = {
@@ -65,13 +66,14 @@ const gaugeLabels = ["Performance", "Accessibility", "Best practices", "SEO"];
 /*
   One Lighthouse ring: the arc draws and the number counts up on first view.
   MotionConfig's reducedMotion only covers transforms, so under reduced
-  motion the ring and the number are drawn at their final values instead.
+  motion the ring and the number jump to their final values instead. The
+  first render always matches the server (see useStill).
 */
 function Gauge({ label, score, delay }: { label: string; score: number; delay: number }) {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-40px" });
-  const still = useReducedMotion() ?? false;
-  const value = useMotionValue(still ? score : 0);
+  const still = useStill();
+  const value = useMotionValue(0);
   const text = useTransform(value, (v) => Math.round(v).toString());
 
   useEffect(() => {
@@ -95,8 +97,11 @@ function Gauge({ label, score, delay }: { label: string; score: number; delay: n
     score >= 90 ? "var(--color-good)" : score >= 50 ? "var(--color-warn)" : "var(--color-crit)";
 
   return (
-    // Phones: ring and label side by side in a 2x2. Wider: four stacked columns.
-    <div ref={ref} className="flex items-center gap-3 sm:flex-col sm:gap-2.5">
+    // Narrowest phones: label under the ring. 400px up: side by side in a 2x2. sm up: four columns.
+    <div
+      ref={ref}
+      className="flex flex-col items-start gap-2 min-[400px]:flex-row min-[400px]:items-center min-[400px]:gap-3 sm:flex-col sm:items-center sm:gap-2.5"
+    >
       <div className="relative h-12 w-12 shrink-0 sm:h-16 sm:w-16">
         <svg viewBox="0 0 60 60" className="h-full w-full -rotate-90" aria-hidden="true">
           <circle cx="30" cy="30" r={r} fill="none" stroke="var(--color-line)" strokeWidth="2.5" />
@@ -108,7 +113,7 @@ function Gauge({ label, score, delay }: { label: string; score: number; delay: n
             stroke={tone}
             strokeWidth="2.5"
             strokeDasharray={circumference}
-            initial={{ strokeDashoffset: still ? filled : circumference }}
+            initial={{ strokeDashoffset: circumference }}
             animate={inView || still ? { strokeDashoffset: filled } : undefined}
             transition={still ? { duration: 0 } : { duration: 1.5, delay, ease: [0.16, 1, 0.3, 1] }}
           />

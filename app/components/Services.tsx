@@ -36,13 +36,14 @@ const services = [
   {
     section: "§ 03",
     num: "03",
-    title: "Technical Consulting for Law Firms",
-    outcome: "Analysis counsel can use",
+    title: "Research & Consulting for Law Firms",
+    outcome: "Work counsel can use",
     description:
-      "When a case turns on technology, I work for the attorney. I read the discovery, interpret carrier and platform records, and explain what the records show in writing. The engagement is structured with work-product protection in mind. I also advise firms on their own technology decisions.",
+      "I work for other attorneys on legal research and on cases that turn on technology. I research legal questions, write up what I find, and take on other projects a firm needs help with. On technology cases, I read the discovery, interpret carrier and platform records, and explain what the records show in writing. That work is structured with work-product protection in mind.",
     offerings: [
+      "Legal research & memos",
+      "Project work for lawyers",
       "Digital evidence & discovery analysis",
-      "Technical memos for counsel",
       "Questions for opposing experts",
       "Firm technology guidance",
     ],

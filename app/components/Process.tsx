@@ -1,7 +1,8 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useReducedMotion, useScroll, useSpring, useTransform, type MotionValue } from "motion/react";
+import { useEffect, useRef } from "react";
+import { motion, useMotionValue, useScroll, useSpring, useTransform, type MotionValue } from "motion/react";
+import { useStill } from "./ui/useStill";
 import Blueprint from "./Blueprint";
 import { FadeUp, SplitLines } from "./ui/Reveal";
 
@@ -94,10 +95,19 @@ export default function Process() {
     target: trackRef,
     offset: ["start 78%", "end 55%"],
   });
-  // The fill follows the scroll; under reduced motion it tracks it exactly, without the spring's glide.
-  const still = useReducedMotion();
+  // The fill follows the scroll. Under reduced motion the track is drawn
+  // complete and every step is lit, so nothing changes while scrolling.
+  const still = useStill();
   const sprung = useSpring(scrollYProgress, { stiffness: 70, damping: 22, mass: 0.5 });
-  const progress = still ? scrollYProgress : sprung;
+  const progress = useMotionValue(0);
+  useEffect(() => {
+    if (still) {
+      progress.set(1);
+      return;
+    }
+    progress.set(sprung.get());
+    return sprung.on("change", (v) => progress.set(v));
+  }, [still, sprung, progress]);
 
   return (
     <section

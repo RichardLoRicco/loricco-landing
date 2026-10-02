@@ -9,7 +9,7 @@ const EMAIL = "admin@loriccoandco.com";
 const manifest: [string, string][] = [
   ["PRINCIPAL", "R.T. LoRicco"],
   ["BACKGROUND", "J.D. · LL.M. · MBA · SWE"],
-  ["WORK", "websites\u00a0· training\u00a0· consulting\u00a0· advisory"],
+  ["WORK", "websites\u00a0· training\u00a0· research\u00a0· consulting\u00a0· advisory"],
   ["BASE", "Connecticut, USA"],
 ];
 
@@ -107,13 +107,15 @@ export default function Contact() {
                         </dd>
                       </div>
                     ))}
-                    <dt className="border-y border-white/8 py-2.5 tracking-[0.08em] text-data-ink/80">
-                      STATUS /
-                    </dt>
-                    <dd className="flex items-center gap-2 border-y border-white/8 py-2.5 text-cobalt-bright">
-                      <span className="h-1.5 w-1.5 rounded-full bg-cobalt-bright" aria-hidden="true" />
-                      accepting clients
-                    </dd>
+                    <div className="contents">
+                      <dt className="border-y border-white/8 py-2.5 tracking-[0.08em] text-data-ink/80">
+                        STATUS /
+                      </dt>
+                      <dd className="flex items-center gap-2 border-y border-white/8 py-2.5 text-cobalt-bright">
+                        <span className="h-1.5 w-1.5 rounded-full bg-cobalt-bright" aria-hidden="true" />
+                        accepting clients
+                      </dd>
+                    </div>
                   </dl>
                 </div>
               </FadeUp>

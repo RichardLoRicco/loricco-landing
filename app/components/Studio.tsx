@@ -166,14 +166,14 @@ function DevRow({ app }: { app: StudioApp }) {
       <div className="relative">
         <AppIcon app={app} size={44} />
         <span
-          className="absolute -bottom-2.5 left-0 hidden h-[2px] w-11 origin-left md:block scale-x-[0.45] transition-transform duration-500 [transition-timing-function:var(--ease-out-expo)] group-hover:scale-x-100 motion-reduce:transition-none"
+          className="absolute -bottom-2.5 left-0 hidden h-[2px] w-11 origin-left md:block scale-x-[0.45] transition-transform duration-500 [transition-timing-function:var(--ease-out-expo)] group-focus-within:scale-x-100 group-hover:scale-x-100 motion-reduce:transition-none"
           style={{ backgroundColor: app.color }}
           aria-hidden="true"
         />
       </div>
 
       <div className="min-w-0">
-        <h4 className="font-display text-[17px] font-bold tracking-tight transition-colors duration-300 group-hover:text-cobalt">
+        <h4 className="font-display text-[17px] font-bold tracking-tight transition-colors duration-300 group-focus-within:text-cobalt group-hover:text-cobalt">
           {app.name}
         </h4>
         <p className="mt-1 text-[14px] leading-snug font-medium text-foreground">{app.tagline}</p>

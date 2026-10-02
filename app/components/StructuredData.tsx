@@ -8,7 +8,7 @@ export default function StructuredData() {
     name: "LoRicco & Co",
     url: "https://loriccoandco.com",
     description:
-      "LoRicco & Co rebuilds and operates websites, develops AI tools, trains lawyers and small businesses, analyzes digital evidence for counsel, and advises startups. The principal is a Connecticut-admitted attorney, MBA, and software engineer. The studio also publishes iOS apps.",
+      "LoRicco & Co. rebuilds and runs websites, builds AI tools, trains lawyers and small businesses on AI, does legal research and technical consulting for attorneys, and advises startups. Richard T. LoRicco is a Connecticut-admitted attorney and software engineer. The studio also publishes iOS apps.",
     email: "admin@loriccoandco.com",
     address: {
       "@type": "PostalAddress",
@@ -52,6 +52,7 @@ export default function StructuredData() {
       "Content strategy and attorney-advertising compliance",
       "AI agents and workflow automation",
       "AI education and training for lawyers and small businesses",
+      "Legal research and writing for attorneys",
       "Litigation technology and digital evidence consulting",
       "Software architecture",
       "iOS app development",
@@ -101,9 +102,9 @@ export default function StructuredData() {
           "@type": "Offer",
           itemOffered: {
             "@type": "Service",
-            name: "Technical Consulting for Law Firms",
+            name: "Research & Consulting for Law Firms",
             description:
-              "Digital evidence and discovery analysis, written explanations of technical records, questions for opposing experts, and advice on law-firm technology. Retained by counsel and structured as non-testifying consulting with work-product protection in mind.",
+              "Legal research, research memos, and other project work for attorneys. Digital evidence and discovery analysis, written explanations of technical records, questions for opposing experts, and advice on law-firm technology. Retained by counsel and structured as non-testifying consulting with work-product protection in mind.",
           },
         },
         {
