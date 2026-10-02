@@ -330,6 +330,29 @@ function Featured({ app }: { app: StudioApp }) {
   );
 }
 
+/*
+  The dev grid is 2 columns at sm and 4 at lg. The closing note takes the
+  cells left in the last row so it never sits alone beside empty space; when
+  it spans a whole row it lays out side by side. Literal class names so
+  Tailwind picks them up.
+*/
+const lgLeft = 4 - (devGrid.length % 4);
+const smFull = devGrid.length % 2 === 0;
+const noteSpan = {
+  className: [
+    smFull ? "sm:col-span-2" : "",
+    ({ 1: "", 2: "lg:col-span-2", 3: "lg:col-span-3", 4: "lg:col-span-4" } as const)[lgLeft as 1 | 2 | 3 | 4],
+  ].join(" "),
+  wideLayout: [
+    smFull ? "sm:flex-row sm:items-end sm:gap-10" : "",
+    lgLeft >= 2 ? "lg:flex-row lg:items-end lg:gap-10" : "lg:flex-col lg:items-stretch lg:gap-0",
+  ].join(" "),
+  wideText: [
+    smFull ? "sm:mt-0 sm:max-w-md" : "",
+    lgLeft >= 2 ? "lg:mt-0 lg:max-w-md" : "lg:mt-6 lg:max-w-none",
+  ].join(" "),
+};
+
 export default function Studio() {
   return (
     <section id="studio" className="relative scroll-mt-24 px-6 py-28" aria-label="The studio">
@@ -417,9 +440,11 @@ export default function Studio() {
               </Reveal>
             ))}
 
-            {/* Closing annotation card */}
-            <Reveal i={devGrid.length}>
-              <div className="flex h-full flex-col justify-between rounded-[4px] border border-dashed border-line-strong p-5">
+            {/* Closing annotation card: fills whatever is left of the last row */}
+            <Reveal i={devGrid.length} className={noteSpan.className}>
+              <div
+                className={`flex h-full flex-col justify-between rounded-[4px] border border-dashed border-line-strong p-5 ${noteSpan.wideLayout}`}
+              >
                 <p className="font-mono text-[12px] leading-[1.9] text-text-muted">
                   SHIPPED / {pad2(counts.live)}
                   <br />
@@ -429,7 +454,7 @@ export default function Studio() {
                   <br />
                   PLATFORM / iPHONE
                 </p>
-                <p className="mt-6 text-[13.5px] leading-relaxed text-body-muted">
+                <p className={`mt-6 text-[13.5px] leading-relaxed text-body-muted ${noteSpan.wideText}`}>
                   <span className="editorial text-[15px] text-foreground">Why it&apos;s on this page:</span>{" "}
                   the advice I give clients on product and engineering has been tested on my own apps
                   first.

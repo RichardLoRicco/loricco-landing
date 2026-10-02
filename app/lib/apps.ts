@@ -236,6 +236,19 @@ export const apps: StudioApp[] = [
     schemaCategory: "SportsApplication",
   },
   {
+    slug: "metclock",
+    name: "MetClock",
+    tagline: "Red for work, blue for rest.",
+    description:
+      "One clock for EMOM, AMRAP, Tabata and For Time. The whole screen changes color with the workout, so a glance tells you whether it's work, rest or the last few seconds.",
+    category: "Workout timer",
+    status: "development",
+    icon: "/apps/metclock/icon.webp",
+    iconAlt: "MetClock app icon: a barbell loaded with red, blue and yellow bumper plates",
+    color: "#D62828",
+    schemaCategory: "HealthApplication",
+  },
+  {
     slug: "scrombie",
     name: "Scrombie",
     tagline: "Stop doomscrolling, save face.",
