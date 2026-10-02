@@ -17,7 +17,7 @@ export default function Footer() {
         <div className="flex flex-col items-center justify-between gap-6 sm:flex-row">
           <div>
             <span className="font-display text-sm font-bold tracking-tight">
-              LoRicco <span className="editorial font-medium text-cobalt">&</span> Co.
+              LoRicco <span className="editorial font-medium text-ins">&</span> Co.
             </span>
             <p className="mt-1 font-mono text-[10px] tracking-[0.16em] text-text-muted uppercase">
               Attorney · MBA · Engineer
@@ -62,9 +62,9 @@ export default function Footer() {
               <li key={s.id}>
                 <a
                   href={`/#${s.id}`}
-                  className="group inline-flex items-baseline gap-2 text-[13px] text-body-muted transition-colors duration-200 hover:text-cobalt"
+                  className="group inline-flex items-baseline gap-2 text-[13px] text-body-muted transition-colors duration-200 hover:text-ins"
                 >
-                  <span className="font-mono text-[10px] text-text-muted tnum group-hover:text-cobalt">
+                  <span className="font-mono text-[10px] text-text-muted tnum group-hover:text-ins">
                     {s.num}
                   </span>
                   {s.label}
@@ -85,7 +85,7 @@ export default function Footer() {
           </p>
           <a
             href="mailto:admin@loriccoandco.com"
-            className="font-mono text-[11px] text-body-muted underline decoration-line-strong underline-offset-4 transition-colors duration-200 hover:text-cobalt hover:decoration-cobalt"
+            className="font-mono text-[11px] text-body-muted underline decoration-line-strong underline-offset-4 transition-colors duration-200 hover:text-ins hover:decoration-ins"
           >
             admin@loriccoandco.com
           </a>

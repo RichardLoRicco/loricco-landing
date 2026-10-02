@@ -4,12 +4,12 @@
   module and server components can import it too.
 */
 export const SECTIONS = [
-  { id: "services", num: "01", label: "Services" },
-  { id: "work", num: "02", label: "Selected work" },
-  { id: "process", num: "03", label: "How I work" },
-  { id: "about", num: "04", label: "About" },
-  { id: "studio", num: "05", label: "The Studio" },
-  { id: "contact", num: "06", label: "Contact" },
+  { id: "services", num: "1", label: "Services" },
+  { id: "work", num: "2", label: "Selected work" },
+  { id: "process", num: "3", label: "How I work" },
+  { id: "about", num: "4", label: "About" },
+  { id: "studio", num: "5", label: "The Studio" },
+  { id: "contact", num: "6", label: "Contact" },
 ] as const;
 
 export type SectionId = (typeof SECTIONS)[number]["id"];

@@ -1,24 +1,24 @@
 import type { Metadata } from "next";
-import { Bricolage_Grotesque, Fraunces, Spline_Sans_Mono } from "next/font/google";
+import { Archivo, Martian_Mono } from "next/font/google";
 import Providers from "./components/Providers";
 import StructuredData from "./components/StructuredData";
 import "./globals.css";
 
-const bricolage = Bricolage_Grotesque({
-  variable: "--font-bricolage",
-  subsets: ["latin"],
-  display: "swap",
-});
-
-const fraunces = Fraunces({
-  variable: "--font-fraunces",
+/*
+  "Legal Pad": one variable family carries the whole voice. Display runs
+  expanded and heavy; the second voice is the same family, light italic.
+  Martian Mono for labels and figures.
+*/
+const archivo = Archivo({
+  variable: "--font-archivo",
   subsets: ["latin"],
   style: ["normal", "italic"],
+  axes: ["wdth"],
   display: "swap",
 });
 
-const splineSansMono = Spline_Sans_Mono({
-  variable: "--font-spline-mono",
+const martianMono = Martian_Mono({
+  variable: "--font-martian",
   subsets: ["latin"],
   display: "swap",
 });
@@ -64,11 +64,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${bricolage.variable} ${fraunces.variable} ${splineSansMono.variable} antialiased`}
+        className={`${archivo.variable} ${martianMono.variable} antialiased`}
       >
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:rounded-[3px] focus:bg-cobalt focus:px-6 focus:py-3 focus:text-sm focus:font-semibold focus:text-white"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:rounded-[3px] focus:bg-ins focus:px-6 focus:py-3 focus:text-sm focus:font-semibold focus:text-white"
         >
           Skip to main content
         </a>

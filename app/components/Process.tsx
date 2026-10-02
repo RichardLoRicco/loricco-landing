@@ -5,6 +5,7 @@ import { motion, useMotionValue, useScroll, useSpring, useTransform, type Motion
 import { useStill } from "./ui/useStill";
 import Blueprint from "./Blueprint";
 import { FadeUp, SplitLines } from "./ui/Reveal";
+import { Clause } from "./ui/Redline";
 
 const steps = [
   {
@@ -35,7 +36,7 @@ const steps = [
 
 function Arrow() {
   return (
-    <span className="mx-[0.12em] inline-block text-cobalt-bright" aria-hidden="true">
+    <span className="mx-[0.12em] inline-block text-ins-bright" aria-hidden="true">
       →
     </span>
   );
@@ -61,20 +62,21 @@ function Step({
       {/* Node on the track */}
       <motion.span
         aria-hidden="true"
-        className="absolute top-2 left-0 h-2.5 w-2.5 -translate-x-[4.5px] rounded-full border border-cobalt-bright bg-data-bg lg:top-0 lg:left-0 lg:translate-x-0 lg:-translate-y-[4.5px]"
+        className="absolute top-2 left-0 h-2.5 w-2.5 -translate-x-[4.5px] rounded-full border border-ins-bright bg-data-bg lg:top-0 lg:left-0 lg:translate-x-0 lg:-translate-y-[4.5px]"
         style={{ scale: nodeScale }}
       >
         <motion.span
-          className="absolute inset-[2px] rounded-full bg-cobalt-bright"
+          className="absolute inset-[2px] rounded-full bg-ins-bright"
           style={{ opacity: reached }}
         />
       </motion.span>
 
-      <span
-        aria-hidden="true"
-        className="ghost-bright font-display text-[4.5rem] leading-none font-bold lg:text-[5.5rem]"
-      >
-        {step.id}
+      {/* Each step reads as an added line in a diff: a + mark and its clause number */}
+      <span aria-hidden="true" className="flex items-baseline gap-3">
+        <span className="font-mono text-[1.6rem] text-ins-bright lg:text-[2rem]">+</span>
+        <span className="ghost-bright font-display text-[4.5rem] leading-none font-bold lg:text-[5.5rem]">
+          3.{index + 1}
+        </span>
       </span>
       <motion.h3
         className="font-display mt-3 text-2xl font-semibold"
@@ -121,7 +123,7 @@ export default function Process() {
         <div className="flex flex-wrap items-end justify-between gap-8">
           <div>
             <FadeUp>
-              <p className="kicker text-data-ink">How I work</p>
+              <Clause num="3" dark rule={false}>How I work</Clause>
             </FadeUp>
             <SplitLines
               className="font-display mt-4 text-3xl font-bold tracking-tight text-data-hi sm:text-4xl lg:text-[3.4rem] lg:leading-[1.05]"
@@ -152,13 +154,13 @@ export default function Process() {
           {/* Vertical fill (phones, tablets) */}
           <motion.div
             aria-hidden="true"
-            className="absolute top-0 left-0 h-full w-px origin-top bg-cobalt-bright lg:hidden"
+            className="absolute top-0 left-0 h-full w-px origin-top bg-ins-bright lg:hidden"
             style={{ scaleY: progress }}
           />
           {/* Horizontal fill (desktop) */}
           <motion.div
             aria-hidden="true"
-            className="absolute top-0 left-0 hidden h-px w-full origin-left bg-cobalt-bright lg:block"
+            className="absolute top-0 left-0 hidden h-px w-full origin-left bg-ins-bright lg:block"
             style={{ scaleX: progress }}
           />
 

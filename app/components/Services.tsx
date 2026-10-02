@@ -3,10 +3,11 @@
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { FadeUp, SplitLines } from "./ui/Reveal";
+import { Clause } from "./ui/Redline";
 
 const services = [
   {
-    section: "§ 01",
+    section: "1.1",
     num: "01",
     title: "Websites & AI Tools",
     outcome: "You own the site and accounts",
@@ -20,7 +21,7 @@ const services = [
     ],
   },
   {
-    section: "§ 02",
+    section: "1.2",
     num: "02",
     title: "AI Education & Training",
     outcome: "Staff who use the tools",
@@ -34,7 +35,7 @@ const services = [
     ],
   },
   {
-    section: "§ 03",
+    section: "1.3",
     num: "03",
     title: "Research & Consulting for Law Firms",
     outcome: "Work counsel can use",
@@ -49,7 +50,7 @@ const services = [
     ],
   },
   {
-    section: "§ 04",
+    section: "1.4",
     num: "04",
     title: "Business & Startup Advisory",
     outcome: "A second opinion",
@@ -93,7 +94,7 @@ export default function Services() {
         {/* Section header */}
         <div className="max-w-2xl">
           <FadeUp>
-            <p className="kicker rule-label text-text-muted">Services</p>
+            <Clause num="1">Services</Clause>
           </FadeUp>
           <SplitLines
             className="font-display mt-5 text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl"
@@ -113,10 +114,10 @@ export default function Services() {
                     animate={{ y: 0, opacity: 1 }}
                     exit={{ y: "-45%", opacity: 0 }}
                     transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                    className="ghost-cobalt absolute inset-0 font-display text-[10rem] leading-none font-bold"
+                    className="ghost-ins absolute inset-0 font-display text-[10rem] leading-none font-bold"
                     aria-hidden="true"
                   >
-                    {services[active].num}
+                    {services[active].section}
                   </motion.span>
                 </AnimatePresence>
               </div>
@@ -150,10 +151,10 @@ export default function Services() {
                         >
                           <span
                             className={`font-mono text-[10px] tnum transition-colors duration-300 ${
-                              isActive ? "text-cobalt" : "text-text-muted"
+                              isActive ? "text-ins" : "text-text-muted"
                             }`}
                           >
-                            {service.num}
+                            {service.section}
                           </span>
                           <span
                             className={`transition-colors duration-300 ${
@@ -192,19 +193,24 @@ export default function Services() {
                   transition={{ duration: 0.5, delay: i * 0.06, ease: [0.16, 1, 0.3, 1] }}
                   className="ledger-row group grid scroll-mt-28 gap-4 border-t border-line py-10 last:border-b md:grid-cols-[72px_1fr_236px] md:gap-8 lg:py-12"
                 >
-                  {/* § number */}
-                  <div className="font-mono text-sm font-medium text-cobalt tnum">
+                  {/* Clause number, with a change bar when this row is the one in view */}
+                  <div className="relative font-mono text-sm font-medium text-ins tnum">
+                    <span
+                      aria-hidden="true"
+                      className={`absolute top-0 -left-4 h-full w-[3px] origin-top bg-ins transition-transform duration-500 [transition-timing-function:var(--ease-out-expo)] md:-left-5 ${
+                        isActive ? "scale-y-100" : "scale-y-0"
+                      }`}
+                    />
                     {service.section}
                   </div>
 
                   {/* Title + description */}
                   <div>
-                    <h3
-                      className={`font-display text-2xl font-bold tracking-tight transition-colors duration-400 lg:text-[1.9rem] ${
-                        isActive ? "text-cobalt" : "text-foreground group-hover:text-cobalt"
-                      }`}
-                    >
-                      {service.title}
+                    <h3 className="font-display text-2xl font-bold tracking-tight lg:text-[1.9rem]">
+                      {/* Highlighter sweep on the row in view, on hover and on focus */}
+                      <span className="hl-sweep" data-on={isActive}>
+                        {service.title}
+                      </span>
                     </h3>
                     <p className="mt-3 max-w-xl text-[15px] leading-relaxed text-body-muted">
                       {service.description}
@@ -224,7 +230,7 @@ export default function Services() {
                           className="flex items-center gap-2.5 font-mono text-[12px] text-body-muted"
                         >
                           <span
-                            className={`h-1 shrink-0 bg-cobalt transition-all duration-500 ${
+                            className={`h-1 shrink-0 bg-ins transition-all duration-500 ${
                               isActive ? "w-3" : "w-1"
                             }`}
                             style={{ transitionDelay: isActive ? `${j * 60}ms` : "0ms" }}
@@ -248,7 +254,7 @@ export default function Services() {
             with a short call and a written review of where things stand.{" "}
             <a
               href="mailto:admin@loriccoandco.com"
-              className="u-link font-medium text-cobalt"
+              className="u-link font-medium text-ins"
             >
               Email me
             </a>{" "}

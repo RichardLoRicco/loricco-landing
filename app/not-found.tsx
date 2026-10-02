@@ -17,10 +17,10 @@ export default function NotFound() {
       <main id="main-content" className="relative overflow-hidden px-6 pt-40 pb-28 lg:pt-48 lg:pb-36">
         <Blueprint fade />
         <div className="relative mx-auto max-w-6xl">
-          <p className="kicker text-cobalt">LCO / Not found / 404</p>
+          <p className="kicker text-ins">LCO / Not found / 404</p>
           <p
             aria-hidden="true"
-            className="ghost-cobalt mt-6 select-none font-display text-[clamp(7rem,24vw,16rem)] leading-[0.85] font-bold"
+            className="ghost-ins mt-6 select-none font-display text-[clamp(7rem,24vw,16rem)] leading-[0.85] font-bold"
           >
             404
           </p>
@@ -32,7 +32,7 @@ export default function NotFound() {
           </p>
           <Link
             href="/"
-            className="btn mt-9 inline-flex items-center gap-2 bg-cobalt px-6 py-3.5 text-sm font-semibold text-white"
+            className="btn mt-9 inline-flex items-center gap-2 bg-ins px-6 py-3.5 text-sm font-semibold text-white"
             style={{ ["--btn-fill" as string]: "var(--color-foreground)" }}
           >
             Back to the home page <span className="btn-arrow">→</span>

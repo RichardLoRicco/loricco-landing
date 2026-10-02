@@ -1,29 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Blueprint from "./Blueprint";
 import { FadeUp, SplitLines } from "./ui/Reveal";
-import { TitleBlock, Zones, type TitleCell } from "./ui/Sheet";
+import { Clause, Comment } from "./ui/Redline";
 
 const EMAIL = "admin@loriccoandco.com";
-
-/* The closing sheet's title block. */
-const titleCells: TitleCell[] = [
-  { label: "Principal", value: "R.T. LoRicco" },
-  { label: "Base", value: "Connecticut, USA" },
-  { label: "Background", value: "J.D. · LL.M. · MBA · SWE", wide: true },
-  { label: "Work", value: "websites\u00a0· training\u00a0· research\u00a0· consulting\u00a0· advisory", wide: true },
-  {
-    label: "Status",
-    value: (
-      <span className="inline-flex items-center gap-2">
-        <span className="h-1.5 w-1.5 rounded-full bg-background" aria-hidden="true" />
-        Accepting clients
-      </span>
-    ),
-    wide: true,
-  },
-];
 
 function CopyEmail() {
   const [copied, setCopied] = useState(false);
@@ -47,7 +28,7 @@ function CopyEmail() {
     <button
       type="button"
       onClick={copy}
-      className="group inline-flex items-center gap-2 rounded-[3px] border border-background/50 px-4 py-3 font-mono text-[12px] tracking-[0.06em] text-background transition-colors duration-200 hover:border-background hover:bg-background hover:text-cobalt"
+      className="group inline-flex items-center gap-2 rounded-[3px] border border-line-strong bg-card px-4 py-3 font-mono text-[11px] tracking-[0.04em] text-foreground transition-colors duration-200 hover:border-ins hover:text-ins"
       aria-live="polite"
     >
       <span
@@ -61,36 +42,25 @@ function CopyEmail() {
 
 export default function Contact() {
   return (
-    <section
-      id="contact"
-      className="sheet relative overflow-hidden px-6 pt-24 pb-20 lg:pt-32 lg:pb-28"
-      aria-label="Contact"
-    >
-      <Blueprint cobalt />
-      <Zones edge="top" />
-
+    <section id="contact" className="section-y relative scroll-mt-24 px-6" aria-label="Contact">
       <div className="relative mx-auto max-w-6xl">
-        {/* Sheet header: the page closes on the same drawing it opened with */}
-        <FadeUp y={8}>
-          <div className="flex items-center justify-between gap-6 border-b border-background/30 pb-3 font-mono text-[11px] tracking-[0.14em] text-background/80 uppercase">
-            <span>LCO / Contact</span>
-            <span className="tnum">Sheet 06 / 06</span>
-          </div>
+        <FadeUp>
+          <Clause num="6">Contact</Clause>
         </FadeUp>
 
-        <div className="mt-12 grid gap-12 lg:mt-16 lg:grid-cols-[minmax(0,1fr)_minmax(0,25rem)] lg:gap-20">
+        <div className="mt-6 grid grid-cols-[minmax(0,1fr)] gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,20rem)] lg:items-end lg:gap-20">
           <div>
             <SplitLines
-              className="font-display max-w-xl text-4xl leading-[1.04] font-bold tracking-tight text-background sm:text-5xl lg:text-[3.8rem]"
+              className="font-display max-w-2xl text-4xl leading-[1.02] font-[760] tracking-[-0.03em] [font-stretch:112%] sm:text-5xl lg:text-[4rem]"
               lines={[
                 "Tell me what",
-                <span key="l2" className="editorial font-medium text-cobalt-pale">
+                <span key="l2" className="editorial font-light tracking-[-0.02em] [font-stretch:100%]">
                   you&apos;re working on.
                 </span>,
               ]}
             />
             <FadeUp delay={0.15}>
-              <p className="mt-6 max-w-lg text-[16px] leading-relaxed text-background/85">
+              <p className="mt-6 max-w-lg text-[16px] leading-relaxed text-body-muted">
                 Send me a note about the website, the team, the case, or the
                 business. I&apos;ll reply with a few questions, and if it
                 makes sense we&apos;ll set up a short call and I&apos;ll
@@ -100,25 +70,31 @@ export default function Contact() {
           </div>
 
           <FadeUp delay={0.2}>
-            <TitleBlock heading="LoRicco & Co. LLC" cells={titleCells} />
+            <Comment meta="Status">
+              <span className="inline-flex items-center gap-2 font-medium text-foreground">
+                <span className="font-mono text-ins" aria-hidden="true">+</span>
+                Accepting clients
+              </span>
+              <span className="mt-1 block">Replies usually come within one business day.</span>
+            </Comment>
           </FadeUp>
         </div>
 
-        {/* The address itself is the call to action, set at display size */}
-        <FadeUp delay={0.25} className="mt-16 border-t border-background/30 pt-10 lg:mt-20">
-          <p className="font-mono text-[11px] tracking-[0.14em] text-background/80 uppercase">Write to</p>
+        {/* The address is the call to action, set at display size as an inserted line */}
+        <FadeUp delay={0.25} className="mt-14 border-t border-line pt-10 lg:mt-16">
           <a
             href={`mailto:${EMAIL}`}
-            className="group mt-3 inline-flex max-w-full items-baseline gap-[0.25em] font-display text-[length:clamp(1.35rem,calc((100vw-3rem)/13),5.5rem)] leading-[1.05] font-bold tracking-[-0.025em] text-background [overflow-wrap:anywhere]"
+            className="group inline-flex max-w-full items-baseline gap-[0.3em] font-display text-[length:clamp(1.2rem,calc((100vw-3rem)/16.5),4.4rem)] leading-[1.1] font-[760] tracking-[-0.03em] [font-stretch:108%] [overflow-wrap:anywhere]"
           >
-            <span className="u-link [background-size:100%_2px] pb-1 group-hover:text-cobalt-pale">{EMAIL}</span>
-            <span className="btn-arrow shrink-0 text-cobalt-pale" aria-hidden="true">
+            <span className="font-mono text-[0.5em] text-ins" aria-hidden="true">+</span>
+            <span className="ins-mark transition-colors duration-300 group-hover:text-ins-deep">{EMAIL}</span>
+            <span className="btn-arrow shrink-0 text-ins" aria-hidden="true">
               →
             </span>
           </a>
           <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
             <CopyEmail />
-            <p className="font-mono text-[12px] text-background/80">REPLIES / usually one business day</p>
+            <p className="font-mono text-[11px] text-text-muted">J.D. · LL.M. · MBA · Software engineer · Connecticut</p>
           </div>
         </FadeUp>
       </div>

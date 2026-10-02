@@ -1,49 +1,63 @@
 @import "tailwindcss";
 
 /*
-  LoRicco & Co. — "Engineered Counsel" design language (Variant B: Character)
-  Vellum ground, ink, cobalt accent. Bricolage Grotesque / Fraunces / Spline Sans Mono.
-  Dark is reserved for the engineering voice: data strips, process, terminal moments.
+  LoRicco & Co. — "Redline"
+  The page is a document under revision. Law (pleading paper, tracked
+  changes), engineering (the editor gutter, the diff, code review), the MBA
+  (the spreadsheet: numbered rows, a selected cell, the formula bar) and AI
+  (the suggested edit you accept with Tab) all work on the same object.
 
-  Motion rule: nothing moves on its own. Every effect is driven by the cursor,
-  a hover, or the scroll position, and all of it is off under reduced motion.
+  Insert green is the accent (added, approved, go). Redline red is used
+  sparingly for strike-throughs and review marks. Every text pairing below is
+  checked to WCAG AA in the comment beside it.
+
+  Motion rule: nothing moves on its own except the hero's caret. Everything
+  else follows the cursor, a hover or the scroll, and all of it, caret
+  included, is off under reduced motion.
 */
 
 @theme inline {
   /* Ground */
-  --color-background: #faf7f0; /* vellum */
-  --color-card: #fffdf8;
-  --color-foreground: #1a1814; /* ink */
-  --color-body-muted: #52504a;
-  --color-text-muted: #706d65; /* 4.6:1 on vellum; was #8b8880 at 3.3:1 */
-  --color-line: #e8e3d6;
-  --color-line-strong: #d3cdbd;
+  --color-background: #fafaf7; /* paper */
+  --color-card: #fffffd;
+  --color-foreground: #121317; /* ink, 17.8:1 on paper */
+  --color-body-muted: #45474d; /* 8.9:1 */
+  --color-text-muted: #686a70; /* 5.2:1 on paper, 4.8:1 on the gutter */
+  --color-line: #e4e4de;
+  --color-line-strong: #cfcfc6;
+  --color-gutter: #f1f1ec;
+  --color-ghost: #6f727a; /* AI suggestion text, 4.6:1 */
 
-  /* Brand accent */
-  --color-cobalt: #2038c8;
-  --color-cobalt-deep: #182ea6;
-  --color-cobalt-wash: #eaedfa;
-  --color-cobalt-bright: #8fa0ff; /* cobalt legible on dark ink ground */
-  --color-cobalt-pale: #cbd3ff; /* second-voice text on a cobalt sheet (5.8:1) */
+  /* Insert: the accent */
+  --color-ins: #0b7a4b; /* 5.2:1 on paper; white on it 5.4:1 */
+  --color-ins-deep: #08603b;
+  --color-ins-wash: #dff3e7; /* green on it 4.6:1, ink 16:1 */
+  --color-ins-bright: #6ee7a8; /* insert green on the dark editor, 12.3:1 */
+  --color-ins-pale: #b9efd0;
 
-  /* Diagnostic palette (shared with client documents) */
-  --color-good: #2a6a44;
-  --color-good-wash: #e9f1e8;
+  /* Delete: the redline */
+  --color-del: #b3261e; /* 6.3:1 on paper */
+  --color-del-wash: #fbe6e2;
+  --color-del-bright: #f87171; /* on the dark editor, 6.8:1 */
+
+  /* Diagnostic palette */
+  --color-good: #0b7a4b;
+  --color-good-wash: #dff3e7;
   --color-warn: #8a6412;
   --color-warn-wash: #f7f0db;
-  --color-crit: #a8351f;
-  --color-crit-wash: #f9ece6;
+  --color-crit: #b3261e;
+  --color-crit-wash: #fbe6e2;
 
-  /* Engineering voice (dark moments) */
-  --color-data-bg: #1a1814;
-  --color-data-ink: #a29f97;
-  --color-data-hi: #f0ede6;
+  /* The dark editor (Process, data strips) */
+  --color-data-bg: #0f1115;
+  --color-data-ink: #a3a6ad; /* 7.8:1 */
+  --color-data-hi: #ecedef;
 
   /* Type */
-  --font-display: var(--font-bricolage);
-  --font-sans: var(--font-bricolage);
-  --font-serif: var(--font-fraunces);
-  --font-mono: var(--font-spline-mono);
+  --font-display: var(--font-archivo);
+  --font-sans: var(--font-archivo);
+  --font-serif: var(--font-archivo);
+  --font-mono: var(--font-martian);
 
   /* Motion */
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
@@ -78,9 +92,25 @@ html {
 body {
   background: var(--color-background);
   color: var(--color-foreground);
-  font-family: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
+  font-family: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
   scrollbar-width: thin;
   scrollbar-color: var(--color-line-strong) var(--color-background);
+}
+
+/*
+  Display type: Archivo pushed wide and heavy for section heads. Unlayered on
+  purpose so it overrides the font-bold utility those headings carry. Width
+  capped at 112% and weight at 760 so it reads engineered, not billboard.
+*/
+h1.font-display,
+h2.font-display {
+  font-stretch: 112%;
+  font-weight: 760;
+  letter-spacing: -0.035em;
+}
+h3.font-display,
+h4.font-display {
+  font-stretch: 104%;
 }
 
 /* ── Whisper of paper grain ── */
@@ -105,18 +135,20 @@ body::after {
 @layer components {
   /* Mono kicker label: SECTION / 02 style */
   .kicker {
-    font-family: var(--font-spline-mono), monospace;
+    font-family: var(--font-martian), monospace;
     font-size: 11px;
     font-weight: 500;
-    letter-spacing: 0.16em;
+    letter-spacing: 0.06em; /* Martian is wide already */
     text-transform: uppercase;
   }
 
   /* Serif editorial voice — used sparingly, where trust is built.
      (Fraunces' optical axes were tried and dropped: +250KB of font, +2s LCP on mobile.) */
+  /* The second voice: the same family, italic. Light weight only at display size. */
   .editorial {
-    font-family: var(--font-fraunces), serif;
+    font-family: var(--font-archivo), sans-serif;
     font-style: italic;
+    font-weight: 400;
   }
 
   /* Hairline rule with mono label */
@@ -138,18 +170,14 @@ body::after {
     -webkit-text-stroke: 1px var(--color-line-strong);
     font-variant-numeric: tabular-nums;
   }
-  .ghost-cobalt {
+  .ghost-ins {
     color: transparent;
-    -webkit-text-stroke: 1px rgba(32, 56, 200, 0.45);
+    -webkit-text-stroke: 1px rgba(11, 122, 75, 0.45);
     font-variant-numeric: tabular-nums;
-  }
-  .ghost-pale {
-    color: transparent;
-    -webkit-text-stroke: 1px rgba(250, 247, 240, 0.3);
   }
   .ghost-bright {
     color: transparent;
-    -webkit-text-stroke: 1px rgba(143, 160, 255, 0.35);
+    -webkit-text-stroke: 1px rgba(110, 231, 168, 0.4);
     font-variant-numeric: tabular-nums;
   }
 
@@ -166,8 +194,8 @@ body::after {
   inset: 0;
   pointer-events: none;
   overflow: hidden;
-  --grid-ink: rgba(32, 56, 200, 0.5);
-  --lamp: rgba(32, 56, 200, 0.12);
+  --grid-ink: rgba(18, 19, 23, 0.4);
+  --lamp: rgba(11, 122, 75, 0.1);
   --cell: 72px;
   transition:
     --mx 0.28s var(--ease-out-expo),
@@ -200,56 +228,90 @@ body::after {
   -webkit-mask-image: linear-gradient(to bottom, #000 20%, transparent 96%);
 }
 .blueprint-dark {
-  --grid-ink: rgba(143, 160, 255, 0.55);
-  --lamp: rgba(143, 160, 255, 0.16);
+  --grid-ink: rgba(110, 231, 168, 0.5);
+  --lamp: rgba(110, 231, 168, 0.12);
   --cell: 56px;
 }
 .blueprint-dark::before {
   opacity: 0.09;
 }
-/* The cobalt drafting sheet: minor lines every cell, major lines every fourth. */
-.blueprint-cobalt {
-  /* Kept faint: labels sit on this ground and must clear 4.5:1 at the brightest point. */
-  --grid-ink: rgba(250, 247, 240, 0.45);
-  --lamp: rgba(250, 247, 240, 0.06);
-  --cell: 24px;
-}
-.blueprint-cobalt::before {
-  opacity: 1;
-  background-image:
-    linear-gradient(rgba(250, 247, 240, 0.1) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(250, 247, 240, 0.1) 1px, transparent 1px),
-    linear-gradient(rgba(250, 247, 240, 0.045) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(250, 247, 240, 0.045) 1px, transparent 1px);
-  background-size:
-    calc(var(--cell) * 4) calc(var(--cell) * 4),
-    calc(var(--cell) * 4) calc(var(--cell) * 4),
-    var(--cell) var(--cell),
-    var(--cell) var(--cell);
-}
-.blueprint-cobalt::after {
-  opacity: 0.4;
-}
-
 @media (hover: none) {
   .blueprint::after {
     display: none;
   }
 }
 
-/* ── Cobalt drafting sheet (hero and contact) ──
-   Text on the sheet never drops below vellum at 70% (4.9:1); focus rings and
-   selection flip to vellum so they stay visible on cobalt. */
-.sheet {
-  background: var(--color-cobalt);
-  color: var(--color-background);
+/* ── Redline: four marks (gutter numbers are markup) ── */
+
+/* Inserted text: insert wash with a green underline, like a tracked insertion. */
+.ins-mark {
+  background: var(--color-ins-wash);
+  box-shadow: inset 0 -2px 0 var(--color-ins);
+  text-decoration: none;
+  padding: 0 0.08em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
 }
-.sheet :focus-visible {
-  outline-color: var(--color-background);
+/* Deleted text: struck through, so the meaning never rests on colour alone. */
+.del-mark {
+  color: var(--color-del);
+  text-decoration: line-through;
+  text-decoration-thickness: 2px;
 }
-.sheet ::selection {
-  background: rgba(250, 247, 240, 0.92);
-  color: var(--color-cobalt-deep);
+/* A highlight that sweeps in behind a title on hover, focus, or when active. */
+.hl-sweep {
+  background-image: linear-gradient(var(--color-ins-wash), var(--color-ins-wash));
+  background-repeat: no-repeat;
+  background-position: 0 90%;
+  background-size: 0% 40%;
+  transition: background-size 0.6s var(--ease-out-expo);
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+.hl-sweep[data-on="true"],
+.group:hover .hl-sweep,
+.group:focus-within .hl-sweep {
+  background-size: 100% 40%;
+}
+/* The editor caret: blinks three times on load, then holds (WCAG 2.2.2). */
+.caret {
+  display: inline-block;
+  width: 0.08em;
+  min-width: 2px;
+  height: 0.9em;
+  background: var(--color-ins);
+  vertical-align: -0.08em;
+  animation: caret-blink 1s steps(1, end) 3;
+}
+@keyframes caret-blink {
+  50% {
+    opacity: 0;
+  }
+}
+/* A keyboard key, for the Tab hint on the one AI suggestion. */
+.kbd {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+  border: 1px solid var(--color-line-strong);
+  border-bottom-width: 2px;
+  border-radius: 3px;
+  background: var(--color-card);
+  padding: 0.1em 0.45em;
+  font-family: var(--font-martian), monospace;
+  font-size: 10px;
+  line-height: 1.6;
+  color: var(--color-body-muted);
+}
+@media (hover: none) {
+  .kbd-hint {
+    display: none;
+  }
+}
+
+/* Dark editor: focus rings switch to the bright insert green. */
+.editor :focus-visible {
+  outline-color: var(--color-ins-bright);
 }
 
 /* ── Exhibit card tilt (portrait) ── */
@@ -377,16 +439,6 @@ body::after {
   transform: translateX(4px);
 }
 
-/* ── Margin index (fixed section rail; only where the margin can hold it) ── */
-.margin-index {
-  display: none;
-}
-@media (min-width: 1440px) {
-  .margin-index {
-    display: flex;
-  }
-}
-
 /* ── Ledger row active hairline ── */
 .ledger-row {
   position: relative;
@@ -398,7 +450,7 @@ body::after {
   left: 0;
   height: 1px;
   width: 100%;
-  background: var(--color-cobalt);
+  background: var(--color-ins);
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 0.6s var(--ease-out-expo);
@@ -411,8 +463,8 @@ body::after {
 
 /* ── Selection ── */
 ::selection {
-  background: rgba(32, 56, 200, 0.14);
-  color: var(--color-cobalt-deep);
+  background: var(--color-ins-wash);
+  color: var(--color-foreground);
 }
 
 /* ── Scrollbar ── */
@@ -441,8 +493,12 @@ body::after {
   .u-link,
   .btn::before,
   .btn-arrow,
-  .ledger-row::before {
+  .ledger-row::before,
+  .hl-sweep {
     transition: none !important;
+  }
+  .caret {
+    animation: none;
   }
   .site-preview-trigger:hover .site-preview > img,
   .site-preview-trigger:focus-visible .site-preview > img,
@@ -455,7 +511,7 @@ body::after {
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-cobalt);
+  outline: 2px solid var(--color-ins);
   outline-offset: 2px;
   border-radius: 2px;
 }
@@ -466,11 +522,7 @@ body::after {
     color: CanvasText;
   }
   .ghost,
-  .ghost-cobalt,
-  .ghost-pale {
-    color: transparent;
-    -webkit-text-stroke: 1px rgba(250, 247, 240, 0.3);
-  }
+  .ghost-ins,
   .ghost-bright {
     color: CanvasText;
     -webkit-text-stroke: 0;

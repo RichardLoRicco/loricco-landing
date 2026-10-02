@@ -4,19 +4,18 @@ import Image from "next/image";
 import { useEffect, useRef, type ReactNode } from "react";
 import Blueprint from "./Blueprint";
 import { FadeUp, SplitLines } from "./ui/Reveal";
-import { TitleBlock, Zones, type TitleCell } from "./ui/Sheet";
-import { counts, pad2 } from "../lib/apps";
+import { Clause, Comment, Sheet } from "./ui/Redline";
+import { counts } from "../lib/apps";
 
 /*
-  The title block in the corner of the sheet. Every figure here is checkable
-  elsewhere on the page or on the linked sites; update it when the Work or
-  Studio sections change.
+  The page's one spreadsheet. Every row is checkable elsewhere on the page or
+  on the linked sites, and the formula describes the selected cell truthfully
+  (it counts the Studio apps marked live). Update it with Work and Studio.
 */
-const titleCells: TitleCell[] = [
-  { label: "Drawing", value: "LCO-001" },
-  { label: "Base", value: "New Haven, CT" },
-  { label: "Apps on the App Store", value: pad2(counts.live) },
-  { label: "Lighthouse, loriccolaw.com", value: "100 · 100 · 100 · 100" },
+const sheetRows: [string, ReactNode][] = [
+  ["Apps on the App Store", counts.live],
+  ["Lighthouse, loriccolaw.com", "100 · 100 · 100 · 100"],
+  ["Base", "New Haven, CT"],
 ];
 
 /* The exhibit card leans a few degrees toward the cursor. */
@@ -61,56 +60,45 @@ export default function Hero() {
   return (
     <section
       aria-label="Introduction"
-      className="sheet relative overflow-hidden px-6 pt-28 pb-20 sm:pt-32 lg:flex lg:min-h-[100svh] lg:flex-col lg:justify-center lg:pt-32 lg:pb-24"
+      className="relative overflow-hidden px-6 pt-28 pb-16 sm:pt-32 lg:flex lg:min-h-[100svh] lg:flex-col lg:justify-center lg:pt-32 lg:pb-20"
     >
-      <Blueprint cobalt />
-
-      {/* The expressive ampersand, drawn in outline at drafting scale */}
-      <span
-        aria-hidden="true"
-        className="editorial ghost-pale pointer-events-none absolute -right-[0.06em] -bottom-[0.2em] select-none text-[46vw] leading-none lg:top-[2%] lg:bottom-auto lg:text-[30vw]"
-      >
-        &amp;
-      </span>
+      <Blueprint fade />
 
       <div className="relative mx-auto w-full max-w-6xl">
-        {/* ── Sheet header, like the top rule of a drawing ── */}
+        {/* Document header: the page is a draft under revision */}
         <FadeUp immediate delay={0} y={8}>
-          <div className="flex items-center justify-between gap-6 border-b border-background/30 pb-3 font-mono text-[11px] tracking-[0.14em] text-background/80 uppercase">
-            <span>LCO / Cover sheet</span>
-            <span className="hidden text-background sm:inline">Attorney · MBA · Engineer</span>
-            <span className="tnum">Sheet 00 / 06</span>
+          <div className="flex items-center justify-between gap-6 font-mono text-[11px] tracking-[0.06em] text-text-muted uppercase">
+            <Clause num="0" rule={false}>LCO / Overview</Clause>
+            <span className="tnum">Rev. Oct 2026</span>
           </div>
-          <p className="mt-3 font-mono text-[11px] tracking-[0.14em] text-background uppercase sm:hidden">
-            Attorney · MBA · Engineer
-          </p>
+          <p className="kicker mt-6 text-foreground">Attorney · MBA · Engineer</p>
         </FadeUp>
 
-        {/* ── The argument, at full width ── */}
+        {/* ── The argument ── */}
         <SplitLines
           as="h1"
           immediate
           /*
-            Phones: "Websites, AI, and" is ~7.7em wide, so the size tracks the
-            viewport (gutters out, divided by 8) to keep that line whole
-            instead of stranding "and" on a line of its own.
+            Phones: "Websites, AI, and" is about 8.6em wide in Archivo at this
+            width setting, so the size tracks the viewport (gutters out,
+            divided by 9) to keep that line whole.
           */
-          className="font-display mt-12 max-w-5xl text-[length:min(2.9rem,calc((100vw-3rem)/8))] leading-[0.98] font-bold tracking-[-0.03em] text-background sm:text-[3.8rem] lg:mt-16 lg:text-[5.4rem] xl:text-[6.2rem]"
+          className="font-display mt-5 max-w-5xl text-[length:min(2.8rem,calc((100vw-3rem)/9))] leading-[1] font-[760] tracking-[-0.035em] [font-stretch:112%] sm:text-[3.7rem] lg:text-[5.2rem] xl:text-[5.9rem]"
           lines={[
             "Websites, AI, and",
-            <span key="l2" className="editorial font-medium tracking-[-0.01em] text-cobalt-pale">
-              technical consulting.
+            <span key="l2" className="editorial font-light tracking-[-0.02em] [font-stretch:100%]">
+              <span className="ins-mark">technical consulting.</span>
             </span>,
           ]}
         />
 
-        <div className="mt-10 grid items-start gap-14 lg:mt-14 lg:grid-cols-[minmax(0,1fr)_auto] lg:gap-24">
+        <div className="mt-10 grid grid-cols-[minmax(0,1fr)] items-start gap-14 lg:mt-14 lg:grid-cols-[minmax(0,1fr)_auto] lg:gap-20">
           <div className="max-w-xl">
             {/*
               Kept out of the entrance animation on purpose: this paragraph is the
               LCP element on phones, and a delayed fade was costing ~2s of LCP.
             */}
-            <p className="text-lg leading-relaxed text-background/85 lg:text-[1.15rem]">
+            <p className="text-lg leading-relaxed text-body-muted lg:text-[1.15rem]">
               I&apos;m a Connecticut attorney and software engineer. I rebuild
               and run websites and AI systems for law firms and small businesses,
               train lawyers and their staff on AI, do legal research and
@@ -118,57 +106,50 @@ export default function Hero() {
               You work with me directly from the first call to the finished work.
             </p>
 
-            <FadeUp immediate delay={0.3} className="mt-9 flex flex-wrap items-center gap-6">
+            <FadeUp immediate delay={0.3} className="mt-9 flex flex-wrap items-center gap-x-6 gap-y-4">
               <a
                 href="mailto:admin@loriccoandco.com"
-                className="btn bg-background px-6 py-3.5 text-sm font-semibold text-cobalt [outline-offset:4px] hover:text-background hover:shadow-[0_14px_30px_-12px_rgba(10,16,60,0.6)]"
+                className="btn bg-ins px-6 py-3.5 text-sm font-semibold text-white hover:shadow-[0_14px_30px_-12px_rgba(11,122,75,0.55)]"
                 style={{ ["--btn-fill" as string]: "var(--color-foreground)" }}
               >
                 Get in touch <span className="btn-arrow">→</span>
               </a>
+
+              {/*
+                The page's one AI suggestion: the secondary link offered as
+                ghost text after a caret, "accepted" (inked and underlined)
+                on hover or focus. The Tab hint only shows on devices with a
+                pointer that hovers.
+              */}
               <a
                 href="#services"
-                className="group font-mono text-[13px] text-background transition-colors duration-200 hover:text-cobalt-pale"
+                className="group inline-flex items-center gap-2.5 text-[15px] text-ghost transition-colors duration-200 hover:text-foreground focus-visible:text-foreground"
               >
-                See what I do{" "}
-                <span className="inline-block transition-transform duration-300 group-hover:translate-y-1">
-                  ↓
+                <span className="caret" aria-hidden="true" />
+                <span className="border-b border-dashed border-line-strong pb-0.5 transition-colors group-hover:border-ins group-focus-visible:border-ins">
+                  See what I do
+                </span>
+                <span className="kbd kbd-hint" aria-hidden="true">
+                  Tab ↹
                 </span>
               </a>
             </FadeUp>
 
-            {/* ── Title block ── */}
-            <FadeUp immediate delay={0.45} y={12} className="mt-12 lg:mt-16">
-              <TitleBlock heading="LoRicco & Co. LLC" cells={titleCells} />
+            {/* ── The one formula bar ── */}
+            <FadeUp immediate delay={0.45} y={12} className="mt-12 max-w-lg lg:mt-14">
+              <Sheet rows={sheetRows} selected={0} formula={'=COUNTIF(Studio!Status, "Live")'} />
             </FadeUp>
           </div>
 
-          {/* ── The principal, drawn into the sheet as figure 1 ── */}
+          {/* ── The principal, with a review comment pinned to the figure ── */}
           <FadeUp
             immediate
             delay={0.2}
             y={24}
-            className="relative mx-auto mt-6 w-full max-w-[280px] lg:mx-0 lg:mt-0 lg:w-[310px] xl:w-[340px]"
+            className="relative mx-auto w-full max-w-[280px] lg:mx-0 lg:w-[310px] xl:w-[330px]"
           >
-            {/* Drafting annotation: one leader to the figure label */}
-            <div aria-hidden="true" className="pointer-events-none absolute -top-9 left-0 hidden items-center gap-2 font-mono text-[10px] tracking-[0.14em] text-background/80 uppercase lg:flex">
-              <span>Fig. 1</span>
-              <span className="h-px w-16 bg-background/50" />
-              <span className="h-1.5 w-1.5 rotate-45 border border-background/70" />
-            </div>
-
             <TiltCard>
-              {/* Backing sheets: a short stack of prepared work */}
-              <div
-                className="absolute inset-0 translate-x-6 translate-y-6 rounded-[4px] border border-background/25 bg-background/5"
-                aria-hidden="true"
-              />
-              <div
-                className="absolute inset-0 translate-x-3 translate-y-3 rounded-[4px] border border-background/35 bg-background/10"
-                aria-hidden="true"
-              />
-
-              <figure className="relative overflow-hidden rounded-[4px] border border-background/60 bg-card text-foreground shadow-[0_40px_70px_-30px_rgba(12,22,96,0.85)]">
+              <figure className="relative overflow-hidden rounded-[4px] border border-line-strong bg-card shadow-[0_32px_64px_-28px_rgba(18,19,23,0.4)]">
                 <div className="tilt-sheen z-10" aria-hidden="true" />
                 <div className="p-3 pb-0">
                   <Image
@@ -177,23 +158,28 @@ export default function Hero() {
                     width={800}
                     height={1000}
                     priority
-                    sizes="(min-width: 1280px) 340px, (min-width: 1024px) 310px, 280px"
+                    sizes="(min-width: 1280px) 330px, (min-width: 1024px) 310px, 280px"
                     className="aspect-[4/5] w-full rounded-[2px] object-cover"
                   />
                 </div>
-                {/* Base and disciplines live in the title block and sheet header, so the caption is the name. */}
-                <figcaption className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 px-4 py-3 font-mono text-[10.5px] tracking-[0.1em] uppercase">
-                  <span className="whitespace-nowrap text-text-muted">
-                    Principal / <span className="font-medium text-foreground">R.T. LoRicco</span>
-                  </span>
+                <figcaption className="flex items-baseline justify-between gap-4 px-4 py-3 font-mono text-[10.5px] tracking-[0.04em] uppercase">
+                  <span className="text-text-muted">Fig. 1</span>
+                  <span className="font-medium whitespace-nowrap text-foreground">R.T. LoRicco</span>
                 </figcaption>
               </figure>
             </TiltCard>
+
+            {/* Review comment, anchored to the figure by a short leader */}
+            <div className="relative mt-5 xl:absolute xl:top-[58%] xl:-left-[13.5rem] xl:mt-0 xl:w-56">
+              <span
+                aria-hidden="true"
+                className="absolute top-1/2 -right-6 hidden h-px w-6 bg-line-strong xl:block"
+              />
+              <Comment meta="Principal">Attorney (LL.M., J.D., MBA) and software engineer, based in New Haven.</Comment>
+            </div>
           </FadeUp>
         </div>
       </div>
-
-      <Zones edge="bottom" />
     </section>
   );
 }
