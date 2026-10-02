@@ -297,7 +297,7 @@ export const apps: StudioApp[] = [
     name: "Scrombie",
     tagline: "Fresh me vs. Scrombie.",
     description:
-      "Pick a face, one of eight drawn characters or your own selfie, and watch it drain from Fresh to Tired, Drained, Hollow and Scrombie as you doomscroll. You set the daily budget, share cards show the damage, and Pro's Lockdown shields your scroll apps until midnight.",
+      "Pick a face, one of eight drawn characters or your own selfie, and watch it drain from Fresh to Tired, Drained, Hollow and Scrombie as you doomscroll. You set the daily budget, share cards show the damage, and Pro's Lockdown shields your doomscroll apps until midnight.",
     category: "Screen time",
     status: "development",
     icon: "/apps/scrombie/icon.webp",
