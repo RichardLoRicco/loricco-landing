@@ -24,6 +24,7 @@
   --color-cobalt-deep: #182ea6;
   --color-cobalt-wash: #eaedfa;
   --color-cobalt-bright: #8fa0ff; /* cobalt legible on dark ink ground */
+  --color-cobalt-pale: #cbd3ff; /* second-voice text on a cobalt sheet (5.8:1) */
 
   /* Diagnostic palette (shared with client documents) */
   --color-good: #2a6a44;
@@ -142,6 +143,10 @@ body::after {
     -webkit-text-stroke: 1px rgba(32, 56, 200, 0.45);
     font-variant-numeric: tabular-nums;
   }
+  .ghost-pale {
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(250, 247, 240, 0.3);
+  }
   .ghost-bright {
     color: transparent;
     -webkit-text-stroke: 1px rgba(143, 160, 255, 0.35);
@@ -202,10 +207,49 @@ body::after {
 .blueprint-dark::before {
   opacity: 0.09;
 }
+/* The cobalt drafting sheet: minor lines every cell, major lines every fourth. */
+.blueprint-cobalt {
+  /* Kept faint: labels sit on this ground and must clear 4.5:1 at the brightest point. */
+  --grid-ink: rgba(250, 247, 240, 0.45);
+  --lamp: rgba(250, 247, 240, 0.06);
+  --cell: 24px;
+}
+.blueprint-cobalt::before {
+  opacity: 1;
+  background-image:
+    linear-gradient(rgba(250, 247, 240, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(250, 247, 240, 0.1) 1px, transparent 1px),
+    linear-gradient(rgba(250, 247, 240, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(250, 247, 240, 0.045) 1px, transparent 1px);
+  background-size:
+    calc(var(--cell) * 4) calc(var(--cell) * 4),
+    calc(var(--cell) * 4) calc(var(--cell) * 4),
+    var(--cell) var(--cell),
+    var(--cell) var(--cell);
+}
+.blueprint-cobalt::after {
+  opacity: 0.4;
+}
+
 @media (hover: none) {
   .blueprint::after {
     display: none;
   }
+}
+
+/* ── Cobalt drafting sheet (hero and contact) ──
+   Text on the sheet never drops below vellum at 70% (4.9:1); focus rings and
+   selection flip to vellum so they stay visible on cobalt. */
+.sheet {
+  background: var(--color-cobalt);
+  color: var(--color-background);
+}
+.sheet :focus-visible {
+  outline-color: var(--color-background);
+}
+.sheet ::selection {
+  background: rgba(250, 247, 240, 0.92);
+  color: var(--color-cobalt-deep);
 }
 
 /* ── Exhibit card tilt (portrait) ── */
@@ -423,6 +467,10 @@ body::after {
   }
   .ghost,
   .ghost-cobalt,
+  .ghost-pale {
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(250, 247, 240, 0.3);
+  }
   .ghost-bright {
     color: CanvasText;
     -webkit-text-stroke: 0;

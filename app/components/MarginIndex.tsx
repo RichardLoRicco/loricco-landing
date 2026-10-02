@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { useActiveSection } from "./ActiveSection";
 import { SECTIONS } from "../lib/sections";
 
@@ -10,6 +11,16 @@ import { SECTIONS } from "../lib/sections";
 */
 export default function MarginIndex() {
   const active = useActiveSection();
+
+  // The rail sits over a cobalt sheet at the top (the cover) and at Contact.
+  const [atTop, setAtTop] = useState(false);
+  useEffect(() => {
+    const check = () => setAtTop(window.scrollY < window.innerHeight * 0.7);
+    check();
+    window.addEventListener("scroll", check, { passive: true });
+    return () => window.removeEventListener("scroll", check);
+  }, []);
+  const onSheet = active === "contact" || (active === null && atTop);
 
   return (
     <nav
@@ -27,13 +38,23 @@ export default function MarginIndex() {
           >
             <span
               className={`h-px transition-all duration-500 ${
-                isActive ? "w-5 bg-cobalt" : "w-2.5 bg-line-strong group-hover:w-4 group-hover:bg-text-muted"
+                isActive
+                  ? `w-5 ${onSheet ? "bg-background" : "bg-cobalt"}`
+                  : `w-2.5 group-hover:w-4 ${
+                      onSheet ? "bg-background/50 group-hover:bg-background" : "bg-line-strong group-hover:bg-text-muted"
+                    }`
               }`}
               aria-hidden="true"
             />
             <span
               className={`font-mono text-[10px] tracking-[0.14em] transition-colors duration-300 tnum ${
-                isActive ? "text-cobalt" : "text-text-muted group-hover:text-foreground"
+                onSheet
+                  ? isActive
+                    ? "text-background"
+                    : "text-background/80 group-hover:text-background"
+                  : isActive
+                    ? "text-cobalt"
+                    : "text-text-muted group-hover:text-foreground"
               }`}
             >
               {s.num}
@@ -41,8 +62,10 @@ export default function MarginIndex() {
             <span
               className={`font-mono text-[10px] tracking-[0.12em] uppercase whitespace-nowrap transition-all duration-300 ${
                 isActive
-                  ? "translate-x-0 text-cobalt opacity-100"
-                  : "-translate-x-1 opacity-0 group-hover:translate-x-0 group-hover:text-foreground group-hover:opacity-100"
+                  ? `translate-x-0 opacity-100 ${onSheet ? "text-background" : "text-cobalt"}`
+                  : `-translate-x-1 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 ${
+                      onSheet ? "group-hover:text-background" : "group-hover:text-foreground"
+                    }`
               }`}
             >
               {s.label}

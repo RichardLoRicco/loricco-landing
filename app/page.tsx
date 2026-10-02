@@ -12,7 +12,7 @@ import Footer from "./components/Footer";
 export default function Home() {
   return (
     <>
-      <Navbar />
+      <Navbar overHero />
       <MarginIndex />
       <main id="main-content">
         <Hero />

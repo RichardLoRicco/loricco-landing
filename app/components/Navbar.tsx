@@ -12,11 +12,17 @@ const navLinks = SECTIONS.map((s) => ({
   href: `/#${s.id}`,
 }));
 
-export default function Navbar() {
+/*
+  overHero: the page opens on the cobalt cover sheet, so until the bar turns
+  into the vellum strip (after 40px of scroll) its text and button invert.
+  The 404 page leaves this off and keeps the vellum bar.
+*/
+export default function Navbar({ overHero = false }: { overHero?: boolean }) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const toggleRef = useRef<HTMLButtonElement>(null);
   const active = useActiveSection();
+  const onSheet = overHero && !scrolled && !mobileOpen;
 
   // Reading-progress hairline along the bottom edge of the bar.
   const { scrollYProgress } = useScroll();
@@ -55,7 +61,7 @@ export default function Navbar() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
+        scrolled || mobileOpen
           ? "bg-background/85 backdrop-blur-xl border-b border-line"
           : "bg-transparent"
       }`}
@@ -63,9 +69,13 @@ export default function Navbar() {
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-5">
         <Link
           href="/"
-          className="font-display text-lg font-bold tracking-tight text-foreground"
+          className={`font-display text-lg font-bold tracking-tight transition-colors duration-300 ${
+            onSheet ? "text-background" : "text-foreground"
+          }`}
         >
-          LoRicco <span className="editorial font-medium text-cobalt">&</span> Co.
+          LoRicco{" "}
+          <span className={`editorial font-medium ${onSheet ? "text-cobalt-pale" : "text-cobalt"}`}>&amp;</span>{" "}
+          Co.
         </Link>
 
         {/* Desktop nav */}
@@ -78,7 +88,11 @@ export default function Navbar() {
                 href={link.href}
                 aria-current={isActive ? "true" : undefined}
                 className={`u-link text-sm font-medium transition-colors duration-200 ${
-                  isActive ? "text-cobalt" : "text-body-muted hover:text-foreground"
+                  onSheet
+                    ? "text-background/85 hover:text-background"
+                    : isActive
+                      ? "text-cobalt"
+                      : "text-body-muted hover:text-foreground"
                 }`}
               >
                 {link.label}
@@ -87,8 +101,10 @@ export default function Navbar() {
           })}
           <a
             href="mailto:admin@loriccoandco.com"
-            className="btn bg-foreground px-4 py-2 text-sm font-semibold text-background"
-            style={{ ["--btn-fill" as string]: "var(--color-cobalt)" }}
+            className={`btn px-4 py-2 text-sm font-semibold [outline-offset:3px] ${
+              onSheet ? "bg-background text-cobalt hover:text-background" : "bg-foreground text-background"
+            }`}
+            style={{ ["--btn-fill" as string]: onSheet ? "var(--color-foreground)" : "var(--color-cobalt)" }}
           >
             Get in touch
           </a>
@@ -104,12 +120,12 @@ export default function Navbar() {
           aria-controls="mobile-menu"
         >
           <span
-            className={`block h-px w-5 bg-foreground transition-all duration-300 ${
+            className={`block h-px w-5 transition-all duration-300 ${onSheet ? "bg-background" : "bg-foreground"} ${
               mobileOpen ? "translate-y-[3.5px] rotate-45" : ""
             }`}
           />
           <span
-            className={`block h-px w-5 bg-foreground transition-all duration-300 ${
+            className={`block h-px w-5 transition-all duration-300 ${onSheet ? "bg-background" : "bg-foreground"} ${
               mobileOpen ? "-translate-y-[3.5px] -rotate-45" : ""
             }`}
           />

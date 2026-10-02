@@ -9,10 +9,12 @@ import { useEffect, useRef } from "react";
 */
 export default function Blueprint({
   dark = false,
+  cobalt = false,
   fade = false,
   className = "",
 }: {
   dark?: boolean;
+  cobalt?: boolean;
   fade?: boolean;
   className?: string;
 }) {
@@ -38,7 +40,7 @@ export default function Blueprint({
     <div
       ref={ref}
       aria-hidden="true"
-      className={`blueprint ${dark ? "blueprint-dark" : ""} ${fade ? "blueprint-fade" : ""} ${className}`}
+      className={`blueprint ${dark ? "blueprint-dark" : ""} ${cobalt ? "blueprint-cobalt" : ""} ${fade ? "blueprint-fade" : ""} ${className}`}
     />
   );
 }
