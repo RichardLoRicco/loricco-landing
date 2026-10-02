@@ -69,7 +69,7 @@ export default function Navbar() {
         </Link>
 
         {/* Desktop nav */}
-        <div className="hidden items-center gap-7 md:flex">
+        <div className="hidden items-center gap-7 lg:flex">
           {navLinks.map((link) => {
             const isActive = active === link.id;
             return (
@@ -98,7 +98,7 @@ export default function Navbar() {
         <button
           ref={toggleRef}
           onClick={() => setMobileOpen(!mobileOpen)}
-          className="relative z-50 -mr-2.5 flex h-11 w-11 flex-col items-center justify-center gap-1.5 md:hidden"
+          className="relative z-50 -mr-2.5 flex h-11 w-11 flex-col items-center justify-center gap-1.5 lg:hidden"
           aria-label="Toggle menu"
           aria-expanded={mobileOpen}
           aria-controls="mobile-menu"
@@ -136,7 +136,7 @@ export default function Navbar() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.25 }}
-            className="overflow-hidden border-b border-line bg-background/95 backdrop-blur-xl md:hidden"
+            className="overflow-hidden border-b border-line bg-background/95 backdrop-blur-xl lg:hidden"
           >
             <div className="flex flex-col gap-4 px-6 py-6">
               {navLinks.map((link, i) => (

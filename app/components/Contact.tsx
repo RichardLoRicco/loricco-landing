@@ -53,7 +53,7 @@ export default function Contact() {
           <div className="relative overflow-hidden rounded-[4px] bg-data-bg">
             <Blueprint dark />
 
-            <div className="relative grid gap-10 px-8 py-14 sm:px-14 sm:py-20 lg:grid-cols-[1.2fr_0.8fr] lg:items-center lg:px-16 lg:py-24">
+            <div className="relative grid gap-10 px-6 py-14 sm:px-14 sm:py-20 lg:grid-cols-[1.2fr_0.8fr] lg:items-center lg:px-16 lg:py-24">
               <div>
                 <FadeUp delay={0.1}>
                   <p className="kicker text-data-ink">Contact</p>
@@ -79,7 +79,7 @@ export default function Contact() {
                 <FadeUp delay={0.3} className="mt-9 flex flex-wrap items-center gap-4">
                   <a
                     href={`mailto:${EMAIL}`}
-                    className="btn bg-cobalt px-7 py-4 text-sm font-semibold text-white hover:text-data-bg"
+                    className="btn max-w-full bg-cobalt px-5 py-4 text-[13px] font-semibold text-white hover:text-data-bg min-[400px]:px-7 min-[400px]:text-sm"
                     style={{ ["--btn-fill" as string]: "var(--color-cobalt-bright)" }}
                   >
                     {EMAIL} <span className="btn-arrow">→</span>
