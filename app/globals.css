@@ -243,6 +243,24 @@ body::after {
   transition: transform 9s cubic-bezier(0.33, 0.1, 0.25, 1);
 }
 
+/* ── Studio featured app: a still night sky (no animation) ── */
+.featured-sky {
+  background-color: #0b1030;
+  background-image:
+    radial-gradient(1px 1px at 12% 18%, rgba(255, 255, 255, 0.7), transparent 60%),
+    radial-gradient(1px 1px at 28% 72%, rgba(255, 255, 255, 0.45), transparent 60%),
+    radial-gradient(1.5px 1.5px at 41% 9%, rgba(255, 255, 255, 0.8), transparent 60%),
+    radial-gradient(1px 1px at 57% 44%, rgba(255, 255, 255, 0.4), transparent 60%),
+    radial-gradient(1px 1px at 66% 86%, rgba(255, 255, 255, 0.55), transparent 60%),
+    radial-gradient(1.5px 1.5px at 78% 14%, rgba(255, 255, 255, 0.75), transparent 60%),
+    radial-gradient(1px 1px at 88% 58%, rgba(255, 255, 255, 0.5), transparent 60%),
+    radial-gradient(1px 1px at 94% 92%, rgba(255, 255, 255, 0.4), transparent 60%),
+    radial-gradient(1px 1px at 6% 88%, rgba(255, 255, 255, 0.5), transparent 60%),
+    radial-gradient(900px 520px at 78% 110%, rgba(64, 214, 168, 0.16), transparent 70%),
+    radial-gradient(700px 480px at 0% 0%, rgba(80, 98, 220, 0.28), transparent 70%),
+    linear-gradient(160deg, #0b1030 0%, #10163d 55%, #0a0e26 100%);
+}
+
 /* ── Animated link underline ── */
 .u-link {
   background-image: linear-gradient(currentColor, currentColor);

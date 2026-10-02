@@ -1,11 +1,12 @@
 import Image from "next/image";
+import { liveApps } from "../lib/apps";
 
-const appLinks = [
-  { name: "Atlas", icon: "/apps/atlas/icon.png", url: "https://atlas.loriccoandco.com/" },
-  { name: "Grill Tonight", icon: "/apps/grilltonight/icon.png", url: "https://grilltonight-landing.vercel.app/" },
-  { name: "Milo", icon: "/apps/milo/icon.png", url: "https://quitwithmilo.com/" },
-  { name: "Claro", icon: "/apps/claro/icon.png", url: "https://claro.loriccoandco.com/" },
-];
+/* The footer row shows the apps that are live on the App Store. */
+const appLinks = liveApps.map((app) => ({
+  name: app.name,
+  icon: app.icon,
+  url: app.siteUrl ?? app.appStoreUrl ?? "#studio",
+}));
 
 export default function Footer() {
   return (
@@ -37,12 +38,13 @@ export default function Footer() {
                   className="group p-1"
                   aria-label={`${app.name}, opens in a new tab`}
                 >
-                  <div className="h-8 w-8 overflow-hidden rounded-[4px] border border-line transition-all duration-200 group-hover:border-line-strong group-hover:-translate-y-0.5">
+                  <div className="h-8 w-8 overflow-hidden rounded-[22.5%] border border-line transition-all duration-200 group-hover:border-line-strong group-hover:-translate-y-0.5">
                     <Image
                       src={app.icon}
-                      alt={app.name}
+                      alt=""
                       width={32}
                       height={32}
+                      sizes="32px"
                       className="h-full w-full object-cover"
                     />
                   </div>
