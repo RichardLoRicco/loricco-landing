@@ -32,7 +32,7 @@ const principles = [
 
 export default function About() {
   return (
-    <section id="about" className="relative scroll-mt-24 px-6 py-28" aria-label="About">
+    <section id="about" className="section-y relative scroll-mt-24 px-6" aria-label="About">
       <div className="mx-auto max-w-6xl">
         <div className="grid gap-16 lg:grid-cols-[1.05fr_0.95fr] lg:gap-20">
           {/* Left — Statement */}

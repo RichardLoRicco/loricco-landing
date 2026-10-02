@@ -1,6 +1,7 @@
 "use client";
 
-import { SECTIONS, useActiveSection } from "./ActiveSection";
+import { useActiveSection } from "./ActiveSection";
+import { SECTIONS } from "../lib/sections";
 
 /*
   The document's margin index: a fixed rail of § numbers that tracks the
@@ -20,7 +21,7 @@ export default function MarginIndex() {
         return (
           <a
             key={s.id}
-            href={`#${s.id}`}
+            href={`/#${s.id}`}
             aria-current={isActive ? "true" : undefined}
             className="group flex items-center gap-2.5 py-0.5"
           >

@@ -1,23 +1,13 @@
 "use client";
 
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
+import { SECTIONS, type SectionId } from "../lib/sections";
 
 /*
-  The page is one document with numbered sections. This provider watches a
-  thin band near the top third of the viewport and reports which section is
-  crossing it, so the navbar and the margin index can highlight the same one.
+  This provider watches a thin band near the top third of the viewport and
+  reports which section is crossing it, so the navbar and the margin index
+  can highlight the same one.
 */
-
-export const SECTIONS = [
-  { id: "services", num: "01", label: "Services" },
-  { id: "work", num: "02", label: "Selected work" },
-  { id: "process", num: "03", label: "How I work" },
-  { id: "studio", num: "04", label: "The Studio" },
-  { id: "about", num: "05", label: "About" },
-  { id: "contact", num: "06", label: "Contact" },
-] as const;
-
-export type SectionId = (typeof SECTIONS)[number]["id"];
 
 const Ctx = createContext<SectionId | null>(null);
 

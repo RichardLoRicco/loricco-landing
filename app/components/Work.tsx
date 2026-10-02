@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useRef } from "react";
-import { animate, motion, useInView, useMotionValue, useTransform } from "motion/react";
+import { animate, motion, useInView, useMotionValue, useReducedMotion, useTransform } from "motion/react";
 import { FadeUp, SplitLines } from "./ui/Reveal";
 
 type Project = {
@@ -62,14 +62,23 @@ const projects: Project[] = [
 
 const gaugeLabels = ["Performance", "Accessibility", "Best practices", "SEO"];
 
-/* One Lighthouse ring: the arc draws and the number counts up on first view. */
+/*
+  One Lighthouse ring: the arc draws and the number counts up on first view.
+  MotionConfig's reducedMotion only covers transforms, so under reduced
+  motion the ring and the number are drawn at their final values instead.
+*/
 function Gauge({ label, score, delay }: { label: string; score: number; delay: number }) {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-40px" });
-  const value = useMotionValue(0);
+  const still = useReducedMotion() ?? false;
+  const value = useMotionValue(still ? score : 0);
   const text = useTransform(value, (v) => Math.round(v).toString());
 
   useEffect(() => {
+    if (still) {
+      value.set(score);
+      return;
+    }
     if (!inView) return;
     const controls = animate(value, score, {
       duration: 1.5,
@@ -77,17 +86,19 @@ function Gauge({ label, score, delay }: { label: string; score: number; delay: n
       ease: [0.16, 1, 0.3, 1],
     });
     return () => controls.stop();
-  }, [inView, score, delay, value]);
+  }, [inView, still, score, delay, value]);
 
   const r = 23;
   const circumference = 2 * Math.PI * r;
+  const filled = circumference * (1 - score / 100);
   const tone =
     score >= 90 ? "var(--color-good)" : score >= 50 ? "var(--color-warn)" : "var(--color-crit)";
 
   return (
-    <div ref={ref} className="flex flex-col items-center gap-2.5">
-      <div className="relative h-16 w-16">
-        <svg viewBox="0 0 60 60" className="h-16 w-16 -rotate-90" aria-hidden="true">
+    // Phones: ring and label side by side in a 2x2. Wider: four stacked columns.
+    <div ref={ref} className="flex items-center gap-3 sm:flex-col sm:gap-2.5">
+      <div className="relative h-12 w-12 shrink-0 sm:h-16 sm:w-16">
+        <svg viewBox="0 0 60 60" className="h-full w-full -rotate-90" aria-hidden="true">
           <circle cx="30" cy="30" r={r} fill="none" stroke="var(--color-line)" strokeWidth="2.5" />
           <motion.circle
             cx="30"
@@ -97,13 +108,13 @@ function Gauge({ label, score, delay }: { label: string; score: number; delay: n
             stroke={tone}
             strokeWidth="2.5"
             strokeDasharray={circumference}
-            initial={{ strokeDashoffset: circumference }}
-            animate={inView ? { strokeDashoffset: circumference * (1 - score / 100) } : undefined}
-            transition={{ duration: 1.5, delay, ease: [0.16, 1, 0.3, 1] }}
+            initial={{ strokeDashoffset: still ? filled : circumference }}
+            animate={inView || still ? { strokeDashoffset: filled } : undefined}
+            transition={still ? { duration: 0 } : { duration: 1.5, delay, ease: [0.16, 1, 0.3, 1] }}
           />
         </svg>
         <motion.span
-          className="absolute inset-0 flex items-center justify-center font-mono text-[14px] font-medium text-foreground tnum"
+          className="absolute inset-0 flex items-center justify-center font-mono text-[13px] font-medium text-foreground tnum sm:text-[14px]"
           aria-hidden="true"
         >
           {text}
@@ -112,7 +123,9 @@ function Gauge({ label, score, delay }: { label: string; score: number; delay: n
           {label}: {score} out of 100
         </span>
       </div>
-      <span className="kicker px-0.5 text-center text-[8px] leading-tight tracking-[0.08em] text-text-muted sm:text-[9px] sm:tracking-[0.14em]">{label}</span>
+      <span className="kicker text-[10px] leading-snug tracking-[0.1em] text-text-muted sm:text-center" aria-hidden="true">
+        {label}
+      </span>
     </div>
   );
 }
@@ -179,7 +192,7 @@ export default function Work() {
   return (
     <section
       id="work"
-      className="relative scroll-mt-24 overflow-hidden px-6 py-28 lg:py-36"
+      className="section-y relative scroll-mt-24 overflow-hidden px-6"
       aria-label="Selected client work"
     >
       <div className="mx-auto max-w-6xl">
@@ -206,16 +219,6 @@ export default function Work() {
                 key={project.host}
                 className="relative grid items-center gap-10 lg:grid-cols-12 lg:gap-14"
               >
-                {/* Ghost exhibit numeral */}
-                <span
-                  aria-hidden="true"
-                  className={`ghost pointer-events-none absolute -top-[6.5rem] hidden select-none font-display text-[7.5rem] leading-none font-bold lg:block ${
-                    flipped ? "right-0" : "left-0"
-                  }`}
-                >
-                  0{i + 1}
-                </span>
-
                 <FadeUp
                   className={`relative lg:col-span-7 ${flipped ? "lg:order-2" : ""}`}
                   y={28}
@@ -225,9 +228,18 @@ export default function Work() {
 
                 <div className={`relative lg:col-span-5 ${flipped ? "lg:order-1" : ""}`}>
                   <FadeUp delay={0.1}>
-                    <p className="kicker rule-label text-text-muted">
-                      Exhibit {project.exhibit}
-                    </p>
+                    {/* Ghost exhibit letter sits in flow beside the label, so it can't collide with the intro */}
+                    <div className="flex items-end gap-5">
+                      <span
+                        aria-hidden="true"
+                        className="ghost select-none font-display text-[4.5rem] leading-[0.8] font-bold lg:text-[6rem]"
+                      >
+                        {project.exhibit}
+                      </span>
+                      <p className="kicker rule-label flex-1 pb-1 text-text-muted">
+                        Exhibit {project.exhibit}
+                      </p>
+                    </div>
                     <h3 className="font-display mt-5 text-3xl font-bold tracking-tight lg:text-[2.35rem] lg:leading-[1.08]">
                       {project.name}
                     </h3>
@@ -241,7 +253,7 @@ export default function Work() {
                     <p className="kicker text-[10px] text-text-muted">
                       Lighthouse / mobile, Sep 2026
                     </p>
-                    <div className="mt-4 grid grid-cols-2 gap-x-2 gap-y-5 sm:grid-cols-4">
+                    <div className="mt-4 grid grid-cols-2 gap-x-4 gap-y-4 sm:grid-cols-4 sm:gap-x-2">
                       {project.lighthouse.map((score, j) => (
                         <Gauge key={gaugeLabels[j]} label={gaugeLabels[j]} score={score} delay={j * 0.12} />
                       ))}

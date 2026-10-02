@@ -48,6 +48,15 @@
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+/*
+  Section rhythm. Two light sections meet at 2x this value, so it's kept
+  modest; the dark Process band adds its own inner padding because the
+  colour change already does the separating.
+*/
+@utility section-y {
+  padding-block: clamp(4rem, 7vw, 6rem);
+}
+
 /* Registered so the blueprint spotlight can glide after the cursor with a
    plain CSS transition instead of a per-frame JS loop. */
 @property --mx {
@@ -344,7 +353,8 @@ body::after {
   transition: transform 0.6s var(--ease-out-expo);
 }
 .ledger-row[data-active="true"]::before,
-.ledger-row:hover::before {
+.ledger-row:hover::before,
+.ledger-row:focus-within::before {
   transform: scaleX(1);
 }
 
@@ -383,7 +393,9 @@ body::after {
   .ledger-row::before {
     transition: none !important;
   }
-  .site-preview-trigger:hover .site-preview > img {
+  .site-preview-trigger:hover .site-preview > img,
+  .site-preview-trigger:focus-visible .site-preview > img,
+  .site-preview-trigger:focus-within .site-preview > img {
     transform: none;
   }
   .tilt {

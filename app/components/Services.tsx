@@ -85,7 +85,7 @@ export default function Services() {
   return (
     <section
       id="services"
-      className="relative scroll-mt-24 px-6 py-28 lg:py-36"
+      className="section-y relative scroll-mt-24 px-6"
       aria-label="Services"
     >
       <div className="mx-auto max-w-6xl">
@@ -140,6 +140,41 @@ export default function Services() {
                   </motion.p>
                 </AnimatePresence>
               </div>
+
+              {/* Contents: the four services, the one in view marked */}
+              <nav aria-label="Services contents" className="mt-8 border-t border-line pt-4">
+                <ol className="flex flex-col">
+                  {services.map((service, i) => {
+                    const isActive = active === i;
+                    return (
+                      <li key={service.num}>
+                        <a
+                          href={`#service-${service.num}`}
+                          aria-current={isActive ? "true" : undefined}
+                          className="group flex items-baseline gap-3 py-1.5 text-[13.5px] leading-snug"
+                        >
+                          <span
+                            className={`font-mono text-[10px] tnum transition-colors duration-300 ${
+                              isActive ? "text-cobalt" : "text-text-muted"
+                            }`}
+                          >
+                            {service.num}
+                          </span>
+                          <span
+                            className={`transition-colors duration-300 ${
+                              isActive
+                                ? "font-medium text-foreground"
+                                : "text-body-muted group-hover:text-foreground"
+                            }`}
+                          >
+                            {service.title}
+                          </span>
+                        </a>
+                      </li>
+                    );
+                  })}
+                </ol>
+              </nav>
             </div>
           </div>
 
@@ -150,6 +185,7 @@ export default function Services() {
               return (
                 <motion.article
                   key={service.title}
+                  id={`service-${service.num}`}
                   ref={(el) => {
                     rows.current[i] = el;
                   }}
@@ -159,7 +195,7 @@ export default function Services() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-60px" }}
                   transition={{ duration: 0.5, delay: i * 0.06, ease: [0.16, 1, 0.3, 1] }}
-                  className="ledger-row group grid gap-4 border-t border-line py-10 last:border-b md:grid-cols-[72px_1fr_236px] md:gap-8 lg:py-12"
+                  className="ledger-row group grid scroll-mt-28 gap-4 border-t border-line py-10 last:border-b md:grid-cols-[72px_1fr_236px] md:gap-8 lg:py-12"
                 >
                   {/* § number */}
                   <div className="font-mono text-sm font-medium text-cobalt tnum">

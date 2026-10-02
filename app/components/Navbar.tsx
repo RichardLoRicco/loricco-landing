@@ -3,12 +3,13 @@
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence, useScroll, useSpring } from "motion/react";
-import { SECTIONS, useActiveSection } from "./ActiveSection";
+import { useActiveSection } from "./ActiveSection";
+import { SECTIONS } from "../lib/sections";
 
 const navLinks = SECTIONS.map((s) => ({
   id: s.id,
   label: s.id === "work" ? "Work" : s.label,
-  href: `#${s.id}`,
+  href: `/#${s.id}`,
 }));
 
 export default function Navbar() {
@@ -97,7 +98,7 @@ export default function Navbar() {
         <button
           ref={toggleRef}
           onClick={() => setMobileOpen(!mobileOpen)}
-          className="relative z-50 flex h-8 w-8 flex-col items-center justify-center gap-1.5 md:hidden"
+          className="relative z-50 -mr-2.5 flex h-11 w-11 flex-col items-center justify-center gap-1.5 md:hidden"
           aria-label="Toggle menu"
           aria-expanded={mobileOpen}
           aria-controls="mobile-menu"

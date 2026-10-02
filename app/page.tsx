@@ -25,8 +25,8 @@ export default function Home() {
         <Services />
         <Work />
         <Process />
-        <Studio />
         <About />
+        <Studio />
         <Contact />
       </main>
       <Footer />

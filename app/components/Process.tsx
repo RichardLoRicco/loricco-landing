@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useScroll, useSpring, useTransform, type MotionValue } from "motion/react";
+import { motion, useReducedMotion, useScroll, useSpring, useTransform, type MotionValue } from "motion/react";
 import Blueprint from "./Blueprint";
 import { FadeUp, SplitLines } from "./ui/Reveal";
 
@@ -94,12 +94,15 @@ export default function Process() {
     target: trackRef,
     offset: ["start 78%", "end 55%"],
   });
-  const progress = useSpring(scrollYProgress, { stiffness: 70, damping: 22, mass: 0.5 });
+  // The fill follows the scroll; under reduced motion it tracks it exactly, without the spring's glide.
+  const still = useReducedMotion();
+  const sprung = useSpring(scrollYProgress, { stiffness: 70, damping: 22, mass: 0.5 });
+  const progress = still ? scrollYProgress : sprung;
 
   return (
     <section
       id="process"
-      className="relative scroll-mt-24 overflow-hidden bg-data-bg px-6 py-28 lg:py-36"
+      className="relative scroll-mt-24 overflow-hidden bg-data-bg px-6 py-24 lg:py-32"
       aria-label="How I work"
     >
       <Blueprint dark />

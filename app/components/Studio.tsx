@@ -155,27 +155,106 @@ function LiveCard({ app }: { app: StudioApp }) {
   );
 }
 
-function DevCard({ app }: { app: StudioApp }) {
+/*
+  In development: a ledger row, not a card. The group heading already says
+  "in development", so rows carry no status chip; the app's colour is a
+  short rule beside the icon, never text.
+*/
+function DevRow({ app }: { app: StudioApp }) {
   return (
-    <article className={cardClass}>
-      <CardAccent color={app.color} />
-      <div className="relative flex flex-1 flex-col p-5">
-        <div className="flex items-center gap-3.5">
-          <AppIcon app={app} size={48} />
-          <div className="min-w-0 flex-1">
-            <h4 className="font-display truncate text-[17px] font-bold tracking-tight">{app.name}</h4>
-            <p className="mt-1 font-mono text-[10px] tracking-[0.12em] text-text-muted uppercase">
-              {app.category}
-              {app.note && <span className="text-foreground"> · {app.note}</span>}
-            </p>
+    <article className="ledger-row group grid grid-cols-[44px_minmax(0,1fr)] gap-x-4 gap-y-3 border-t border-line py-6 md:grid-cols-[52px_minmax(0,15rem)_minmax(0,1fr)_auto] md:items-start md:gap-x-8">
+      <div className="relative">
+        <AppIcon app={app} size={44} />
+        <span
+          className="absolute -bottom-2.5 left-0 hidden h-[2px] w-11 origin-left md:block scale-x-[0.45] transition-transform duration-500 [transition-timing-function:var(--ease-out-expo)] group-hover:scale-x-100 motion-reduce:transition-none"
+          style={{ backgroundColor: app.color }}
+          aria-hidden="true"
+        />
+      </div>
+
+      <div className="min-w-0">
+        <h4 className="font-display text-[17px] font-bold tracking-tight transition-colors duration-300 group-hover:text-cobalt">
+          {app.name}
+        </h4>
+        <p className="mt-1 text-[14px] leading-snug font-medium text-foreground">{app.tagline}</p>
+        <p className="mt-2 font-mono text-[10px] tracking-[0.12em] text-text-muted uppercase">
+          {app.category}
+          {app.note && <span className="text-foreground"> · {app.note}</span>}
+        </p>
+      </div>
+
+      <p className="col-span-2 text-[13.5px] leading-relaxed text-body-muted md:col-span-1 md:pt-0.5">
+        {app.description}
+      </p>
+
+      <div className="col-span-2 md:col-span-1 md:justify-self-end">
+        <AppLinks app={app} />
+      </div>
+    </article>
+  );
+}
+
+/*
+  An app in App Review that isn't the featured one gets a full-width card
+  on the light ground (dark is kept for Process and the featured panel):
+  copy on the left, its real screenshots on the right.
+*/
+function Spotlight({ app }: { app: StudioApp }) {
+  const shots = app.screenshots ?? [];
+  const bezel = app.featuredTheme?.bezel ?? "#111111";
+  return (
+    <article
+      className="group relative overflow-hidden rounded-[4px] border border-line bg-card"
+      style={{ ["--ft-bezel" as string]: bezel } as React.CSSProperties}
+    >
+      <div className="h-[3px] w-full" style={{ backgroundColor: app.color }} aria-hidden="true" />
+      <div className="grid items-center gap-10 p-6 sm:p-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-8">
+        <div>
+          <div className="flex items-center gap-4">
+            <AppIcon app={app} size={60} />
+            <div>
+              <h4 className="font-display text-2xl font-bold tracking-tight">{app.name}</h4>
+              <div className="mt-1.5">
+                <StatusChip status={app.status} />
+              </div>
+            </div>
+          </div>
+          <p className="font-display mt-7 text-[1.7rem] leading-[1.1] font-bold tracking-tight sm:text-[2.1rem]">
+            {app.tagline}
+          </p>
+          <p className="mt-4 max-w-md text-[15px] leading-relaxed text-body-muted">{app.description}</p>
+          <p className="mt-6 border-t border-line pt-4 font-mono text-[10px] leading-[1.8] tracking-[0.12em] text-text-muted uppercase">
+            {meta(app).join(" · ")}
+          </p>
+          <div className="mt-4">
+            <AppLinks app={app} />
           </div>
         </div>
-        <p className="editorial mt-4 text-[14.5px] leading-snug text-foreground">{app.tagline}</p>
-        <p className="mt-2 flex-1 text-[13px] leading-relaxed text-body-muted">{app.description}</p>
-        <div className="mt-4 flex flex-wrap items-center justify-between gap-x-3 gap-y-3 border-t border-line pt-4">
-          <AppLinks app={app} />
-          <StatusChip status={app.status} />
-        </div>
+
+        {shots.length >= 3 && (
+          <div
+            className="relative mx-auto flex w-full max-w-[440px] items-end justify-center pb-4 lg:max-w-none"
+            role="group"
+            aria-label={`${app.name} screenshots`}
+          >
+            {[1, 0, 2].map((idx, k) => (
+              <div
+                key={shots[idx].src}
+                className={
+                  k === 1
+                    ? "relative z-10 w-[36%] transition-transform duration-700 [transition-timing-function:var(--ease-out-expo)] motion-safe:group-hover:-translate-y-2"
+                    : `relative z-0 w-[30%] transition-transform duration-700 [transition-timing-function:var(--ease-out-expo)] ${
+                        k === 0
+                          ? "-mr-[7%] origin-bottom-right -rotate-6 motion-safe:group-hover:-rotate-[8deg]"
+                          : "-ml-[7%] origin-bottom-left rotate-6 motion-safe:group-hover:rotate-[8deg]"
+                      }`
+                }
+              >
+                <Phone src={shots[idx].src} alt={shots[idx].alt} sizes="(min-width: 1024px) 170px, 30vw" />
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </article>
   );
@@ -208,7 +287,19 @@ function GroupHeading({ id, label, count }: { id: string; label: string; count: 
 }
 
 /* A phone-shaped frame around a real screenshot. */
-function Phone({ src, alt, className = "", priority = false }: { src: string; alt: string; className?: string; priority?: boolean }) {
+function Phone({
+  src,
+  alt,
+  className = "",
+  priority = false,
+  sizes = "(min-width: 1024px) 220px, 30vw",
+}: {
+  src: string;
+  alt: string;
+  className?: string;
+  priority?: boolean;
+  sizes?: string;
+}) {
   return (
     <div
       className={`relative aspect-[1320/2868] overflow-hidden rounded-[18%/8.3%] border-[5px] border-(--ft-bezel) bg-(--ft-bezel) shadow-[0_30px_60px_-20px_rgba(0,0,0,0.75),0_0_0_1px_rgba(255,255,255,0.08)] ${className}`}
@@ -217,7 +308,7 @@ function Phone({ src, alt, className = "", priority = false }: { src: string; al
         src={src}
         alt={alt}
         fill
-        sizes="(min-width: 1024px) 220px, 30vw"
+        sizes={sizes}
         priority={priority}
         className="rounded-[15%/7%] object-cover"
       />
@@ -387,32 +478,9 @@ function Featured({ app }: { app: StudioApp }) {
   );
 }
 
-/*
-  The dev grid is 2 columns at sm and 4 at lg. The closing note takes the
-  cells left in the last row so it never sits alone beside empty space; when
-  it spans a whole row it lays out side by side. Literal class names so
-  Tailwind picks them up.
-*/
-const lgLeft = 4 - (devGrid.length % 4);
-const smFull = devGrid.length % 2 === 0;
-const noteSpan = {
-  className: [
-    smFull ? "sm:col-span-2" : "",
-    ({ 1: "", 2: "lg:col-span-2", 3: "lg:col-span-3", 4: "lg:col-span-4" } as const)[lgLeft as 1 | 2 | 3 | 4],
-  ].join(" "),
-  wideLayout: [
-    smFull ? "sm:flex-row sm:items-end sm:gap-10" : "",
-    lgLeft >= 2 ? "lg:flex-row lg:items-end lg:gap-10" : "lg:flex-col lg:items-stretch lg:gap-0",
-  ].join(" "),
-  wideText: [
-    smFull ? "sm:mt-0 sm:max-w-md" : "",
-    lgLeft >= 2 ? "lg:mt-0 lg:max-w-md" : "lg:mt-6 lg:max-w-none",
-  ].join(" "),
-};
-
 export default function Studio() {
   return (
-    <section id="studio" className="relative scroll-mt-24 px-6 py-28" aria-label="The studio">
+    <section id="studio" className="section-y relative scroll-mt-24 px-6" aria-label="The studio">
       <div className="mx-auto max-w-6xl">
         {/* Section header */}
         <div className="mb-14 grid gap-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
@@ -473,51 +541,36 @@ export default function Studio() {
           </div>
         </div>
 
-        {/* In App Review (apps in review that aren't featured) */}
+        {/* In App Review (apps in review that aren't featured): a full-width spotlight when the
+            app has screenshots, otherwise its card */}
         {reviewGrid.length > 0 && (
           <div className="mt-16" role="group" aria-labelledby="studio-review">
             <GroupHeading id="studio-review" label="In App Review" count={reviewGrid.length} />
             <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-              {reviewGrid.map((app, i) => (
-                <Reveal key={app.slug} i={i}>
-                  <LiveCard app={app} />
-                </Reveal>
-              ))}
+              {reviewGrid.map((app, i) =>
+                (app.screenshots?.length ?? 0) >= 3 ? (
+                  <Reveal key={app.slug} i={i} className="sm:col-span-2 lg:col-span-3">
+                    <Spotlight app={app} />
+                  </Reveal>
+                ) : (
+                  <Reveal key={app.slug} i={i}>
+                    <LiveCard app={app} />
+                  </Reveal>
+                )
+              )}
             </div>
           </div>
         )}
 
-        {/* In development */}
+        {/* In development: ledger rows */}
         <div className="mt-16" role="group" aria-labelledby="studio-dev">
           <GroupHeading id="studio-dev" label="In development" count={devGrid.length} />
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="border-b border-line">
             {devGrid.map((app, i) => (
               <Reveal key={app.slug} i={i}>
-                <DevCard app={app} />
+                <DevRow app={app} />
               </Reveal>
             ))}
-
-            {/* Closing annotation card: fills whatever is left of the last row */}
-            <Reveal i={devGrid.length} className={noteSpan.className}>
-              <div
-                className={`flex h-full flex-col justify-between rounded-[4px] border border-dashed border-line-strong p-5 ${noteSpan.wideLayout}`}
-              >
-                <p className="font-mono text-[12px] leading-[1.9] text-text-muted">
-                  SHIPPED / {pad2(counts.live)}
-                  <br />
-                  IN REVIEW / {pad2(counts.review)}
-                  <br />
-                  IN DEVELOPMENT / {pad2(counts.development)}
-                  <br />
-                  PLATFORM / iPHONE
-                </p>
-                <p className={`mt-6 text-[13.5px] leading-relaxed text-body-muted ${noteSpan.wideText}`}>
-                  <span className="editorial text-[15px] text-foreground">Why it&apos;s on this page:</span>{" "}
-                  the advice I give clients on product and engineering has been tested on my own apps
-                  first.
-                </p>
-              </div>
-            </Reveal>
           </div>
         </div>
       </div>

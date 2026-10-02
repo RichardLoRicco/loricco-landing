@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { liveApps } from "../lib/apps";
+import { SECTIONS } from "../lib/sections";
 
 /* The footer row shows the apps that are live on the App Store. */
 const appLinks = liveApps.map((app) => ({
@@ -12,7 +13,7 @@ export default function Footer() {
   return (
     <footer className="border-t border-line px-6 py-12">
       <div className="mx-auto flex max-w-6xl flex-col gap-8">
-        {/* Top row — wordmark + document identifier + app icons */}
+        {/* Top row: wordmark, discipline line, live app icons */}
         <div className="flex flex-col items-center justify-between gap-6 sm:flex-row">
           <div>
             <span className="font-display text-sm font-bold tracking-tight">
@@ -54,7 +55,26 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Bottom row — identifier + copyright + email */}
+        {/* Section links, numbered like the margin index */}
+        <nav aria-label="Footer" className="border-t border-line pt-6">
+          <ul className="grid grid-cols-2 gap-x-6 gap-y-3 sm:flex sm:flex-wrap sm:justify-center sm:gap-x-8">
+            {SECTIONS.map((s) => (
+              <li key={s.id}>
+                <a
+                  href={`/#${s.id}`}
+                  className="group inline-flex items-baseline gap-2 text-[13px] text-body-muted transition-colors duration-200 hover:text-cobalt"
+                >
+                  <span className="font-mono text-[10px] text-text-muted tnum group-hover:text-cobalt">
+                    {s.num}
+                  </span>
+                  {s.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        {/* Bottom row: identifier, copyright, email */}
         <div className="flex flex-col items-center justify-between gap-3 border-t border-line pt-6 sm:flex-row">
           <p className="font-mono text-[11px] text-text-muted">
             LCO / LORICCOANDCO.COM / {new Date().getFullYear()}

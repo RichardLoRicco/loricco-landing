@@ -79,7 +79,12 @@ export default function Hero() {
         <SplitLines
           as="h1"
           immediate
-          className="font-display max-w-5xl text-[2.9rem] leading-[0.98] font-bold tracking-[-0.03em] sm:text-[3.8rem] lg:text-[5.2rem] xl:text-[5.8rem]"
+          /*
+            Phones: "Websites, AI, and" is ~7.7em wide, so the size tracks the
+            viewport (gutters out, divided by 8) to keep that line whole
+            instead of stranding "and" on a line of its own.
+          */
+          className="font-display max-w-5xl text-[length:min(2.9rem,calc((100vw-3rem)/8))] leading-[0.98] font-bold tracking-[-0.03em] sm:text-[3.8rem] lg:text-[5.2rem] xl:text-[5.8rem]"
           lines={[
             "Websites, AI, and",
             <span key="l2" className="editorial font-medium tracking-[-0.01em]">
@@ -153,11 +158,12 @@ export default function Hero() {
                     className="aspect-[4/5] w-full rounded-[2px] object-cover"
                   />
                 </div>
-                <figcaption className="flex items-baseline justify-between gap-4 px-4 py-3 font-mono text-[11px] tracking-[0.12em] uppercase">
-                  <span className="text-text-muted">
+                {/* Each half stays whole; on a narrow card the place drops below the name. */}
+                <figcaption className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 px-4 py-3 font-mono text-[10.5px] tracking-[0.1em] uppercase">
+                  <span className="whitespace-nowrap text-text-muted">
                     Principal / <span className="font-medium text-foreground">R.T. LoRicco</span>
                   </span>
-                  <span className="text-text-muted">New Haven, CT</span>
+                  <span className="whitespace-nowrap text-text-muted">New Haven, CT</span>
                 </figcaption>
               </figure>
             </TiltCard>

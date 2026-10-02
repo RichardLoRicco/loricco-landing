@@ -6,6 +6,14 @@ import { FadeUp, SplitLines } from "./ui/Reveal";
 
 const EMAIL = "admin@loriccoandco.com";
 
+const manifest: [string, string][] = [
+  ["PRINCIPAL", "R.T. LoRicco"],
+  ["BACKGROUND", "J.D. · LL.M. · MBA · SWE"],
+  ["WORK", "websites\u00a0· training\u00a0· consulting\u00a0· advisory"],
+  ["BASE", "Connecticut, USA"],
+  ["PROCESS", "review → work → follow-up"],
+];
+
 function CopyEmail() {
   const [copied, setCopied] = useState(false);
 
@@ -39,7 +47,7 @@ function CopyEmail() {
 
 export default function Contact() {
   return (
-    <section id="contact" className="relative scroll-mt-24 px-6 py-28 lg:py-36" aria-label="Contact">
+    <section id="contact" className="section-y relative scroll-mt-24 px-6" aria-label="Contact">
       <div className="mx-auto max-w-6xl">
         <FadeUp y={28}>
           <div className="relative overflow-hidden rounded-[4px] bg-data-bg">
@@ -85,22 +93,29 @@ export default function Contact() {
                 </FadeUp>
               </div>
 
-              {/* Mono manifest */}
+              {/* Mono manifest: a spec sheet, so long values wrap in their own column */}
               <FadeUp delay={0.25} className="hidden lg:block">
-                <div
-                  className="border-l border-white/10 pl-10 font-mono text-[12px] leading-[2.3] text-data-ink"
-                  aria-hidden="true"
-                >
-                  <p className="text-data-hi">LCO / PROJECT DETAILS</p>
-                  <p>PRINCIPAL / R.T. LoRicco</p>
-                  <p>BACKGROUND / JD · MBA · SWE</p>
-                  <p>WORK / websites · training · consulting · advisory</p>
-                  <p>BASE / Connecticut, USA</p>
-                  <p>PROCESS / review → work → follow-up</p>
-                  <p>
-                    STATUS /{" "}
-                    <span className="text-cobalt-bright">accepting clients</span>
-                  </p>
+                <div className="border-l border-white/10 pl-10 font-mono text-[12px] text-data-ink">
+                  <p className="pb-3 text-data-hi">LCO / PROJECT DETAILS</p>
+                  <dl className="grid grid-cols-[auto_1fr] gap-x-5">
+                    {manifest.map(([label, value]) => (
+                      <div key={label} className="contents">
+                        <dt className="border-t border-white/8 py-2.5 tracking-[0.08em] text-data-ink/80">
+                          {label} /
+                        </dt>
+                        <dd className="border-t border-white/8 py-2.5 leading-relaxed text-data-hi/90">
+                          {value}
+                        </dd>
+                      </div>
+                    ))}
+                    <dt className="border-y border-white/8 py-2.5 tracking-[0.08em] text-data-ink/80">
+                      STATUS /
+                    </dt>
+                    <dd className="flex items-center gap-2 border-y border-white/8 py-2.5 text-cobalt-bright">
+                      <span className="h-1.5 w-1.5 rounded-full bg-cobalt-bright" aria-hidden="true" />
+                      accepting clients
+                    </dd>
+                  </dl>
                 </div>
               </FadeUp>
             </div>
