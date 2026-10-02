@@ -1,4 +1,6 @@
-import type { ReactNode } from "react";
+"use client";
+
+import { useState, type ReactNode } from "react";
 
 /*
   "Redline" components. The page reads as one document under revision, with
@@ -85,20 +87,15 @@ export function Comment({
 
 /*
   The one spreadsheet on the page: a formula bar over a two-column grid with
-  row numbers and column letters. Row `selected` gets the selection outline,
-  and the formula bar shows its formula. Every formula states a real fact.
+  row numbers and column letters. Hovering or clicking a row selects its
+  value cell, and the formula bar shows that cell's formula, so the
+  selection is real rather than decoration. Every formula is true: either a
+  real count or the literal value.
 */
-export function Sheet({
-  rows,
-  selected = 0,
-  formula,
-  className = "",
-}: {
-  rows: [string, ReactNode][];
-  selected?: number;
-  formula: string;
-  className?: string;
-}) {
+export type SheetRow = { label: string; value: ReactNode; formula: string };
+
+export function Sheet({ rows, className = "" }: { rows: SheetRow[]; className?: string }) {
+  const [selected, setSelected] = useState(0);
   return (
     <div className={`overflow-hidden rounded-[4px] border border-line-strong bg-card font-mono text-[12px] ${className}`}>
       {/* Formula bar */}
@@ -107,7 +104,9 @@ export function Sheet({
           B{selected + 1}
         </span>
         <span className="flex items-center border-r border-line-strong px-2.5 text-[11px] text-text-muted italic">fx</span>
-        <span className="min-w-0 flex-1 truncate px-3 py-2 text-foreground">{formula}</span>
+        <span className="min-w-0 flex-1 truncate px-3 py-2 text-foreground" aria-live="off">
+          {rows[selected].formula}
+        </span>
       </div>
       {/* Column letters */}
       <div className="grid grid-cols-[2rem_minmax(0,1.1fr)_minmax(0,1fr)] border-b border-line bg-gutter text-center text-[10px] text-text-muted">
@@ -116,26 +115,30 @@ export function Sheet({
         <span className="py-1">B</span>
       </div>
       <dl>
-        {rows.map(([label, value], i) => {
+        {rows.map((row, i) => {
           const isSel = i === selected;
           return (
             <div
-              key={label}
-              className="grid grid-cols-[2rem_minmax(0,1.1fr)_minmax(0,1fr)] border-b border-line last:border-b-0"
+              key={row.label}
+              onMouseEnter={() => setSelected(i)}
+              onClick={() => setSelected(i)}
+              className="grid cursor-cell grid-cols-[2rem_minmax(0,1.1fr)_minmax(0,1fr)] border-b border-line last:border-b-0"
             >
-              <span className="flex items-center justify-center border-r border-line bg-gutter text-[10px] text-text-muted tnum">
+              <span
+                className={`flex items-center justify-center border-r border-line text-[10px] tnum transition-colors ${
+                  isSel ? "bg-ins-wash text-ins" : "bg-gutter text-text-muted"
+                }`}
+              >
                 {i + 1}
               </span>
-              <dt className="border-r border-line px-3 py-2.5 text-[11px] text-body-muted">{label}</dt>
+              <dt className="border-r border-line px-3 py-2.5 text-[11px] text-body-muted">{row.label}</dt>
               <dd
                 className={`relative px-3 py-2.5 font-medium text-foreground tnum ${
                   isSel ? "bg-ins-wash outline-2 -outline-offset-2 outline-ins outline-solid" : ""
                 }`}
               >
-                {value}
-                {isSel && (
-                  <span aria-hidden="true" className="absolute -right-px -bottom-px h-1.5 w-1.5 bg-ins" />
-                )}
+                {row.value}
+                {isSel && <span aria-hidden="true" className="absolute -right-px -bottom-px h-1.5 w-1.5 bg-ins" />}
               </dd>
             </div>
           );

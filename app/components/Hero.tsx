@@ -4,18 +4,18 @@ import Image from "next/image";
 import { useEffect, useRef, type ReactNode } from "react";
 import Blueprint from "./Blueprint";
 import { FadeUp, SplitLines } from "./ui/Reveal";
-import { Clause, Comment, Sheet } from "./ui/Redline";
+import { Clause, Comment, Sheet, type SheetRow } from "./ui/Redline";
 import { counts } from "../lib/apps";
 
 /*
   The page's one spreadsheet. Every row is checkable elsewhere on the page or
-  on the linked sites, and the formula describes the selected cell truthfully
-  (it counts the Studio apps marked live). Update it with Work and Studio.
+  on the linked sites, and each formula is true: a real count over the Studio
+  list, or the literal value. Update it with Work and Studio.
 */
-const sheetRows: [string, ReactNode][] = [
-  ["Apps on the App Store", counts.live],
-  ["Lighthouse, loriccolaw.com", "100 · 100 · 100 · 100"],
-  ["Base", "New Haven, CT"],
+const sheetRows: SheetRow[] = [
+  { label: "Apps on the App Store", value: counts.live, formula: '=COUNTIF(Studio!Status, "Live")' },
+  { label: "Lighthouse, loriccolaw.com", value: "100 · 100 · 100 · 100", formula: '="100 · 100 · 100 · 100"' },
+  { label: "Base", value: "New Haven, CT", formula: '="New Haven, CT"' },
 ];
 
 /* The exhibit card leans a few degrees toward the cursor. */
@@ -137,7 +137,7 @@ export default function Hero() {
 
             {/* ── The one formula bar ── */}
             <FadeUp immediate delay={0.45} y={12} className="mt-12 max-w-lg lg:mt-14">
-              <Sheet rows={sheetRows} selected={0} formula={'=COUNTIF(Studio!Status, "Live")'} />
+              <Sheet rows={sheetRows} />
             </FadeUp>
           </div>
 
