@@ -152,9 +152,10 @@ function Figure() {
           <Tag
             swatch="bg-eng"
             style={{
+              // Inside the plane's bottom-left corner: clear of the Law tag at any width
               left: `${planes[2].x}%`,
               top: `${planes[2].y + planes[2].h}%`,
-              transform: "translate(calc(-100% - 6px), -100%)",
+              transform: "translate(6px, calc(-100% - 6px))",
             }}
           >
             Engineering
@@ -162,7 +163,7 @@ function Figure() {
         </div>
       </div>
 
-      <figcaption className="mt-24 flex items-baseline justify-between font-mono text-[11px] tracking-[0.06em] text-text-muted uppercase">
+      <figcaption className="mt-24 flex items-baseline justify-between gap-1 font-mono whitespace-nowrap text-[11px] tracking-[0.06em] text-text-muted uppercase">
         <span>Fig. 1</span>
         <span className="text-foreground">R.T. LoRicco, principal</span>
         <span className="sr-only">
@@ -242,7 +243,7 @@ export default function Hero() {
             immediate
             delay={0.15}
             y={20}
-            className="mx-auto w-full max-w-[300px] px-8 lg:mx-0 lg:w-[340px] lg:max-w-none lg:px-6 xl:w-[380px]"
+            className="mx-auto w-full max-w-[300px] px-6 min-[360px]:px-8 lg:mx-0 lg:w-[340px] lg:max-w-none lg:px-6 xl:w-[380px]"
           >
             <Figure />
           </FadeUp>
