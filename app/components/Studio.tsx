@@ -3,9 +3,9 @@
 import Image from "next/image";
 import { motion } from "motion/react";
 import { FadeUp, SplitLines } from "./ui/Reveal";
-import { apps, counts, featuredApp, pad2, spell, type AppStatus, type StudioApp } from "../lib/apps";
+import { apps, counts, featuredApp, pad2, spell, type AppStatus, type FeaturedTheme, type StudioApp } from "../lib/apps";
 
-const gridApps = apps.filter((a) => !a.featured);
+const gridApps = apps.filter((a) => a !== featuredApp);
 const liveGrid = gridApps.filter((a) => a.status === "live");
 const reviewGrid = gridApps.filter((a) => a.status === "review");
 const devGrid = gridApps.filter((a) => a.status === "development");
@@ -211,7 +211,7 @@ function GroupHeading({ id, label, count }: { id: string; label: string; count: 
 function Phone({ src, alt, className = "", priority = false }: { src: string; alt: string; className?: string; priority?: boolean }) {
   return (
     <div
-      className={`relative aspect-[1320/2868] overflow-hidden rounded-[18%/8.3%] border-[5px] border-[#0d1022] bg-[#0d1022] shadow-[0_30px_60px_-20px_rgba(0,0,0,0.75),0_0_0_1px_rgba(255,255,255,0.08)] ${className}`}
+      className={`relative aspect-[1320/2868] overflow-hidden rounded-[18%/8.3%] border-[5px] border-(--ft-bezel) bg-(--ft-bezel) shadow-[0_30px_60px_-20px_rgba(0,0,0,0.75),0_0_0_1px_rgba(255,255,255,0.08)] ${className}`}
     >
       <Image
         src={src}
@@ -225,7 +225,59 @@ function Phone({ src, alt, className = "", priority = false }: { src: string; al
   );
 }
 
+/* The theme's colours as CSS variables, so the panel's classes stay static. */
+function themeVars(t: FeaturedTheme): React.CSSProperties {
+  return {
+    "--ft-border": t.border,
+    "--ft-text": t.text,
+    "--ft-accent": t.accent,
+    "--ft-body": t.body,
+    "--ft-label": t.label,
+    "--ft-btn": t.button.bg,
+    "--ft-btn-text": t.button.text,
+    "--btn-fill": t.button.hoverBg,
+    "--ft-btn-hover-text": t.button.hoverText,
+    "--ft-bezel": t.bezel,
+  } as React.CSSProperties;
+}
+
+/* The tagline, with the theme's highlight (if it ends the line) in the accent. */
+function Headline({ text, highlight }: { text: string; highlight?: string }) {
+  if (!highlight || !text.endsWith(highlight)) return <>{text}</>;
+  return (
+    <>
+      {text.slice(0, text.length - highlight.length)}
+      <span className="text-(--ft-accent)">{highlight}</span>
+    </>
+  );
+}
+
+function Stages({ stages, label }: { stages: NonNullable<FeaturedTheme["stages"]>; label?: string }) {
+  return (
+    <ol className="mt-7 grid max-w-md grid-cols-5 gap-1.5 sm:gap-2.5" aria-label={label}>
+      {stages.map((stage, i) => (
+        <li key={stage.label} className="min-w-0">
+          <span
+            className="relative block aspect-square overflow-hidden rounded-[22%] bg-[radial-gradient(80%_70%_at_50%_35%,#2a2e35_0%,#202329_70%)] ring-1 ring-white/8"
+            style={i === stages.length - 1 ? { boxShadow: `0 0 0 1.5px ${stage.color}, 0 8px 28px -8px ${stage.color}80` } : undefined}
+          >
+            <Image src={stage.src} alt="" fill sizes="(min-width: 640px) 76px, 18vw" className="object-cover" />
+          </span>
+          <span
+            className="mt-2 block truncate text-center font-mono text-[9.5px] tracking-[0.04em] uppercase sm:text-[10px] sm:tracking-[0.1em]"
+            style={{ color: stage.color }}
+          >
+            {stage.label}
+          </span>
+        </li>
+      ))}
+    </ol>
+  );
+}
+
 function Featured({ app }: { app: StudioApp }) {
+  const theme = app.featuredTheme;
+  if (!theme) return null;
   const shots = app.screenshots ?? [];
   return (
     <motion.article
@@ -234,15 +286,16 @@ function Featured({ app }: { app: StudioApp }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
       transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-      className="featured-sky relative overflow-hidden rounded-[4px] border border-[#232a5c] text-data-hi"
+      className={`${theme.surface} relative overflow-hidden rounded-[4px] border border-(--ft-border) text-(--ft-text)`}
+      style={themeVars(theme)}
     >
       <div className="relative grid gap-10 p-6 sm:p-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:gap-6 lg:p-12">
         {/* Copy */}
         <div className="flex flex-col">
-          <p className="kicker flex items-center gap-3 text-cobalt-bright">
-            <span>Newest</span>
-            <span className="h-px w-8 bg-cobalt-bright/40" aria-hidden="true" />
-            <span>Featured</span>
+          <p className="kicker flex items-center gap-3 text-(--ft-accent)">
+            <span>{theme.kicker[0]}</span>
+            <span className="h-px w-8 bg-(--ft-accent) opacity-40" aria-hidden="true" />
+            <span>{theme.kicker[1]}</span>
           </p>
 
           <div className="mt-7 flex items-center gap-4">
@@ -258,22 +311,27 @@ function Featured({ app }: { app: StudioApp }) {
           </div>
 
           <p className="font-display mt-8 text-[2.1rem] leading-[1.05] font-bold tracking-tight sm:text-5xl">
-            {app.tagline}
+            <Headline text={app.tagline} highlight={theme.highlight} />
           </p>
-          <p className="mt-5 max-w-md text-[15px] leading-relaxed text-[#c3c6dc]">{app.description}</p>
+          <p className="mt-5 max-w-md text-[15px] leading-relaxed text-(--ft-body)">{app.description}</p>
+
+          {theme.stages && theme.stages.length > 0 && <Stages stages={theme.stages} label={theme.stagesLabel} />}
 
           <dl className="mt-8 grid max-w-md grid-cols-3 gap-4 border-t border-white/12 pt-5 font-mono text-[10px] tracking-[0.12em] uppercase">
             <div>
-              <dt className="text-[#9ea3c4]">Price</dt>
-              <dd className="mt-1.5 text-[12px] text-data-hi">{app.price} once</dd>
+              <dt className="text-(--ft-label)">Price</dt>
+              <dd className="mt-1.5 text-[12px] text-(--ft-text)">
+                {app.price}
+                {app.priceNote && <span className="mt-1 block text-[10px] text-(--ft-body)">{app.priceNote}</span>}
+              </dd>
             </div>
             <div>
-              <dt className="text-[#9ea3c4]">Platform</dt>
-              <dd className="mt-1.5 text-[12px] text-data-hi">iPhone</dd>
+              <dt className="text-(--ft-label)">Platform</dt>
+              <dd className="mt-1.5 text-[12px] text-(--ft-text)">iPhone</dd>
             </div>
             <div>
-              <dt className="text-[#9ea3c4]">Status</dt>
-              <dd className="mt-1.5 text-[12px] text-data-hi">{app.note ?? statusLabel[app.status]}</dd>
+              <dt className="text-(--ft-label)">Status</dt>
+              <dd className="mt-1.5 text-[12px] text-(--ft-text)">{app.note ?? statusLabel[app.status]}</dd>
             </div>
           </dl>
 
@@ -284,8 +342,7 @@ function Featured({ app }: { app: StudioApp }) {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`${app.name} website, ${new URL(app.siteUrl).host} (opens in a new tab)`}
-                className="btn inline-flex items-center gap-2 bg-data-hi px-5 py-3 text-sm font-semibold text-[#0b1030] hover:text-white focus-visible:outline-cobalt-bright"
-                style={{ ["--btn-fill" as string]: "var(--color-cobalt)" }}
+                className="btn inline-flex items-center gap-2 bg-(--ft-btn) px-5 py-3 text-sm font-semibold text-(--ft-btn-text) hover:text-(--ft-btn-hover-text) focus-visible:outline-(--ft-accent)"
               >
                 Visit the {app.name} site <span className="btn-arrow">→</span>
               </a>
@@ -416,7 +473,7 @@ export default function Studio() {
           </div>
         </div>
 
-        {/* In App Review (only when the reviewed app isn't the featured one) */}
+        {/* In App Review (apps in review that aren't featured) */}
         {reviewGrid.length > 0 && (
           <div className="mt-16" role="group" aria-labelledby="studio-review">
             <GroupHeading id="studio-review" label="In App Review" count={reviewGrid.length} />

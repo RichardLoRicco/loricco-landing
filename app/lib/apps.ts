@@ -12,6 +12,36 @@
 
 export type AppStatus = "live" | "review" | "development";
 
+/**
+  How the featured panel paints itself for one app. The panel is dark, so every
+  text colour here must clear 4.5:1 on the surface (the accent is used for text).
+  Any app with a theme can be featured by moving `featured: true`.
+*/
+export type FeaturedTheme = {
+  /** Class in globals.css that paints the panel background. */
+  surface: string;
+  border: string;
+  /** Headline and primary text. */
+  text: string;
+  /** Kicker, the headline highlight and the focus ring. */
+  accent: string;
+  /** Description copy. */
+  body: string;
+  /** Small labels (the Price / Platform / Status terms). */
+  label: string;
+  /** The site button at rest and on hover. */
+  button: { bg: string; text: string; hoverBg: string; hoverText: string };
+  /** Colour of the phone frame around the screenshots. */
+  bezel: string;
+  kicker: [string, string];
+  /** The end of the tagline drawn in the accent, e.g. "Scrombie." */
+  highlight?: string;
+  /** Optional row of art under the description, e.g. a face's decay stages. */
+  stages?: { src: string; label: string; color: string }[];
+  /** Caption for `stages`, read by screen readers. */
+  stagesLabel?: string;
+};
+
 export type StudioApp = {
   slug: string;
   name: string;
@@ -31,12 +61,15 @@ export type StudioApp = {
   appStoreUrl?: string;
   /** Download price as the App Store shows it, or the planned price. */
   price?: string;
+  /** Qualifier printed after the price in the featured panel, e.g. "once". */
+  priceNote?: string;
   /** Month it went live, e.g. "Aug 2026". */
   since?: string;
   /** Short status note shown under the badge, e.g. "Due November". */
   note?: string;
-  /** Shown in the large featured slot instead of the grid. One at a time. */
+  /** Shown in the large featured slot instead of the grid. One at a time, and it needs `featuredTheme`. */
   featured?: boolean;
+  featuredTheme?: FeaturedTheme;
   screenshots?: { src: string; alt: string }[];
   /** schema.org applicationCategory */
   schemaCategory: string;
@@ -144,8 +177,19 @@ export const apps: StudioApp[] = [
     color: "#2E3A8C",
     siteUrl: "https://startonight.loriccoandco.com/",
     price: "$2.99",
+    priceNote: "once",
     note: "Submitted Oct 2026",
-    featured: true,
+    featuredTheme: {
+      surface: "featured-sky",
+      border: "#232a5c",
+      text: "#f0ede6",
+      accent: "#8fa0ff",
+      body: "#c3c6dc",
+      label: "#9ea3c4",
+      button: { bg: "#f0ede6", text: "#0b1030", hoverBg: "#2038c8", hoverText: "#ffffff" },
+      bezel: "#0d1022",
+      kicker: ["Newest", "Featured"],
+    },
     screenshots: [
       {
         src: "/apps/startonight/shot-tonight.webp",
@@ -251,14 +295,53 @@ export const apps: StudioApp[] = [
   {
     slug: "scrombie",
     name: "Scrombie",
-    tagline: "Stop doomscrolling, save face.",
+    tagline: "Fresh me vs. Scrombie.",
     description:
-      "Your screen time gets a face. Pick a character or use a selfie, then watch it wear down as the minutes on your scroll apps add up.",
+      "Pick a face, one of eight drawn characters or your own selfie, and watch it drain from Fresh to Tired, Drained, Hollow and Scrombie as you doomscroll. You set the daily budget, share cards show the damage, and Pro's Lockdown shields your scroll apps until midnight.",
     category: "Screen time",
     status: "development",
     icon: "/apps/scrombie/icon.webp",
     iconAlt: "Scrombie app icon: a cartoon face, fresh on one side and cracked and decayed on the other",
     color: "#1FB5D6",
+    siteUrl: "https://scrombie.loriccoandco.com/",
+    price: "Free",
+    priceNote: "Pro optional",
+    featured: true,
+    // Colours from scrombie/Sources/Support/Theme.swift, as on scrombie.loriccoandco.com.
+    featuredTheme: {
+      surface: "featured-scrombie",
+      border: "#24282f",
+      text: "#f2f2f0",
+      accent: "#b3ecaa",
+      body: "#b4b8bc",
+      label: "#8f949a",
+      button: { bg: "#b3ecaa", text: "#0c0d10", hoverBg: "#f2f2f0", hoverText: "#0c0d10" },
+      bezel: "#050607",
+      kicker: ["Featured", "Screen time"],
+      highlight: "Scrombie.",
+      stagesLabel: "One face, five stages",
+      stages: [
+        { src: "/apps/scrombie/stage-0.webp", label: "Fresh", color: "#f2a65a" },
+        { src: "/apps/scrombie/stage-1.webp", label: "Tired", color: "#e0b87a" },
+        { src: "/apps/scrombie/stage-2.webp", label: "Drained", color: "#b3b89e" },
+        { src: "/apps/scrombie/stage-3.webp", label: "Hollow", color: "#8c9e8f" },
+        { src: "/apps/scrombie/stage-4.webp", label: "Scrombie", color: "#b3ecaa" },
+      ],
+    },
+    screenshots: [
+      {
+        src: "/apps/scrombie/shot-home-scrombie.webp",
+        alt: "Scrombie's Today screen at the last stage: a cracked grey face, 5% vitality left after 2h 30m on a 1h budget",
+      },
+      {
+        src: "/apps/scrombie/shot-home-drained.webp",
+        alt: "Scrombie's Today screen at Drained: the face gone pale and tired, 46% vitality after 45 minutes",
+      },
+      {
+        src: "/apps/scrombie/shot-week.webp",
+        alt: "Scrombie Week: a bar chart of seven days of scroll time against the budget, 5h 52m doomscrolled",
+      },
+    ],
     schemaCategory: "LifestyleApplication",
   },
   {
@@ -278,7 +361,7 @@ export const apps: StudioApp[] = [
 ];
 
 export const liveApps = apps.filter((a) => a.status === "live");
-export const featuredApp = apps.find((a) => a.featured);
+export const featuredApp = apps.find((a) => a.featured && a.featuredTheme);
 export const counts = {
   live: liveApps.length,
   review: apps.filter((a) => a.status === "review").length,

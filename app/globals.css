@@ -243,7 +243,9 @@ body::after {
   transition: transform 9s cubic-bezier(0.33, 0.1, 0.25, 1);
 }
 
-/* ── Studio featured app: a still night sky (no animation) ── */
+/* ── Studio featured app: each app's featuredTheme names one of these surfaces ── */
+
+/* Star Tonight: a still night sky (no animation) */
 .featured-sky {
   background-color: #0b1030;
   background-image:
@@ -259,6 +261,15 @@ body::after {
     radial-gradient(900px 520px at 78% 110%, rgba(64, 214, 168, 0.16), transparent 70%),
     radial-gradient(700px 480px at 0% 0%, rgba(80, 98, 220, 0.28), transparent 70%),
     linear-gradient(160deg, #0b1030 0%, #10163d 55%, #0a0e26 100%);
+}
+
+/* Scrombie: near-black with the faint green haze its site and App Store frames open with */
+.featured-scrombie {
+  background-color: #0c0d10;
+  background-image:
+    radial-gradient(70% 60% at 78% 0%, rgba(179, 236, 170, 0.13), transparent 70%),
+    radial-gradient(55% 50% at 0% 100%, rgba(179, 236, 170, 0.06), transparent 70%),
+    linear-gradient(180deg, #0f1114 0%, #0b0c0f 100%);
 }
 
 /* ── Animated link underline ── */
