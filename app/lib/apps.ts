@@ -356,6 +356,7 @@ export const apps: StudioApp[] = [
     iconAlt: "Hazel the rabbit, Haven's companion",
     iconIsMascot: true,
     color: "#B48895",
+    siteUrl: "https://haven.loriccoandco.com/",
     schemaCategory: "HealthApplication",
   },
 ];
