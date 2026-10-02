@@ -1,14 +1,5 @@
 @import "tailwindcss";
 
-/*
-  LoRicco & Co. — "Engineered Counsel" design language (Variant B: Character)
-  Vellum ground, ink, cobalt accent. Bricolage Grotesque / Fraunces / Spline Sans Mono.
-  Dark is reserved for the engineering voice: data strips, process, terminal moments.
-
-  Motion rule: nothing moves on its own. Every effect is driven by the cursor,
-  a hover, or the scroll position, and all of it is off under reduced motion.
-*/
-
 @theme inline {
   /* Ground */
   --color-background: #faf7f0; /* vellum */
