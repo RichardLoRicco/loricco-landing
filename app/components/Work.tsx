@@ -206,7 +206,7 @@ export default function Work() {
           />
           <FadeUp delay={0.15}>
             <p className="mt-5 text-lg leading-relaxed text-body-muted">
-              Websites I&apos;ve rebuilt and continue to maintain.
+              These are websites I&apos;ve rebuilt and still maintain.
             </p>
           </FadeUp>
         </div>

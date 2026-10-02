@@ -14,7 +14,7 @@ const principles = [
     id: "02",
     title: "Straight answers",
     description:
-      "You'll get a direct answer on what the records show, what's broken, what it costs to fix, and what AI can and can't do for you, including when the answer is that you don't need me.",
+      "I'll tell you plainly what I find and what it will take to fix, including when the answer is that you don't need me.",
   },
   {
     id: "03",
@@ -35,7 +35,7 @@ export default function About() {
     <section id="about" className="section-y relative scroll-mt-24 px-6" aria-label="About">
       <div className="mx-auto max-w-6xl">
         <div className="grid gap-16 lg:grid-cols-[1.05fr_0.95fr] lg:gap-20">
-          {/* Left — Statement */}
+          {/* Left: statement */}
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -45,23 +45,18 @@ export default function About() {
             <p className="kicker rule-label text-text-muted">About</p>
             <SplitLines
               className="font-display mt-5 text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl"
-              lines={[
-                "About the",
-                <span key="l2" className="editorial font-medium">
-                  principal
-                </span>,
-              ]}
+              lines={["Richard T.", "LoRicco"]}
             />
             <p className="mt-6 max-w-lg text-lg leading-relaxed text-body-muted">
               I practiced law, consulted for startups, and then moved into
               building production software. The services on this page grew
-              out of problems people kept bringing me. Their firm website had
-              stopped bringing in work. Their team bought AI tools but never
-              used them. Their case turned on carrier records. Their business
-              plan needed a straight read.
+              out of problems people kept bringing me, including firm websites
+              that had stopped producing new business, AI tools that teams had
+              bought but never used, cases that turned on carrier records, and
+              business plans that needed an outside assessment.
             </p>
 
-            {/* Founder (portrait lives in the hero) */}
+            {/* Credentials (the portrait lives in the hero, the name in the heading) */}
             <motion.div
               initial={{ opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -69,22 +64,17 @@ export default function About() {
               transition={{ duration: 0.4, delay: 0.15 }}
               className="mt-10 border-t border-line pt-8"
             >
-              <p className="font-display text-[15px] font-bold">
-                Richard T. LoRicco
-              </p>
-              <p className="mt-0.5 font-mono text-[11px] tracking-[0.1em] text-cobalt uppercase">
+              <p className="font-mono text-[11px] tracking-[0.1em] text-cobalt uppercase">
                 Attorney (LL.M., J.D., MBA) · Software Engineer · New Haven, CT
               </p>
               <p className="mt-2.5 max-w-md text-sm leading-relaxed text-body-muted">
-                I&apos;m a Connecticut-admitted attorney and software
-                engineer with an LL.M., J.D., and MBA. My work has included
-                legal practice, startup consulting, production web and AI
-                systems, open-source tools, and the studio&apos;s apps.
+                I&apos;m admitted to practice law in Connecticut. I also build
+                open-source tools and the iOS apps shown below.
               </p>
             </motion.div>
           </motion.div>
 
-          {/* Right — Principles */}
+          {/* Right: principles */}
           <div className="flex flex-col justify-center gap-0">
             {principles.map((principle, i) => (
               <motion.div

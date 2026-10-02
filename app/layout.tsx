@@ -25,30 +25,30 @@ const splineSansMono = Spline_Sans_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://loriccoandco.com"),
-  title: "LoRicco & Co | Websites, AI & Technical Consulting",
+  title: "LoRicco & Co. | Websites, AI & Technical Consulting",
   description:
-    "LoRicco & Co rebuilds and operates websites, develops AI tools, trains lawyers and small businesses, analyzes digital evidence for counsel, and advises startups. Led by a Connecticut attorney, MBA, and software engineer.",
+    "LoRicco & Co. rebuilds and runs websites, builds AI tools, trains lawyers and small businesses on AI, analyzes digital evidence for counsel, and advises startups. The practice is run by Richard T. LoRicco, a Connecticut attorney and software engineer.",
   openGraph: {
-    title: "LoRicco & Co | Websites, AI & Technical Consulting",
+    title: "LoRicco & Co. | Websites, AI & Technical Consulting",
     description:
-      "Websites and AI systems, practical AI training, technical consulting for law firms, and startup advisory from an attorney, MBA, and software engineer.",
+      "Richard T. LoRicco, a Connecticut attorney and software engineer, builds websites and AI tools, trains lawyers and small businesses on AI, consults with counsel on technical evidence, and advises startups.",
     type: "website",
-    siteName: "LoRicco & Co",
+    siteName: "LoRicco & Co.",
     locale: "en_US",
     images: [
       {
         url: "/og.png",
         width: 1200,
         height: 630,
-        alt: "LoRicco & Co website with a portrait of principal Richard T. LoRicco.",
+        alt: "LoRicco & Co. website with a portrait of Richard T. LoRicco.",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "LoRicco & Co | Websites, AI & Technical Consulting",
+    title: "LoRicco & Co. | Websites, AI & Technical Consulting",
     description:
-      "Websites and AI systems, practical AI training, technical consulting for law firms, and startup advisory from an attorney, MBA, and software engineer.",
+      "Richard T. LoRicco, a Connecticut attorney and software engineer, builds websites and AI tools, trains lawyers and small businesses on AI, consults with counsel on technical evidence, and advises startups.",
     images: ["/og.png"],
   },
   alternates: {

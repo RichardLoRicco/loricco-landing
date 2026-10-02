@@ -11,7 +11,6 @@ const manifest: [string, string][] = [
   ["BACKGROUND", "J.D. · LL.M. · MBA · SWE"],
   ["WORK", "websites\u00a0· training\u00a0· consulting\u00a0· advisory"],
   ["BASE", "Connecticut, USA"],
-  ["PROCESS", "review → work → follow-up"],
 ];
 
 function CopyEmail() {
@@ -96,7 +95,7 @@ export default function Contact() {
               {/* Mono manifest: a spec sheet, so long values wrap in their own column */}
               <FadeUp delay={0.25} className="hidden lg:block">
                 <div className="border-l border-white/10 pl-10 font-mono text-[12px] text-data-ink">
-                  <p className="pb-3 text-data-hi">LCO / PROJECT DETAILS</p>
+                  <p className="pb-3 text-data-hi">LCO / THE PRACTICE</p>
                   <dl className="grid grid-cols-[auto_1fr] gap-x-5">
                     {manifest.map(([label, value]) => (
                       <div key={label} className="contents">

@@ -496,8 +496,9 @@ export default function Studio() {
               <p className="mt-5 text-lg leading-relaxed text-body-muted">
                 {spell(counts.live)[0].toUpperCase() + spell(counts.live).slice(1)} are live on the
                 App Store, {spell(counts.review)} is in App Review, and {spell(counts.development)} more
-                are in development. I build them and handle App Store review, subscriptions,
-                analytics, and support. That work informs the product advice I give clients.
+                are in development. I build them myself and handle App Store review,
+                subscriptions, analytics, and support. I draw on that work when advising clients
+                on product decisions.
               </p>
             </FadeUp>
           </div>

@@ -11,7 +11,7 @@ const services = [
     title: "Websites & AI Tools",
     outcome: "You own the site and accounts",
     description:
-      "I rebuild outdated websites without throwing away the search rankings they already have. After launch, I can maintain the site, publish content, improve how it appears in Google and AI answers, and build AI tools for intake or routine work. The domain, code, content, and accounts stay in your name.",
+      "I rebuild outdated websites without throwing away the search rankings they already have. After launch, I can maintain the site, publish content, improve how it appears in Google and AI answers, and build AI tools for intake or routine work.",
     offerings: [
       "Website rebuilds without losing rankings",
       "Ongoing site care and content",
@@ -25,7 +25,7 @@ const services = [
     title: "AI Education & Training",
     outcome: "Staff who use the tools",
     description:
-      "Training for lawyers and small-business teams on what AI tools do well, where they fail, and how to use them without creating a compliance problem. The sessions use examples from the systems I build and run every day.",
+      "I train lawyers and small-business teams on what AI tools do well, where they fail, and how to use them without creating a compliance problem. The sessions use examples from the systems I build and run every day.",
     offerings: [
       "Law-firm workshops",
       "Small-business sessions",
@@ -53,7 +53,7 @@ const services = [
     title: "Business & Startup Advisory",
     outcome: "A second opinion",
     description:
-      "I advise startups and business owners on pitch decks, financial projections, competitive analysis, go-to-market strategy, and architecture reviews. I read the deck, the contract, and the codebase myself, so the business, legal, and technical questions get answered by the same person.",
+      "I advise startups and business owners on pitch decks, financial projections, competitive analysis, go-to-market strategy, and architecture reviews. I review the deck, the projections, and the code myself and put my assessment in writing.",
     offerings: [
       "Pitch decks & projections",
       "Competitive analysis",
@@ -98,12 +98,6 @@ export default function Services() {
             className="font-display mt-5 text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl"
             lines={["What I do"]}
           />
-          <FadeUp delay={0.15}>
-            <p className="mt-5 text-lg leading-relaxed text-body-muted">
-              I handle each engagement myself. There is no account manager
-              between us and no junior staff doing the work.
-            </p>
-          </FadeUp>
         </div>
 
         <div className="mt-16 lg:grid lg:grid-cols-[260px_1fr] lg:gap-16">

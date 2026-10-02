@@ -10,7 +10,7 @@ const steps = [
     id: "01",
     verb: "Diagnose",
     detail:
-      "Most engagements start with a written review of what's there: a technical memo, a website findings report, a workflow audit, or a read on a business plan.",
+      "Most engagements start with a written review of your website, workflow, case materials, or business plan.",
   },
   {
     id: "02",
@@ -22,13 +22,13 @@ const steps = [
     id: "03",
     verb: "Build",
     detail:
-      "Then I do the work: the memo, the website or the agent, the deck, or the training session.",
+      "Then I do the work, whether that's a memo, a website, an AI tool, a pitch deck, or a training session.",
   },
   {
     id: "04",
     verb: "Improve",
     detail:
-      "For ongoing work, I monitor the system, handle updates, and revisit it when the underlying needs change.",
+      "For ongoing work, I monitor the system, handle updates, and revisit it when your needs change.",
   },
 ];
 
