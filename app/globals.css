@@ -7,13 +7,14 @@
   (the spreadsheet: numbered rows, a selected cell, the formula bar) and AI
   (the suggested edit you accept with Tab) all work on the same object.
 
-  Insert green is the accent (added, approved, go). Redline red is used
-  sparingly for strike-throughs and review marks. Every text pairing below is
-  checked to WCAG AA in the comment beside it.
+  Insert green is the accent (added, approved, go). Redline red is kept for
+  the double margin rule. Every text pairing below is checked to WCAG AA in
+  the comment beside it.
 
-  Motion rule: nothing moves on its own except the hero's caret. Everything
-  else follows the cursor, a hover or the scroll, and all of it, caret
-  included, is off under reduced motion.
+  Motion rule: sections reveal once as they load or scroll into view, and the
+  hero's caret blinks three times. Everything else follows the cursor, a
+  hover or the scroll. Under reduced motion the caret, transforms and
+  scroll-linked effects are off; only brief opacity fades remain.
 */
 
 @theme inline {
@@ -26,19 +27,16 @@
   --color-line: #e4e4de;
   --color-line-strong: #cfcfc6;
   --color-gutter: #f1f1ec;
-  --color-ghost: #6f727a; /* AI suggestion text, 4.6:1 */
+  --color-ghost: #63666e; /* AI suggestion text: 5.5:1, and 5.1:1 under the cursor spotlight */
 
   /* Insert: the accent */
   --color-ins: #0b7a4b; /* 5.2:1 on paper; white on it 5.4:1 */
   --color-ins-deep: #08603b;
   --color-ins-wash: #dff3e7; /* green on it 4.6:1, ink 16:1 */
   --color-ins-bright: #6ee7a8; /* insert green on the dark editor, 12.3:1 */
-  --color-ins-pale: #b9efd0;
 
-  /* Delete: the redline */
+  /* Redline red: the double margin rule */
   --color-del: #b3261e; /* 6.3:1 on paper */
-  --color-del-wash: #fbe6e2;
-  --color-del-bright: #f87171; /* on the dark editor, 6.8:1 */
 
   /* Diagnostic palette */
   --color-good: #0b7a4b;
@@ -56,7 +54,6 @@
   /* Type */
   --font-display: var(--font-archivo);
   --font-sans: var(--font-archivo);
-  --font-serif: var(--font-archivo);
   --font-mono: var(--font-martian);
 
   /* Motion */
@@ -142,26 +139,11 @@ body::after {
     text-transform: uppercase;
   }
 
-  /* Serif editorial voice — used sparingly, where trust is built.
-     (Fraunces' optical axes were tried and dropped: +250KB of font, +2s LCP on mobile.) */
   /* The second voice: the same family, italic. Light weight only at display size. */
   .editorial {
-    font-family: var(--font-archivo), sans-serif;
+    font-family: var(--font-archivo-italic), var(--font-archivo), sans-serif;
     font-style: italic;
     font-weight: 400;
-  }
-
-  /* Hairline rule with mono label */
-  .rule-label {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-  .rule-label::after {
-    content: "";
-    flex: 1;
-    height: 1px;
-    background: var(--color-line);
   }
 
   /* Outline-only display numerals: the drafting-table voice */
@@ -241,7 +223,7 @@ body::after {
   }
 }
 
-/* ── Redline: four marks (gutter numbers are markup) ── */
+/* ── Redline marks ── */
 
 /* Inserted text: insert wash with a green underline, like a tracked insertion. */
 .ins-mark {
@@ -251,12 +233,6 @@ body::after {
   padding: 0 0.08em;
   -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
-}
-/* Deleted text: struck through, so the meaning never rests on colour alone. */
-.del-mark {
-  color: var(--color-del);
-  text-decoration: line-through;
-  text-decoration-thickness: 2px;
 }
 /* A highlight that sweeps in behind a title on hover, focus, or when active. */
 .hl-sweep {
@@ -307,11 +283,6 @@ body::after {
   .kbd-hint {
     display: none;
   }
-}
-
-/* Dark editor: focus rings switch to the bright insert green. */
-.editor :focus-visible {
-  outline-color: var(--color-ins-bright);
 }
 
 /* ── Exhibit card tilt (portrait) ── */
@@ -510,10 +481,13 @@ body::after {
   }
 }
 
-:focus-visible {
-  outline: 2px solid var(--color-ins);
-  outline-offset: 2px;
-  border-radius: 2px;
+/* In the base layer so a component's own focus colour (focus-visible:outline-*) can override it. */
+@layer base {
+  :focus-visible {
+    outline: 2px solid var(--color-ins);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
 }
 
 /* ── Forced colors (Windows High Contrast) ── */

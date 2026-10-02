@@ -227,7 +227,7 @@ function BrowserFrame({
             </span>
           ) : (
             <span
-              className="hidden font-mono text-[10px] text-text-muted uppercase transition-colors duration-300 group-hover:text-ins lg:inline"
+              className="hidden font-mono text-[10px] text-text-muted uppercase transition-colors duration-300 group-hover:text-ins lg:inline motion-reduce:lg:hidden"
               aria-hidden="true"
             >
               Hover to scroll
@@ -293,7 +293,8 @@ function useLinked() {
   const still = useStill();
   const [wide, setWide] = useState(false);
   useEffect(() => {
-    const media = window.matchMedia("(min-width: 1024px)");
+    // Tall enough for the pinned copy column to fit under the navbar, too.
+    const media = window.matchMedia("(min-width: 1024px) and (min-height: 760px)");
     const update = () => setWide(media.matches);
     update();
     media.addEventListener("change", update);
@@ -350,8 +351,18 @@ function Exhibit({ project, index }: { project: Project; index: number }) {
             <p className="mt-4 text-[15px] leading-relaxed text-body-muted">{project.description}</p>
           </FadeUp>
 
-          {/* Review notes as a list where the frame isn't scroll-linked (phones, reduced motion) */}
-          {!linked && (
+          {/*
+            Review notes as a list. Where the frame is scroll-linked the same notes
+            appear in the frame overlay (aria-hidden), so the list stays for screen
+            readers but is visually hidden.
+          */}
+          {linked ? (
+            <ul className="sr-only">
+              {project.comments.map((c) => (
+                <li key={c.text}>{c.text}</li>
+              ))}
+            </ul>
+          ) : (
             <FadeUp delay={0.15} className="mt-6">
               <ul className="flex flex-col gap-2">
                 {project.comments.map((c) => (
@@ -378,7 +389,7 @@ function Exhibit({ project, index }: { project: Project; index: number }) {
 
           {/* Data strip */}
           <FadeUp delay={0.25} className="mt-6">
-            <dl className="editor flex flex-wrap gap-x-6 gap-y-2 rounded-[3px] bg-data-bg px-5 py-3.5 font-mono text-[11px] text-data-ink">
+            <dl className="flex flex-wrap gap-x-6 gap-y-2 rounded-[3px] bg-data-bg px-5 py-3.5 font-mono text-[11px] text-data-ink">
               {project.data.map(([label, value]) => (
                 <div key={label} className="flex gap-2">
                   <dt className="uppercase">{label} /</dt>

@@ -197,7 +197,7 @@ export default function Services() {
                   <div className="relative font-mono text-sm font-medium text-ins tnum">
                     <span
                       aria-hidden="true"
-                      className={`absolute top-0 -left-4 h-full w-[3px] origin-top bg-ins transition-transform duration-500 [transition-timing-function:var(--ease-out-expo)] md:-left-5 ${
+                      className={`absolute top-0 -left-4 h-full w-[3px] origin-top bg-ins transition-transform duration-500 motion-reduce:transition-none [transition-timing-function:var(--ease-out-expo)] md:-left-5 ${
                         isActive ? "scale-y-100" : "scale-y-0"
                       }`}
                     />
@@ -230,7 +230,7 @@ export default function Services() {
                           className="flex items-center gap-2.5 font-mono text-[12px] text-body-muted"
                         >
                           <span
-                            className={`h-1 shrink-0 bg-ins transition-all duration-500 ${
+                            className={`h-1 shrink-0 bg-ins transition-all duration-500 motion-reduce:transition-none ${
                               isActive ? "w-3" : "w-1"
                             }`}
                             style={{ transitionDelay: isActive ? `${j * 60}ms` : "0ms" }}

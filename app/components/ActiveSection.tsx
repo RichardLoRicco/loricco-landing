@@ -5,8 +5,7 @@ import { SECTIONS, type SectionId } from "../lib/sections";
 
 /*
   This provider watches a thin band near the top third of the viewport and
-  reports which section is crossing it, so the navbar and the margin index
-  can highlight the same one.
+  reports which section is crossing it, so the navbar can highlight it.
 */
 
 const Ctx = createContext<SectionId | null>(null);

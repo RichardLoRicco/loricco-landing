@@ -1,6 +1,6 @@
 /*
   The page is one document with numbered sections. This list drives the
-  navbar, the margin index and the footer, so it lives outside any client
+  navbar, the mobile menu and the footer, so it lives outside any client
   module and server components can import it too.
 */
 export const SECTIONS = [

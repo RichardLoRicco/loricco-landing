@@ -5,16 +5,28 @@ import StructuredData from "./components/StructuredData";
 import "./globals.css";
 
 /*
-  "Legal Pad": one variable family carries the whole voice. Display runs
-  expanded and heavy; the second voice is the same family, light italic.
-  Martian Mono for labels and figures.
+  "Redline": one variable family carries the whole voice. Display runs wide
+  and heavy; the second voice is the same family in italic. Martian Mono for
+  labels and figures.
+
+  The italic is its own instance and isn't preloaded: it only sets a few
+  display lines, and preloading it with the upright file pushed the hero
+  paragraph (the LCP element) back by about half a second.
 */
 const archivo = Archivo({
   variable: "--font-archivo",
   subsets: ["latin"],
-  style: ["normal", "italic"],
   axes: ["wdth"],
   display: "swap",
+});
+
+const archivoItalic = Archivo({
+  variable: "--font-archivo-italic",
+  subsets: ["latin"],
+  style: ["italic"],
+  axes: ["wdth"],
+  display: "swap",
+  preload: false,
 });
 
 const martianMono = Martian_Mono({
@@ -64,7 +76,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${archivo.variable} ${martianMono.variable} antialiased`}
+        className={`${archivo.variable} ${archivoItalic.variable} ${martianMono.variable} antialiased`}
       >
         <a
           href="#main-content"

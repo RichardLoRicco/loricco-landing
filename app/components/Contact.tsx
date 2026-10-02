@@ -32,7 +32,7 @@ function CopyEmail() {
       aria-live="polite"
     >
       <span
-        className={`h-1.5 w-1.5 rounded-full transition-colors duration-300 ${copied ? "bg-good-wash" : "bg-current"}`}
+        className={`h-1.5 w-1.5 rounded-full transition-colors duration-300 ${copied ? "bg-ins" : "bg-current"}`}
         aria-hidden="true"
       />
       {copied ? "COPIED" : "COPY ADDRESS"}
@@ -51,7 +51,7 @@ export default function Contact() {
         <div className="mt-6 grid grid-cols-[minmax(0,1fr)] gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,20rem)] lg:items-end lg:gap-20">
           <div>
             <SplitLines
-              className="font-display max-w-2xl text-4xl leading-[1.02] font-[760] tracking-[-0.03em] [font-stretch:112%] sm:text-5xl lg:text-[4rem]"
+              className="font-display max-w-2xl text-4xl leading-[1.02] sm:text-5xl lg:text-[4rem]"
               lines={[
                 "Tell me what",
                 <span key="l2" className="editorial font-light tracking-[-0.02em] [font-stretch:100%]">

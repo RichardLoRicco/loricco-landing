@@ -55,7 +55,7 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Section links, numbered like the margin index */}
+        {/* Section links, numbered like the clause numbers in the page margin */}
         <nav aria-label="Footer" className="border-t border-line pt-6">
           <ul className="grid grid-cols-2 gap-x-6 gap-y-3 sm:flex sm:flex-wrap sm:justify-center sm:gap-x-8">
             {SECTIONS.map((s) => (

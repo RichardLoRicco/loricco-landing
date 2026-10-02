@@ -83,7 +83,7 @@ export default function Hero() {
             width setting, so the size tracks the viewport (gutters out,
             divided by 9) to keep that line whole.
           */
-          className="font-display mt-5 max-w-5xl text-[length:min(2.8rem,calc((100vw-3rem)/9))] leading-[1] font-[760] tracking-[-0.035em] [font-stretch:112%] sm:text-[3.7rem] lg:text-[5.2rem] xl:text-[5.9rem]"
+          className="font-display mt-5 max-w-5xl text-[length:min(2.8rem,calc((100vw-3rem)/9))] leading-[1] sm:text-[3.7rem] lg:text-[5.2rem] xl:text-[5.9rem]"
           lines={[
             "Websites, AI, and",
             <span key="l2" className="editorial font-light tracking-[-0.02em] [font-stretch:100%]">
@@ -137,7 +137,7 @@ export default function Hero() {
 
             {/* ── The one formula bar ── */}
             <FadeUp immediate delay={0.45} y={12} className="mt-12 max-w-lg lg:mt-14">
-              <Sheet rows={sheetRows} />
+              <Sheet rows={sheetRows} caption="Figures about the practice" />
             </FadeUp>
           </div>
 
