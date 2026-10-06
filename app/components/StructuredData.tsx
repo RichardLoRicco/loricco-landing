@@ -110,6 +110,15 @@ export default function StructuredData() {
           "@type": "Offer",
           itemOffered: {
             "@type": "Service",
+            name: "Contract Legal Work for Law Firms",
+            description:
+              "Legal research, research memos, and drafting for law firms that need another attorney on a matter, by a Connecticut-admitted attorney working under the direction of the hiring attorney.",
+          },
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
             name: "Business & Startup Advisory",
             description:
               "Pitch decks, financial projections, competitive analysis, architecture reviews, and go-to-market strategy for startups and small businesses.",

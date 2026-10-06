@@ -567,6 +567,16 @@ a { color: inherit; text-decoration: none; }
   box-shadow: 0 0 0 3px rgba(78, 163, 92, 0.18);
 }
 .dateline-location-short { display: none; }
+/* Phones get the short credential line so the email link fits beside it */
+.dateline-short { display: none; }
+@media (max-width: 480px) {
+  .dateline-long { display: none; }
+  .dateline-short { display: inline; }
+}
+/* Below 360px the email cannot fit; the menu's Get in touch opens the same address */
+@media (max-width: 359px) {
+  .dateline-link { display: none; }
+}
 .dateline-link {
   color: var(--text-muted);
   text-decoration: none;

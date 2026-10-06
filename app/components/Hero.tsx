@@ -61,7 +61,8 @@ export default function Hero() {
               I&apos;m a Connecticut attorney and software engineer. I rebuild and
               run websites and AI systems for law firms and small businesses, train
               lawyers and their staff on AI, consult with counsel on the technology
-              in their cases, and advise startups. You work with me directly from
+              in their cases, take on contract research and drafting for law
+              firms, and advise startups. You work with me directly from
               the first call to the finished work.
             </p>
 
