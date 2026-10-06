@@ -112,7 +112,7 @@ export default function StructuredData() {
             "@type": "Service",
             name: "Contract Legal Work for Law Firms",
             description:
-              "Legal research, research memos, and drafting for law firms that need another attorney on a matter, by a Connecticut-admitted attorney.",
+              "Legal research, research memos, and litigation and contract drafting for law firms that need another attorney on a matter, by a Connecticut-admitted attorney.",
           },
         },
         {

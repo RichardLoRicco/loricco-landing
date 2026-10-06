@@ -57,7 +57,7 @@ const services = [
     offerings: [
       "Legal research",
       "Research memos",
-      "Drafting",
+      "Litigation & contract drafting",
       "Single projects or ongoing help",
     ],
   },
