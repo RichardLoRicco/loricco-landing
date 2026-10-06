@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { SECTIONS, useActiveSection } from "./ActiveSection";
 import ThemeToggle from "./ThemeToggle";
 
+const EMAIL = "admin@loriccoandco.com";
+
 const SHORT_LABELS: Partial<Record<(typeof SECTIONS)[number]["id"], string>> = {
   work: "Work",
   process: "Process",
@@ -29,7 +31,7 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => {
-    const onResize = () => window.innerWidth >= 900 && setMenuOpen(false);
+    const onResize = () => window.innerWidth >= 1100 && setMenuOpen(false);
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
   }, []);
@@ -61,8 +63,11 @@ export default function Navbar() {
                 <span>{label}</span>
               </a>
             ))}
-            <div className="ml-2 pl-3" style={{ borderLeft: "1px solid var(--border)" }}>
+            <div className="ml-2 flex items-center gap-3 pl-3" style={{ borderLeft: "1px solid var(--border)" }}>
               <ThemeToggle />
+              <a href={`mailto:${EMAIL}`} className="btn btn-primary nav-cta">
+                Get in touch
+              </a>
             </div>
           </div>
 
@@ -125,6 +130,13 @@ export default function Navbar() {
             <span className="label">Theme</span>
             <ThemeToggle />
           </div>
+          <a
+            href={`mailto:${EMAIL}`}
+            onClick={() => setMenuOpen(false)}
+            className="btn btn-primary mt-5 w-full"
+          >
+            Get in touch
+          </a>
         </div>
       </div>
     </>
