@@ -1,25 +1,39 @@
 import type { Metadata } from "next";
-import { Bricolage_Grotesque, Fraunces, Spline_Sans_Mono } from "next/font/google";
+import { Fraunces, Geist, Geist_Mono, Source_Serif_4 } from "next/font/google";
+import Script from "next/script";
 import Providers from "./components/Providers";
 import StructuredData from "./components/StructuredData";
 import "./globals.css";
 
-const bricolage = Bricolage_Grotesque({
-  variable: "--font-bricolage",
-  subsets: ["latin"],
-  display: "swap",
-});
-
+/* Same four faces as richardloricco.com. Fraunces keeps its SOFT and opsz
+   axes because the display headlines are drawn at opsz 144. */
 const fraunces = Fraunces({
   variable: "--font-fraunces",
   subsets: ["latin"],
   style: ["normal", "italic"],
+  axes: ["SOFT", "opsz"],
   display: "swap",
 });
 
-const splineSansMono = Spline_Sans_Mono({
-  variable: "--font-spline-mono",
+const geist = Geist({
+  variable: "--font-geist",
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+});
+
+const sourceSerif = Source_Serif_4({
+  variable: "--font-source-serif",
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  style: ["normal", "italic"],
+  display: "swap",
+});
+
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+  weight: ["400", "500"],
   display: "swap",
 });
 
@@ -62,10 +76,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${bricolage.variable} ${fraunces.variable} ${splineSansMono.variable} antialiased`}
-      >
+    // Font variables sit on <html> so the :root tokens that reference them resolve.
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={`${fraunces.variable} ${geist.variable} ${sourceSerif.variable} ${geistMono.variable}`}
+    >
+      <body className="antialiased">
+        <Script src="/theme-init.js" strategy="beforeInteractive" />
         <StructuredData />
         <Providers>{children}</Providers>
       </body>
