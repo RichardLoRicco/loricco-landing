@@ -528,6 +528,23 @@ li:last-child > .service-row { border-bottom: 1px solid var(--rule-color); }
   font-variation-settings: "opsz" 144, "SOFT" 40;
 }
 
+/* Process: four ruled columns on desktop, stacked rows below */
+.process-steps {
+  display: grid;
+  gap: 0;
+}
+.process-steps > li {
+  padding-block: 1.75rem 2rem;
+  border-top: 1px solid var(--rule-color);
+}
+@media (min-width: 900px) {
+  .process-steps {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 2.5rem;
+  }
+  .process-steps > li { padding-block: 1.75rem 0; }
+}
+
 /* Small monospace tag */
 .tag {
   display: inline-flex;
