@@ -508,6 +508,26 @@ li:last-child > .service-row { border-bottom: 1px solid var(--rule-color); }
 }
 .service-row:hover .service-title { color: var(--accent); }
 
+/* Work: Lighthouse scores as a ruled four-cell ledger */
+.work-scores {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border-top: 1px solid var(--rule-color);
+  border-bottom: 1px solid var(--rule-color);
+}
+@media (min-width: 480px) {
+  .work-scores { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+.work-scores > div { padding: 0.9rem 0.75rem 0.9rem 0; }
+.work-scores dd {
+  margin-top: 0.3rem;
+  font-family: var(--ff-display);
+  font-size: 1.6rem;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  font-variation-settings: "opsz" 144, "SOFT" 40;
+}
+
 /* Small monospace tag */
 .tag {
   display: inline-flex;
