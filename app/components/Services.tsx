@@ -53,7 +53,7 @@ const services = [
     title: "Contract Legal Work for Law Firms",
     outcome: "Extra capacity when you need it",
     description:
-      "Firms bring me in when they need another attorney on a matter without making a hire. I take on legal research, research memos, and drafting, and I return work your attorneys can review and use. I'm admitted in Connecticut and I work under the direction of the attorney who brings me in.",
+      "Firms bring me in when they need another attorney on a matter without making a hire. I take on legal research, research memos, and drafting, and I return work your attorneys can review and use. I'm admitted in Connecticut.",
     offerings: [
       "Legal research",
       "Research memos",
