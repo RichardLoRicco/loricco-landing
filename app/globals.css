@@ -487,6 +487,27 @@ a { color: inherit; text-decoration: none; }
   border-color: var(--accent);
 }
 
+/* Services: one ruled row per service, § number / title and copy / outcome and tags */
+.service-row {
+  display: grid;
+  gap: 1rem 2.5rem;
+  padding-block: 2.5rem;
+  border-top: 1px solid var(--rule-color);
+}
+li:last-child > .service-row { border-bottom: 1px solid var(--rule-color); }
+@media (min-width: 900px) {
+  .service-row {
+    grid-template-columns: 4.5rem minmax(0, 1fr) 17rem;
+    padding-block: 3rem;
+  }
+}
+.service-title {
+  font-size: clamp(1.6rem, 2.6vw, 2.15rem);
+  line-height: 1.05;
+  transition: color var(--dur-sm) var(--ease-out-expo);
+}
+.service-row:hover .service-title { color: var(--accent); }
+
 /* Small monospace tag */
 .tag {
   display: inline-flex;
