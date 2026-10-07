@@ -48,8 +48,8 @@ export default function About() {
         <div className="grid gap-12 pt-14 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)] lg:gap-20">
           <Reveal>
             <p className="drop-cap body-serif pretty" style={{ fontSize: "1.2rem", lineHeight: 1.65 }}>
-              I practiced law, consulted for startups, and then moved into
-              building production software. The services on this page grew
+              I practice law, consult for startups and small businesses, and
+              build production software and AI systems. The services on this page grew
               out of problems people kept bringing me. Their firm website had
               stopped bringing in work. Their team bought AI tools but never
               used them. Their case turned on carrier records. Their business
@@ -65,9 +65,10 @@ export default function About() {
               </p>
               <p className="body-serif pretty mt-4 max-w-xl" style={{ fontSize: "1.05rem" }}>
                 I&apos;m a Connecticut-admitted attorney and software
-                engineer with an LL.M., J.D., and MBA. My work has included
-                legal practice, startup consulting, production web and AI
-                systems, open-source tools, and the studio&apos;s apps.
+                engineer with an LL.M., J.D., and MBA. My work includes
+                legal practice, consulting for startups and small businesses,
+                production software and AI systems, open-source tools, and the
+                studio&apos;s apps.
               </p>
             </div>
           </Reveal>
