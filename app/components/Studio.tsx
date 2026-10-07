@@ -456,7 +456,7 @@ export default function Studio() {
         <div
           role="group"
           aria-labelledby="studio-dev"
-          className="mt-20 grid gap-8 border-t border-[var(--rule-color)] pt-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] lg:gap-16"
+          className="mt-20 grid gap-8 border-t border-[var(--rule-color)] pt-10 lg:grid-cols-[14rem_minmax(0,1fr)] lg:gap-14 xl:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] xl:gap-16"
         >
           <header className="flex flex-col gap-4 lg:sticky lg:top-[calc(var(--dateline-h)+var(--nav-h)+2rem)] lg:self-start">
             <div className="flex items-center gap-3">

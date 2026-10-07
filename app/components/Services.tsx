@@ -112,8 +112,10 @@ export default function Services() {
                     {service.outcome}
                   </p>
                   <ul className="offerings" aria-label={`${service.title} includes`}>
-                    {service.offerings.map((offering) => (
-                      <li key={offering}>{offering}</li>
+                    {service.offerings.map((offering, j) => (
+                      <li key={offering} style={{ "--i": j } as React.CSSProperties}>
+                        {offering}
+                      </li>
                     ))}
                   </ul>
                   {/* A ready-made subject line, so nobody starts from a blank email */}

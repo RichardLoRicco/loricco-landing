@@ -107,7 +107,7 @@
 [data-theme="light"] {
   --background:     var(--paper);
   --surface:        #f6f2e9;
-  --surface-raised: #ffffff;
+  --surface-raised: #fbf8f2;
   --surface-sunken: var(--paper-soft);
   --border:         rgba(18, 17, 16, 0.10);
   --border-strong:  rgba(18, 17, 16, 0.22);
@@ -133,7 +133,7 @@
   :root:not([data-theme]) {
     --background:     var(--paper);
     --surface:        #f6f2e9;
-    --surface-raised: #ffffff;
+    --surface-raised: #fbf8f2;
     --surface-sunken: var(--paper-soft);
     --border:         rgba(18, 17, 16, 0.10);
     --border-strong:  rgba(18, 17, 16, 0.22);
@@ -206,7 +206,7 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
+  overflow-x: clip;     /* clip, not hidden: hidden creates a scroll container and breaks position: sticky */
   padding-top: var(--dateline-h);      /* leaves room for fixed dateline */
 }
 
@@ -485,7 +485,10 @@ li:last-child > .service-row { border-bottom: 1px solid var(--rule-color); }
   border-top: 1px solid var(--rule-color);
   border-bottom: 1px solid var(--rule-color);
 }
-@media (min-width: 480px) {
+/* Four across only when the column holding them is wide enough (it is a
+   narrow 5/12 column at the lg breakpoint, wide on phones in landscape) */
+.work-meta { container-type: inline-size; }
+@container (min-width: 30rem) {
   .work-scores { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 }
 .work-scores > div { padding: 0.9rem 0.75rem 0.9rem 0; }
@@ -507,16 +510,17 @@ li:last-child > .service-row { border-bottom: 1px solid var(--rule-color); }
   gap: 2.25rem;
   padding-left: 2.75rem;
 }
-.process-steps::before {
+/* Phones: each step draws the line down to the next ring, so it ends at 04 */
+.process-steps > li { position: relative; }
+.process-steps > li:not(:last-child)::before {
   content: "";
   position: absolute;
-  left: 0.875rem;
-  top: 0.875rem;
-  bottom: 0;
+  left: -1.875rem;
+  top: 1.75rem;
+  bottom: -2.25rem;
   width: 1px;
   background: var(--rule-color);
 }
-.process-steps > li { position: relative; }
 .step-num {
   position: absolute;
   left: -2.75rem;
@@ -541,13 +545,16 @@ li:last-child > .service-row { border-bottom: 1px solid var(--rule-color); }
     padding-left: 0;
     padding-top: 2.75rem;
   }
+  /* Desktop: one line across all four columns */
+  .process-steps > li:not(:last-child)::before { display: none; }
   .process-steps::before {
+    content: "";
+    position: absolute;
     left: 0;
     right: 0;
     top: 0.875rem;
-    bottom: auto;
-    width: auto;
     height: 1px;
+    background: var(--rule-color);
   }
   .step-num { left: 0; top: -2.75rem; }
   .process-steps h3 { line-height: 1.05; }
@@ -598,23 +605,35 @@ li:last-child > .service-row { border-bottom: 1px solid var(--rule-color); }
   to   { opacity: 1; transform: translateY(0); }
 }
 
+/* Phones: the left cell shows the running head once past the hero */
+.dateline-run-phone { display: none; }
+@media (max-width: 860px) {
+  .dateline-left[data-section] .dateline-cred { display: none; }
+  .dateline-left[data-section] .dateline-run-phone { display: inline-block; }
+}
+
 /* Hero on phones: the eyebrow sits beside the small portrait, so it drops its
    leading rule */
 @media (max-width: 1023px) {
   .hero-eyebrow::before { display: none; }
 }
 
-/* Hero facts on phones: one ruled line instead of the desktop ledger */
+/* Hero facts on phones: one ruled row instead of the desktop ledger; labels
+   in mono, values in the display face, as in the desktop ledger */
 .hero-facts {
   margin-top: 2.25rem;
-  padding-block: 0.9rem;
+  padding-block: 1rem;
   border-top: 1px solid var(--rule-color);
   border-bottom: 1px solid var(--rule-color);
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem 1.25rem;
-  line-height: 1.5;
-  color: var(--text-secondary);
+  gap: 0.9rem 1.75rem;
+}
+.hero-facts dd {
+  margin-top: 0.2rem;
+  font-family: var(--ff-display);
+  font-size: 1rem;
+  font-variant-numeric: tabular-nums;
 }
 
 /* Services: what each service includes, as a quiet ruled list */
@@ -625,7 +644,7 @@ li:last-child > .service-row { border-bottom: 1px solid var(--rule-color); }
 }
 .offerings li {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 0.75rem;
   font-family: var(--ff-mono);
   font-size: 0.68rem;
@@ -637,11 +656,13 @@ li:last-child > .service-row { border-bottom: 1px solid var(--rule-color); }
 .offerings li::before {
   content: "";
   flex: none;
+  margin-top: 0.72em;
   width: 1.25rem;
   height: 1px;
   background: var(--border-strong);
   transition: width var(--dur-md) var(--ease-out-expo), background var(--dur-sm) ease;
 }
+.offerings li::before { transition-delay: calc(var(--i, 0) * 40ms); }
 .service-row:hover .offerings li::before {
   width: 1.75rem;
   background: var(--accent);

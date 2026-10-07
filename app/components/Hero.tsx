@@ -111,13 +111,14 @@ export default function Hero() {
             </div>
 
             {/* Phones: the same facts as the desktop ledger, on one ruled line */}
-            <p className="hero-facts meta lg:hidden">
+            <dl className="hero-facts lg:hidden">
               {facts.map(({ label, value }) => (
-                <span key={label}>
-                  <span style={{ color: "var(--text-faint)" }}>{label}</span> {value}
-                </span>
+                <div key={label}>
+                  <dt className="meta">{label}</dt>
+                  <dd>{value}</dd>
+                </div>
               ))}
-            </p>
+            </dl>
           </div>
 
           {/* The principal, framed the way the personal site frames its portrait */}
@@ -139,6 +140,7 @@ export default function Hero() {
                     alt="Richard T. LoRicco, principal of LoRicco & Co., in a suit and tie"
                     width={800}
                     height={1000}
+                    loading="eager"
                     sizes="240px"
                     className="aspect-[4/5] w-full object-cover"
                     style={{ display: "block" }}

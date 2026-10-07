@@ -92,7 +92,7 @@ export default function Work() {
                   <SiteFrame project={project} />
                 </Reveal>
 
-                <Reveal delay={100} className={`lg:col-span-5 ${flipped ? "lg:order-1" : ""}`}>
+                <Reveal delay={100} className={`work-meta lg:col-span-5 ${flipped ? "lg:order-1" : ""}`}>
                   <h3 style={{ fontSize: "clamp(1.75rem, 2.8vw, 2.35rem)", lineHeight: 1.05 }}>
                     {project.name}
                   </h3>

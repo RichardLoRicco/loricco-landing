@@ -22,7 +22,7 @@ export default function Home() {
       <Dateline />
       <Navbar />
       <ScrollProgress />
-      <main id="main-content" className="relative overflow-x-hidden">
+      <main id="main-content" className="relative overflow-x-clip">
         <Hero />
         <Services />
         <Work />
