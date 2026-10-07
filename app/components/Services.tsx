@@ -1,6 +1,17 @@
 import Reveal from "./Reveal";
+import { counts, spell } from "../lib/apps";
 
-const services = [
+type Service = {
+  section: string;
+  title: string;
+  outcome: string;
+  description: string;
+  offerings: string[];
+  /** A second link under "Email about this", to proof elsewhere on the page. */
+  seeAlso?: { href: string; label: string };
+};
+
+const services: Service[] = [
   {
     section: "01",
     title: "Websites & AI Tools",
@@ -16,6 +27,20 @@ const services = [
   },
   {
     section: "02",
+    title: "Web & Mobile Apps",
+    outcome: "A shipped app you own",
+    // The count comes from the Studio list, so this sentence stays true as apps ship.
+    description: `I build iPhone apps and web apps, from the first version through App Store review and launch. I've taken ${spell(counts.live)} of my own apps through that process, including subscriptions, analytics, and support, and you can see them in the Studio section below. I can also pick up an app that's stalled or add features to one you already have. The developer accounts and the App Store listing stay in your name.`,
+    offerings: [
+      "iPhone apps",
+      "Web apps and internal tools",
+      "App Store launch & subscriptions",
+      "Features for an existing app",
+    ],
+    seeAlso: { href: "#studio", label: "See the apps I've built" },
+  },
+  {
+    section: "03",
     title: "AI Education & Training",
     outcome: "Staff who use the tools",
     description:
@@ -28,7 +53,7 @@ const services = [
     ],
   },
   {
-    section: "03",
+    section: "04",
     title: "Technical Consulting for Law Firms",
     outcome: "Analysis counsel can use",
     description:
@@ -41,7 +66,7 @@ const services = [
     ],
   },
   {
-    section: "04",
+    section: "05",
     title: "Contract Legal Work for Law Firms",
     outcome: "Extra capacity when you need it",
     description:
@@ -54,7 +79,7 @@ const services = [
     ],
   },
   {
-    section: "05",
+    section: "06",
     title: "Business & Startup Advisory",
     outcome: "A second opinion",
     description:
@@ -118,15 +143,22 @@ export default function Services() {
                       </li>
                     ))}
                   </ul>
-                  {/* A ready-made subject line, so nobody starts from a blank email */}
-                  <a
-                    href={`mailto:admin@loriccoandco.com?subject=${encodeURIComponent(service.title)}`}
-                    className="link-accent meta mt-6 inline-block"
-                    style={{ color: "var(--accent)" }}
-                    aria-label={`Email about this: ${service.title}`}
-                  >
-                    Email about this &rarr;
-                  </a>
+                  <div className="mt-6 flex flex-wrap gap-x-6 gap-y-3">
+                    {/* A ready-made subject line, so nobody starts from a blank email */}
+                    <a
+                      href={`mailto:admin@loriccoandco.com?subject=${encodeURIComponent(service.title)}`}
+                      className="link-accent meta"
+                      style={{ color: "var(--accent)" }}
+                      aria-label={`Email about this: ${service.title}`}
+                    >
+                      Email about this &rarr;
+                    </a>
+                    {service.seeAlso && (
+                      <a href={service.seeAlso.href} className="link-accent meta" style={{ color: "var(--text-primary)" }}>
+                        {service.seeAlso.label} &darr;
+                      </a>
+                    )}
+                  </div>
                 </div>
               </article>
             </Reveal>

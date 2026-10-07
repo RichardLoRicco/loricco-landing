@@ -91,8 +91,8 @@ export default function Hero() {
               style={{ fontSize: "clamp(1.15rem, 1.6vw, 1.35rem)" }}
             >
               I&apos;m a Connecticut attorney and software engineer. I rebuild and
-              run websites and AI systems for law firms and small businesses, train
-              lawyers and their staff on AI, consult with counsel on the technology
+              run websites and AI systems for law firms and small businesses, build
+              iPhone and web apps, train lawyers and their staff on AI, consult with counsel on the technology
               in their cases, take on contract research and drafting for law
               firms, and advise startups and small businesses. You work with me
               directly from the first call to the finished work.

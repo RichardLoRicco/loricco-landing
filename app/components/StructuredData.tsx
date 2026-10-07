@@ -92,6 +92,15 @@ export default function StructuredData() {
           "@type": "Offer",
           itemOffered: {
             "@type": "Service",
+            name: "Web & Mobile App Development",
+            description:
+              "iPhone apps and web apps built from the first version through App Store review and launch, including subscriptions and analytics, plus features for existing apps. The client keeps the developer accounts and App Store listing.",
+          },
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
             name: "AI Education & Training",
             description:
               "AI workshops for lawyers and small-business teams covering day-to-day use, common failures, and compliance concerns.",

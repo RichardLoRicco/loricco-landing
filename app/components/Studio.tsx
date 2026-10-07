@@ -373,8 +373,8 @@ export default function Studio() {
           <p className="body-serif pretty max-w-2xl" style={{ fontSize: "1.15rem" }}>
             {capitalize(spell(counts.live))} are live on the App Store, {spell(counts.review)} is
             in App Review, and {spell(counts.development)} more are in development. I build them and
-            handle App Store review, subscriptions, analytics, and support. That work informs the
-            product advice I give clients.
+            handle App Store review, subscriptions, analytics, and support. I do the same work for
+            clients who need an app built.
           </p>
 
           {/* The sentence beside it gives the same three numbers, so phones skip the ledger */}
