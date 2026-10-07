@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Fraunces, Geist, Geist_Mono, Source_Serif_4 } from "next/font/google";
 import Script from "next/script";
-import Providers from "./components/Providers";
+import { ThemeColorSync } from "./components/ThemeToggle";
 import StructuredData from "./components/StructuredData";
 import "./globals.css";
 
@@ -101,7 +101,8 @@ export default function RootLayout({
       <body className="antialiased">
         <Script src="/theme-init.js" strategy="beforeInteractive" />
         <StructuredData />
-        <Providers>{children}</Providers>
+        <ThemeColorSync />
+        {children}
       </body>
     </html>
   );

@@ -2,7 +2,7 @@
 
 import { useEffect, useSyncExternalStore } from "react";
 
-type Theme = "light" | "dark";
+export type Theme = "light" | "dark";
 
 /* public/theme-init.js sets data-theme on <html> before first paint; this
    component reads it from there and writes it back on toggle. */
@@ -15,19 +15,31 @@ const getTheme = (): Theme =>
   document.documentElement.getAttribute("data-theme") === "light" ? "light" : "dark";
 const getServerTheme = (): Theme | null => null;
 
+/** The current theme, or null during server render and hydration. */
+export function useTheme() {
+  return useSyncExternalStore(subscribe, getTheme, getServerTheme);
+}
+
 const CHROME = { dark: "#121110", light: "#efeae0" } as const;
 
-export default function ThemeToggle() {
-  const theme = useSyncExternalStore(subscribe, getTheme, getServerTheme);
-
-  // Browser chrome (the theme-color metas) follows the chosen theme, not only
-  // the OS setting. Done after hydration so the server-rendered head matches.
+/*
+  Mounted once in the root layout, so every page (the 404 too): the browser
+  chrome (theme-color metas) follows the chosen theme, not only the OS setting.
+  Runs after hydration so the server-rendered head still matches.
+*/
+export function ThemeColorSync() {
+  const theme = useTheme();
   useEffect(() => {
     if (!theme) return;
     document
       .querySelectorAll('meta[name="theme-color"]')
       .forEach((m) => m.setAttribute("content", CHROME[theme]));
   }, [theme]);
+  return null;
+}
+
+export default function ThemeToggle() {
+  const theme = useTheme();
 
   if (!theme) {
     return (

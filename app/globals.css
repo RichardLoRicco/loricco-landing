@@ -899,10 +899,14 @@ li:last-child > .service-row { border-bottom: 1px solid var(--rule-color); }
   border-bottom: 1px solid transparent;
   max-height: 0;
   overflow: hidden;
-  transition: max-height var(--dur-md) var(--ease-out-expo);
+  visibility: hidden;
+  transition: max-height var(--dur-md) var(--ease-out-expo),
+              visibility 0s linear var(--dur-md);
 }
 @media (min-width: 900px) { .nav-drawer { display: none; } }
 .nav-drawer.is-open {
+  visibility: visible;
+  transition: max-height var(--dur-md) var(--ease-out-expo), visibility 0s;
   border-bottom-color: var(--rule-color);
   max-height: calc(100dvh - var(--dateline-h) - var(--nav-h));
   overflow-y: auto;
