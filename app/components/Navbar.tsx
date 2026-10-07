@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { SECTIONS, useActiveSection } from "./ActiveSection";
 import ThemeToggle from "./ThemeToggle";
 
@@ -15,12 +15,14 @@ const SHORT_LABELS: Partial<Record<(typeof SECTIONS)[number]["id"], string>> = {
 const links = SECTIONS.map((s) => ({
   href: `#${s.id}`,
   id: s.id,
+  num: s.num,
   label: SHORT_LABELS[s.id] ?? s.label,
 }));
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const toggleRef = useRef<HTMLButtonElement>(null);
   const active = useActiveSection();
 
   useEffect(() => {
@@ -38,7 +40,11 @@ export default function Navbar() {
 
   useEffect(() => {
     if (!menuOpen) return;
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setMenuOpen(false);
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== "Escape") return;
+      setMenuOpen(false);
+      toggleRef.current?.focus();
+    };
     document.addEventListener("keydown", onKey);
     return () => document.removeEventListener("keydown", onKey);
   }, [menuOpen]);
@@ -52,14 +58,14 @@ export default function Navbar() {
           </a>
 
           <div className="nav-links">
-            {links.map(({ href, id, label }, i) => (
+            {links.map(({ href, id, num, label }) => (
               <a
                 key={href}
                 href={href}
                 aria-current={active === id ? "page" : undefined}
                 className="nav-link"
               >
-                <span className="num">{String(i + 1).padStart(2, "0")}</span>
+                <span className="num">{num}</span>
                 <span>{label}</span>
               </a>
             ))}
@@ -72,6 +78,7 @@ export default function Navbar() {
           </div>
 
           <button
+            ref={toggleRef}
             type="button"
             aria-expanded={menuOpen}
             aria-controls="mobile-menu"
@@ -94,15 +101,16 @@ export default function Navbar() {
         </div>
       </nav>
 
-      <div
+      <nav
         id="mobile-menu"
+        aria-label="Mobile navigation"
         aria-hidden={!menuOpen}
         inert={!menuOpen}
         className={`nav-drawer ${menuOpen ? "is-open" : ""}`}
         style={{ zIndex: 109 }}
       >
         <div className="nav-drawer-inner">
-          {links.map(({ href, id, label }, i) => (
+          {links.map(({ href, id, num, label }) => (
             <a
               key={href}
               href={href}
@@ -112,7 +120,7 @@ export default function Navbar() {
               style={{ justifyContent: "space-between" }}
             >
               <span style={{ display: "inline-flex", gap: "0.9rem" }}>
-                <span className="num">{String(i + 1).padStart(2, "0")}</span>
+                <span className="num">{num}</span>
                 <span>{label}</span>
               </span>
             </a>
@@ -138,7 +146,7 @@ export default function Navbar() {
             Get in touch
           </a>
         </div>
-      </div>
+      </nav>
     </>
   );
 }

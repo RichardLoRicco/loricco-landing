@@ -80,57 +80,60 @@ export default function Hero() {
           </div>
 
           {/* The principal, framed the way the personal site frames its portrait */}
-          <aside className="animate-reveal delay-400 flex flex-col gap-8">
-            <HeroParallax>
-              <figure
-                className="relative mx-auto w-[200px] sm:w-[240px]"
-                style={{
-                  border: "1px solid var(--border-strong)",
-                  padding: "10px",
-                  background: "var(--surface-raised)",
-                  borderRadius: 2,
-                }}
-              >
-                <Image
-                  src="/portrait-bw.jpg"
-                  alt="Richard T. LoRicco, principal of LoRicco & Co., in a suit and tie"
-                  width={800}
-                  height={1000}
-                  priority
-                  sizes="240px"
-                  className="aspect-[4/5] w-full object-cover"
-                  style={{ display: "block" }}
-                />
-                <figcaption className="meta mt-3" style={{ textAlign: "center" }}>
-                  Principal &middot; R.&nbsp;T.&nbsp;LoRicco
-                </figcaption>
-              </figure>
-            </HeroParallax>
+          <aside className="animate-reveal delay-400">
+            {/* Portrait and facts drift together, at most the section's 5rem bottom padding */}
+            <HeroParallax max={80}>
+              <div className="flex flex-col gap-8">
+                <figure
+                  className="relative mx-auto w-[200px] sm:w-[240px]"
+                  style={{
+                    border: "1px solid var(--border-strong)",
+                    padding: "10px",
+                    background: "var(--surface-raised)",
+                    borderRadius: 2,
+                  }}
+                >
+                  <Image
+                    src="/portrait-bw.jpg"
+                    alt="Richard T. LoRicco, principal of LoRicco & Co., in a suit and tie"
+                    width={800}
+                    height={1000}
+                    priority
+                    sizes="240px"
+                    className="aspect-[4/5] w-full object-cover"
+                    style={{ display: "block" }}
+                  />
+                  <figcaption className="meta mt-3" style={{ textAlign: "center" }}>
+                    Principal &middot; R.&nbsp;T.&nbsp;LoRicco
+                  </figcaption>
+                </figure>
 
-            <dl
-              className="grid grid-cols-2 gap-x-6 gap-y-4"
-              style={{
-                borderTop: "1px solid var(--rule-color)",
-                borderBottom: "1px solid var(--rule-color)",
-                padding: "1.25rem 0",
-              }}
-            >
-              {facts.map(({ label, value, wide }) => (
-                <div key={label} className={wide ? "col-span-2" : undefined}>
-                  <dt className="meta">{label}</dt>
-                  <dd
-                    className="mt-1"
-                    style={{
-                      fontFamily: "var(--ff-display)",
-                      fontSize: "1.05rem",
-                      fontVariantNumeric: "tabular-nums",
-                    }}
-                  >
-                    {value}
-                  </dd>
-                </div>
-              ))}
-            </dl>
+                <dl
+                  className="grid grid-cols-2 gap-x-6 gap-y-4"
+                  style={{
+                    borderTop: "1px solid var(--rule-color)",
+                    borderBottom: "1px solid var(--rule-color)",
+                    padding: "1.25rem 0",
+                  }}
+                >
+                  {facts.map(({ label, value, wide }) => (
+                    <div key={label} className={wide ? "col-span-2" : undefined}>
+                      <dt className="meta">{label}</dt>
+                      <dd
+                        className="mt-1"
+                        style={{
+                          fontFamily: "var(--ff-display)",
+                          fontSize: "1.05rem",
+                          fontVariantNumeric: "tabular-nums",
+                        }}
+                      >
+                        {value}
+                      </dd>
+                    </div>
+                  ))}
+                </dl>
+              </div>
+            </HeroParallax>
           </aside>
         </div>
       </div>

@@ -2,8 +2,12 @@
 
 import { useEffect, useRef, type ReactNode } from "react";
 
-/* The portrait drifts down at 0.4x scroll speed on desktop, as on richardloricco.com. */
-export default function HeroParallax({ children }: { children: ReactNode }) {
+/*
+  The hero's right column drifts down at 0.4x scroll speed on desktop, as on
+  richardloricco.com. `max` caps the drift at the room below the column, so it
+  never runs into the section's clipped bottom edge.
+*/
+export default function HeroParallax({ children, max = 200 }: { children: ReactNode; max?: number }) {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -15,7 +19,7 @@ export default function HeroParallax({ children }: { children: ReactNode }) {
     const apply = () => {
       raf = 0;
       el.style.transform = mq.matches
-        ? `translate3d(0, ${Math.round(Math.min(window.scrollY * 0.4, 200))}px, 0)`
+        ? `translate3d(0, ${Math.round(Math.min(window.scrollY * 0.4, max))}px, 0)`
         : "";
     };
     const onScroll = () => {
@@ -30,7 +34,7 @@ export default function HeroParallax({ children }: { children: ReactNode }) {
       window.removeEventListener("scroll", onScroll);
       mq.removeEventListener("change", apply);
     };
-  }, []);
+  }, [max]);
 
   return (
     <div ref={ref} style={{ willChange: "transform", transition: "transform 100ms linear" }}>

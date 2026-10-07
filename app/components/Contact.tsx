@@ -25,9 +25,14 @@ function CopyEmail() {
   };
 
   return (
-    <button type="button" onClick={copy} className="btn btn-secondary" aria-live="polite">
-      {copied ? "Copied" : "Copy address"}
-    </button>
+    <>
+      <button type="button" onClick={copy} className="btn btn-secondary">
+        {copied ? "Copied" : "Copy address"}
+      </button>
+      <span role="status" className="sr-only">
+        {copied ? "Email address copied" : ""}
+      </span>
+    </>
   );
 }
 

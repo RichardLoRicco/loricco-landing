@@ -5,7 +5,8 @@ import { createContext, useContext, useEffect, useState, type ReactNode } from "
 /*
   The page is one document with numbered sections. This provider watches a
   thin band near the top third of the viewport and reports which section is
-  crossing it, so the navbar and the margin index can highlight the same one.
+  crossing it, so the navbar can highlight it. `num` is the section's number in
+  the nav; keep it in step with the "§ 0n" label in each section's heading.
 */
 
 export const SECTIONS = [

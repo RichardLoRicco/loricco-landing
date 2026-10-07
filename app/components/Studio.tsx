@@ -230,7 +230,7 @@ function Featured({ app }: { app: StudioApp }) {
   return (
     <article
       aria-labelledby={`featured-${app.slug}`}
-      className={`${theme.surface} relative overflow-hidden border border-(--ft-border) text-(--ft-text)`}
+      className={`${theme.surface} featured-panel relative overflow-hidden border border-(--ft-border) text-(--ft-text)`}
       style={{ ...themeVars(theme), borderRadius: "var(--radius-lg)" }}
     >
       <div className="relative grid gap-10 p-6 sm:p-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:gap-6 lg:p-12">

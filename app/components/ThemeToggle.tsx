@@ -19,7 +19,12 @@ export default function ThemeToggle() {
   const theme = useSyncExternalStore(subscribe, getTheme, getServerTheme);
 
   if (!theme) {
-    return <span aria-hidden="true" style={{ display: "inline-block", width: 76, height: 28 }} />;
+    return (
+      <span aria-hidden="true" className="theme-toggle" style={{ visibility: "hidden" }}>
+        <svg width="12" height="12" viewBox="0 0 24 24" />
+        <span>Paper</span>
+      </span>
+    );
   }
 
   const isDark = theme === "dark";

@@ -3,7 +3,6 @@ import Reveal from "./Reveal";
 const services = [
   {
     section: "§ 01",
-    num: "01",
     title: "Websites & AI Tools",
     outcome: "You own the site and accounts",
     description:
@@ -17,7 +16,6 @@ const services = [
   },
   {
     section: "§ 02",
-    num: "02",
     title: "AI Education & Training",
     outcome: "Staff who use the tools",
     description:
@@ -31,7 +29,6 @@ const services = [
   },
   {
     section: "§ 03",
-    num: "03",
     title: "Technical Consulting for Law Firms",
     outcome: "Analysis counsel can use",
     description:
@@ -45,7 +42,6 @@ const services = [
   },
   {
     section: "§ 04",
-    num: "04",
     title: "Contract Legal Work for Law Firms",
     outcome: "Extra capacity when you need it",
     description:
@@ -59,7 +55,6 @@ const services = [
   },
   {
     section: "§ 05",
-    num: "05",
     title: "Business & Startup Advisory",
     outcome: "A second opinion",
     description:
