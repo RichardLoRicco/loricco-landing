@@ -176,6 +176,14 @@
   }
 }
 
+/*
+  Everything below sits in Tailwind's components layer, so a utility class on
+  an element (text-*, bg-*, hover:*, group-hover:*) overrides these rules, as
+  Tailwind intends. Unlayered rules would beat every utility regardless of
+  order. The theme tokens above stay unlayered.
+*/
+@layer components {
+
 /* =============================================================
    Base
    ============================================================= */
@@ -934,3 +942,5 @@ li:last-child > .service-row { border-bottom: 1px solid var(--rule-color); }
   .site-preview-trigger:focus-visible .site-preview > img,
   .site-preview-trigger:focus-within .site-preview > img { transform: none; }
 }
+
+} /* @layer components */
