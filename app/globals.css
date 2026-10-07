@@ -7,38 +7,8 @@
   step with the personal site's src/app/globals.css.
 */
 
-/* Tailwind theme names point at the Chambers tokens, so utility classes
-   (bg-background, text-foreground, border-line, ...) follow the active theme.
-   The cobalt/data names are a bridge for sections not yet ported. */
+/* Tailwind's font utilities (font-mono, font-serif, ...) use the Chambers faces. */
 @theme inline {
-  --color-background: var(--background);
-  --color-card: var(--surface-raised);
-  --color-surface: var(--surface);
-  --color-foreground: var(--text-primary);
-  --color-body-muted: var(--text-secondary);
-  --color-text-muted: var(--text-muted);
-  --color-text-faint: var(--text-faint);
-  --color-line: var(--border);
-  --color-line-strong: var(--border-strong);
-  --color-rule: var(--rule-color);
-  --color-accent: var(--accent);
-  --color-accent-deep: var(--accent-deep);
-
-  --color-cobalt: var(--accent);
-  --color-cobalt-deep: var(--accent-deep);
-  --color-cobalt-wash: color-mix(in oklab, var(--accent) 12%, transparent);
-  --color-cobalt-bright: var(--accent);
-  --color-data-bg: var(--surface-sunken);
-  --color-data-ink: var(--text-muted);
-  --color-data-hi: var(--text-primary);
-
-  --color-good: #2a6a44;
-  --color-good-wash: #e9f1e8;
-  --color-warn: #8a6412;
-  --color-warn-wash: #f7f0db;
-  --color-crit: #a8351f;
-  --color-crit-wash: #f9ece6;
-
   --font-display: var(--ff-display);
   --font-sans: var(--ff-sans);
   --font-serif: var(--ff-body);
@@ -545,6 +515,24 @@ li:last-child > .service-row { border-bottom: 1px solid var(--rule-color); }
   .process-steps > li { padding-block: 1.75rem 0; }
 }
 
+/* Contact: the address set large, underlined in the rule colour until hover */
+.contact-email {
+  font-family: var(--ff-display);
+  font-size: clamp(1.9rem, 5.5vw, 4rem);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  color: var(--text-primary);
+  font-variation-settings: "opsz" 144, "SOFT" 40;
+  overflow-wrap: anywhere;
+}
+.contact-email-line {
+  border-bottom: 1px solid var(--rule-color);
+  padding-bottom: 0.1em;
+  transition: border-color var(--dur-sm) ease;
+}
+.contact-email:hover .contact-email-line { border-color: var(--accent); }
+
 /* Small monospace tag */
 .tag {
   display: inline-flex;
@@ -960,150 +948,8 @@ li:last-child > .service-row { border-bottom: 1px solid var(--rule-color); }
 }
 
 /* =============================================================
-   Legacy helpers (pre-Chambers sections; removed as each is ported)
+   Work and Studio specifics
    ============================================================= */
-@property --mx {
-  syntax: "<length-percentage>";
-  inherits: true;
-  initial-value: 50%;
-}
-@property --my {
-  syntax: "<length-percentage>";
-  inherits: true;
-  initial-value: 35%;
-}
-
-/* Mono kicker label: SECTION / 02 style */
-.kicker {
-  font-family: var(--ff-mono), monospace;
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-}
-
-/* Serif editorial voice — used sparingly, where trust is built.
-   (Fraunces' optical axes were tried and dropped: +250KB of font, +2s LCP on mobile.) */
-.editorial {
-  font-family: var(--ff-display);
-  font-style: italic;
-}
-
-/* Hairline rule with mono label */
-.rule-label {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-.rule-label::after {
-  content: "";
-  flex: 1;
-  height: 1px;
-  background: var(--color-line);
-}
-
-/* Outline-only display numerals: the drafting-table voice */
-.ghost {
-  color: transparent;
-  -webkit-text-stroke: 1px var(--color-line-strong);
-  font-variant-numeric: tabular-nums;
-}
-.ghost-cobalt {
-  color: transparent;
-  -webkit-text-stroke: 1px rgba(32, 56, 200, 0.45);
-  font-variant-numeric: tabular-nums;
-}
-.ghost-bright {
-  color: transparent;
-  -webkit-text-stroke: 1px rgba(143, 160, 255, 0.35);
-  font-variant-numeric: tabular-nums;
-}
-
-.tnum {
-  font-variant-numeric: tabular-nums;
-}
-
-/* ── Blueprint grid with cursor spotlight ──
-   The base grid is always faintly there. The ::after layer is the same grid,
-   brighter, revealed only inside a radial mask centered on the cursor. */
-.blueprint {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  overflow: hidden;
-  --grid-ink: rgba(32, 56, 200, 0.5);
-  --lamp: rgba(32, 56, 200, 0.12);
-  --cell: 72px;
-  transition:
-    --mx 0.28s var(--ease-out-expo),
-    --my 0.28s var(--ease-out-expo);
-}
-.blueprint::before,
-.blueprint::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(var(--grid-ink) 1px, transparent 1px),
-    linear-gradient(90deg, var(--grid-ink) 1px, transparent 1px);
-  background-size: var(--cell) var(--cell);
-}
-.blueprint::before {
-  opacity: 0.07;
-}
-.blueprint::after {
-  opacity: 0.6;
-  background-image:
-    radial-gradient(360px circle at var(--mx) var(--my), var(--lamp), transparent 65%),
-    linear-gradient(var(--grid-ink) 1px, transparent 1px),
-    linear-gradient(90deg, var(--grid-ink) 1px, transparent 1px);
-  mask-image: radial-gradient(420px circle at var(--mx) var(--my), #000 0%, transparent 70%);
-  -webkit-mask-image: radial-gradient(420px circle at var(--mx) var(--my), #000 0%, transparent 70%);
-}
-.blueprint-fade {
-  mask-image: linear-gradient(to bottom, #000 20%, transparent 96%);
-  -webkit-mask-image: linear-gradient(to bottom, #000 20%, transparent 96%);
-}
-.blueprint-dark {
-  --grid-ink: rgba(143, 160, 255, 0.55);
-  --lamp: rgba(143, 160, 255, 0.16);
-  --cell: 56px;
-}
-.blueprint-dark::before {
-  opacity: 0.09;
-}
-@media (hover: none) {
-  .blueprint::after {
-    display: none;
-  }
-}
-
-/* ── Exhibit card tilt (portrait) ── */
-.tilt {
-  --rx: 0deg;
-  --ry: 0deg;
-  transform: perspective(1100px) rotateX(var(--rx)) rotateY(var(--ry));
-  transition: transform 0.5s var(--ease-out-expo);
-  transform-style: preserve-3d;
-  will-change: transform;
-}
-.tilt-sheen {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: radial-gradient(
-    300px circle at var(--mx) var(--my),
-    rgba(255, 255, 255, 0.22),
-    transparent 60%
-  );
-  opacity: 0;
-  transition: opacity 0.4s ease;
-  mix-blend-mode: soft-light;
-}
-.tilt:hover .tilt-sheen {
-  opacity: 1;
-}
-
 /* ── Site preview: the screenshot scrolls through the real page on hover ──
    The container is a size container so the image can compute
    "translate to my own bottom edge" as calc(-100% + 100cqh) in pure CSS. */
@@ -1111,7 +957,7 @@ li:last-child > .service-row { border-bottom: 1px solid var(--rule-color); }
   position: relative;
   overflow: hidden;
   container-type: size;
-  background: var(--color-card);
+  background: var(--surface-raised);
 }
 .site-preview > img {
   position: absolute;
@@ -1158,74 +1004,7 @@ li:last-child > .service-row { border-bottom: 1px solid var(--rule-color); }
     linear-gradient(180deg, #0f1114 0%, #0b0c0f 100%);
 }
 
-/* ── Animated link underline ── */
-.u-link {
-  background-image: linear-gradient(currentColor, currentColor);
-  background-repeat: no-repeat;
-  background-size: 0% 1px;
-  background-position: 0 100%;
-  transition: background-size 0.35s var(--ease-out-expo), color 0.2s ease;
-  padding-bottom: 2px;
-}
-.u-link:hover,
-.u-link[aria-current="true"] {
-  background-size: 100% 1px;
-}
-
-/* ── Margin index (fixed section rail; only where the margin can hold it) ── */
-.margin-index {
-  display: none;
-}
-@media (min-width: 1440px) {
-  .margin-index {
-    display: flex;
-  }
-}
-
-/* ── Ledger row active hairline ── */
-.ledger-row {
-  position: relative;
-}
-.ledger-row::before {
-  content: "";
-  position: absolute;
-  top: -1px;
-  left: 0;
-  height: 1px;
-  width: 100%;
-  background: var(--color-cobalt);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.6s var(--ease-out-expo);
-}
-.ledger-row[data-active="true"]::before,
-.ledger-row:hover::before {
-  transform: scaleX(1);
-}
-
-
 @media (prefers-reduced-motion: reduce) {
-  .blueprint,
-  .tilt,
-  .site-preview > img,
-  .u-link,
-  .ledger-row::before {
-    transition: none !important;
-  }
-  .site-preview-trigger:hover .site-preview > img,
-  .tilt {
-    transform: none;
-  }
-}
-
-@media (forced-colors: active) {
-  .kicker {
-    color: CanvasText;
-  }
-  .ghost,
-  .ghost-cobalt,
-  .ghost-bright {
-    color: CanvasText;
-    -webkit-text-stroke: 0;
-  }
+  .site-preview > img { transition: none !important; }
+  .site-preview-trigger:hover .site-preview > img { transform: none; }
 }

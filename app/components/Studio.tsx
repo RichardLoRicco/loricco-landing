@@ -1,8 +1,5 @@
-"use client";
-
 import Image from "next/image";
-import { motion } from "motion/react";
-import { FadeUp, SplitLines } from "./ui/Reveal";
+import Reveal from "./Reveal";
 import { apps, counts, featuredApp, pad2, spell, type AppStatus, type FeaturedTheme, type StudioApp } from "../lib/apps";
 
 const gridApps = apps.filter((a) => a !== featuredApp);
@@ -16,24 +13,20 @@ const statusLabel: Record<AppStatus, string> = {
   development: "In dev",
 };
 
-function StatusChip({ status, onDark = false }: { status: AppStatus; onDark?: boolean }) {
-  const tone = onDark
-    ? status === "review"
-      ? "border-[#e8c46a]/60 bg-[#e8c46a]/10 text-[#f1d892]"
-      : "border-white/30 text-data-hi"
-    : status === "live"
-      ? "border-good bg-good-wash text-good"
-      : status === "review"
-        ? "border-warn bg-warn-wash text-warn"
-        : "border-line-strong bg-background text-text-muted";
+const statusDot: Record<AppStatus, string> = {
+  live: "#4ea35c",
+  review: "#d0a03a",
+  development: "var(--text-faint)",
+};
+
+function StatusChip({ status, label }: { status: AppStatus; label?: string }) {
   return (
-    <span
-      className={`inline-flex shrink-0 items-center gap-1.5 rounded-[2px] border px-2 py-0.5 font-mono text-[10px] tracking-[0.08em] uppercase ${tone}`}
-    >
-      {status === "live" && (
-        <span className="h-1.5 w-1.5 rounded-full bg-current" aria-hidden="true" />
-      )}
-      {statusLabel[status]}
+    <span className="chip-meta">
+      <span
+        aria-hidden="true"
+        style={{ width: 5, height: 5, borderRadius: 9999, background: statusDot[status] }}
+      />
+      {label ?? statusLabel[status]}
     </span>
   );
 }
@@ -42,10 +35,11 @@ function StatusChip({ status, onDark = false }: { status: AppStatus; onDark?: bo
 function AppIcon({ app, size }: { app: StudioApp; size: number }) {
   return (
     <span
-      className="relative block shrink-0 overflow-hidden rounded-[22.5%] shadow-[0_1px_0_rgba(26,24,20,0.06),0_10px_22px_-12px_rgba(26,24,20,0.45)] ring-1 ring-black/5"
+      className="relative block shrink-0 overflow-hidden rounded-[22.5%]"
       style={{
         width: size,
         height: size,
+        border: "1px solid var(--border)",
         backgroundColor: app.iconIsMascot ? `${app.color}26` : undefined,
       }}
     >
@@ -61,35 +55,22 @@ function AppIcon({ app, size }: { app: StudioApp; size: number }) {
   );
 }
 
-function ArrowOut() {
-  return (
-    <svg viewBox="0 0 12 12" className="h-2.5 w-2.5" aria-hidden="true">
-      <path d="M3.5 2.5h6v6M9.5 2.5 2.5 9.5" fill="none" stroke="currentColor" strokeWidth="1.4" />
-    </svg>
-  );
-}
-
 function AppLinks({ app }: { app: StudioApp }) {
-  const linkClass =
-    "inline-flex min-h-9 items-center gap-1.5 rounded-[3px] border px-3 font-mono text-[11px] tracking-[0.08em] uppercase transition-colors duration-200";
   if (!app.siteUrl && !app.appStoreUrl) {
-    return (
-      <p className="font-mono text-[11px] tracking-[0.08em] text-text-muted uppercase">
-        Site coming soon
-      </p>
-    );
+    return <p className="meta">Site coming soon</p>;
   }
   return (
-    <div className="flex flex-wrap gap-2">
+    <div className="flex flex-wrap gap-x-5 gap-y-2">
       {app.appStoreUrl && (
         <a
           href={app.appStoreUrl}
           target="_blank"
           rel="noopener noreferrer"
           aria-label={`${app.name} on the App Store (opens in a new tab)`}
-          className={`${linkClass} border-foreground bg-foreground text-background hover:border-cobalt hover:bg-cobalt`}
+          className="link-accent meta"
+          style={{ color: "var(--accent)" }}
         >
-          App Store <ArrowOut />
+          App Store &rarr;
         </a>
       )}
       {app.siteUrl && (
@@ -98,29 +79,13 @@ function AppLinks({ app }: { app: StudioApp }) {
           target="_blank"
           rel="noopener noreferrer"
           aria-label={`${app.name} website (opens in a new tab)`}
-          className={`${linkClass} border-line-strong text-foreground hover:border-cobalt hover:text-cobalt`}
+          className="link-accent meta"
+          style={{ color: "var(--text-primary)" }}
         >
-          Website <ArrowOut />
+          Website &rarr;
         </a>
       )}
     </div>
-  );
-}
-
-const cardClass =
-  "group relative flex h-full flex-col overflow-hidden rounded-[4px] border border-line bg-card transition-[transform,border-color,box-shadow] duration-500 [transition-timing-function:var(--ease-out-expo)] hover:-translate-y-1 hover:border-line-strong hover:shadow-[0_24px_40px_-24px_rgba(26,24,20,0.35)] focus-within:border-line-strong";
-
-/* App-colored hairline plus a lamp that comes up behind the icon on hover. */
-function CardAccent({ color }: { color: string }) {
-  return (
-    <>
-      <div className="h-[3px] w-full" style={{ backgroundColor: color }} aria-hidden="true" />
-      <div
-        className="pointer-events-none absolute inset-x-0 top-0 h-40 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-        style={{ background: `radial-gradient(220px circle at 52px 40px, ${color}2e, transparent 70%)` }}
-        aria-hidden="true"
-      />
-    </>
   );
 }
 
@@ -132,95 +97,73 @@ function meta(app: StudioApp) {
   return parts;
 }
 
-function LiveCard({ app }: { app: StudioApp }) {
+/* Live and in-review apps: the personal site's filing card. */
+function AppCard({ app, index }: { app: StudioApp; index: number }) {
   return (
-    <article className={cardClass}>
-      <CardAccent color={app.color} />
-      <div className="relative flex flex-1 flex-col p-5 sm:p-6">
-        <div className="flex items-start justify-between gap-3">
-          <AppIcon app={app} size={60} />
-          <StatusChip status={app.status} />
-        </div>
-        <h4 className="font-display mt-5 text-xl font-bold tracking-tight">{app.name}</h4>
-        <p className="editorial mt-1 text-[15px] leading-snug text-foreground">{app.tagline}</p>
-        <p className="mt-3 flex-1 text-[13.5px] leading-relaxed text-body-muted">{app.description}</p>
-        <p className="mt-5 border-t border-line pt-4 font-mono text-[10px] leading-[1.8] tracking-[0.12em] text-text-muted uppercase">
-          {meta(app).join(" · ")}
-        </p>
-        <div className="mt-4">
-          <AppLinks app={app} />
-        </div>
+    <article className="filing filing-interactive flex h-full flex-col overflow-hidden">
+      <div className="flex items-center justify-between gap-3 border-b border-[var(--border)] px-6 py-4">
+        <span className="meta">No. {pad2(index + 1)}</span>
+        <StatusChip status={app.status} label={app.status === "live" ? "Live on App Store" : undefined} />
       </div>
-    </article>
-  );
-}
-
-function DevCard({ app }: { app: StudioApp }) {
-  return (
-    <article className={cardClass}>
-      <CardAccent color={app.color} />
-      <div className="relative flex flex-1 flex-col p-5">
-        <div className="flex items-center gap-3.5">
-          <AppIcon app={app} size={48} />
-          <div className="min-w-0 flex-1">
-            <h4 className="font-display truncate text-[17px] font-bold tracking-tight">{app.name}</h4>
-            <p className="mt-1 font-mono text-[10px] tracking-[0.12em] text-text-muted uppercase">
-              {app.category}
-              {app.note && <span className="text-foreground"> · {app.note}</span>}
+      <div className="flex flex-1 flex-col p-6">
+        <div className="flex items-center gap-4">
+          <AppIcon app={app} size={56} />
+          <div className="min-w-0">
+            <h4 style={{ fontSize: "clamp(1.5rem, 2.2vw, 1.85rem)", lineHeight: 1 }}>{app.name}</h4>
+            <p className="serif-italic mt-1" style={{ fontSize: "1.05rem" }}>
+              {app.tagline}
             </p>
           </div>
         </div>
-        <p className="editorial mt-4 text-[14.5px] leading-snug text-foreground">{app.tagline}</p>
-        <p className="mt-2 flex-1 text-[13px] leading-relaxed text-body-muted">{app.description}</p>
-        <div className="mt-4 flex flex-wrap items-center justify-between gap-x-3 gap-y-3 border-t border-line pt-4">
+        <p className="body-serif mt-5 flex-1" style={{ fontSize: "0.98rem" }}>
+          {app.description}
+        </p>
+        <p className="meta mt-5" style={{ lineHeight: 1.8 }}>
+          {meta(app).join(" · ")}
+        </p>
+        <div className="mt-4 border-t border-[var(--border)] pt-4">
           <AppLinks app={app} />
-          <StatusChip status={app.status} />
         </div>
       </div>
     </article>
   );
 }
 
-function Reveal({ i, children, className = "" }: { i: number; children: React.ReactNode; className?: string }) {
+/* In development: the personal site's numbered editorial list. */
+function DevRow({ app, index }: { app: StudioApp; index: number }) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-40px" }}
-      transition={{ duration: 0.45, delay: (i % 4) * 0.07, ease: [0.16, 1, 0.3, 1] }}
-      className={className}
-    >
-      {children}
-    </motion.div>
-  );
-}
-
-function GroupHeading({ id, label, count }: { id: string; label: string; count: number }) {
-  return (
-    <div className="mb-6 flex items-center gap-3">
-      <h3 id={id} className="kicker text-foreground">
-        {label}
-      </h3>
-      <span className="font-mono text-[11px] text-text-muted tnum">/ {pad2(count)}</span>
-      <span className="h-px flex-1 bg-line" aria-hidden="true" />
+    <div className="grid grid-cols-[auto_1fr] items-start gap-5 border-b border-[var(--rule-color)] py-6">
+      <AppIcon app={app} size={44} />
+      <div className="min-w-0">
+        <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+          <span className="meta" style={{ color: "var(--accent)" }}>
+            {pad2(index + 1)}
+          </span>
+          <h4 style={{ fontSize: "1.35rem", lineHeight: 1.1 }}>{app.name}</h4>
+        </div>
+        <p className="serif-italic mt-1" style={{ fontSize: "1rem" }}>
+          {app.tagline}
+        </p>
+        <p className="body-serif mt-2" style={{ fontSize: "0.92rem" }}>
+          {app.description}
+        </p>
+        <div className="mt-3 flex flex-wrap items-center gap-x-5 gap-y-2">
+          <span className="meta">
+            {app.category}
+            {app.note && <> &middot; {app.note}</>}
+          </span>
+          <AppLinks app={app} />
+        </div>
+      </div>
     </div>
   );
 }
 
 /* A phone-shaped frame around a real screenshot. */
-function Phone({ src, alt, className = "", priority = false }: { src: string; alt: string; className?: string; priority?: boolean }) {
+function Phone({ src, alt }: { src: string; alt: string }) {
   return (
-    <div
-      className={`relative aspect-[1320/2868] overflow-hidden rounded-[18%/8.3%] border-[5px] border-(--ft-bezel) bg-(--ft-bezel) shadow-[0_30px_60px_-20px_rgba(0,0,0,0.75),0_0_0_1px_rgba(255,255,255,0.08)] ${className}`}
-    >
-      <Image
-        src={src}
-        alt={alt}
-        fill
-        sizes="(min-width: 1024px) 220px, 30vw"
-        priority={priority}
-        className="rounded-[15%/7%] object-cover"
-      />
+    <div className="relative aspect-[1320/2868] overflow-hidden rounded-[18%/8.3%] border-[5px] border-(--ft-bezel) bg-(--ft-bezel) shadow-[0_30px_60px_-20px_rgba(0,0,0,0.75),0_0_0_1px_rgba(255,255,255,0.08)]">
+      <Image src={src} alt={alt} fill sizes="(min-width: 1024px) 220px, 30vw" className="rounded-[15%/7%] object-cover" />
     </div>
   );
 }
@@ -235,7 +178,7 @@ function themeVars(t: FeaturedTheme): React.CSSProperties {
     "--ft-label": t.label,
     "--ft-btn": t.button.bg,
     "--ft-btn-text": t.button.text,
-    "--btn-fill": t.button.hoverBg,
+    "--ft-btn-hover": t.button.hoverBg,
     "--ft-btn-hover-text": t.button.hoverText,
     "--ft-bezel": t.bezel,
   } as React.CSSProperties;
@@ -275,24 +218,24 @@ function Stages({ stages, label }: { stages: NonNullable<FeaturedTheme["stages"]
   );
 }
 
+/*
+  The featured app keeps its own colours (they come from the app's theme), so
+  it reads as that app's panel set inside this page. Only the frame and the
+  type follow the Chambers system.
+*/
 function Featured({ app }: { app: StudioApp }) {
   const theme = app.featuredTheme;
   if (!theme) return null;
   const shots = app.screenshots ?? [];
   return (
-    <motion.article
+    <article
       aria-labelledby={`featured-${app.slug}`}
-      initial={{ opacity: 0, y: 28 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-60px" }}
-      transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-      className={`${theme.surface} relative overflow-hidden rounded-[4px] border border-(--ft-border) text-(--ft-text)`}
-      style={themeVars(theme)}
+      className={`${theme.surface} relative overflow-hidden border border-(--ft-border) text-(--ft-text)`}
+      style={{ ...themeVars(theme), borderRadius: "var(--radius-lg)" }}
     >
       <div className="relative grid gap-10 p-6 sm:p-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:gap-6 lg:p-12">
-        {/* Copy */}
         <div className="flex flex-col">
-          <p className="kicker flex items-center gap-3 text-(--ft-accent)">
+          <p className="flex items-center gap-3 font-mono text-[0.68rem] tracking-[0.2em] text-(--ft-accent) uppercase">
             <span>{theme.kicker[0]}</span>
             <span className="h-px w-8 bg-(--ft-accent) opacity-40" aria-hidden="true" />
             <span>{theme.kicker[1]}</span>
@@ -301,19 +244,31 @@ function Featured({ app }: { app: StudioApp }) {
           <div className="mt-7 flex items-center gap-4">
             <AppIcon app={app} size={64} />
             <div>
-              <h3 id={`featured-${app.slug}`} className="font-display text-2xl font-bold tracking-tight">
+              <h3 id={`featured-${app.slug}`} style={{ fontSize: "1.9rem", color: "var(--ft-text)" }}>
                 {app.name}
               </h3>
-              <div className="mt-1.5">
-                <StatusChip status={app.status} onDark />
-              </div>
+              <p className="mt-1.5 font-mono text-[0.65rem] tracking-[0.12em] text-(--ft-label) uppercase">
+                {statusLabel[app.status]}
+              </p>
             </div>
           </div>
 
-          <p className="font-display mt-8 text-[2.1rem] leading-[1.05] font-bold tracking-tight sm:text-5xl">
+          <p
+            className="mt-8"
+            style={{
+              fontFamily: "var(--ff-display)",
+              fontSize: "clamp(2.1rem, 4.2vw, 3.1rem)",
+              lineHeight: 1.02,
+              fontWeight: 500,
+              letterSpacing: "-0.03em",
+              fontVariationSettings: '"opsz" 144, "SOFT" 40',
+            }}
+          >
             <Headline text={app.tagline} highlight={theme.highlight} />
           </p>
-          <p className="mt-5 max-w-md text-[15px] leading-relaxed text-(--ft-body)">{app.description}</p>
+          <p className="mt-5 max-w-md text-(--ft-body)" style={{ fontFamily: "var(--ff-body)", fontSize: "1.02rem", lineHeight: 1.65 }}>
+            {app.description}
+          </p>
 
           {theme.stages && theme.stages.length > 0 && <Stages stages={theme.stages} label={theme.stagesLabel} />}
 
@@ -342,183 +297,166 @@ function Featured({ app }: { app: StudioApp }) {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`${app.name} website, ${new URL(app.siteUrl).host} (opens in a new tab)`}
-                className="btn inline-flex items-center gap-2 bg-(--ft-btn) px-5 py-3 text-sm font-semibold text-(--ft-btn-text) hover:text-(--ft-btn-hover-text) focus-visible:outline-(--ft-accent)"
+                className="btn bg-(--ft-btn) text-(--ft-btn-text) hover:bg-(--ft-btn-hover) hover:text-(--ft-btn-hover-text) focus-visible:outline-(--ft-accent)"
               >
-                Visit the {app.name} site <span className="btn-arrow">→</span>
+                Visit the {app.name} site &rarr;
               </a>
             </div>
           )}
         </div>
 
-        {/* Real screenshots */}
+        {/* Real screenshots, fanned */}
         {shots.length >= 3 && (
-          <div className="relative mx-auto flex w-full max-w-[520px] items-center justify-center lg:max-w-none" aria-label={`${app.name} screenshots`} role="group">
-            <motion.div
-              initial={{ opacity: 0, y: 40, rotate: 0 }}
-              whileInView={{ opacity: 1, y: 18, rotate: -7 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.9, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-              className="relative z-0 -mr-[9%] w-[31%] origin-bottom-right"
-            >
+          <div
+            className="relative mx-auto flex w-full max-w-[520px] items-center justify-center lg:max-w-none"
+            aria-label={`${app.name} screenshots`}
+            role="group"
+          >
+            <div className="relative z-0 -mr-[9%] w-[31%] origin-bottom-right translate-y-[18px] -rotate-[7deg]">
               <Phone src={shots[1].src} alt={shots[1].alt} />
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-              className="relative z-10 w-[38%]"
-            >
+            </div>
+            <div className="relative z-10 w-[38%]">
               <Phone src={shots[0].src} alt={shots[0].alt} />
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, y: 40, rotate: 0 }}
-              whileInView={{ opacity: 1, y: 18, rotate: 7 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.9, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
-              className="relative z-0 -ml-[9%] w-[31%] origin-bottom-left"
-            >
+            </div>
+            <div className="relative z-0 -ml-[9%] w-[31%] origin-bottom-left translate-y-[18px] rotate-[7deg]">
               <Phone src={shots[2].src} alt={shots[2].alt} />
-            </motion.div>
+            </div>
           </div>
         )}
       </div>
-    </motion.article>
+    </article>
   );
 }
 
-/*
-  The dev grid is 2 columns at sm and 4 at lg. The closing note takes the
-  cells left in the last row so it never sits alone beside empty space; when
-  it spans a whole row it lays out side by side. Literal class names so
-  Tailwind picks them up.
-*/
-const lgLeft = 4 - (devGrid.length % 4);
-const smFull = devGrid.length % 2 === 0;
-const noteSpan = {
-  className: [
-    smFull ? "sm:col-span-2" : "",
-    ({ 1: "", 2: "lg:col-span-2", 3: "lg:col-span-3", 4: "lg:col-span-4" } as const)[lgLeft as 1 | 2 | 3 | 4],
-  ].join(" "),
-  wideLayout: [
-    smFull ? "sm:flex-row sm:items-end sm:gap-10" : "",
-    lgLeft >= 2 ? "lg:flex-row lg:items-end lg:gap-10" : "lg:flex-col lg:items-stretch lg:gap-0",
-  ].join(" "),
-  wideText: [
-    smFull ? "sm:mt-0 sm:max-w-md" : "",
-    lgLeft >= 2 ? "lg:mt-0 lg:max-w-md" : "lg:mt-6 lg:max-w-none",
-  ].join(" "),
-};
+function GroupHeading({ id, label, count }: { id: string; label: string; count: number }) {
+  return (
+    <div className="mb-8 flex items-baseline justify-between gap-4 border-b border-[var(--rule-color)] pb-4">
+      <h3 id={id} style={{ fontSize: "clamp(1.5rem, 2.2vw, 2rem)" }}>
+        {label}
+      </h3>
+      <span className="meta">{pad2(count)}</span>
+    </div>
+  );
+}
+
+const capitalize = (s: string) => s[0].toUpperCase() + s.slice(1);
 
 export default function Studio() {
   return (
-    <section id="studio" className="relative scroll-mt-24 px-6 py-28" aria-label="The studio">
-      <div className="mx-auto max-w-6xl">
-        {/* Section header */}
-        <div className="mb-14 grid gap-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
-          <div className="max-w-2xl">
-            <FadeUp>
-              <p className="kicker rule-label text-text-muted">The Studio</p>
-            </FadeUp>
-            <SplitLines
-              className="font-display mt-5 text-[1.85rem] font-bold leading-[1.05] tracking-tight min-[400px]:text-4xl sm:text-5xl lg:text-6xl"
-              lines={["I also build and ship", "my own apps."]}
-            />
-            <FadeUp delay={0.15}>
-              <p className="mt-5 text-lg leading-relaxed text-body-muted">
-                {spell(counts.live)[0].toUpperCase() + spell(counts.live).slice(1)} are live on the
-                App Store, {spell(counts.review)} is in App Review, and {spell(counts.development)} more
-                are in development. I build them and handle App Store review, subscriptions,
-                analytics, and support. That work informs the product advice I give clients.
-              </p>
-            </FadeUp>
+    <section
+      id="studio"
+      aria-label="The studio"
+      className="relative"
+      style={{ padding: "var(--space-section) 0" }}
+    >
+      <div className="page-gutter">
+        <div className="section-head">
+          <div>
+            <p className="section-num">04 &middot; Studio</p>
+            <h2 className="mt-3 balance">
+              I also build and ship my own <span className="serif-italic">apps</span>.
+            </h2>
           </div>
-
-          {/* Ledger */}
-          <FadeUp delay={0.2}>
-            <dl className="grid grid-cols-3 gap-px overflow-hidden rounded-[4px] border border-line bg-line lg:min-w-[340px]">
-              {(
-                [
-                  ["Live", counts.live, "text-good"],
-                  ["In review", counts.review, "text-warn"],
-                  ["In dev", counts.development, "text-foreground"],
-                ] as const
-              ).map(([label, n, tone]) => (
-                <div key={label} className="bg-card px-4 py-4">
-                  <dt className="font-mono text-[10px] tracking-[0.14em] text-text-muted uppercase">{label}</dt>
-                  <dd className={`font-display mt-1 text-3xl font-bold tnum ${tone}`}>{pad2(n)}</dd>
-                </div>
-              ))}
-            </dl>
-          </FadeUp>
         </div>
 
-        {featuredApp && <Featured app={featuredApp} />}
+        <div className="grid gap-10 pt-10 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)] lg:items-end lg:gap-20">
+          <p className="body-serif pretty max-w-2xl" style={{ fontSize: "1.15rem" }}>
+            {capitalize(spell(counts.live))} are live on the App Store, {spell(counts.review)} is
+            in App Review, and {spell(counts.development)} more are in development. I build them and
+            handle App Store review, subscriptions, analytics, and support. That work informs the
+            product advice I give clients.
+          </p>
 
-        {/* On the App Store */}
-        <div className="mt-16" role="group" aria-labelledby="studio-live">
+          <dl
+            className="grid grid-cols-3 gap-x-6"
+            style={{
+              borderTop: "1px solid var(--rule-color)",
+              borderBottom: "1px solid var(--rule-color)",
+              padding: "1.25rem 0",
+            }}
+          >
+            {(
+              [
+                ["Live", counts.live],
+                ["In review", counts.review],
+                ["In dev", counts.development],
+              ] as const
+            ).map(([label, n]) => (
+              <div key={label}>
+                <dt className="meta">{label}</dt>
+                <dd
+                  className="mt-1"
+                  style={{
+                    fontFamily: "var(--ff-display)",
+                    fontSize: "2rem",
+                    lineHeight: 1,
+                    fontVariantNumeric: "tabular-nums",
+                    color: label === "Live" ? "var(--accent)" : "var(--text-primary)",
+                  }}
+                >
+                  {pad2(n)}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+
+        {featuredApp && (
+          <Reveal className="mt-14">
+            <Featured app={featuredApp} />
+          </Reveal>
+        )}
+
+        <div className="mt-20" role="group" aria-labelledby="studio-live">
           <GroupHeading id="studio-live" label="On the App Store" count={liveGrid.length} />
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-6">
+          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
             {liveGrid.map((app, i) => (
-              <Reveal
-                key={app.slug}
-                i={i}
-                className={`${i < 2 ? "lg:col-span-3" : "lg:col-span-2"} ${
-                  i === liveGrid.length - 1 && liveGrid.length % 2 === 1 ? "sm:col-span-2 lg:col-span-2" : ""
-                }`}
-              >
-                <LiveCard app={app} />
+              <Reveal key={app.slug} delay={(i % 3) * 80}>
+                <AppCard app={app} index={i} />
               </Reveal>
             ))}
           </div>
         </div>
 
-        {/* In App Review (apps in review that aren't featured) */}
         {reviewGrid.length > 0 && (
-          <div className="mt-16" role="group" aria-labelledby="studio-review">
+          <div className="mt-20" role="group" aria-labelledby="studio-review">
             <GroupHeading id="studio-review" label="In App Review" count={reviewGrid.length} />
-            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
               {reviewGrid.map((app, i) => (
-                <Reveal key={app.slug} i={i}>
-                  <LiveCard app={app} />
+                <Reveal key={app.slug} delay={(i % 3) * 80}>
+                  <AppCard app={app} index={liveGrid.length + i} />
                 </Reveal>
               ))}
             </div>
           </div>
         )}
 
-        {/* In development */}
-        <div className="mt-16" role="group" aria-labelledby="studio-dev">
-          <GroupHeading id="studio-dev" label="In development" count={devGrid.length} />
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div
+          role="group"
+          aria-labelledby="studio-dev"
+          className="mt-20 grid gap-8 border-t border-[var(--rule-color)] pt-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] lg:gap-16"
+        >
+          <header className="flex flex-col gap-4">
+            <div className="flex items-center gap-3">
+              <StatusChip status="development" label="In development" />
+              <span className="meta">{pad2(devGrid.length)}</span>
+            </div>
+            <h3 id="studio-dev" style={{ fontSize: "clamp(1.75rem, 2.6vw, 2.25rem)" }}>
+              In <span className="serif-italic">development</span>.
+            </h3>
+            <p className="body-serif" style={{ fontSize: "0.98rem" }}>
+              <em>Why it&apos;s on this page:</em> the advice I give clients on product and
+              engineering has been tested on my own apps first.
+            </p>
+          </header>
+
+          <ol className="grid grid-cols-1 gap-x-10 md:grid-cols-2">
             {devGrid.map((app, i) => (
-              <Reveal key={app.slug} i={i}>
-                <DevCard app={app} />
+              <Reveal as="li" key={app.slug} delay={(i % 2) * 60}>
+                <DevRow app={app} index={i} />
               </Reveal>
             ))}
-
-            {/* Closing annotation card: fills whatever is left of the last row */}
-            <Reveal i={devGrid.length} className={noteSpan.className}>
-              <div
-                className={`flex h-full flex-col justify-between rounded-[4px] border border-dashed border-line-strong p-5 ${noteSpan.wideLayout}`}
-              >
-                <p className="font-mono text-[12px] leading-[1.9] text-text-muted">
-                  SHIPPED / {pad2(counts.live)}
-                  <br />
-                  IN REVIEW / {pad2(counts.review)}
-                  <br />
-                  IN DEVELOPMENT / {pad2(counts.development)}
-                  <br />
-                  PLATFORM / iPHONE
-                </p>
-                <p className={`mt-6 text-[13.5px] leading-relaxed text-body-muted ${noteSpan.wideText}`}>
-                  <span className="editorial text-[15px] text-foreground">Why it&apos;s on this page:</span>{" "}
-                  the advice I give clients on product and engineering has been tested on my own apps
-                  first.
-                </p>
-              </div>
-            </Reveal>
-          </div>
+          </ol>
         </div>
       </div>
     </section>
