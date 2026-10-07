@@ -123,7 +123,7 @@ export default function Services() {
                     href={`mailto:admin@loriccoandco.com?subject=${encodeURIComponent(service.title)}`}
                     className="link-accent meta mt-6 inline-block"
                     style={{ color: "var(--accent)" }}
-                    aria-label={`Email about ${service.title}`}
+                    aria-label={`Email about this: ${service.title}`}
                   >
                     Email about this &rarr;
                   </a>

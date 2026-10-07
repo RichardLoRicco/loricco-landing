@@ -65,7 +65,7 @@ export default function Hero() {
               </p>
             </div>
             <h1
-              className="mt-6 animate-reveal delay-100 balance"
+              className="mt-6 animate-reveal reveal-delay-100 balance"
               style={{ fontSize: "clamp(3rem, 6.3vw, 5.75rem)", letterSpacing: "-0.045em" }}
             >
               Websites, AI, and{" "}
@@ -98,7 +98,7 @@ export default function Hero() {
               the first call to the finished work.
             </p>
 
-            <div className="mt-10 flex flex-wrap items-center gap-4 animate-reveal delay-300">
+            <div className="mt-10 flex flex-wrap items-center gap-4 animate-reveal reveal-delay-300">
               <a href={`mailto:${EMAIL}`} className="btn btn-primary">
                 Get in touch
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
@@ -122,7 +122,7 @@ export default function Hero() {
           </div>
 
           {/* The principal, framed the way the personal site frames its portrait */}
-          <aside className="hidden animate-reveal delay-400 lg:block">
+          <aside className="hidden animate-reveal reveal-delay-400 lg:block">
             {/* Portrait and facts drift together, at most the section's 5rem bottom padding */}
             <HeroParallax max={80}>
               <div className="flex flex-col gap-8">

@@ -1,6 +1,6 @@
 "use client";
 
-import { useSyncExternalStore } from "react";
+import { useEffect, useSyncExternalStore } from "react";
 
 type Theme = "light" | "dark";
 
@@ -15,8 +15,19 @@ const getTheme = (): Theme =>
   document.documentElement.getAttribute("data-theme") === "light" ? "light" : "dark";
 const getServerTheme = (): Theme | null => null;
 
+const CHROME = { dark: "#121110", light: "#efeae0" } as const;
+
 export default function ThemeToggle() {
   const theme = useSyncExternalStore(subscribe, getTheme, getServerTheme);
+
+  // Browser chrome (the theme-color metas) follows the chosen theme, not only
+  // the OS setting. Done after hydration so the server-rendered head matches.
+  useEffect(() => {
+    if (!theme) return;
+    document
+      .querySelectorAll('meta[name="theme-color"]')
+      .forEach((m) => m.setAttribute("content", CHROME[theme]));
+  }, [theme]);
 
   if (!theme) {
     return (

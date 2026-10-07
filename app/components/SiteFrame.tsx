@@ -11,14 +11,22 @@ import type { Project } from "./Work";
   - Touch: there is no hover, so the first tap on the screenshot plays the
     scroll and a second tap brings it back. The header and footer still visit.
   Only a real touch pointer is intercepted, so keyboard and assistive-tech
-  activation always follow the link.
+  activation always follow the link. A touch also marks the frame (data-touch)
+  so devices with both a mouse and a touchscreen get touch behaviour after a
+  tap; using the mouse again clears it.
 */
 export default function SiteFrame({ project }: { project: Project }) {
   const [scrolling, setScrolling] = useState(false);
+  const [touched, setTouched] = useState(false);
   const pointer = useRef<string>("");
 
   const onPointerDown = (e: PointerEvent) => {
     pointer.current = e.pointerType;
+    setTouched(e.pointerType === "touch");
+  };
+  // A swipe that starts on the screenshot cancels the pointer; forget it.
+  const onPointerCancel = () => {
+    pointer.current = "";
   };
 
   const onClick = (e: MouseEvent) => {
@@ -38,7 +46,9 @@ export default function SiteFrame({ project }: { project: Project }) {
       aria-label={`${project.name}, ${project.host}. Opens in a new tab.`}
       className="site-preview-trigger filing filing-interactive group block overflow-hidden"
       data-scrolling={scrolling || undefined}
+      data-touch={touched || undefined}
       onPointerDown={onPointerDown}
+      onPointerCancel={onPointerCancel}
       onClick={onClick}
     >
       <div className="flex items-center justify-between gap-3 px-5 py-4">

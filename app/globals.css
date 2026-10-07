@@ -195,6 +195,8 @@ html {
   background: var(--background);
   color-scheme: light dark;
 }
+[data-theme="dark"] { color-scheme: dark; }
+[data-theme="light"] { color-scheme: light; }
 
 body {
   background: var(--background);
@@ -310,7 +312,6 @@ code { font-family: var(--ff-mono); font-size: 0.9em; }
 /* =============================================================
    Section scaffolding
    ============================================================= */
-section[id] { scroll-margin-top: calc(var(--dateline-h) + var(--nav-h) + 1rem); }
 
 .page-gutter {
   max-width: 78rem;
@@ -674,23 +675,6 @@ li:last-child > .service-row { border-bottom: 1px solid var(--rule-color); }
   padding-top: 1.5rem;
 }
 
-/* Small monospace tag */
-.tag {
-  display: inline-flex;
-  align-items: center;
-  padding: 0.3rem 0.65rem;
-  font-family: var(--ff-mono);
-  font-size: 0.68rem;
-  font-weight: 500;
-  color: var(--text-muted);
-  background: transparent;
-  border: 1px solid var(--border-strong);
-  border-radius: 2px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  transition: color var(--dur-xs) ease, border-color var(--dur-xs) ease;
-}
-.tag:hover { color: var(--text-primary); border-color: var(--text-primary); }
 
 /* PR/bug pill (metadata chip) */
 .chip-meta {
@@ -912,12 +896,14 @@ li:last-child > .service-row { border-bottom: 1px solid var(--rule-color); }
   top: calc(var(--dateline-h) + var(--nav-h));
   left: 0; right: 0;
   background: var(--background);
-  border-bottom: 1px solid var(--rule-color);
+  border-bottom: 1px solid transparent;
   max-height: 0;
   overflow: hidden;
   transition: max-height var(--dur-md) var(--ease-out-expo);
 }
+@media (min-width: 900px) { .nav-drawer { display: none; } }
 .nav-drawer.is-open {
+  border-bottom-color: var(--rule-color);
   max-height: calc(100dvh - var(--dateline-h) - var(--nav-h));
   overflow-y: auto;
   overscroll-behavior: contain;
@@ -947,9 +933,9 @@ li:last-child > .service-row { border-bottom: 1px solid var(--rule-color); }
 
 .animate-reveal { animation: revealUp 0.9s var(--ease-out-expo) both; }
 
-.delay-100 { animation-delay: 100ms; }
-.delay-300 { animation-delay: 300ms; }
-.delay-400 { animation-delay: 400ms; }
+.reveal-delay-100 { animation-delay: 100ms; }
+.reveal-delay-300 { animation-delay: 300ms; }
+.reveal-delay-400 { animation-delay: 400ms; }
 
 /* IntersectionObserver-driven scroll reveal */
 .js .reveal-on-scroll {
@@ -1079,8 +1065,10 @@ li:last-child > .service-row { border-bottom: 1px solid var(--rule-color); }
   transition: transform 9s cubic-bezier(0.33, 0.1, 0.25, 1);
 }
 
-/* Touch screens: hover and focus "stick" after a tap, so only the explicit
-   tap toggle (data-scrolling) moves the screenshot; the hint says which. */
+/* Touch: hover and focus "stick" after a tap, so on touch only the explicit
+   tap toggle (data-scrolling) moves the screenshot, and the hint says Tap.
+   Applies to touch-only devices, and to any frame just touched on a device
+   that also has a mouse (SiteFrame sets data-touch). */
 .hint-touch { display: none; }
 @media (hover: none) {
   .hint-hover { display: none; }
@@ -1091,10 +1079,19 @@ li:last-child > .service-row { border-bottom: 1px solid var(--rule-color); }
     transform: translateY(0);
     transition: transform 1.1s var(--ease-out-expo);
   }
-  .site-preview-trigger[data-scrolling] .site-preview > img {
-    transform: translateY(calc(-100% + 100cqh));
-    transition: transform 9s cubic-bezier(0.33, 0.1, 0.25, 1);
-  }
+}
+.site-preview-trigger[data-touch] .hint-hover { display: none; }
+.site-preview-trigger[data-touch] .hint-touch { display: inline; }
+.site-preview-trigger[data-touch]:hover .site-preview > img,
+.site-preview-trigger[data-touch]:focus-visible .site-preview > img,
+.site-preview-trigger[data-touch]:focus-within .site-preview > img {
+  transform: translateY(0);
+  transition: transform 1.1s var(--ease-out-expo);
+}
+/* Declared last so it wins over the touch resets above at equal specificity */
+.site-preview-trigger[data-scrolling]:is(*, :hover, :focus-within) .site-preview > img {
+  transform: translateY(calc(-100% + 100cqh));
+  transition: transform 9s cubic-bezier(0.33, 0.1, 0.25, 1);
 }
 
 /* ── Studio featured app: each app's featuredTheme names one of these surfaces ── */
@@ -1129,11 +1126,15 @@ li:last-child > .service-row { border-bottom: 1px solid var(--rule-color); }
 }
 
 @media (prefers-reduced-motion: reduce) {
+  /* No travel: hover and focus leave the screenshot still, and a tap jumps
+     straight to the bottom of the page and back. */
   .site-preview > img { transition: none !important; }
   .site-preview-trigger:hover .site-preview > img,
   .site-preview-trigger:focus-visible .site-preview > img,
-  .site-preview-trigger:focus-within .site-preview > img,
-  .site-preview-trigger[data-scrolling] .site-preview > img { transform: none; }
+  .site-preview-trigger:focus-within .site-preview > img { transform: none; }
+  .site-preview-trigger[data-scrolling]:is(*, :hover, :focus-within) .site-preview > img {
+    transform: translateY(calc(-100% + 100cqh));
+  }
 }
 
 } /* @layer components */
