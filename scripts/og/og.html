@@ -1,0 +1,47 @@
+<!--
+  Source for public/og.jpg (the 1200x630 share image), in the site's Chambers style.
+  Re-render when the hero headline, the portrait, or the brand colours change:
+    1. cp public/portrait-bw.jpg scripts/og/   (the page loads it from its own folder)
+    2. Open this file in Chrome at exactly 1200x630 (any headless Chrome or Puppeteer
+       screenshot with deviceScaleFactor 1 and --allow-file-access-from-files),
+       wait for document.fonts.ready, and save the screenshot, then convert it to public/og.jpg (JPEG, quality ~88).
+    3. Delete the copied portrait.
+  Words on the image must match copy already approved for the page.
+-->
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Geist+Mono:wght@400;500&family=Source+Serif+4:wght@400&display=block" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1200px; height: 630px; }
+  body { background: #121110; color: #efeae0; font-family: "Source Serif 4", Georgia, serif; position: relative; overflow: hidden; }
+  .grain { position: absolute; inset: 0; opacity: .05; mix-blend-mode: screen; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+  .mono { font-family: "Geist Mono", ui-monospace, monospace; text-transform: uppercase; letter-spacing: .16em; font-size: 15px; color: #958a74; }
+  .bar { position: absolute; left: 0; right: 0; height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 64px; }
+  .top { top: 0; border-bottom: 1px solid rgba(239,234,224,.14); }
+  .bottom { bottom: 0; border-top: 1px solid rgba(239,234,224,.14); }
+  .mark { font-family: Fraunces, serif; font-variation-settings: "opsz" 144; font-size: 28px; letter-spacing: -.02em; color: #efeae0; text-transform: none; }
+  .mark em { font-style: italic; color: #d08d4a; font-weight: 400; }
+  .amp { position: absolute; right: -40px; top: -60px; font-family: Fraunces, serif; font-style: italic; font-variation-settings: "opsz" 144; font-size: 620px; line-height: .8; color: #d08d4a; opacity: .07; }
+  .stage { position: absolute; top: 64px; bottom: 64px; left: 64px; right: 64px; display: flex; align-items: center; justify-content: space-between; gap: 48px; }
+  .eyebrow { display: flex; align-items: center; gap: 14px; }
+  .eyebrow::before { content: ""; width: 40px; height: 1px; background: #d08d4a; }
+  h1 { margin-top: 26px; font-family: Fraunces, serif; font-weight: 500; font-size: 92px; line-height: .98; letter-spacing: -.032em; font-variation-settings: "opsz" 144; }
+  h1 span { display: block; font-style: italic; font-weight: 400; color: #d08d4a; }
+  .frame { flex: none; width: 230px; padding: 9px; border: 1px solid rgba(239,234,224,.18); background: #232019; border-radius: 2px; }
+  .frame img { display: block; width: 100%; aspect-ratio: 4/5; object-fit: cover; }
+  .frame p { margin-top: 10px; text-align: center; font-size: 11.5px; letter-spacing: .08em; white-space: nowrap; }
+</style></head>
+<body>
+  <div class="grain"></div>
+  <div class="amp">&amp;</div>
+  <div class="bar top"><span class="mono mark">LoRicco <em>&amp;</em> Co.</span><span class="mono">Attorney · MBA · Software engineer</span></div>
+  <div class="stage">
+    <div>
+      <p class="mono eyebrow">New Haven, Connecticut</p>
+      <h1>Websites, AI, and <span>technical consulting.</span></h1>
+    </div>
+    <figure class="frame"><img src="portrait-bw.jpg" alt=""><p class="mono">Principal · R.&nbsp;T.&nbsp;LoRicco</p></figure>
+  </div>
+  <div class="bar bottom"><span class="mono" style="color:#d08d4a">loriccoandco.com</span><span class="mono">LoRicco &amp; Co. LLC</span></div>
+</body></html>

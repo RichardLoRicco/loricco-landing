@@ -59,10 +59,10 @@ export const metadata: Metadata = {
     locale: "en_US",
     images: [
       {
-        url: "/og.png",
+        url: "/og.jpg",
         width: 1200,
         height: 630,
-        alt: "LoRicco & Co website with a portrait of principal Richard T. LoRicco.",
+        alt: "LoRicco & Co.: Websites, AI, and technical consulting, with a portrait of principal Richard T. LoRicco.",
       },
     ],
   },
@@ -71,7 +71,7 @@ export const metadata: Metadata = {
     title: "LoRicco & Co | Websites, AI & Technical Consulting",
     description:
       "Websites and AI systems, practical AI training, technical consulting for law firms, and startup advisory from an attorney, MBA, and software engineer.",
-    images: ["/og.png"],
+    images: ["/og.jpg"],
   },
   alternates: {
     canonical: "/",
