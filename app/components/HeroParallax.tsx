@@ -37,7 +37,7 @@ export default function HeroParallax({ children, max = 200 }: { children: ReactN
   }, [max]);
 
   return (
-    <div ref={ref} style={{ willChange: "transform", transition: "transform 100ms linear" }}>
+    <div ref={ref} style={{ willChange: "transform" }}>
       {children}
     </div>
   );

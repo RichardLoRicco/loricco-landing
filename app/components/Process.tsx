@@ -70,10 +70,10 @@ export default function Process() {
         <ol className="process-steps mt-14">
           {steps.map((step, i) => (
             <Reveal as="li" key={step.id} delay={i * 80}>
-              <p className="meta" style={{ color: "var(--accent)" }}>
+              <span className="step-num" aria-hidden="true">
                 {step.id}
-              </p>
-              <h3 className="mt-4" style={{ fontSize: "clamp(1.6rem, 2.4vw, 2rem)" }}>
+              </span>
+              <h3 style={{ fontSize: "clamp(1.6rem, 2.4vw, 2rem)" }}>
                 {step.verb}
               </h3>
               <p className="body-serif pretty mt-3" style={{ fontSize: "1rem" }}>

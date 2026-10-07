@@ -2,7 +2,7 @@ import Reveal from "./Reveal";
 
 const services = [
   {
-    section: "§ 01",
+    section: "01",
     title: "Websites & AI Tools",
     outcome: "You own the site and accounts",
     description:
@@ -15,7 +15,7 @@ const services = [
     ],
   },
   {
-    section: "§ 02",
+    section: "02",
     title: "AI Education & Training",
     outcome: "Staff who use the tools",
     description:
@@ -28,7 +28,7 @@ const services = [
     ],
   },
   {
-    section: "§ 03",
+    section: "03",
     title: "Technical Consulting for Law Firms",
     outcome: "Analysis counsel can use",
     description:
@@ -41,7 +41,7 @@ const services = [
     ],
   },
   {
-    section: "§ 04",
+    section: "04",
     title: "Contract Legal Work for Law Firms",
     outcome: "Extra capacity when you need it",
     description:
@@ -54,7 +54,7 @@ const services = [
     ],
   },
   {
-    section: "§ 05",
+    section: "05",
     title: "Business & Startup Advisory",
     outcome: "A second opinion",
     description:
@@ -111,11 +111,9 @@ export default function Services() {
                   <p className="serif-italic mt-1" style={{ fontSize: "1.15rem" }}>
                     {service.outcome}
                   </p>
-                  <ul className="mt-5 flex flex-wrap gap-2" aria-label={`${service.title} includes`}>
+                  <ul className="offerings" aria-label={`${service.title} includes`}>
                     {service.offerings.map((offering) => (
-                      <li key={offering} className="tag">
-                        {offering}
-                      </li>
+                      <li key={offering}>{offering}</li>
                     ))}
                   </ul>
                 </div>
@@ -125,7 +123,7 @@ export default function Services() {
         </ol>
 
         <Reveal>
-          <p className="body-serif pretty mt-12 max-w-2xl" style={{ fontSize: "1.05rem" }}>
+          <p className="body-serif pretty mt-8 max-w-2xl" style={{ fontSize: "1.05rem" }}>
             Some problems cross more than one service. Most engagements start
             with a short call and a written review of where things stand.{" "}
             <a href="mailto:admin@loriccoandco.com" className="link-ink">

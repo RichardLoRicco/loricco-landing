@@ -177,10 +177,14 @@ export default function Work() {
         </div>
 
         <Reveal>
-          <p className="marginalia mt-16 max-w-2xl" style={{ textTransform: "none", letterSpacing: "0.02em" }}>
+          <p className="marginalia footnote mt-14 max-w-2xl" style={{ textTransform: "none", letterSpacing: "0.02em" }}>
             Lighthouse figures are mobile runs from September 2026 (performance,
             accessibility, best practices, SEO). Consulting matters for counsel
-            are not shown here, for the reasons described below.
+            are not shown here, for the reasons described{" "}
+            <a href="#about" className="link-ink">
+              below
+            </a>
+            .
           </p>
         </Reveal>
       </div>

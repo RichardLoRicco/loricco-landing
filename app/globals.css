@@ -62,7 +62,7 @@
   --radius:   2px;          /* sharp corners · editorial */
   --radius-md: 6px;
   --radius-lg: 10px;
-  --space-section: clamp(5rem, 11vh, 9rem);
+  --space-section: clamp(4rem, 8vh, 6.5rem);
   --dateline-h: 34px;
   --nav-h: 64px;
 
@@ -210,7 +210,8 @@ body {
   padding-top: var(--dateline-h);      /* leaves room for fixed dateline */
 }
 
-/* Editorial grain overlay */
+/* Editorial grain overlay (desktop only: a fixed, blended full-screen layer
+   costs recomposition on every scroll frame on phone GPUs) */
 body::before {
   content: "";
   position: fixed;
@@ -220,6 +221,10 @@ body::before {
   mix-blend-mode: var(--mix-mode);
   opacity: var(--grain-opacity);
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+@media (max-width: 767px) {
+  body::before { display: none; }
 }
 
 /* =============================================================
@@ -240,7 +245,7 @@ h1 {
   line-height: 0.92;
 }
 h2 {
-  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-size: clamp(2.25rem, 5vw, 3.75rem); /* below the hero's 5.75rem so the hero stays the one large statement */
   font-weight: 500;
   letter-spacing: -0.03em;
   line-height: 0.98;
@@ -493,40 +498,96 @@ li:last-child > .service-row { border-bottom: 1px solid var(--rule-color); }
   font-variation-settings: "opsz" 144, "SOFT" 40;
 }
 
-/* Process: four ruled columns on desktop, stacked rows below */
+/* Process: one line, four stops. On desktop a single hairline runs across
+   the top of all four columns with each step's number in a ring on it; on
+   phones the line runs down the left edge and the rings sit on it. */
 .process-steps {
+  position: relative;
   display: grid;
-  gap: 0;
+  gap: 2.25rem;
+  padding-left: 2.75rem;
 }
-.process-steps > li {
-  padding-block: 1.75rem 2rem;
-  border-top: 1px solid var(--rule-color);
+.process-steps::before {
+  content: "";
+  position: absolute;
+  left: 0.875rem;
+  top: 0.875rem;
+  bottom: 0;
+  width: 1px;
+  background: var(--rule-color);
 }
+.process-steps > li { position: relative; }
+.step-num {
+  position: absolute;
+  left: -2.75rem;
+  top: 0;
+  display: grid;
+  place-items: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border: 1px solid var(--accent);
+  border-radius: 9999px;
+  background: var(--background);
+  font-family: var(--ff-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.04em;
+  color: var(--accent);
+}
+.process-steps h3 { line-height: 1.75rem; }
 @media (min-width: 900px) {
   .process-steps {
     grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 2.5rem;
+    padding-left: 0;
+    padding-top: 2.75rem;
   }
-  .process-steps > li { padding-block: 1.75rem 0; }
+  .process-steps::before {
+    left: 0;
+    right: 0;
+    top: 0.875rem;
+    bottom: auto;
+    width: auto;
+    height: 1px;
+  }
+  .step-num { left: 0; top: -2.75rem; }
+  .process-steps h3 { line-height: 1.05; }
 }
 
-/* Contact: the address set large, underlined in the rule colour until hover */
-.contact-email {
-  font-family: var(--ff-display);
-  font-size: clamp(1.9rem, 5.5vw, 4rem);
-  font-weight: 500;
-  letter-spacing: -0.03em;
-  line-height: 1.1;
-  color: var(--text-primary);
-  font-variation-settings: "opsz" 144, "SOFT" 40;
-  overflow-wrap: anywhere;
+/* Services: what each service includes, as a quiet ruled list */
+.offerings {
+  margin-top: 1.25rem;
+  display: grid;
+  gap: 0.6rem;
 }
-.contact-email-line {
-  border-bottom: 1px solid var(--rule-color);
-  padding-bottom: 0.1em;
-  transition: border-color var(--dur-sm) ease;
+.offerings li {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: var(--ff-mono);
+  font-size: 0.68rem;
+  line-height: 1.45;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
 }
-.contact-email:hover .contact-email-line { border-color: var(--accent); }
+.offerings li::before {
+  content: "";
+  flex: none;
+  width: 1.25rem;
+  height: 1px;
+  background: var(--border-strong);
+  transition: width var(--dur-md) var(--ease-out-expo), background var(--dur-sm) ease;
+}
+.service-row:hover .offerings li::before {
+  width: 1.75rem;
+  background: var(--accent);
+}
+
+/* A note that belongs to the ledger above it */
+.footnote {
+  border-top: 1px solid var(--rule-color);
+  padding-top: 1.5rem;
+}
 
 /* Small monospace tag */
 .tag {
@@ -790,6 +851,7 @@ li:last-child > .service-row { border-bottom: 1px solid var(--rule-color); }
 .js .reveal-on-scroll.is-visible {
   opacity: 1;
   transform: translateY(0);
+  will-change: auto;
 }
 
 /* =============================================================
