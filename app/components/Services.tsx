@@ -116,6 +116,15 @@ export default function Services() {
                       <li key={offering}>{offering}</li>
                     ))}
                   </ul>
+                  {/* A ready-made subject line, so nobody starts from a blank email */}
+                  <a
+                    href={`mailto:admin@loriccoandco.com?subject=${encodeURIComponent(service.title)}`}
+                    className="link-accent meta mt-6 inline-block"
+                    style={{ color: "var(--accent)" }}
+                    aria-label={`Email about ${service.title}`}
+                  >
+                    Email about this &rarr;
+                  </a>
                 </div>
               </article>
             </Reveal>
