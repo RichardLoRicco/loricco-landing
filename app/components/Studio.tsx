@@ -97,15 +97,23 @@ function meta(app: StudioApp) {
   return parts;
 }
 
-/* Live and in-review apps: the personal site's filing card. */
-function AppCard({ app, index }: { app: StudioApp; index: number }) {
+/*
+  Live and in-review apps: the personal site's filing card. `wide` lays a lone
+  card out in one row (identity, description, details) so it never sits in a
+  grid with empty cells beside it.
+*/
+function AppCard({ app, index, wide = false }: { app: StudioApp; index: number; wide?: boolean }) {
   return (
     <article className="filing filing-interactive flex h-full flex-col overflow-hidden">
       <div className="flex items-center justify-between gap-3 border-b border-[var(--border)] px-6 py-4">
         <span className="meta">No. {pad2(index + 1)}</span>
         <StatusChip status={app.status} label={app.status === "live" ? "Live on App Store" : undefined} />
       </div>
-      <div className="flex flex-1 flex-col p-6">
+      <div
+        className={`flex flex-1 flex-col p-6 ${
+          wide ? "md:grid md:grid-cols-[minmax(0,1fr)_minmax(0,1.3fr)_minmax(0,1fr)] md:items-start md:gap-10" : ""
+        }`}
+      >
         <div className="flex items-center gap-4">
           <AppIcon app={app} size={56} />
           <div className="min-w-0">
@@ -115,14 +123,16 @@ function AppCard({ app, index }: { app: StudioApp; index: number }) {
             </p>
           </div>
         </div>
-        <p className="body-serif mt-5 flex-1" style={{ fontSize: "0.98rem" }}>
+        <p className={`body-serif mt-5 flex-1 ${wide ? "md:mt-0" : ""}`} style={{ fontSize: "0.98rem" }}>
           {app.description}
         </p>
-        <p className="meta mt-5" style={{ lineHeight: 1.8 }}>
-          {meta(app).join(" · ")}
-        </p>
-        <div className="mt-4 border-t border-[var(--border)] pt-4">
-          <AppLinks app={app} />
+        <div className={wide ? "md:mt-0" : ""}>
+          <p className={`meta mt-5 ${wide ? "md:mt-0" : ""}`} style={{ lineHeight: 1.8 }}>
+            {meta(app).join(" · ")}
+          </p>
+          <div className="mt-4 border-t border-[var(--border)] pt-4">
+            <AppLinks app={app} />
+          </div>
         </div>
       </div>
     </article>
@@ -367,8 +377,9 @@ export default function Studio() {
             product advice I give clients.
           </p>
 
+          {/* The sentence beside it gives the same three numbers, so phones skip the ledger */}
           <dl
-            className="grid grid-cols-3 gap-x-6"
+            className="hidden grid-cols-3 gap-x-6 sm:grid"
             style={{
               borderTop: "1px solid var(--rule-color)",
               borderBottom: "1px solid var(--rule-color)",
@@ -409,9 +420,20 @@ export default function Studio() {
 
         <div className="mt-20" role="group" aria-labelledby="studio-live">
           <GroupHeading id="studio-live" label="On the App Store" count={liveGrid.length} />
-          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+          {/*
+            Six-column track on desktop: the first two cards take half a row each and
+            the rest a third, so five apps fill two rows with no empty cell. On tablets
+            an odd last card spans the full row.
+          */}
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-6">
             {liveGrid.map((app, i) => (
-              <Reveal key={app.slug} delay={(i % 3) * 80}>
+              <Reveal
+                key={app.slug}
+                delay={(i % 3) * 80}
+                className={`${i < 2 ? "lg:col-span-3" : "lg:col-span-2"} ${
+                  i === liveGrid.length - 1 && liveGrid.length % 2 === 1 ? "md:col-span-2 lg:col-span-2" : ""
+                }`}
+              >
                 <AppCard app={app} index={i} />
               </Reveal>
             ))}
@@ -421,10 +443,10 @@ export default function Studio() {
         {reviewGrid.length > 0 && (
           <div className="mt-20" role="group" aria-labelledby="studio-review">
             <GroupHeading id="studio-review" label="In App Review" count={reviewGrid.length} />
-            <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+            <div className={`grid gap-6 ${reviewGrid.length > 1 ? "md:grid-cols-2 xl:grid-cols-3" : ""}`}>
               {reviewGrid.map((app, i) => (
                 <Reveal key={app.slug} delay={(i % 3) * 80}>
-                  <AppCard app={app} index={liveGrid.length + i} />
+                  <AppCard app={app} index={liveGrid.length + i} wide={reviewGrid.length === 1} />
                 </Reveal>
               ))}
             </div>
@@ -436,7 +458,7 @@ export default function Studio() {
           aria-labelledby="studio-dev"
           className="mt-20 grid gap-8 border-t border-[var(--rule-color)] pt-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] lg:gap-16"
         >
-          <header className="flex flex-col gap-4">
+          <header className="flex flex-col gap-4 lg:sticky lg:top-[calc(var(--dateline-h)+var(--nav-h)+2rem)] lg:self-start">
             <div className="flex items-center gap-3">
               <StatusChip status="development" label="In development" />
               <span className="meta">{pad2(devGrid.length)}</span>

@@ -553,6 +553,41 @@ li:last-child > .service-row { border-bottom: 1px solid var(--rule-color); }
   .process-steps h3 { line-height: 1.05; }
 }
 
+/* Contact: the address set large. Two underlines: a rule-coloured base, and
+   an accent line that draws left to right on hover, on focus, and when the
+   address is copied. */
+.contact-email {
+  font-family: var(--ff-display);
+  font-size: clamp(1.9rem, 5.5vw, 4rem);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  color: var(--text-primary);
+  font-variation-settings: "opsz" 144;
+  overflow-wrap: anywhere;
+}
+.contact-email-line {
+  padding-bottom: 0.1em;
+  background-image:
+    linear-gradient(var(--accent), var(--accent)),
+    linear-gradient(var(--rule-color), var(--rule-color));
+  background-repeat: no-repeat;
+  background-position: 0 100%, 0 100%;
+  background-size: 0% 1px, 100% 1px;
+  transition: background-size 400ms var(--ease-out-expo);
+}
+.contact-email:hover .contact-email-line,
+.contact-email:focus-visible .contact-email-line,
+.contact-email[data-copied] .contact-email-line {
+  background-size: 100% 1px, 100% 1px;
+}
+.contact-email-at {
+  color: var(--accent);
+  font-style: italic;
+}
+/* The copy "stamp": the @ sets upright while the button reads Copied */
+.contact-email[data-copied] .contact-email-at { font-style: normal; }
+
 /* Services: what each service includes, as a quiet ruled list */
 .offerings {
   margin-top: 1.25rem;

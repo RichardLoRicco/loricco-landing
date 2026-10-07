@@ -6,7 +6,9 @@ import Reveal from "./Reveal";
 const EMAIL = "admin@loriccoandco.com";
 const [EMAIL_USER, EMAIL_DOMAIN] = EMAIL.split("@");
 
-function CopyEmail() {
+export default function Contact() {
+  // Copying "stamps" the address: its underline draws in the accent and the
+  // italic @ sets upright until the button resets (see .contact-email).
   const [copied, setCopied] = useState(false);
 
   useEffect(() => {
@@ -20,23 +22,10 @@ function CopyEmail() {
       await navigator.clipboard.writeText(EMAIL);
       setCopied(true);
     } catch {
-      /* Clipboard unavailable: the mailto link next to this still works. */
+      /* Clipboard unavailable: the address above is still a mailto link. */
     }
   };
 
-  return (
-    <>
-      <button type="button" onClick={copy} className="btn btn-secondary">
-        {copied ? "Copied" : "Copy address"}
-      </button>
-      <span role="status" className="sr-only">
-        {copied ? "Email address copied" : ""}
-      </span>
-    </>
-  );
-}
-
-export default function Contact() {
   return (
     <section
       id="contact"
@@ -63,25 +52,28 @@ export default function Contact() {
               a written review.
             </p>
 
-            {/* The address itself, set large, as on the personal site */}
-            <a href={`mailto:${EMAIL}`} className="contact-email group mt-10 inline-block">
+            {/* The address itself, set large, as on the personal site. It is the mailto. */}
+            <a
+              href={`mailto:${EMAIL}`}
+              className="contact-email mt-10 inline-block"
+              data-copied={copied || undefined}
+            >
               <span className="contact-email-line">
                 {EMAIL_USER}
-                <span style={{ color: "var(--accent)", fontStyle: "italic" }}>@</span>
+                <span className="contact-email-at">@</span>
                 {EMAIL_DOMAIN}
               </span>
             </a>
 
-            <div className="mt-10 flex flex-wrap items-center gap-4">
-              <a href={`mailto:${EMAIL}`} className="btn btn-primary">
-                Get in touch
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
-                  <path d="M5 12h14M13 6l6 6-6 6" />
-                </svg>
-              </a>
-              <CopyEmail />
+            <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
+              <button type="button" onClick={copy} className="btn btn-secondary">
+                {copied ? "Copied" : "Copy address"}
+              </button>
+              <span role="status" className="sr-only">
+                {copied ? "Email address copied" : ""}
+              </span>
+              <p className="meta">Replies &middot; usually one business day</p>
             </div>
-            <p className="meta mt-6">Replies &middot; usually one business day</p>
           </div>
         </Reveal>
       </div>
