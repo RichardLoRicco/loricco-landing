@@ -122,6 +122,9 @@ export default function Hero() {
           </div>
 
           {/* The principal, framed the way the personal site frames its portrait */}
+          {/* Lazy on purpose: the column is display:none on phones, where an eager
+              image would still download; on desktop it is in view at load, so
+              lazy loading fetches it immediately. */}
           <aside className="hidden animate-reveal reveal-delay-400 lg:block">
             {/* Portrait and facts drift together, at most the section's 5rem bottom padding */}
             <HeroParallax max={80}>
@@ -140,7 +143,6 @@ export default function Hero() {
                     alt="Richard T. LoRicco, principal of LoRicco & Co., in a suit and tie"
                     width={800}
                     height={1000}
-                    loading="eager"
                     sizes="240px"
                     className="aspect-[4/5] w-full object-cover"
                     style={{ display: "block" }}
