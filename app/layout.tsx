@@ -5,13 +5,21 @@ import Providers from "./components/Providers";
 import StructuredData from "./components/StructuredData";
 import "./globals.css";
 
-/* Same four faces as richardloricco.com. Fraunces keeps its SOFT and opsz
-   axes because the display headlines are drawn at opsz 144. */
+/*
+  Same four faces as richardloricco.com, trimmed for speed (Lighthouse mobile,
+  2026-10-07, vs main at 91):
+  - Fraunces keeps opsz, because the display headlines are drawn at opsz 144;
+    without it they set wide and heavy. SOFT is dropped: +118KB for a barely
+    visible softening, and perf 83 -> 88. The SOFT values in globals.css are
+    then ignored, harmlessly.
+  - Source Serif ships upright only. Every italic on the page is Fraunces
+    (see `em` and .serif-italic in globals.css).
+*/
 const fraunces = Fraunces({
   variable: "--font-fraunces",
   subsets: ["latin"],
   style: ["normal", "italic"],
-  axes: ["SOFT", "opsz"],
+  axes: ["opsz"],
   display: "swap",
 });
 
@@ -26,7 +34,7 @@ const sourceSerif = Source_Serif_4({
   variable: "--font-source-serif",
   subsets: ["latin"],
   weight: ["400", "500", "600"],
-  style: ["normal", "italic"],
+  style: ["normal"],
   display: "swap",
 });
 
