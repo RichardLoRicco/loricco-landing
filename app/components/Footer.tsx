@@ -37,9 +37,9 @@ export default function Footer() {
           </p>
         </div>
 
-        <div className="flex items-center gap-4">
+        <div className="flex min-w-0 flex-wrap items-center gap-x-4 gap-y-2">
           <span className="meta">The studio</span>
-          <div className="flex items-center gap-2.5">
+          <div className="flex flex-wrap items-center gap-2.5">
             {appLinks.map((app) => (
               <a
                 key={app.name}
