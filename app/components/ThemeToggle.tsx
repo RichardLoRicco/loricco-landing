@@ -25,15 +25,23 @@ const CHROME = { dark: "#121110", light: "#efeae0" } as const;
 /*
   Mounted once in the root layout, so every page (the 404 too): the browser
   chrome (theme-color metas) follows the chosen theme, not only the OS setting.
-  Runs after hydration so the server-rendered head still matches.
+  Runs after hydration so the server-rendered head still matches, and watches
+  <head> because Next rewrites the metadata on client-side navigation. It only
+  writes a meta whose value is wrong, so its own writes can't retrigger it.
 */
 export function ThemeColorSync() {
   const theme = useTheme();
   useEffect(() => {
     if (!theme) return;
-    document
-      .querySelectorAll('meta[name="theme-color"]')
-      .forEach((m) => m.setAttribute("content", CHROME[theme]));
+    const apply = () => {
+      document.querySelectorAll('meta[name="theme-color"]').forEach((m) => {
+        if (m.getAttribute("content") !== CHROME[theme]) m.setAttribute("content", CHROME[theme]);
+      });
+    };
+    apply();
+    const observer = new MutationObserver(apply);
+    observer.observe(document.head, { childList: true, subtree: true, attributes: true, attributeFilter: ["content"] });
+    return () => observer.disconnect();
   }, [theme]);
   return null;
 }
