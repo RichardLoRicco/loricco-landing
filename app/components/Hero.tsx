@@ -1,186 +1,186 @@
-"use client";
-
 import Image from "next/image";
-import { useEffect, useRef, type ReactNode } from "react";
-import Blueprint from "./Blueprint";
-import { FadeUp, SplitLines } from "./ui/Reveal";
+import HeroParallax from "./HeroParallax";
 import { counts, pad2 } from "../lib/apps";
+
+const EMAIL = "admin@loriccoandco.com";
 
 /*
   Every figure here is checkable elsewhere on the page or on the linked sites.
   Update these when the Work or Studio sections change.
 */
-const facts: [string, string][] = [
-  ["Apps on the App Store", pad2(counts.live)],
-  ["Lighthouse, loriccolaw.com", "100 · 100 · 100 · 100"],
-  ["Base", "New Haven, CT"],
+const facts: { label: string; value: string; wide?: boolean }[] = [
+  { label: "Base", value: "New Haven, CT" },
+  { label: "Apps on the App Store", value: pad2(counts.live) },
+  { label: "Lighthouse, loriccolaw.com", value: "100 · 100 · 100 · 100", wide: true },
 ];
-
-/* The exhibit card leans a few degrees toward the cursor. */
-function TiltCard({ children, className = "" }: { children: ReactNode; className?: string }) {
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    if (window.matchMedia("(hover: none)").matches) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-    const move = (e: PointerEvent) => {
-      const r = el.getBoundingClientRect();
-      const px = (e.clientX - r.left) / r.width;
-      const py = (e.clientY - r.top) / r.height;
-      el.style.setProperty("--ry", `${((px - 0.5) * 9).toFixed(2)}deg`);
-      el.style.setProperty("--rx", `${((0.5 - py) * 9).toFixed(2)}deg`);
-      el.style.setProperty("--mx", `${e.clientX - r.left}px`);
-      el.style.setProperty("--my", `${e.clientY - r.top}px`);
-    };
-    const leave = () => {
-      el.style.setProperty("--rx", "0deg");
-      el.style.setProperty("--ry", "0deg");
-    };
-    el.addEventListener("pointermove", move, { passive: true });
-    el.addEventListener("pointerleave", leave);
-    return () => {
-      el.removeEventListener("pointermove", move);
-      el.removeEventListener("pointerleave", leave);
-    };
-  }, []);
-
-  return (
-    <div ref={ref} className={`tilt ${className}`}>
-      {children}
-    </div>
-  );
-}
 
 export default function Hero() {
   return (
     <section
+      id="top"
       aria-label="Introduction"
-      className="relative overflow-hidden px-6 pt-32 pb-16 sm:pt-36 lg:flex lg:min-h-[100svh] lg:flex-col lg:justify-center lg:pt-40 lg:pb-14"
+      className="relative flex items-center overflow-hidden pt-[calc(var(--nav-h)+2.5rem)] pb-16 lg:min-h-[calc(100dvh-var(--dateline-h))] lg:pt-[calc(var(--nav-h)+3rem)] lg:pb-20"
     >
-      <Blueprint fade />
-
-      {/* The expressive ampersand, drawn in outline at drafting scale */}
-      <span
-        aria-hidden="true"
-        className="editorial ghost-cobalt pointer-events-none absolute -bottom-[0.24em] -right-[0.06em] select-none text-[46vw] leading-none opacity-60 lg:top-[4%] lg:bottom-auto lg:text-[30vw]"
-      >
-        &
+      {/* The brand's ampersand in place of the personal site's § watermark */}
+      <span aria-hidden="true" className="ink-mark" style={{ top: "6%", right: "-3%" }}>
+        &amp;
       </span>
 
-      <div className="relative mx-auto w-full max-w-6xl">
-        <FadeUp immediate delay={0} y={10}>
-          <p className="kicker mb-7 text-cobalt">Attorney · MBA · Engineer</p>
-        </FadeUp>
+      <div className="page-gutter relative z-10 w-full">
+        <div className="grid items-end gap-12 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)] lg:gap-20">
+          <div>
+            {/*
+              Phones: a small framed portrait opens the hero beside the practice's
+              name and city, which the dateline hides at this width. Desktop keeps
+              the credential eyebrow and the full portrait column on the right.
+            */}
+            <div className="flex items-center gap-4 animate-reveal lg:block">
+              <span
+                className="block shrink-0 lg:hidden"
+                style={{
+                  width: 64,
+                  padding: 4,
+                  border: "1px solid var(--border-strong)",
+                  background: "var(--surface-raised)",
+                  borderRadius: 2,
+                }}
+              >
+                <Image
+                  src="/portrait-bw.jpg"
+                  alt="Richard T. LoRicco"
+                  width={160}
+                  height={200}
+                  sizes="56px"
+                  loading="eager"
+                  className="aspect-[4/5] w-full object-cover"
+                  style={{ display: "block" }}
+                />
+              </span>
+              <p className="eyebrow hero-eyebrow">
+                <span className="flex flex-col gap-1.5 lg:hidden">
+                  <span>LoRicco &amp; Co. LLC</span>
+                  <span>New Haven, CT</span>
+                </span>
+                <span className="hidden lg:inline">Attorney &middot; MBA &middot; Engineer</span>
+              </p>
+            </div>
+            <h1
+              className="mt-6 animate-reveal reveal-delay-100 balance"
+              style={{ fontSize: "clamp(3rem, 6.3vw, 5.75rem)", letterSpacing: "-0.045em" }}
+            >
+              Websites, AI, and{" "}
+              <br className="hidden sm:block" />
+              <span
+                style={{
+                  fontStyle: "italic",
+                  fontWeight: 400,
+                  color: "var(--accent)",
+                  fontVariationSettings: '"opsz" 144, "SOFT" 60',
+                }}
+              >
+                technical consulting.
+              </span>
+            </h1>
 
-        {/* ── The argument, at full width ── */}
-        <SplitLines
-          as="h1"
-          immediate
-          className="font-display max-w-5xl text-[2.9rem] leading-[0.98] font-bold tracking-[-0.03em] sm:text-[3.8rem] lg:text-[5.2rem] xl:text-[5.8rem]"
-          lines={[
-            "Websites, AI, and",
-            <span key="l2" className="editorial font-medium tracking-[-0.01em]">
-              technical consulting.
-            </span>,
-          ]}
-        />
-
-        <div className="mt-10 grid items-start gap-12 lg:mt-14 lg:grid-cols-[1fr_auto] lg:gap-20">
-          <div className="max-w-xl">
             {/*
               Kept out of the entrance animation on purpose: this paragraph is the
               LCP element on phones, and a delayed fade was costing ~2s of LCP.
             */}
-            <p className="text-lg leading-relaxed text-body-muted lg:text-[1.15rem]">
-              I&apos;m a Connecticut attorney and software engineer. I rebuild
-              and run websites and AI systems for law firms and small businesses,
-              train lawyers and their staff on AI, consult with counsel on the
-              technology in their cases, and advise startups. You work with me
+            <p
+              className="mt-8 body-serif pretty max-w-2xl"
+              style={{ fontSize: "clamp(1.15rem, 1.6vw, 1.35rem)" }}
+            >
+              I&apos;m a Connecticut attorney and software engineer. I rebuild and
+              run websites and AI systems for law firms and small businesses, train
+              lawyers and their staff on AI, consult with counsel on the technology
+              in their cases, take on contract research and drafting for law
+              firms, and advise startups and small businesses. You work with me
               directly from the first call to the finished work.
             </p>
 
-            <FadeUp immediate delay={0.3} className="mt-9 flex flex-wrap items-center gap-6">
-              <a
-                href="mailto:admin@loriccoandco.com"
-                className="btn bg-cobalt px-6 py-3.5 text-sm font-semibold text-white hover:shadow-[0_12px_28px_-10px_rgba(32,56,200,0.55)]"
-                style={{ ["--btn-fill" as string]: "var(--color-foreground)" }}
-              >
-                Get in touch <span className="btn-arrow">→</span>
+            <div className="mt-10 flex flex-wrap items-center gap-4 animate-reveal reveal-delay-300">
+              <a href={`mailto:${EMAIL}`} className="btn btn-primary">
+                Get in touch
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+                  <path d="M5 12h14M13 6l6 6-6 6" />
+                </svg>
               </a>
-              <a
-                href="#services"
-                className="group font-mono text-[13px] text-foreground transition-colors duration-200 hover:text-cobalt"
-              >
-                See what I do{" "}
-                <span className="inline-block transition-transform duration-300 group-hover:translate-y-1">
-                  ↓
-                </span>
+              <a href="#services" className="btn btn-secondary">
+                See what I do
               </a>
-            </FadeUp>
+            </div>
+
+            {/* Phones: the same facts as the desktop ledger, on one ruled line */}
+            <dl className="hero-facts lg:hidden">
+              {facts.map(({ label, value }) => (
+                <div key={label}>
+                  <dt className="meta">{label}</dt>
+                  <dd>{value}</dd>
+                </div>
+              ))}
+            </dl>
           </div>
 
-          {/* ── The principal. Same exhibit treatment as the OG share card. ── */}
-          <FadeUp
-            immediate
-            delay={0.2}
-            y={24}
-            className="relative mx-auto w-full max-w-[280px] lg:mx-0 lg:-mt-16 lg:w-[300px] xl:w-[330px]"
-          >
-            <TiltCard>
-              {/* Backing sheets: a short stack of prepared work */}
-              <div
-                className="absolute inset-0 translate-x-6 translate-y-6 rounded-[4px] border border-line bg-card/40"
-                aria-hidden="true"
-              />
-              <div
-                className="absolute inset-0 translate-x-3 translate-y-3 rounded-[4px] border border-line bg-card/70"
-                aria-hidden="true"
-              />
-
-              <figure className="relative overflow-hidden rounded-[4px] border border-line-strong bg-card shadow-[0_32px_64px_-28px_rgba(26,24,20,0.38)]">
-                <div className="tilt-sheen z-10" aria-hidden="true" />
-                <div className="p-3 pb-0">
+          {/* The principal, framed the way the personal site frames its portrait */}
+          {/* Lazy on purpose: the column is display:none on phones, where an eager
+              image would still download; on desktop it is in view at load, so
+              lazy loading fetches it immediately. */}
+          <aside className="hidden animate-reveal reveal-delay-400 lg:block">
+            {/* Portrait and facts drift together, at most the section's 5rem bottom padding */}
+            <HeroParallax max={80}>
+              <div className="flex flex-col gap-8">
+                <figure
+                  className="relative mx-auto w-[200px] sm:w-[240px]"
+                  style={{
+                    border: "1px solid var(--border-strong)",
+                    padding: "10px",
+                    background: "var(--surface-raised)",
+                    borderRadius: 2,
+                  }}
+                >
                   <Image
                     src="/portrait-bw.jpg"
                     alt="Richard T. LoRicco, principal of LoRicco & Co., in a suit and tie"
                     width={800}
                     height={1000}
-                    priority
-                    sizes="(min-width: 1280px) 330px, (min-width: 1024px) 300px, 280px"
-                    className="aspect-[4/5] w-full rounded-[2px] object-cover"
+                    sizes="240px"
+                    className="aspect-[4/5] w-full object-cover"
+                    style={{ display: "block" }}
                   />
-                </div>
-                <figcaption className="flex items-baseline justify-between gap-4 px-4 py-3 font-mono text-[11px] tracking-[0.12em] uppercase">
-                  <span className="text-text-muted">
-                    Principal / <span className="font-medium text-foreground">R.T. LoRicco</span>
-                  </span>
-                  <span className="text-text-muted">New Haven, CT</span>
-                </figcaption>
-              </figure>
-            </TiltCard>
-          </FadeUp>
+                  <figcaption className="meta mt-3" style={{ textAlign: "center" }}>
+                    Principal &middot; R.&nbsp;T.&nbsp;LoRicco
+                  </figcaption>
+                </figure>
+
+                <dl
+                  className="grid grid-cols-2 gap-x-6 gap-y-4"
+                  style={{
+                    borderTop: "1px solid var(--rule-color)",
+                    borderBottom: "1px solid var(--rule-color)",
+                    padding: "1.25rem 0",
+                  }}
+                >
+                  {facts.map(({ label, value, wide }) => (
+                    <div key={label} className={wide ? "col-span-2" : undefined}>
+                      <dt className="meta">{label}</dt>
+                      <dd
+                        className="mt-1"
+                        style={{
+                          fontFamily: "var(--ff-display)",
+                          fontSize: "1.05rem",
+                          fontVariantNumeric: "tabular-nums",
+                        }}
+                      >
+                        {value}
+                      </dd>
+                    </div>
+                  ))}
+                </dl>
+              </div>
+            </HeroParallax>
+          </aside>
         </div>
       </div>
-
-      {/* ── Facts ledger ── */}
-      <FadeUp immediate delay={0.5} y={12} className="relative mx-auto mt-16 w-full max-w-6xl lg:mt-20">
-        <dl className="grid grid-cols-1 border-y border-line bg-background/60 backdrop-blur-sm sm:grid-cols-3">
-          {facts.map(([label, value]) => (
-            <div
-              key={label}
-              className="border-b border-line px-5 py-5 last:border-b-0 sm:border-r sm:border-b-0 sm:last:border-r-0"
-            >
-              <dt className="kicker text-[10px] text-text-muted">{label}</dt>
-              <dd className="mt-2 font-mono text-[15px] font-medium text-foreground tnum">
-                {value}
-              </dd>
-            </div>
-          ))}
-        </dl>
-      </FadeUp>
     </section>
   );
 }

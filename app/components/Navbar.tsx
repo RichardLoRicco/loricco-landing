@@ -1,167 +1,146 @@
 "use client";
 
-import Link from "next/link";
-import { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence, useScroll, useSpring } from "motion/react";
+import { useEffect, useRef, useState } from "react";
 import { SECTIONS, useActiveSection } from "./ActiveSection";
+import ThemeToggle from "./ThemeToggle";
 
-const navLinks = SECTIONS.map((s) => ({
-  id: s.id,
-  label: s.id === "work" ? "Work" : s.label,
+const EMAIL = "admin@loriccoandco.com";
+
+const links = SECTIONS.map((s) => ({
   href: `#${s.id}`,
+  id: s.id,
+  num: s.num,
+  label: s.label,
 }));
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const toggleRef = useRef<HTMLButtonElement>(null);
   const active = useActiveSection();
 
-  // Reading-progress hairline along the bottom edge of the bar.
-  const { scrollYProgress } = useScroll();
-  const progress = useSpring(scrollYProgress, { stiffness: 120, damping: 30, mass: 0.3 });
-
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 40);
-    handleScroll();
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 12);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   useEffect(() => {
-    if (mobileOpen) {
-      const firstLink = document.querySelector<HTMLAnchorElement>("#mobile-menu a");
-      firstLink?.focus();
-    }
-  }, [mobileOpen]);
+    const onResize = () => window.innerWidth >= 900 && setMenuOpen(false);
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
 
   useEffect(() => {
-    if (!mobileOpen) return;
-    const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        setMobileOpen(false);
-        toggleRef.current?.focus();
-      }
+    if (!menuOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== "Escape") return;
+      setMenuOpen(false);
+      toggleRef.current?.focus();
     };
-    document.addEventListener("keydown", handleEscape);
-    return () => document.removeEventListener("keydown", handleEscape);
-  }, [mobileOpen]);
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [menuOpen]);
 
   return (
-    <motion.nav
-      aria-label="Main navigation"
-      initial={{ opacity: 0, y: -12 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "bg-background/85 backdrop-blur-xl border-b border-line"
-          : "bg-transparent"
-      }`}
-    >
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-5">
-        <Link
-          href="/"
-          className="font-display text-lg font-bold tracking-tight text-foreground"
-        >
-          LoRicco <span className="editorial font-medium text-cobalt">&</span> Co.
-        </Link>
+    <>
+      <nav aria-label="Main navigation" className={`nav-shell ${scrolled ? "is-scrolled" : ""}`}>
+        <div className="nav-inner">
+          <a href="#top" className="nav-mark" aria-label="LoRicco & Co., back to top">
+            LoRicco <em>&amp;</em> Co.
+          </a>
 
-        {/* Desktop nav */}
-        <div className="hidden items-center gap-7 md:flex">
-          {navLinks.map((link) => {
-            const isActive = active === link.id;
-            return (
+          <div className="nav-links">
+            {links.map(({ href, id, num, label }) => (
               <a
-                key={link.href}
-                href={link.href}
-                aria-current={isActive ? "true" : undefined}
-                className={`u-link text-sm font-medium transition-colors duration-200 ${
-                  isActive ? "text-cobalt" : "text-body-muted hover:text-foreground"
-                }`}
+                key={href}
+                href={href}
+                aria-current={active === id ? "page" : undefined}
+                className="nav-link"
               >
-                {link.label}
+                <span className="num">{num}</span>
+                <span>{label}</span>
               </a>
-            );
-          })}
+            ))}
+            <div className="ml-2 flex items-center gap-3 pl-3" style={{ borderLeft: "1px solid var(--border)" }}>
+              <ThemeToggle />
+              <a href={`mailto:${EMAIL}`} className="btn btn-primary nav-cta">
+                Get in touch
+              </a>
+            </div>
+          </div>
+
+          <button
+            ref={toggleRef}
+            type="button"
+            aria-expanded={menuOpen}
+            aria-controls="mobile-menu"
+            onClick={() => setMenuOpen((v) => !v)}
+            className="nav-mobile-btn"
+          >
+            <span className="sr-only">Toggle menu</span>
+            {menuOpen ? (
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" aria-hidden="true">
+                <line x1="18" x2="6" y1="6" y2="18" />
+                <line x1="6" x2="18" y1="6" y2="18" />
+              </svg>
+            ) : (
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" aria-hidden="true">
+                <line x1="4" x2="20" y1="8" y2="8" />
+                <line x1="4" x2="20" y1="16" y2="16" />
+              </svg>
+            )}
+          </button>
+        </div>
+      </nav>
+
+      <nav
+        id="mobile-menu"
+        aria-label="Mobile navigation"
+        aria-hidden={!menuOpen}
+        inert={!menuOpen}
+        className={`nav-drawer ${menuOpen ? "is-open" : ""}`}
+        style={{ zIndex: 109 }}
+      >
+        <div className="nav-drawer-inner">
+          {links.map(({ href, id, num, label }) => (
+            <a
+              key={href}
+              href={href}
+              aria-current={active === id ? "page" : undefined}
+              onClick={() => setMenuOpen(false)}
+              className="nav-link"
+              style={{ justifyContent: "space-between" }}
+            >
+              <span style={{ display: "inline-flex", gap: "0.9rem" }}>
+                <span className="num">{num}</span>
+                <span>{label}</span>
+              </span>
+            </a>
+          ))}
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              paddingTop: "1rem",
+              marginTop: "0.25rem",
+              borderTop: "1px solid var(--border)",
+            }}
+          >
+            <span className="label">Theme</span>
+            <ThemeToggle />
+          </div>
           <a
-            href="mailto:admin@loriccoandco.com"
-            className="btn bg-foreground px-4 py-2 text-sm font-semibold text-background"
-            style={{ ["--btn-fill" as string]: "var(--color-cobalt)" }}
+            href={`mailto:${EMAIL}`}
+            onClick={() => setMenuOpen(false)}
+            className="btn btn-primary mt-5 w-full"
           >
             Get in touch
           </a>
         </div>
-
-        {/* Mobile toggle */}
-        <button
-          ref={toggleRef}
-          onClick={() => setMobileOpen(!mobileOpen)}
-          className="relative z-50 flex h-8 w-8 flex-col items-center justify-center gap-1.5 md:hidden"
-          aria-label="Toggle menu"
-          aria-expanded={mobileOpen}
-          aria-controls="mobile-menu"
-        >
-          <span
-            className={`block h-px w-5 bg-foreground transition-all duration-300 ${
-              mobileOpen ? "translate-y-[3.5px] rotate-45" : ""
-            }`}
-          />
-          <span
-            className={`block h-px w-5 bg-foreground transition-all duration-300 ${
-              mobileOpen ? "-translate-y-[3.5px] -rotate-45" : ""
-            }`}
-          />
-        </button>
-      </div>
-
-      {/* Reading progress: a cobalt hairline that grows along the bottom edge */}
-      <motion.div
-        aria-hidden="true"
-        className={`absolute bottom-[-1px] left-0 h-px w-full origin-left bg-cobalt transition-opacity duration-300 ${
-          scrolled ? "opacity-100" : "opacity-0"
-        }`}
-        style={{ scaleX: progress }}
-      />
-
-      {/* Mobile menu */}
-      <AnimatePresence>
-        {mobileOpen && (
-          <motion.div
-            id="mobile-menu"
-            role="navigation"
-            aria-label="Mobile navigation"
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.25 }}
-            className="overflow-hidden border-b border-line bg-background/95 backdrop-blur-xl md:hidden"
-          >
-            <div className="flex flex-col gap-4 px-6 py-6">
-              {navLinks.map((link, i) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setMobileOpen(false)}
-                  className="flex items-baseline gap-4 font-display text-lg text-body-muted transition-colors hover:text-cobalt"
-                >
-                  <span className="font-mono text-[11px] text-cobalt tnum">
-                    0{i + 1}
-                  </span>
-                  {link.label}
-                </a>
-              ))}
-              <a
-                href="mailto:admin@loriccoandco.com"
-                onClick={() => setMobileOpen(false)}
-                className="mt-2 inline-flex w-fit rounded-[3px] bg-foreground px-4 py-2 text-sm font-semibold text-background"
-              >
-                Get in touch
-              </a>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.nav>
+      </nav>
+    </>
   );
 }

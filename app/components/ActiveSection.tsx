@@ -5,14 +5,16 @@ import { createContext, useContext, useEffect, useState, type ReactNode } from "
 /*
   The page is one document with numbered sections. This provider watches a
   thin band near the top third of the viewport and reports which section is
-  crossing it, so the navbar and the margin index can highlight the same one.
+  crossing it, so the navbar can highlight it and the dateline can name it.
+  `num` and `label` match the "§ 0n · Label" line in each section's heading;
+  keep them in step.
 */
 
 export const SECTIONS = [
   { id: "services", num: "01", label: "Services" },
-  { id: "work", num: "02", label: "Selected work" },
-  { id: "process", num: "03", label: "How I work" },
-  { id: "studio", num: "04", label: "The Studio" },
+  { id: "work", num: "02", label: "Work" },
+  { id: "process", num: "03", label: "Process" },
+  { id: "studio", num: "04", label: "Studio" },
   { id: "about", num: "05", label: "About" },
   { id: "contact", num: "06", label: "Contact" },
 ] as const;
