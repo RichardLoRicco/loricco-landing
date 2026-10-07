@@ -1,7 +1,7 @@
-import Image from "next/image";
 import Reveal from "./Reveal";
+import SiteFrame from "./SiteFrame";
 
-type Project = {
+export type Project = {
   name: string;
   exhibit: string;
   url: string;
@@ -57,51 +57,6 @@ const projects: Project[] = [
 ];
 
 const scoreLabels = ["Performance", "Accessibility", "Best practices", "SEO"];
-
-/* The screenshot frame: the personal site's filing card, with the real homepage
-   scrolling top to bottom on hover (see .site-preview in globals.css). */
-function SiteFrame({ project }: { project: Project }) {
-  return (
-    <a
-      href={project.url}
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label={`${project.name}, ${project.host}. Opens in a new tab.`}
-      className="site-preview-trigger filing filing-interactive group block overflow-hidden"
-    >
-      <div className="flex items-center justify-between gap-3 px-5 py-4">
-        <span className="meta">Exhibit {project.exhibit}</span>
-        <span className="chip-meta">
-          <span
-            aria-hidden="true"
-            style={{ width: 5, height: 5, borderRadius: 9999, background: "#4ea35c" }}
-          />
-          Live
-        </span>
-      </div>
-
-      <div className="site-preview aspect-[16/10] border-y border-[var(--border)]">
-        <Image
-          src={project.fullPage}
-          alt={project.fullPageAlt}
-          width={1000}
-          height={3281}
-          sizes="(min-width: 1024px) 680px, 100vw"
-        />
-      </div>
-
-      <div className="flex items-center justify-between gap-3 px-5 py-3.5">
-        <span className="meta">{project.host}</span>
-        <span className="meta hidden transition-colors group-hover:text-[var(--accent)] sm:inline">
-          Hover to scroll &middot; Visit &rarr;
-        </span>
-        <span className="meta sm:hidden" style={{ color: "var(--accent)" }}>
-          Visit &rarr;
-        </span>
-      </div>
-    </a>
-  );
-}
 
 export default function Work() {
   return (

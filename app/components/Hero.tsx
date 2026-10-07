@@ -19,7 +19,7 @@ export default function Hero() {
     <section
       id="top"
       aria-label="Introduction"
-      className="relative flex min-h-[calc(100dvh-var(--dateline-h))] items-center overflow-hidden pt-[calc(var(--nav-h)+3rem)] pb-20"
+      className="relative flex items-center overflow-hidden pt-[calc(var(--nav-h)+2.5rem)] pb-16 lg:min-h-[calc(100dvh-var(--dateline-h))] lg:pt-[calc(var(--nav-h)+3rem)] lg:pb-20"
     >
       {/* The brand's ampersand in place of the personal site's § watermark */}
       <span aria-hidden="true" className="ink-mark" style={{ top: "6%", right: "-3%" }}>
@@ -29,9 +29,41 @@ export default function Hero() {
       <div className="page-gutter relative z-10 w-full">
         <div className="grid items-end gap-12 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)] lg:gap-20">
           <div>
-            <p className="eyebrow animate-reveal">
-              <span>Attorney &middot; MBA &middot; Engineer</span>
-            </p>
+            {/*
+              Phones: a small framed portrait opens the hero beside the practice's
+              name and city, which the dateline hides at this width. Desktop keeps
+              the credential eyebrow and the full portrait column on the right.
+            */}
+            <div className="flex items-center gap-4 animate-reveal lg:block">
+              <span
+                className="block shrink-0 lg:hidden"
+                style={{
+                  width: 64,
+                  padding: 4,
+                  border: "1px solid var(--border-strong)",
+                  background: "var(--surface-raised)",
+                  borderRadius: 2,
+                }}
+              >
+                <Image
+                  src="/portrait-bw.jpg"
+                  alt="Richard T. LoRicco"
+                  width={160}
+                  height={200}
+                  sizes="56px"
+                  loading="eager"
+                  className="aspect-[4/5] w-full object-cover"
+                  style={{ display: "block" }}
+                />
+              </span>
+              <p className="eyebrow hero-eyebrow">
+                <span className="flex flex-col gap-1.5 lg:hidden">
+                  <span>LoRicco &amp; Co. LLC</span>
+                  <span>New Haven, CT</span>
+                </span>
+                <span className="hidden lg:inline">Attorney &middot; MBA &middot; Engineer</span>
+              </p>
+            </div>
             <h1
               className="mt-6 animate-reveal delay-100 balance"
               style={{ fontSize: "clamp(3rem, 6.3vw, 5.75rem)", letterSpacing: "-0.045em" }}
@@ -77,10 +109,19 @@ export default function Hero() {
                 See what I do
               </a>
             </div>
+
+            {/* Phones: the same facts as the desktop ledger, on one ruled line */}
+            <p className="hero-facts meta lg:hidden">
+              {facts.map(({ label, value }) => (
+                <span key={label}>
+                  <span style={{ color: "var(--text-faint)" }}>{label}</span> {value}
+                </span>
+              ))}
+            </p>
           </div>
 
           {/* The principal, framed the way the personal site frames its portrait */}
-          <aside className="animate-reveal delay-400">
+          <aside className="hidden animate-reveal delay-400 lg:block">
             {/* Portrait and facts drift together, at most the section's 5rem bottom padding */}
             <HeroParallax max={80}>
               <div className="flex flex-col gap-8">
@@ -98,7 +139,6 @@ export default function Hero() {
                     alt="Richard T. LoRicco, principal of LoRicco & Co., in a suit and tie"
                     width={800}
                     height={1000}
-                    priority
                     sizes="240px"
                     className="aspect-[4/5] w-full object-cover"
                     style={{ display: "block" }}

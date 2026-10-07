@@ -3,9 +3,10 @@
 import { useEffect, useRef } from "react";
 
 /*
-  The reading-progress hairline under the nav. It scales a full-width line
-  with a transform written straight to the element, so scrolling never
-  re-renders React or triggers layout.
+  The reading-progress hairline along the very top of the window, above the
+  dateline, so it isn't mistaken for the nav's active-section underline. It
+  scales a full-width line with a transform written straight to the element,
+  so scrolling never re-renders React or triggers layout.
 */
 export default function ScrollProgress() {
   const ref = useRef<HTMLDivElement>(null);
@@ -40,12 +41,12 @@ export default function ScrollProgress() {
       aria-hidden="true"
       style={{
         position: "fixed",
-        top: "calc(var(--dateline-h) + var(--nav-h) - 1px)",
+        top: 0,
         left: 0,
         right: 0,
         height: "1px",
         background: "var(--accent)",
-        zIndex: 115,
+        zIndex: 130,
         transform: "scaleX(0)",
         transformOrigin: "left",
         willChange: "transform",

@@ -6,17 +6,11 @@ import ThemeToggle from "./ThemeToggle";
 
 const EMAIL = "admin@loriccoandco.com";
 
-const SHORT_LABELS: Partial<Record<(typeof SECTIONS)[number]["id"], string>> = {
-  work: "Work",
-  process: "Process",
-  studio: "Studio",
-};
-
 const links = SECTIONS.map((s) => ({
   href: `#${s.id}`,
   id: s.id,
   num: s.num,
-  label: SHORT_LABELS[s.id] ?? s.label,
+  label: s.label,
 }));
 
 export default function Navbar() {
@@ -33,7 +27,7 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => {
-    const onResize = () => window.innerWidth >= 1100 && setMenuOpen(false);
+    const onResize = () => window.innerWidth >= 900 && setMenuOpen(false);
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
   }, []);
