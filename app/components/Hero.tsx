@@ -94,8 +94,8 @@ export default function Hero() {
               run websites and AI systems for law firms and small businesses, train
               lawyers and their staff on AI, consult with counsel on the technology
               in their cases, take on contract research and drafting for law
-              firms, and advise startups. You work with me directly from
-              the first call to the finished work.
+              firms, and advise startups and small businesses. You work with me
+              directly from the first call to the finished work.
             </p>
 
             <div className="mt-10 flex flex-wrap items-center gap-4 animate-reveal reveal-delay-300">
