@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Fraunces, Geist, Geist_Mono, Source_Serif_4 } from "next/font/google";
 import Script from "next/script";
 import Providers from "./components/Providers";
@@ -76,6 +76,14 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/",
   },
+};
+
+/* Mobile browser chrome matches the ink and paper grounds. */
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: dark)", color: "#121110" },
+    { media: "(prefers-color-scheme: light)", color: "#efeae0" },
+  ],
 };
 
 export default function RootLayout({
