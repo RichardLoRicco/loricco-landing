@@ -3,9 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "generate:posts": "node scripts/generate-posts.mjs",
+    "generate:posts:check": "node scripts/generate-posts.mjs --check",
+    "predev": "npm run generate:posts",
     "dev": "next dev",
+    "prebuild": "npm run generate:posts",
     "build": "next build",
     "start": "next start",
+    "prelint": "npm run generate:posts",
     "lint": "eslint"
   },
   "dependencies": {
@@ -20,7 +25,14 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.1.6",
+    "gray-matter": "^4.0.3",
+    "rehype-sanitize": "^6.0.0",
+    "rehype-stringify": "^10.0.1",
+    "remark-parse": "^11.0.0",
+    "remark-rehype": "^11.1.2",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "unified": "^11.0.5",
+    "unist-util-visit": "^5.1.0"
   }
 }

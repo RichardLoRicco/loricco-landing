@@ -33,3 +33,6 @@ next-env.d.ts
 
 # Riptide artifacts (cloud-synced)
 .humanlayer/tasks/
+
+# Claude Code worktrees (branch checkouts for side sessions)
+/.claude/worktrees/

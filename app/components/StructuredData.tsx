@@ -1,10 +1,11 @@
 import { liveApps } from "../lib/apps";
+import { AUTHOR, BUSINESS_ID, PERSON_ID } from "../lib/site";
 
 export default function StructuredData() {
   const businessSchema = {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
-    "@id": "https://loriccoandco.com/#business",
+    "@id": BUSINESS_ID,
     name: "LoRicco & Co",
     url: "https://loriccoandco.com",
     description:
@@ -17,12 +18,15 @@ export default function StructuredData() {
       addressCountry: "US",
     },
     areaServed: "United States",
+    // The blog's Article JSON-LD points its author at this id, so the person
+    // is defined once, here, for every page.
     founder: {
       "@type": "Person",
-      name: "Richard T. LoRicco",
-      jobTitle: "Principal: Attorney (LL.M., J.D., MBA) and Software Engineer",
-      image: "https://loriccoandco.com/portrait-bw.jpg",
-      url: "https://www.richardloricco.com",
+      "@id": PERSON_ID,
+      name: AUTHOR.name,
+      jobTitle: AUTHOR.jobTitle,
+      image: AUTHOR.image,
+      url: AUTHOR.url,
       sameAs: [
         "https://www.linkedin.com/in/richard-loricco-esq",
         "https://github.com/RichardLoRicco",
