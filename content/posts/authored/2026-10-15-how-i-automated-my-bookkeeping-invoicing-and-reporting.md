@@ -1,9 +1,9 @@
 ---
-title: "What I automated in my own bookkeeping, invoicing, and reporting (and what I still do by hand)"
+title: "What I automated in my own bookkeeping, invoicing, and reporting"
 slug: "how-i-automated-my-bookkeeping-invoicing-and-reporting"
-description: "A one-person practice, five money routines, one rule: the agents prepare, I decide. Here's the setup, what it catches, and the part I kept for myself on purpose."
+description: "I run a one-person practice. Here's how the money side works now: which parts an agent handles each month, what I still do myself, and why nothing gets filed or sent without me."
 metaTitle: "How I Automated My Bookkeeping, Invoicing, and Reporting"
-metaDescription: "A one-person practice runs five money routines on agents that prepare and never decide. The setup, what it catches each month, and what I still do by hand."
+metaDescription: "How a one-person practice handles invoicing, sales tax, and monthly reporting with agents that prepare the work and a person who signs off on all of it."
 publishedAt: "2026-10-15"
 series: "Running the practice on agents"
 tags:
@@ -12,81 +12,75 @@ tags:
   - "Bookkeeping"
 faqs:
   - question: "Does an AI file your taxes?"
-    answer: "No. The routine prepares a worksheet and I file and pay in the state portal myself. Its permissions don't include any tool that can file a return, move money, or change the books, so it can't do those things even by accident."
+    answer: "No. The routine prepares a worksheet, and I file and pay in the state portal myself. It doesn't have access to any tool that can file a return, move money, or change the books."
   - question: "What does this setup cost?"
-    answer: "QuickBooks Online on the entry plan, Mercury as the bank (no base fee for how I use it), Todoist, and the Claude subscription I already use for client work. No bookkeeper yet. I'll bring one in to review the chart of accounts once there are a few more months of real transactions to look at."
-  - question: "Could a small law firm or a local business run its books this way?"
-    answer: "The tooling part, yes. The hard part isn't the software. It's writing down what you actually do each month, in plain words, so an agent can follow it and you can check it. Most of the work in my setup is the writing-down. The automation came after."
-  - question: "Why is everything read-only?"
-    answer: "Because the one time an agent wrote to my invoices, it saved a wrong tax override that the screen didn't show. I caught it by re-reading the totals. A routine that only reads can be wrong, but it can't be wrong in the books, and I'd rather fix a worksheet than refund a client."
+    answer: "QuickBooks Online on the entry plan, Mercury as the bank (no base fee for how I use it), Todoist, and the Claude subscription I already pay for because of client work. I don't have a bookkeeper yet. I plan to have one review the chart of accounts once there are a few more months of real transactions."
+  - question: "Could a small law firm or a local business do this?"
+    answer: "Probably, but the software is the smaller part of it. Most of the work in my setup was writing down, in plain words, what I actually do each month and what the rules are. Once that existed, giving it to an agent was straightforward."
+  - question: "Why do you keep the agents read-only?"
+    answer: "Because the one time I let an agent write to my invoices, it saved a wrong tax override that didn't show on screen. I only caught it because I re-read the totals. I'd rather fix a mistake on a worksheet than in the books."
 ---
 
-On the 12th of every month, at eight in the morning, a worksheet shows up as a comment on a Todoist task called "File and Pay Sales Use Tax." It has last month's Connecticut return worked out line by line, every client payment matched to a bank deposit, and a status at the top: READY, NEEDS REVIEW, or INCOMPLETE. I read it with coffee. If it says READY, I log in to the state portal, type in three numbers, and pay. Ten minutes, maybe fifteen.
+On the 12th of every month, at eight in the morning, a worksheet shows up as a comment on a Todoist task called "File and Pay Sales Use Tax." It has last month's Connecticut return worked out line by line, every client payment matched to a bank deposit, and a status at the top: READY, NEEDS REVIEW, or INCOMPLETE. I read it with coffee. If it says READY, I log in to the state portal, type in three numbers, and pay. It takes me ten or fifteen minutes.
 
-I didn't do any of the math. An agent did, from a spec I wrote.
+I didn't do any of the math. An agent did, following a spec I wrote.
 
-That's the shape of almost everything on the money side of this business now. I run a one-person practice: websites, AI systems, and software for small firms and local businesses, plus a handful of apps. Clients pay me to automate the boring parts of their operations. It would be strange if my own books were a pile of receipts in a drawer. So I pointed the same tools at my own bookkeeping, invoicing, and reporting. Here's what that looks like, what it catches, and the parts I deliberately kept for myself.
+Most of the money side of this business works that way now. I run a one-person practice, building websites, AI systems, and software for small firms and local businesses, and I publish a few apps on the side. Clients pay me to automate the tedious parts of their operations, so it would be a little embarrassing if my own books were a pile of receipts in a drawer. At some point I pointed the same tools at my own bookkeeping, invoicing, and reporting. This is what that looks like, what it catches, and what I still do myself.
 
-## The rule that makes it safe
+## The one rule
 
-One rule first, because everything else depends on it. **The agents prepare. I decide.**
+Nothing I've automated moves money, files a return, sends an invoice, or changes the books. The routines read, compute, and draft, and then they hand me something to approve. On the sales-tax run, the agent isn't even allowed to click Save inside QuickBooks. When it opens a payment to read the date and amount, it leaves through Cancel. Its permissions are a few read-only tools, the ability to post a Todoist comment, and the ability to create a Gmail draft. If it needs anything else, it stalls and waits for me.
 
-No routine of mine moves money, files a return, sends an invoice, or changes the books. They read, they compute, they draft, and they hand me something to approve. On the sales-tax run, the agent isn't even allowed to click Save inside QuickBooks. It opens a payment to read it and leaves through Cancel. The whole permission list is a few read-only tools, a Todoist comment, and a Gmail draft. Anything else and it stalls. I'd rather have a stall than a surprise.
+I set it up this way after a small mistake that could have been a bigger one. A few weeks ago I had an agent edit two invoices through the QuickBooks API to change the payment options. That should have been harmless, but the edit saved a manual 7.35% tax override on the lines while the screen still showed "Automatic calculation." I noticed because I re-read the totals afterward. Fixing it took thirty seconds in the QuickBooks interface. If I hadn't noticed, I would have collected the wrong tax from two clients and filed it with the state. After that, I decided the money routines don't get write access to anything.
 
-That sounds paranoid until you've seen what a small mistake costs. A few weeks ago an agent edited two invoices through the QuickBooks API to tidy up the payment options. Harmless change. Except the edit quietly saved a manual 7.35% tax override on every line while the dropdown still said "Automatic calculation." I caught it because I re-read the totals. The fix took thirty seconds in the QuickBooks interface. Not catching it would have meant collecting the wrong tax from two clients and then filing it. So now the money routines never write. Not to QuickBooks, not to Mercury, not to the state.
+## The setup underneath
 
-## Three layers, no spreadsheet
+There's nothing clever here. Mercury is the bank. Every business dollar goes in and out of the LLC's account there. Card purchases over $75 need a receipt attached before they clear review, and I add a short note whenever the business purpose isn't obvious from the vendor name. QuickBooks Online is the books of record for invoices, sales tax, receivables, reconciliations, and the profit and loss. I'm on the entry-level plan, and every CPA I've talked to knows the software. Statements, receipts, filed returns, and year-end reports go in a secure folder outside of both, named by date, so I can still find them if I ever switch tools.
 
-The setup underneath is boring on purpose.
+The source of truth is never a spreadsheet. A spreadsheet is fine for a month of cleanup. It's a bad place to discover in April that something got counted twice.
 
-- **Mercury** is the bank. Every business dollar moves through the LLC's account there. Card purchases over $75 need a receipt attached before they clear review, and I add a one-line note whenever the business purpose isn't obvious from the vendor name.
-- **QuickBooks Online** is the books of record: invoices, sales tax, receivables, reconciliations, the profit and loss. It's the entry-level plan, and every CPA I've met knows it.
-- **A secure folder outside of everything** holds statements, receipts, filed returns, and year-end reports, named by date, for the day the tools change.
+All of the rules live in Markdown files in a private repo: the chart of accounts, what to record for a client lunch versus a laptop, how an owner draw gets labeled so it never looks like an expense. The agents read those files, and so do I when I forget something. If I want to change what happens on the 12th, I edit the file. The scheduled task just points at it.
 
-The source of truth is never a spreadsheet. A spreadsheet is fine for a month of cleanup. It is a terrible place to find out, in April, that something was counted twice.
+## Monday: the weekly check
 
-Every rule above lives in a Markdown file in a private repo: the chart of accounts, what to capture for a client lunch versus a laptop, how an owner draw gets labeled so it never looks like an expense. The agents read those files. So do I, when I forget. If I want to change what happens on the 12th, I edit a text file. The scheduled task just points at it.
+Every Monday morning a routine reads QuickBooks, my inbox, and the client repos and writes me a short briefing. The first line says whether things are green, yellow, or red and why. After that it lists any invoice that's past due or due within a week, whether I shipped what each retainer promises, deadlines in the next 14 days, and anything that looks off, like a charge in Mercury I don't recognize. Each action item becomes a Todoist task due that day.
 
-## Monday: the pulse
+None of this is complicated. What it does is keep things from quietly going stale. If a client email has been sitting for three days, the briefing says so. If a post has been stuck in review for a week, same thing. I read it in about five minutes and I know what the week looks like.
 
-Every Monday morning a routine reads QuickBooks, my inbox, and the client repos, and writes me a short briefing. One line at the top says green, yellow, or red and why. Then: any invoice past due or due within a week, whether I shipped what each retainer promises, deadlines in the next 14 days, and anything odd, like a charge in Mercury I don't recognize. Each action item becomes a Todoist task, due today.
+## The 25th: invoices
 
-Nothing in it is hard. The point is that nothing goes stale quietly. A client email that's sat for three days gets named. So does a post stuck in review for a week. I read it in five minutes and the week has a shape.
+Retainer invoices get created by QuickBooks recurring templates on the 25th, Net 15, so they're due around the 10th. One client is billed a month ahead and one a month behind. That sounds like a strange detail, and it's the kind of thing you get wrong once and then write down. The templates create the invoice but don't send it. A Todoist task reminds me, I open each one, check the lines, the tax, and the month it covers, and send it myself.
 
-## The 25th: invoices I still send by hand
+QuickBooks could email these automatically, and I've chosen not to let it. It's two invoices and about two minutes a month, and a wrong invoice going to a client would cost me more than that saves.
 
-Retainer invoices are created by QuickBooks recurring templates on the 25th, Net 15, so they come due around the 10th. One client is billed a month ahead and one a month behind, which sounds fussy and is exactly the kind of thing you get wrong once before you write it down. The templates create the invoice. They don't send it. A Todoist task reminds me, I open each one, check the lines, the tax, and the month it covers, and hit send myself.
+## The 12th: sales tax
 
-While QuickBooks could email those for me, I'd rather be the one who hits send. Two clients, two invoices, two minutes. A wrong invoice costs more goodwill than I'd save in a year of not clicking.
+This is the routine I was most nervous about building, and it's the one that's turned out to be the most useful.
 
-## The 12th: sales tax, to the cent
+Connecticut taxes my website work at 1% and my content work at 6.35%. Legal consulting isn't taxed. I report on a cash basis, so what I owe each month depends on which payments actually arrived, and on how each payment splits across those rates. That's a reconciliation problem, and reconciliation is the kind of work that gets pushed to the end of the month and then to the end of the next one.
 
-This is the one I'm proudest of, and the one I was most nervous about.
+The routine runs read-only, using my own browser session and the QuickBooks API. It pulls every payment, opens each one just long enough to read the date and the amount applied, then goes to Mercury and lists every deposit. It matches payments to deposits in both directions, one to one. A deposit with no QuickBooks payment behind it is the first thing it flags, because that's the case where the return would understate what I owe. Then it builds the three lines on the state form, rounds them the way the form rounds, and compares its own unrounded tax figure to what QuickBooks says was collected. If there's a difference of even a cent that it can't explain, the status is NEEDS REVIEW instead of READY, and it shows me both numbers rather than choosing one.
 
-Connecticut taxes my website work at 1% and my content work at 6.35%, and the legal consulting not at all. I report on a cash basis. So the question every month is simple to state and annoying to answer: which payments actually arrived last month, and how do they split? That's a reconciliation problem, and reconciliation is the thing everyone puts off.
+It also checks that last month's payment to the state actually went through, that the bank feed isn't stale, and whether any new software vendor appeared that I need to make a use-tax decision on. It doesn't make that decision. It lists the vendor and leaves it to me.
 
-The routine runs read-only, in my own browser session plus the QuickBooks API. It pulls every payment, opens each one just to read the date and the amount applied, then goes to Mercury and lists every deposit. It matches them both ways, one to one. A deposit with no QuickBooks payment behind it is the top flag, because that's the one that makes the return understate tax. Then it builds the three lines on the state form, rounds them the way the form rounds, and reconciles its own unrounded tax to what QuickBooks says was collected. Every cent of difference needs a named cause. If there's a cent it can't explain, the status is NEEDS REVIEW, not READY, and it shows me both numbers instead of picking one.
+My part is reading the worksheet, confirming that any check that came in near the end of the month arrived on the date the books say, filing, paying, and checking off the task. The first month I watched the whole run from start to finish. Now I mostly read the flags.
 
-It also checks that last month's payment to the state actually posted, that the bank feed isn't stale, and whether a new software vendor showed up that needs a use-tax call. It never guesses that call. New vendor, my decision, flagged.
+One note on the cash-basis question. Before I relied on it, I read the statute myself, had two different models read it independently, and checked the current text on Lexis+. That's a decision I made for my own business with my own facts. If you're in a similar spot, ask your CPA before you do the same.
 
-What I do: read the worksheet, confirm that a check which straddled month-end arrived when the books say it did, file, pay, check the box. The first month I watched the whole run. Now I read the flags.
+## The 1st: the monthly report
 
-On the cash-basis question itself: I read the statute, had two different models read it independently, and checked the current text on Lexis+ before I relied on it. That's the attorney half of me earning its keep. It's also a decision I made for my own business, with my own facts, and yours may come out differently. Ask your CPA.
+Every retainer client gets a report at the start of the month: what shipped, what the search numbers did, what the AI-search monitoring found, and how many leads came through the contact form. A routine drafts it from the git log, the blog registry, the monitoring log, and the form-relay emails. I spend about fifteen minutes reviewing it, and it goes out with the invoice.
 
-## The 1st: the report nobody asked for
-
-Every retainer client gets a monthly report: what shipped, what the search numbers did, what the AI-search monitoring found, how many leads the contact form caught. A routine drafts it from the git log, the blog registry, the monitoring log, and the form-relay emails. I spend about fifteen minutes on it. Then it goes out with the invoice.
-
-Nobody asked me for this report. It's the part of the retainer that's visible, which is why it's the part that keeps the retainer. If a number can't be verified that month, it's left out. Estimates don't go to clients.
+No client asked me for this report. I send it because it's the one part of a retainer the client can actually see, and in my experience that's what keeps a retainer going. If a number can't be verified that month, it stays out. I don't send estimates to clients.
 
 ## What I still do by hand
 
-The monthly close. Downloading the statement, going through "Needs review" in Mercury, attaching the receipts I forgot, syncing to QuickBooks, reconciling, reading the P&L, saving the reports to the archive, and writing the two or three questions for my CPA. There's a checklist. I follow it. It takes an evening.
+The monthly close. I download the statement, go through everything in Mercury's review queue, attach the receipts I forgot, sync to QuickBooks, reconcile, read the P&L, save the reports to the archive, and write down the two or three questions I have for my CPA. There's a checklist, and it takes me an evening.
 
-I haven't automated it, and I'm not sure I will. Reconciling your own bank account is one of the few places where doing the thing by hand teaches you something about the business every single month: which subscription crept, which client pays on the 3rd without fail, what you spent on tools versus what they gave back. The agents can prep the list. I want my hands on the ledger once a month.
+I haven't automated this one, and I'm honestly not sure I will. Going through your own bank account by hand once a month teaches you things about the business you wouldn't otherwise notice: which subscription crept up, which client always pays on the 3rd, what you spent on tools compared with what they produced. An agent could prepare the list for me. I still want to be the one who goes through it.
 
-## What it adds up to
+## Where that leaves things
 
-Five routines: the pulse, the invoices, the sales tax, the report, the close. Three prepared by an agent, one by QuickBooks on a schedule, one by me with a checklist. All five decided by me. The tooling is a bank, QuickBooks, a task manager, and a folder of Markdown files that say exactly what's allowed. A lawyer would call that a policy. I call it the only way I'd let software near my money.
+That's five routines: the weekly check, the invoices, the sales tax, the monthly report, and the close. An agent prepares three of them, QuickBooks runs one on a schedule, and I do one myself with a checklist. I'm the one who signs off on all five. Underneath it is a bank account, QuickBooks, a task manager, and a folder of Markdown files that say exactly what each routine is allowed to touch.
 
-If you run a small firm or a local business and your version of this is a shoebox and a prayer in April, the first fix isn't AI. It's writing down what you do. Once it's written down, the automation is the easy part.
+If you run a small firm or a local business and the money side is still a shoebox you deal with in April, I wouldn't start with AI. I'd start by writing down what you actually do each month. Once that's on paper, the automation is the easy part.
