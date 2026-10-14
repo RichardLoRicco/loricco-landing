@@ -78,6 +78,49 @@ export type StudioApp = {
 export const apps: StudioApp[] = [
   // ── On the App Store (newest first) ──
   {
+    slug: "startonight",
+    name: "Star Tonight",
+    tagline: "Can I see the stars tonight?",
+    description:
+      "Cloud cover, the moon, darkness, light pollution and transparency roll into one score from 0 to 100, plus the best hour to head outside. Same idea as Grill Tonight, pointed at the sky.",
+    category: "Stargazing",
+    status: "live",
+    icon: "/apps/startonight/icon.webp",
+    iconAlt: "Star Tonight app icon: a bright four-pointed star on a night sky",
+    color: "#2E3A8C",
+    siteUrl: "https://startonight.loriccoandco.com/",
+    appStoreUrl: "https://apps.apple.com/us/app/star-tonight-stargazing/id6818198251",
+    price: "$2.99",
+    priceNote: "once",
+    since: "Oct 2026",
+    featuredTheme: {
+      surface: "featured-sky",
+      border: "#232a5c",
+      text: "#f0ede6",
+      accent: "#8fa0ff",
+      body: "#c3c6dc",
+      label: "#9ea3c4",
+      button: { bg: "#f0ede6", text: "#0b1030", hoverBg: "#2038c8", hoverText: "#ffffff" },
+      bezel: "#0d1022",
+      kicker: ["Newest", "Featured"],
+    },
+    screenshots: [
+      {
+        src: "/apps/startonight/shot-tonight.webp",
+        alt: "Star Tonight's Tonight screen: a score of 85, YES, and a best window of 9 to 10pm in Torrey, Utah",
+      },
+      {
+        src: "/apps/startonight/shot-week.webp",
+        alt: "Star Tonight's week view: nightly scores for the next five nights, with Sunday at 100",
+      },
+      {
+        src: "/apps/startonight/shot-red-light.webp",
+        alt: "Star Tonight in red-light mode, which keeps your night vision while you check the score",
+      },
+    ],
+    schemaCategory: "WeatherApplication",
+  },
+  {
     slug: "bowelbuddy",
     name: "BowelBuddy",
     tagline: "Track your gut without making it weird.",
@@ -156,54 +199,10 @@ export const apps: StudioApp[] = [
     icon: "/apps/grilltonight/icon.webp",
     iconAlt: "Grill Tonight app icon: a kettle grill with flames",
     color: "#D4652A",
-    siteUrl: "https://grilltonight-landing.vercel.app/",
+    siteUrl: "https://grilltonight.loriccoandco.com/",
     appStoreUrl: "https://apps.apple.com/us/app/grill-tonight/id6760918522",
     price: "$2.99",
     since: "Apr 2026",
-    schemaCategory: "WeatherApplication",
-  },
-
-  // ── In App Review ──
-  {
-    slug: "startonight",
-    name: "Star Tonight",
-    tagline: "Can I see the stars tonight?",
-    description:
-      "Cloud cover, the moon, darkness, light pollution and transparency roll into one score from 0 to 100, plus the best hour to head outside. Same idea as Grill Tonight, pointed at the sky.",
-    category: "Stargazing",
-    status: "review",
-    icon: "/apps/startonight/icon.webp",
-    iconAlt: "Star Tonight app icon: a bright four-pointed star on a night sky",
-    color: "#2E3A8C",
-    siteUrl: "https://startonight.loriccoandco.com/",
-    price: "$2.99",
-    priceNote: "once",
-    note: "Submitted Oct 2026",
-    featuredTheme: {
-      surface: "featured-sky",
-      border: "#232a5c",
-      text: "#f0ede6",
-      accent: "#8fa0ff",
-      body: "#c3c6dc",
-      label: "#9ea3c4",
-      button: { bg: "#f0ede6", text: "#0b1030", hoverBg: "#2038c8", hoverText: "#ffffff" },
-      bezel: "#0d1022",
-      kicker: ["Newest", "Featured"],
-    },
-    screenshots: [
-      {
-        src: "/apps/startonight/shot-tonight.webp",
-        alt: "Star Tonight's Tonight screen: a score of 85, YES, and a best window of 9 to 10pm in Torrey, Utah",
-      },
-      {
-        src: "/apps/startonight/shot-week.webp",
-        alt: "Star Tonight's week view: nightly scores for the next five nights, with Sunday at 100",
-      },
-      {
-        src: "/apps/startonight/shot-red-light.webp",
-        alt: "Star Tonight in red-light mode, which keeps your night vision while you check the score",
-      },
-    ],
     schemaCategory: "WeatherApplication",
   },
 
