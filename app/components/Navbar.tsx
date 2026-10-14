@@ -1,13 +1,19 @@
 "use client";
 
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { SECTIONS, useActiveSection } from "./ActiveSection";
 import ThemeToggle from "./ThemeToggle";
 
 const EMAIL = "admin@loriccoandco.com";
 
-const links = SECTIONS.map((s) => ({
-  href: `#${s.id}`,
+/*
+  The section links are same-page anchors on the homepage and route back to
+  it from any other page (the blog). The blog gets its own entry after the
+  numbered sections; it is a route, not a section, so it carries no number.
+*/
+const sectionLinks = SECTIONS.map((s) => ({
   id: s.id,
   num: s.num,
   label: s.label,
@@ -18,6 +24,10 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const toggleRef = useRef<HTMLButtonElement>(null);
   const active = useActiveSection();
+  const pathname = usePathname();
+  const onHome = pathname === "/";
+  const onBlog = pathname === "/blog" || pathname.startsWith("/blog/");
+  const links = sectionLinks.map((s) => ({ ...s, href: onHome ? `#${s.id}` : `/#${s.id}` }));
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -47,9 +57,9 @@ export default function Navbar() {
     <>
       <nav aria-label="Main navigation" className={`nav-shell ${scrolled ? "is-scrolled" : ""}`}>
         <div className="nav-inner">
-          <a href="#top" className="nav-mark" aria-label="LoRicco & Co., back to top">
+          <Link href={onHome ? "#top" : "/"} className="nav-mark" aria-label={onHome ? "LoRicco & Co., back to top" : "LoRicco & Co., home"}>
             LoRicco <em>&amp;</em> Co.
-          </a>
+          </Link>
 
           <div className="nav-links">
             {links.map(({ href, id, num, label }) => (
@@ -63,6 +73,9 @@ export default function Navbar() {
                 <span>{label}</span>
               </a>
             ))}
+            <Link href="/blog" aria-current={onBlog ? "page" : undefined} className="nav-link">
+              <span>Blog</span>
+            </Link>
             <div className="ml-2 flex items-center gap-3 pl-3" style={{ borderLeft: "1px solid var(--border)" }}>
               <ThemeToggle />
               <a href={`mailto:${EMAIL}`} className="btn btn-primary nav-cta">
@@ -119,6 +132,15 @@ export default function Navbar() {
               </span>
             </a>
           ))}
+          <Link
+            href="/blog"
+            aria-current={onBlog ? "page" : undefined}
+            onClick={() => setMenuOpen(false)}
+            className="nav-link"
+            style={{ justifyContent: "space-between" }}
+          >
+            <span>Blog</span>
+          </Link>
           <div
             style={{
               display: "flex",

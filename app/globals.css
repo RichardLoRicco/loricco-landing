@@ -1041,6 +1041,225 @@ li:last-child > .service-row { border-bottom: 1px solid var(--rule-color); }
 }
 
 /* =============================================================
+   Blog
+   ============================================================= */
+/* Index: one ruled row per post, date / title and summary / tags, the same
+   ledger as the services rows */
+.post-row {
+  display: grid;
+  gap: 1rem 2.5rem;
+  padding-block: 2.25rem;
+  border-top: 1px solid var(--rule-color);
+}
+.post-ledger > li:last-child > .post-row { border-bottom: 1px solid var(--rule-color); }
+@media (min-width: 900px) {
+  .post-row {
+    grid-template-columns: 8.5rem minmax(0, 1fr) 15rem;
+    padding-block: 2.75rem;
+  }
+}
+.post-row-when { display: flex; flex-wrap: wrap; gap: 0.35rem 1rem; }
+@media (min-width: 900px) {
+  .post-row-when { flex-direction: column; }
+}
+.post-row-title {
+  font-size: clamp(1.5rem, 2.6vw, 2.15rem);
+  line-height: 1.05;
+}
+.post-row-link { transition: color var(--dur-sm) var(--ease-out-expo); }
+.post-row:hover .post-row-link { color: var(--accent); }
+.post-row-tags .offerings { margin-top: 0.75rem; }
+@media (max-width: 899px) {
+  .post-row-tags { display: none; }
+}
+
+/* Post: headline, lede, byline ledger */
+.post-header {
+  margin-top: 2rem;
+  padding-bottom: 2.5rem;
+  border-bottom: 1px solid var(--rule-color);
+}
+.post-title {
+  font-size: clamp(2.25rem, 5.5vw, 4.25rem);
+  letter-spacing: -0.035em;
+  line-height: 0.98;
+  max-width: 22ch;
+}
+.post-lede {
+  margin-top: 1.5rem;
+  max-width: 60ch;
+  font-size: clamp(1.15rem, 1rem + 0.6vw, 1.35rem);
+}
+.post-byline {
+  margin-top: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 2.5rem;
+}
+.post-byline dd {
+  margin-top: 0.3rem;
+  font-family: var(--ff-display);
+  font-size: 1rem;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Post: the body column with the aside beside it on wide screens */
+.post-layout {
+  display: grid;
+  gap: 3rem;
+  padding-top: 3rem;
+}
+@media (min-width: 1024px) {
+  .post-layout {
+    grid-template-columns: 15rem minmax(0, 1fr);
+    gap: 4rem;
+  }
+  .post-aside {
+    position: sticky;
+    top: calc(var(--dateline-h) + var(--nav-h) + 2rem);
+    align-self: start;
+  }
+}
+.post-aside { display: grid; gap: 2rem; align-content: start; }
+.post-aside-block + .post-aside-block {
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+.post-aside .offerings { margin-top: 0.75rem; }
+.post-series { display: grid; gap: 0.75rem; font-size: 0.9rem; line-height: 1.4; }
+.post-series li { display: flex; gap: 0.75rem; align-items: baseline; color: var(--text-secondary); }
+.post-series .num {
+  font-family: var(--ff-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.04em;
+  color: var(--accent);
+  flex: none;
+}
+
+/* Post body prose: serif, 70ch, display headings, ochre/oxblood links */
+.blog-prose {
+  font-family: var(--ff-body);
+  font-size: clamp(1.0625rem, 0.95rem + 0.5vw, 1.2rem);
+  line-height: 1.7;
+  color: var(--text-secondary);
+  max-width: 70ch;
+}
+.blog-prose > :first-child { margin-top: 0; }
+.blog-prose p { margin-block: 1.25em; text-wrap: pretty; }
+.blog-prose h2 {
+  font-size: clamp(1.6rem, 2.6vw, 2.15rem);
+  line-height: 1.08;
+  margin-top: 2.5em;
+  margin-bottom: 0.6em;
+}
+.blog-prose h3 {
+  font-size: clamp(1.25rem, 1.8vw, 1.5rem);
+  line-height: 1.2;
+  margin-top: 2em;
+  margin-bottom: 0.5em;
+}
+.blog-prose a {
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--accent);
+  padding-bottom: 1px;
+  transition: color var(--dur-sm) ease, border-color var(--dur-sm) ease;
+}
+.blog-prose a:hover { color: var(--accent); }
+.blog-prose strong { color: var(--text-primary); font-weight: 600; }
+.blog-prose em { font-size: 1.02em; }
+.blog-prose ul, .blog-prose ol { margin-block: 1.25em; padding-left: 1.5em; }
+.blog-prose ul { list-style: none; padding-left: 1.5em; }
+.blog-prose ul > li { position: relative; margin-block: 0.5em; }
+.blog-prose ul > li::before {
+  content: "";
+  position: absolute;
+  left: -1.5em;
+  top: 0.8em;
+  width: 0.9em;
+  height: 1px;
+  background: var(--accent);
+}
+.blog-prose ol { list-style: decimal; }
+.blog-prose ol > li { margin-block: 0.5em; padding-left: 0.25em; }
+.blog-prose ol > li::marker { font-family: var(--ff-mono); font-size: 0.8em; color: var(--accent); }
+.blog-prose blockquote {
+  margin: 1.75em 0;
+  padding: 0.25em 0 0.25em 1.25em;
+  border-left: 2px solid var(--accent);
+  color: var(--text-primary);
+  font-style: normal;
+}
+.blog-prose blockquote p { margin-block: 0.75em; }
+.blog-prose code {
+  font-family: var(--ff-mono);
+  font-size: 0.85em;
+  padding: 0.1em 0.35em;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text-primary);
+}
+
+/* Post: questions, the standing note, and the contact block */
+.post-faqs {
+  margin-top: 3.5rem;
+  padding-top: 2.5rem;
+  border-top: 1px solid var(--rule-color);
+  max-width: 70ch;
+}
+.post-faqs h2 { font-size: clamp(1.6rem, 2.6vw, 2.15rem); line-height: 1.08; }
+.post-faqs dl { margin-top: 1.5rem; display: grid; gap: 1.75rem; }
+.post-faqs dt {
+  font-family: var(--ff-display);
+  font-size: 1.25rem;
+  line-height: 1.25;
+  color: var(--text-primary);
+}
+.post-faqs dd {
+  margin-top: 0.6rem;
+  font-family: var(--ff-body);
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: var(--text-secondary);
+}
+.post-faqs dd a { color: var(--text-primary); border-bottom: 1px solid var(--accent); }
+.post-disclaimer {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+  max-width: 70ch;
+  font-size: 0.8rem;
+  line-height: 1.6;
+}
+.post-contact {
+  margin-top: 3rem;
+  padding: 2rem;
+  max-width: 70ch;
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+}
+
+/* Older / newer */
+.post-pager {
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--rule-color);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+.post-pager-link { display: flex; flex-direction: column; gap: 0.5rem; }
+.post-pager-title {
+  font-family: var(--ff-display);
+  font-size: 1.15rem;
+  line-height: 1.2;
+  color: var(--text-primary);
+  transition: color var(--dur-sm) ease;
+}
+.post-pager-link:hover .post-pager-title { color: var(--accent); }
+
+/* =============================================================
    Work and Studio specifics
    ============================================================= */
 /* ── Site preview: the screenshot scrolls through the real page on hover ──
