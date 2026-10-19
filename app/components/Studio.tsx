@@ -341,7 +341,10 @@ export default function Studio() {
             <p className="section-num">Apps</p>
             <h1 id="apps-title" className="mt-3 balance" style={{ fontSize: "clamp(2.5rem, 5.6vw, 5rem)", lineHeight: 0.96 }}>
               I build iPhone and web apps,{" "}
-              <span className="serif-italic">and I&apos;ve shipped my own.</span>
+              <br className="hidden sm:block" />
+              <span className="serif-italic" style={{ fontVariationSettings: '"opsz" 144, "SOFT" 60' }}>
+                and I&apos;ve shipped my own.
+              </span>
             </h1>
           </div>
         </div>
