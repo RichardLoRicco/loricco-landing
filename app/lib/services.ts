@@ -33,7 +33,7 @@ export const services: Service[] = [
     title: "Legal and technical work for law firms",
     short: "legal and technical work",
     description:
-      "Law firms bring me in as a contract attorney when they need another lawyer on a matter without making a hire. I handle legal research, research memos, and litigation and contract drafting. When a case turns on digital evidence, I read the discovery, interpret carrier and platform records, explain in writing what they show, and prepare questions for opposing experts. That consulting is structured with work-product protection in mind. I'm admitted in Connecticut, and I take legal work from law firms only.",
+      "Law firms bring me in as a contract attorney when they need another lawyer on a matter without making a hire. I handle legal research, research memos, and contract drafting. When a case turns on digital evidence, I read the discovery, interpret carrier and platform records, explain in writing what they show, and prepare questions for opposing experts. That consulting is structured with work-product protection in mind. I'm admitted in Connecticut, and I take legal work from law firms only.",
   },
   {
     title: "Business and startup advice",
