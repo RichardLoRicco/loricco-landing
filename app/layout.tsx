@@ -45,32 +45,34 @@ const geistMono = Geist_Mono({
   display: "swap",
 });
 
+const TITLE = "Websites, Apps, and AI in New Haven, CT | LoRicco & Co.";
+const DESCRIPTION =
+  "I'm a Connecticut attorney and software engineer in New Haven. I build websites, apps, and AI tools for law firms and small businesses.";
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://loriccoandco.com"),
-  title: "LoRicco & Co | Websites, AI & Technical Consulting",
-  description:
-    "LoRicco & Co rebuilds and operates websites, develops AI tools, trains lawyers and small businesses, analyzes digital evidence for counsel, and advises startups. Led by a Connecticut attorney, MBA, and software engineer.",
+  title: TITLE,
+  description: DESCRIPTION,
   openGraph: {
-    title: "LoRicco & Co | Websites, AI & Technical Consulting",
-    description:
-      "Websites and AI systems, practical AI training, technical consulting for law firms, and startup advisory from an attorney, MBA, and software engineer.",
+    title: TITLE,
+    description: DESCRIPTION,
+    url: "/",
     type: "website",
-    siteName: "LoRicco & Co",
+    siteName: "LoRicco & Co.",
     locale: "en_US",
     images: [
       {
         url: "/og.jpg",
         width: 1200,
         height: 630,
-        alt: "LoRicco & Co.: Websites, AI, and technical consulting, with a portrait of principal Richard T. LoRicco.",
+        alt: "LoRicco & Co.: I'm an attorney who builds software for law firms and small businesses, with a portrait of Richard T. LoRicco.",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "LoRicco & Co | Websites, AI & Technical Consulting",
-    description:
-      "Websites and AI systems, practical AI training, technical consulting for law firms, and startup advisory from an attorney, MBA, and software engineer.",
+    title: TITLE,
+    description: DESCRIPTION,
     images: ["/og.jpg"],
   },
   alternates: {
@@ -95,6 +97,7 @@ export default function RootLayout({
     // Font variables sit on <html> so the :root tokens that reference them resolve.
     <html
       lang="en"
+      data-scroll-behavior="smooth"
       suppressHydrationWarning
       className={`${fraunces.variable} ${geist.variable} ${sourceSerif.variable} ${geistMono.variable}`}
     >

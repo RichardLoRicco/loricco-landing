@@ -15,7 +15,6 @@
   --font-mono: var(--ff-mono);
 }
 
-
 /* =============================================================
    CHAMBERS · an editorial design system
    Law-review gravitas × developer-journal precision.
@@ -273,20 +272,6 @@ em {
   color: var(--text-secondary);
 }
 
-/* Drop cap for first editorial paragraph */
-.drop-cap::first-letter {
-  font-family: var(--ff-display);
-  font-weight: 700;
-  font-style: normal;
-  font-size: 4.5em;
-  line-height: 0.85;
-  float: left;
-  padding: 0.12em 0.12em 0 0;
-  margin-right: 0.02em;
-  color: var(--accent);
-  font-variation-settings: "opsz" 144, "SOFT" 0;
-}
-
 /* Small-caps label · our "legal citation" type */
 .label {
   font-family: var(--ff-sans);
@@ -318,7 +303,6 @@ code { font-family: var(--ff-mono); font-size: 0.9em; }
   margin-inline: auto;
   padding-inline: clamp(1.25rem, 4vw, 3rem);
 }
-
 
 /* Section header block: § number + label */
 .section-head {
@@ -436,7 +420,6 @@ a { color: inherit; text-decoration: none; }
   transform: translateY(-1px);
 }
 
-
 /* =============================================================
    Surfaces (cards, filings)
    ============================================================= */
@@ -458,26 +441,26 @@ a { color: inherit; text-decoration: none; }
   border-color: var(--accent);
 }
 
-/* Services: one ruled row per service, § number / title and copy / outcome and tags */
+/* Services: one ruled row per service, title / copy and its email link */
 .service-row {
   display: grid;
-  gap: 1rem 2.5rem;
-  padding-block: 2.5rem;
+  gap: 1rem 3rem;
+  padding-block: 2.25rem;
   border-top: 1px solid var(--rule-color);
 }
 li:last-child > .service-row { border-bottom: 1px solid var(--rule-color); }
+/* The section head's rule already sits above the first row */
+li:first-child > .service-row { border-top: 0; }
 @media (min-width: 900px) {
   .service-row {
-    grid-template-columns: 4.5rem minmax(0, 1fr) 17rem;
-    padding-block: 3rem;
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.3fr);
+    padding-block: 2.75rem;
   }
 }
 .service-title {
   font-size: clamp(1.6rem, 2.6vw, 2.15rem);
   line-height: 1.05;
-  transition: color var(--dur-sm) var(--ease-out-expo);
 }
-.service-row:hover .service-title { color: var(--accent); }
 
 /* Work: Lighthouse scores as a ruled four-cell ledger */
 .work-scores {
@@ -500,65 +483,6 @@ li:last-child > .service-row { border-bottom: 1px solid var(--rule-color); }
   line-height: 1;
   font-variant-numeric: tabular-nums;
   font-variation-settings: "opsz" 144, "SOFT" 40;
-}
-
-/* Process: one line, four stops. On desktop a single hairline runs across
-   the top of all four columns with each step's number in a ring on it; on
-   phones the line runs down the left edge and the rings sit on it. */
-.process-steps {
-  position: relative;
-  display: grid;
-  gap: 2.25rem;
-  padding-left: 2.75rem;
-}
-/* Phones: each step draws the line down to the next ring, so it ends at 04 */
-.process-steps > li { position: relative; }
-.process-steps > li:not(:last-child)::before {
-  content: "";
-  position: absolute;
-  left: -1.875rem;
-  top: 1.75rem;
-  bottom: -2.25rem;
-  width: 1px;
-  background: var(--rule-color);
-}
-.step-num {
-  position: absolute;
-  left: -2.75rem;
-  top: 0;
-  display: grid;
-  place-items: center;
-  width: 1.75rem;
-  height: 1.75rem;
-  border: 1px solid var(--accent);
-  border-radius: 9999px;
-  background: var(--background);
-  font-family: var(--ff-mono);
-  font-size: 0.62rem;
-  letter-spacing: 0.04em;
-  color: var(--accent);
-}
-.process-steps h3 { line-height: 1.75rem; }
-@media (min-width: 900px) {
-  .process-steps {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 2.5rem;
-    padding-left: 0;
-    padding-top: 2.75rem;
-  }
-  /* Desktop: one line across all four columns */
-  .process-steps > li:not(:last-child)::before { display: none; }
-  .process-steps::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0.875rem;
-    height: 1px;
-    background: var(--rule-color);
-  }
-  .step-num { left: 0; top: -2.75rem; }
-  .process-steps h3 { line-height: 1.05; }
 }
 
 /* Contact: the address set large. Two underlines: a rule-coloured base, and
@@ -619,81 +543,6 @@ li:last-child > .service-row { border-bottom: 1px solid var(--rule-color); }
   .hero-eyebrow::before { display: none; }
 }
 
-/* Hero facts on phones: one ruled row instead of the desktop ledger; labels
-   in mono, values in the display face, as in the desktop ledger */
-.hero-facts {
-  margin-top: 2.25rem;
-  padding-block: 1rem;
-  border-top: 1px solid var(--rule-color);
-  border-bottom: 1px solid var(--rule-color);
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.9rem 1.75rem;
-}
-.hero-facts dd {
-  margin-top: 0.2rem;
-  font-family: var(--ff-display);
-  font-size: 1rem;
-  font-variant-numeric: tabular-nums;
-}
-
-/* Services: what each service includes, as a quiet ruled list */
-.offerings {
-  margin-top: 1.25rem;
-  display: grid;
-  gap: 0.6rem;
-}
-.offerings li {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.75rem;
-  font-family: var(--ff-mono);
-  font-size: 0.68rem;
-  line-height: 1.45;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--text-secondary);
-}
-.offerings li::before {
-  content: "";
-  flex: none;
-  margin-top: 0.72em;
-  width: 1.25rem;
-  height: 1px;
-  background: var(--border-strong);
-  transition: width var(--dur-md) var(--ease-out-expo), background var(--dur-sm) ease;
-}
-.offerings li::before { transition-delay: calc(var(--i, 0) * 40ms); }
-.service-row:hover .offerings li::before {
-  width: 1.75rem;
-  background: var(--accent);
-}
-
-/* A note that belongs to the ledger above it */
-.footnote {
-  border-top: 1px solid var(--rule-color);
-  padding-top: 1.5rem;
-}
-
-
-/* PR/bug pill (metadata chip) */
-.chip-meta {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  padding: 0.22rem 0.55rem;
-  font-family: var(--ff-mono);
-  font-size: 0.65rem;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  color: var(--text-muted);
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 2px;
-  text-transform: uppercase;
-  white-space: nowrap;
-}
-
 /* =============================================================
    Dateline bar (top-fixed, newspaper-style)
    ============================================================= */
@@ -733,7 +582,7 @@ li:last-child > .service-row { border-bottom: 1px solid var(--rule-color); }
 }
 /* Below 360px the email cannot fit; the menu's Get in touch opens the same address */
 @media (max-width: 359px) {
-  .dateline-link { display: none; }
+  .dateline .dateline-link { display: none; }
 }
 .dateline-link {
   color: var(--text-muted);
@@ -926,7 +775,6 @@ li:last-child > .service-row { border-bottom: 1px solid var(--rule-color); }
   font-size: 0.85rem;
 }
 
-
 /* =============================================================
    Animations (restrained, staged)
    ============================================================= */
@@ -1017,7 +865,6 @@ li:last-child > .service-row { border-bottom: 1px solid var(--rule-color); }
   height: 1px;
   background: var(--accent);
 }
-
 
 .marginalia {
   font-family: var(--ff-mono);

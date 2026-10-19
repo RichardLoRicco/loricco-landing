@@ -1,19 +1,27 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
 import { SECTIONS, useActiveSection } from "./ActiveSection";
 import ThemeToggle from "./ThemeToggle";
 
 const EMAIL = "admin@loriccoandco.com";
 
-const links = SECTIONS.map((s) => ({
-  href: `#${s.id}`,
-  id: s.id,
-  num: s.num,
-  label: s.label,
-}));
+/* Homepage sections, then the pages that live on their own routes. */
+function navLinks(onHome: boolean) {
+  const sections = SECTIONS.filter((s) => s.nav).map((s) => ({
+    href: onHome ? `#${s.id}` : `/#${s.id}`,
+    id: s.id as string,
+    num: s.num as string | null,
+    label: s.label as string,
+  }));
+  return [...sections, { href: "/apps", id: "apps", num: null, label: "Apps" }];
+}
 
 export default function Navbar() {
+  const pathname = usePathname();
+  const onHome = pathname === "/";
+  const links = navLinks(onHome);
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const toggleRef = useRef<HTMLButtonElement>(null);
@@ -47,7 +55,7 @@ export default function Navbar() {
     <>
       <nav aria-label="Main navigation" className={`nav-shell ${scrolled ? "is-scrolled" : ""}`}>
         <div className="nav-inner">
-          <a href="#top" className="nav-mark" aria-label="LoRicco & Co., back to top">
+          <a href={onHome ? "#top" : "/"} className="nav-mark" aria-label={onHome ? "LoRicco & Co., back to top" : "LoRicco & Co., home"}>
             LoRicco <em>&amp;</em> Co.
           </a>
 
@@ -56,10 +64,10 @@ export default function Navbar() {
               <a
                 key={href}
                 href={href}
-                aria-current={active === id ? "page" : undefined}
+                aria-current={active === id || pathname === href ? "page" : undefined}
                 className="nav-link"
               >
-                <span className="num">{num}</span>
+                {num && <span className="num">{num}</span>}
                 <span>{label}</span>
               </a>
             ))}
@@ -108,13 +116,13 @@ export default function Navbar() {
             <a
               key={href}
               href={href}
-              aria-current={active === id ? "page" : undefined}
+              aria-current={active === id || pathname === href ? "page" : undefined}
               onClick={() => setMenuOpen(false)}
               className="nav-link"
               style={{ justifyContent: "space-between" }}
             >
               <span style={{ display: "inline-flex", gap: "0.9rem" }}>
-                <span className="num">{num}</span>
+                {num && <span className="num">{num}</span>}
                 <span>{label}</span>
               </span>
             </a>
