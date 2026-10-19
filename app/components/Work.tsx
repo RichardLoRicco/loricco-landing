@@ -1,5 +1,8 @@
+import Image from "next/image";
+import Link from "next/link";
 import Reveal from "./Reveal";
 import SiteFrame from "./SiteFrame";
+import { liveApps } from "../lib/apps";
 
 export type Project = {
   name: string;
@@ -52,7 +55,7 @@ const projects: Project[] = [
     fullPageAlt:
       "Top of the loriccolaw.com homepage, headed Three generations of New Haven attorneys, above a photo of the firm's attorneys",
     description:
-      "A general practice firm my family has run in New Haven since 1956. I'm one of its attorneys, and it's a separate business from LoRicco & Co. I rebuilt its outdated site in English and Spanish, kept its existing URLs, and added a compliance-reviewed blog and pages for the surrounding towns.",
+      "A general practice firm in New Haven since 1956, where I'm of counsel. It's a separate business from LoRicco & Co. I rebuilt its outdated site in English and Spanish, kept its existing URLs, and added a blog that the firm's attorneys review before each post goes up, along with pages for the surrounding towns.",
     lighthouse: [99, 100, 100, 100],
     data: [
       ["Live since", "May 2026"],
@@ -77,7 +80,7 @@ export default function Work() {
           <div>
             <p className="section-num">02 &middot; Work</p>
             <h2 className="mt-3 balance">
-              Selected client <span className="serif-italic">work</span>.
+              Client <span className="serif-italic">work</span>.
             </h2>
           </div>
         </div>
@@ -137,6 +140,41 @@ export default function Work() {
             );
           })}
         </div>
+
+        {/* The apps as proof that the app work ships; the full list lives on /apps */}
+        <Reveal>
+          <div className="mt-20 border-t border-[var(--rule-color)] pt-10">
+            <h3 style={{ fontSize: "clamp(1.5rem, 2.2vw, 2rem)" }}>Apps I&apos;ve shipped</h3>
+            <ul className="mt-6 grid grid-cols-2 gap-x-6 gap-y-5 sm:grid-cols-3 lg:grid-cols-6">
+              {liveApps.map((app) => (
+                <li key={app.slug}>
+                  <a
+                    href={app.appStoreUrl ?? app.siteUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group flex items-center gap-3"
+                    aria-label={`${app.name} on the App Store (opens in a new tab)`}
+                  >
+                    <span
+                      className="block h-11 w-11 shrink-0 overflow-hidden rounded-[22.5%]"
+                      style={{ border: "1px solid var(--border)" }}
+                    >
+                      <Image src={app.icon} alt="" width={44} height={44} sizes="44px" className="h-full w-full object-cover" />
+                    </span>
+                    <span className="body-serif transition-colors group-hover:text-[var(--accent)]" style={{ fontSize: "1rem" }}>
+                      {app.name}
+                    </span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+            <p className="body-serif mt-8" style={{ fontSize: "1rem" }}>
+              <Link href="/apps" className="link-ink">
+                More about the apps
+              </Link>
+            </p>
+          </div>
+        </Reveal>
       </div>
     </section>
   );

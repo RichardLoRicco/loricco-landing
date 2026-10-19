@@ -95,7 +95,7 @@ function AppCard({ app, wide = false }: { app: StudioApp; wide?: boolean }) {
         <div className="flex items-center gap-4">
           <AppIcon app={app} size={56} />
           <div className="min-w-0">
-            <h4 style={{ fontSize: "clamp(1.5rem, 2.2vw, 1.85rem)", lineHeight: 1 }}>{app.name}</h4>
+            <h3 style={{ fontSize: "clamp(1.5rem, 2.2vw, 1.85rem)", lineHeight: 1 }}>{app.name}</h3>
             <p className="serif-italic mt-1" style={{ fontSize: "1.05rem" }}>
               {app.tagline}
             </p>
@@ -123,7 +123,7 @@ function DevRow({ app }: { app: StudioApp }) {
     <div className="grid grid-cols-[auto_1fr] items-start gap-5 border-b border-[var(--rule-color)] py-6">
       <AppIcon app={app} size={44} />
       <div className="min-w-0">
-        <h4 style={{ fontSize: "1.35rem", lineHeight: 1.1 }}>{app.name}</h4>
+        <h3 style={{ fontSize: "1.35rem", lineHeight: 1.1 }}>{app.name}</h3>
         <p className="serif-italic mt-1" style={{ fontSize: "1rem" }}>
           {app.tagline}
         </p>
@@ -227,9 +227,9 @@ function Featured({ app }: { app: StudioApp }) {
           <div className="mt-7 flex items-center gap-4">
             <AppIcon app={app} size={64} />
             <div>
-              <h3 id={`featured-${app.slug}`} style={{ fontSize: "1.9rem", color: "var(--ft-text)" }}>
+              <h2 id={`featured-${app.slug}`} style={{ fontSize: "1.9rem", color: "var(--ft-text)" }}>
                 {app.name}
-              </h3>
+              </h2>
               <p className="mt-1.5 font-mono text-[0.65rem] tracking-[0.12em] text-(--ft-label) uppercase">
                 {statusLabel[app.status]}
               </p>
@@ -314,39 +314,53 @@ function Featured({ app }: { app: StudioApp }) {
 function GroupHeading({ id, label }: { id: string; label: string }) {
   return (
     <div className="mb-8 border-b border-[var(--rule-color)] pb-4">
-      <h3 id={id} style={{ fontSize: "clamp(1.5rem, 2.2vw, 2rem)" }}>
+      <h2 id={id} style={{ fontSize: "clamp(1.5rem, 2.2vw, 2rem)" }}>
         {label}
-      </h3>
+      </h2>
     </div>
   );
 }
 
 const capitalize = (s: string) => s[0].toUpperCase() + s.slice(1);
 
+/*
+  The /apps page body: the studio's own apps, as proof that the app work ships.
+  The homepage shows only the live icons (Work.tsx) and links here.
+*/
 export default function Studio() {
   return (
     <section
-      id="studio"
-      aria-label="The studio"
+      id="apps"
+      aria-labelledby="apps-title"
       className="relative"
-      style={{ padding: "var(--space-section) 0" }}
+      style={{ padding: "calc(var(--nav-h) + 4rem) 0 var(--space-section)" }}
     >
       <div className="page-gutter">
         <div className="section-head">
           <div>
-            <p className="section-num">04 &middot; Studio</p>
-            <h2 className="mt-3 balance">
-              I also build and ship my own <span className="serif-italic">apps</span>.
-            </h2>
+            <p className="section-num">Apps</p>
+            <h1 id="apps-title" className="mt-3 balance" style={{ fontSize: "clamp(2.5rem, 5.6vw, 5rem)", lineHeight: 0.96 }}>
+              I build iPhone and web apps,{" "}
+              <span className="serif-italic">and I&apos;ve shipped my own.</span>
+            </h1>
           </div>
         </div>
 
-        {/* The review clause only appears while an app is actually in review */}
-        <p className="body-serif pretty mt-10 max-w-2xl" style={{ fontSize: "1.15rem" }}>
-          {capitalize(spell(counts.live))} are live on the App Store
-          {counts.review > 0 && <>, {spell(counts.review)} {counts.review === 1 ? "is" : "are"} in App Review,</>}
-          {" "}and {spell(counts.development)} more are in development.
-        </p>
+        <div className="mt-10 max-w-2xl">
+          {/* The review clause only appears while an app is actually in review */}
+          <p className="body-serif pretty" style={{ fontSize: "1.15rem" }}>
+            I take apps from the first version through App Store review and launch,
+            including subscriptions, analytics, and support. {capitalize(spell(counts.live))} of
+            my own are live on the App Store
+            {counts.review > 0 && <>, {spell(counts.review)} {counts.review === 1 ? "is" : "are"} in App Review,</>}
+            {" "}and {spell(counts.development)} more are in development. If you need an app
+            built, or want features added to one you already have,{" "}
+            <a href="mailto:admin@loriccoandco.com?subject=Web%20and%20mobile%20apps" className="link-ink">
+              email me
+            </a>
+            .
+          </p>
+        </div>
 
         {featuredApp && (
           <Reveal className="mt-14">

@@ -24,7 +24,7 @@ export default function About() {
       <div className="page-gutter">
         <div className="section-head">
           <div>
-            <p className="section-num">05 &middot; About</p>
+            <p className="section-num">04 &middot; About</p>
             <h2 className="mt-3 balance">
               About the <span className="serif-italic">principal</span>.
             </h2>
@@ -34,12 +34,11 @@ export default function About() {
         <div className="grid gap-12 pt-14 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)] lg:gap-20">
           <Reveal>
             <p className="drop-cap body-serif pretty" style={{ fontSize: "1.2rem", lineHeight: 1.65 }}>
-              I practice law, consult for startups and small businesses, and
-              build production software and AI systems. The services on this page grew
-              out of problems people kept bringing me. Their firm website had
-              stopped bringing in work. Their team bought AI tools but never
-              used them. Their case turned on carrier records. Their business
-              plan needed a straight read.
+              LoRicco &amp; Co. is my practice. I&apos;m an attorney admitted in
+              Connecticut and a software engineer, and I hold an MBA. I&apos;m also of
+              counsel to The LoRicco Law Firm in New Haven, which is a separate
+              business. Because I work in all three fields, a client whose problem
+              touches more than one of them only has to explain it once.
             </p>
 
             <div className="mt-10 border-t border-[var(--rule-color)] pt-8">
