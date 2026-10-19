@@ -79,8 +79,8 @@ export default function Hero() {
               className="mt-8 body-serif pretty max-w-2xl"
               style={{ fontSize: "clamp(1.15rem, 1.6vw, 1.35rem)" }}
             >
-              I&apos;m a Connecticut attorney and software engineer. I rebuild and
-              maintain websites for law firms and small businesses, consult with
+              I&apos;m Richard LoRicco, a Connecticut attorney and software engineer
+              in New Haven. I rebuild and maintain websites for law firms and small businesses, consult with
               attorneys on the technology in their cases, and take on research and
               drafting for firms. I also build apps and AI tools, train teams on AI,
               and advise startups. You work with me directly.
