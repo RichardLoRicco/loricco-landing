@@ -77,8 +77,8 @@ export default function Contact() {
             </div>
 
             <p className="body-serif mt-8 max-w-xl" style={{ fontSize: "0.95rem", color: "var(--text-secondary)" }}>
-              Writing to me doesn&apos;t make me your lawyer. For a legal matter,
-              please reach me through{" "}
+              Writing to me doesn&apos;t make me your lawyer. If you&apos;re not a law
+              firm and need legal help, please reach me through{" "}
               <a href="https://loriccolaw.com/" className="link-ink" target="_blank" rel="noopener noreferrer">
                 The LoRicco Law Firm
                 <span className="sr-only"> (opens in a new tab)</span>

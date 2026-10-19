@@ -149,7 +149,7 @@ export default function Work() {
               {liveApps.map((app) => (
                 <li key={app.slug}>
                   <a
-                    href={app.appStoreUrl ?? app.siteUrl}
+                    href={app.appStoreUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="group flex items-center gap-3"

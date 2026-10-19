@@ -47,7 +47,7 @@ export const services: Service[] = [
     // him as "Attorney"; keep both sites in step). The relationship stays
     // visible so the pointer is not misleading.
     referral: {
-      before: "If you need legal work, I can take it on through ",
+      before: "If you need legal work, I can take it on, or bring in the right attorney, through ",
       linkText: "The LoRicco Law Firm",
       href: "https://loriccolaw.com/",
       after: " in New Haven, where I'm an attorney.",

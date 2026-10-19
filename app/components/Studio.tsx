@@ -334,6 +334,15 @@ function GroupHeading({ id, label }: { id: string; label: string }) {
 
 const capitalize = (s: string) => s[0].toUpperCase() + s.slice(1);
 
+/* Grid spans for the live cards (see the grid comment in Studio below). */
+function liveCardSpan(i: number, n: number) {
+  const lastRow = n % 3;
+  const inLastRow = lastRow !== 0 && i >= n - lastRow;
+  const lg = !inLastRow ? "lg:col-span-2" : lastRow === 2 ? "lg:col-span-3" : "lg:col-span-6";
+  const md = i === n - 1 && n % 2 === 1 ? "md:col-span-2" : "";
+  return `${md} ${lg}`.trim();
+}
+
 /*
   The /apps page body: the studio's own apps, as proof that the app work ships.
   The homepage shows only the live icons (Work.tsx) and links here.
@@ -384,13 +393,17 @@ export default function Studio() {
 
         <div className="mt-20" role="group" aria-labelledby="studio-live">
           <GroupHeading id="studio-live" label="On the App Store" />
-          {/* Three across on desktop, two on tablets; an odd last card on tablets spans the row */}
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {/*
+            Six-column track on desktop: cards take a third of a row, and a short last
+            row is spread out (two cards take half each, one takes the full row) so
+            no cell sits empty. On tablets an odd last card spans the row.
+          */}
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-6">
             {liveGrid.map((app, i) => (
               <Reveal
                 key={app.slug}
                 delay={(i % 3) * 80}
-                className={i === liveGrid.length - 1 && liveGrid.length % 2 === 1 ? "md:col-span-2 lg:col-span-1" : undefined}
+                className={liveCardSpan(i, liveGrid.length)}
               >
                 <AppCard app={app} />
               </Reveal>
