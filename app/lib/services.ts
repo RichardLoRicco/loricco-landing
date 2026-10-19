@@ -7,6 +7,8 @@ export type Service = {
   description: string;
   /** A second link beside the email link, to more detail elsewhere. */
   seeAlso?: { href: string; label: string };
+  /** A closing sentence with one link, rendered after the description. */
+  referral?: { before: string; linkText: string; href: string; after: string };
 };
 
 /*
@@ -39,6 +41,14 @@ export const services: Service[] = [
     title: "Business and startup advice",
     short: "business and startup advice",
     description:
-      "I review pitch decks, financial projections, and go-to-market plans for startups and small businesses, and when there's a product behind them, its architecture and code. This is business and technical advice, not legal advice. If something needs a lawyer, I'll tell you.",
+      "I review pitch decks, financial projections, and go-to-market plans for startups and small businesses, and when there's a product behind them, its architecture and code. This is business and technical advice, not legal advice.",
+    // Richard's call (2026-10-19): anyone who needs a lawyer goes to the firm.
+    // The relationship stays visible ("of counsel") so the pointer isn't misleading.
+    referral: {
+      before: "If you need a lawyer, I'll refer you to ",
+      linkText: "The LoRicco Law Firm",
+      href: "https://loriccolaw.com/",
+      after: " in New Haven, where I'm of counsel.",
+    },
   },
 ];

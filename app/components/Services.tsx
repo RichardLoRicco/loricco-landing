@@ -27,6 +27,16 @@ export default function Services() {
                 <div>
                   <p className="body-serif pretty max-w-2xl" style={{ fontSize: "1.05rem" }}>
                     {service.description}
+                    {service.referral && (
+                      <>
+                        {" "}
+                        {service.referral.before}
+                        <a href={service.referral.href} className="link-ink" target="_blank" rel="noopener noreferrer">
+                          {service.referral.linkText}
+                        </a>
+                        {service.referral.after}
+                      </>
+                    )}
                   </p>
                   <div className="mt-4 flex flex-wrap gap-x-6 gap-y-2 body-serif" style={{ fontSize: "1rem" }}>
                     {/* A ready-made subject line, so nobody starts from a blank email */}
