@@ -29,7 +29,7 @@ export const services: Service[] = [
     title: "AI training and integration",
     short: "AI training and integration",
     description:
-      "I train lawyers, small-business teams, and engineers to use AI in their daily work, including where the tools fail. For law firms, the training also covers what client confidentiality requires, and each session comes with a written guide. I also set up AI systems that take on day-to-day work like intake, scheduling, and routine admin, and for engineering teams I set up AI-assisted development, from the tools to the review process.",
+      "I train lawyers, small-business teams, and engineers to use AI in their daily work, including where the tools fail. For law firms, the training also covers what client confidentiality requires, and each session comes with a written guide. I also set up AI systems that take on day-to-day work like intake, scheduling, and routine admin. For engineering teams, I set up AI-assisted development, from the tools to the review process.",
   },
   {
     title: "Legal and technical work for law firms",

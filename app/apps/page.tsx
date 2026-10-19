@@ -6,7 +6,7 @@ import Footer from "../components/Footer";
 import { AppsStructuredData } from "../components/StructuredData";
 import { counts, spell } from "../lib/apps";
 
-const description = `I build web and iPhone apps and handle App Store review and launch for iPhone apps. ${
+const description = `I build iPhone and web apps, and for iPhone apps I handle App Store review and launch. ${
   spell(counts.live)[0].toUpperCase() + spell(counts.live).slice(1)
 } of my own apps are live on the App Store.`;
 

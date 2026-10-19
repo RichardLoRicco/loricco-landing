@@ -97,6 +97,7 @@ export default function RootLayout({
     // Font variables sit on <html> so the :root tokens that reference them resolve.
     <html
       lang="en"
+      data-scroll-behavior="smooth"
       suppressHydrationWarning
       className={`${fraunces.variable} ${geist.variable} ${sourceSerif.variable} ${geistMono.variable}`}
     >

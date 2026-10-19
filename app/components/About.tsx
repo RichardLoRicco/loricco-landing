@@ -36,8 +36,7 @@ export default function About() {
             <p className="body-serif pretty" style={{ fontSize: "1.2rem", lineHeight: 1.65 }}>
               LoRicco &amp; Co. is my company. I&apos;m admitted to practice law in
               Connecticut, I work as a software engineer, and I hold an MBA. I also
-              practice at The LoRicco Law Firm in New Haven, a separate business,
-              which is where legal matters go.
+              practice at The LoRicco Law Firm in New Haven, a separate business.
             </p>
 
             <div className="mt-10 border-t border-[var(--rule-color)] pt-8">

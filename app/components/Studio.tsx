@@ -270,17 +270,31 @@ function Featured({ app }: { app: StudioApp }) {
             </div>
           </dl>
 
-          {app.siteUrl && (
-            <div className="mt-8">
-              <a
-                href={app.siteUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`Visit the ${app.name} site (opens in a new tab)`}
-                className="btn max-w-full whitespace-normal text-center bg-(--ft-btn) text-(--ft-btn-text) hover:bg-(--ft-btn-hover) hover:text-(--ft-btn-hover-text) focus-visible:outline-(--ft-accent)"
-              >
-                Visit the {app.name} site &rarr;
-              </a>
+          {(app.siteUrl || app.appStoreUrl) && (
+            <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
+              {app.siteUrl && (
+                <a
+                  href={app.siteUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Visit the ${app.name} site (opens in a new tab)`}
+                  className="btn max-w-full whitespace-normal text-center bg-(--ft-btn) text-(--ft-btn-text) hover:bg-(--ft-btn-hover) hover:text-(--ft-btn-hover-text) focus-visible:outline-(--ft-accent)"
+                >
+                  Visit the {app.name} site &rarr;
+                </a>
+              )}
+              {/* Featuring an app removes its grid card, so its App Store link lives here */}
+              {app.appStoreUrl && (
+                <a
+                  href={app.appStoreUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`View ${app.name} on the App Store (opens in a new tab)`}
+                  className="font-mono text-[0.72rem] tracking-[0.12em] text-(--ft-text) uppercase underline decoration-(--ft-accent) underline-offset-4 hover:text-(--ft-accent)"
+                >
+                  View on the App Store
+                </a>
+              )}
             </div>
           )}
         </div>
@@ -349,8 +363,8 @@ export default function Studio() {
         <div className="mt-10 max-w-2xl">
           {/* The review clause only appears while an app is actually in review */}
           <p className="body-serif pretty" style={{ fontSize: "1.15rem" }}>
-            I build web and iPhone apps and handle subscriptions, analytics, and
-            support. For iPhone apps, I also handle App Store review and launch.{" "}
+            I build iPhone and web apps and handle subscriptions, analytics, and
+            support. For iPhone apps, I also take care of App Store review and launch.{" "}
             {capitalize(spell(counts.live))} of mine are live on the App Store
             {counts.review > 0 && <>, {spell(counts.review)} {counts.review === 1 ? "is" : "are"} in App Review,</>}
             {" "}and {spell(counts.development)} more are in development. If you need an app
