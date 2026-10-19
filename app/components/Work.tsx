@@ -55,7 +55,7 @@ const projects: Project[] = [
     fullPageAlt:
       "Top of the loriccolaw.com homepage, headed Three generations of New Haven attorneys, above a photo of the firm's attorneys",
     description:
-      "A general practice firm in New Haven since 1956, where I'm of counsel. It's a separate business from LoRicco & Co. I rebuilt its outdated site in English and Spanish, kept its existing URLs, and added a blog that the firm's attorneys review before each post goes up, along with pages for the surrounding towns.",
+      "A general practice firm in New Haven since 1956, where I'm an attorney. It's a separate business from LoRicco & Co. I rebuilt its outdated site in English and Spanish, kept its existing URLs, and added pages for the surrounding towns and a blog with every post reviewed by an attorney at the firm before it goes up.",
     lighthouse: [99, 100, 100, 100],
     data: [
       ["Live since", "May 2026"],
@@ -71,7 +71,7 @@ export default function Work() {
   return (
     <section
       id="work"
-      aria-label="Selected client work"
+      aria-label="Client work"
       className="relative"
       style={{ padding: "var(--space-section) 0" }}
     >
@@ -86,8 +86,8 @@ export default function Work() {
         </div>
 
         <p className="body-serif pretty mt-10 max-w-2xl" style={{ fontSize: "1.15rem" }}>
-          Websites I&apos;ve rebuilt and still maintain, including their content
-          and search work.
+          I rebuilt both of these sites and still maintain them, along with their
+          content and search work.
         </p>
 
         <div className="mt-16 flex flex-col gap-20 lg:gap-28">

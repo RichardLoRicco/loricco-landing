@@ -82,8 +82,8 @@ export default function Hero() {
               I&apos;m Richard LoRicco. I practice law in Connecticut and work as a
               software engineer in New Haven. I rebuild and maintain websites, build
               apps and AI tools, and train teams to use AI. For law firms, I also take
-              on legal research and drafting and consult on the technology in their
-              cases. You work with me directly.
+              on legal research and contract drafting, and I consult on the
+              technology in their cases. You work with me directly.
             </p>
 
             <div className="mt-10 flex flex-wrap items-center gap-4 animate-reveal reveal-delay-300">

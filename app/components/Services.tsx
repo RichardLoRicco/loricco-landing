@@ -33,6 +33,7 @@ export default function Services() {
                         {service.referral.before}
                         <a href={service.referral.href} className="link-ink" target="_blank" rel="noopener noreferrer">
                           {service.referral.linkText}
+                          <span className="sr-only"> (opens in a new tab)</span>
                         </a>
                         {service.referral.after}
                       </>
@@ -60,9 +61,9 @@ export default function Services() {
 
         <Reveal>
           <p className="body-serif pretty mt-8 max-w-2xl" style={{ fontSize: "1.05rem" }}>
-            Some work crosses more than one of these.{" "}
+            If you&apos;re not sure which of these fits,{" "}
             <a href="mailto:admin@loriccoandco.com" className="link-ink">
-              Email me
+              email me
             </a>{" "}
             and we&apos;ll figure it out from there.
           </p>

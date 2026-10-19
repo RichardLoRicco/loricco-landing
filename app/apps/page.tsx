@@ -3,25 +3,35 @@ import Dateline from "../components/Dateline";
 import Navbar from "../components/Navbar";
 import Studio from "../components/Studio";
 import Footer from "../components/Footer";
+import { AppsStructuredData } from "../components/StructuredData";
 import { counts, spell } from "../lib/apps";
 
-const description = `I build iPhone and web apps and take them through App Store review and launch. ${
+const description = `I build web and iPhone apps and handle App Store review and launch for iPhone apps. ${
   spell(counts.live)[0].toUpperCase() + spell(counts.live).slice(1)
 } of my own apps are live on the App Store.`;
 
+const title = "iPhone and Web App Development | LoRicco & Co.";
+const ogImage = {
+  url: "/og.jpg",
+  width: 1200,
+  height: 630,
+  alt: "LoRicco & Co.: I'm an attorney who builds software for law firms and small businesses, with a portrait of Richard T. LoRicco.",
+};
+
 export const metadata: Metadata = {
-  title: "iPhone and Web App Development | LoRicco & Co.",
+  title,
   description,
   alternates: { canonical: "/apps" },
   openGraph: {
-    title: "iPhone and Web App Development | LoRicco & Co.",
+    title,
     description,
     url: "/apps",
     type: "website",
     siteName: "LoRicco & Co.",
     locale: "en_US",
-    images: [{ url: "/og.jpg", width: 1200, height: 630 }],
+    images: [ogImage],
   },
+  twitter: { card: "summary_large_image", title, description, images: ["/og.jpg"] },
 };
 
 export default function AppsPage() {
@@ -33,6 +43,7 @@ export default function AppsPage() {
       >
         Skip to main content
       </a>
+      <AppsStructuredData />
       <Dateline />
       <Navbar />
       <main id="main-content" className="relative overflow-x-clip">

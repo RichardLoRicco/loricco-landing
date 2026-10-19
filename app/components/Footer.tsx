@@ -35,7 +35,7 @@ export default function Footer() {
           LoRicco <em>&amp;</em> Co.
         </p>
         <p className="marginalia">
-          &copy; {year} LoRicco &amp; Co. LLC
+          &copy; {year} LoRicco &amp; Co. LLC &middot; Richard T. LoRicco
         </p>
         <a href={`mailto:${EMAIL}`} className="dateline-link meta">
           {EMAIL}

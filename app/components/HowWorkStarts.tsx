@@ -24,15 +24,10 @@ export default function HowWorkStarts() {
         <Reveal>
           <div className="mt-10 max-w-2xl">
             <p className="body-serif pretty" style={{ fontSize: "1.15rem" }}>
-              Most work starts with a short call and then a written review of where
-              things stand. For a website that&apos;s a findings report, for a case
-              it&apos;s a memo on the technical question, and for a business it&apos;s
-              a read on the plan. You get my recommendation in writing, and you can
-              act on it with me or with someone else.
-            </p>
-            <p className="body-serif pretty mt-5" style={{ fontSize: "1.15rem" }}>
-              For ongoing work, I keep the site or system running and revisit it as
-              your needs change.
+              The first step is usually a short call, then a written review of where
+              things stand, whether that&apos;s a findings report on a website, a memo
+              on the technical question in a case, or notes on a business plan. You
+              can act on it with me or with someone else.
             </p>
           </div>
         </Reveal>

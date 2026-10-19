@@ -230,9 +230,6 @@ function Featured({ app }: { app: StudioApp }) {
               <h2 id={`featured-${app.slug}`} style={{ fontSize: "1.9rem", color: "var(--ft-text)" }}>
                 {app.name}
               </h2>
-              <p className="mt-1.5 font-mono text-[0.65rem] tracking-[0.12em] text-(--ft-label) uppercase">
-                {statusLabel[app.status]}
-              </p>
             </div>
           </div>
 
@@ -352,12 +349,12 @@ export default function Studio() {
         <div className="mt-10 max-w-2xl">
           {/* The review clause only appears while an app is actually in review */}
           <p className="body-serif pretty" style={{ fontSize: "1.15rem" }}>
-            I take apps from the first version through App Store review and launch,
-            including subscriptions, analytics, and support. {capitalize(spell(counts.live))} of
-            my own are live on the App Store
+            I build web and iPhone apps and handle subscriptions, analytics, and
+            support. For iPhone apps, I also handle App Store review and launch.{" "}
+            {capitalize(spell(counts.live))} of mine are live on the App Store
             {counts.review > 0 && <>, {spell(counts.review)} {counts.review === 1 ? "is" : "are"} in App Review,</>}
             {" "}and {spell(counts.development)} more are in development. If you need an app
-            built, or want features added to one you already have,{" "}
+            built or want features added to one you already have,{" "}
             <a href="mailto:admin@loriccoandco.com?subject=Web%20and%20mobile%20apps" className="link-ink">
               email me
             </a>

@@ -4,7 +4,7 @@ const principles = [
   {
     title: "Client matters stay private",
     description:
-      "Consulting work for counsel stays between me and the attorney. I don't turn those matters into marketing material or publish case studies about them.",
+      "I keep consulting work for counsel confidential. I don't use those matters in marketing or publish case studies about them.",
   },
   {
     title: "Straight answers",
@@ -34,11 +34,10 @@ export default function About() {
         <div className="grid gap-12 pt-14 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)] lg:gap-20">
           <Reveal>
             <p className="body-serif pretty" style={{ fontSize: "1.2rem", lineHeight: 1.65 }}>
-              LoRicco &amp; Co. is my practice. I&apos;m an attorney admitted in
-              Connecticut and a software engineer, and I hold an MBA. I&apos;m also of
-              counsel to The LoRicco Law Firm in New Haven, which is a separate
-              business and where legal matters go. Because I work in all three fields, a client whose problem
-              touches more than one of them only has to explain it once.
+              LoRicco &amp; Co. is my company. I&apos;m admitted to practice law in
+              Connecticut, I work as a software engineer, and I hold an MBA. I also
+              practice at The LoRicco Law Firm in New Haven, a separate business,
+              which is where legal matters go.
             </p>
 
             <div className="mt-10 border-t border-[var(--rule-color)] pt-8">

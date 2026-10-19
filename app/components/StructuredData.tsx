@@ -8,8 +8,9 @@ const SITE = "https://loriccoandco.com";
   - Organization, not ProfessionalService (deprecated on schema.org) and never
     LegalService: this is not a law firm, and the markup must not suggest one.
   - The offer catalog is built from the same list as the visible Services rows,
-    and each description is the visible paragraph word for word (Google's
-    structured-data policy: markup describes what readers can see).
+    and each description is that row's visible paragraph (Google's
+    structured-data policy: markup describes what readers can see). The apps
+    list lives on /apps only (AppsStructuredData), where the apps are shown.
 */
 export default function StructuredData() {
   const graph = {
@@ -30,7 +31,7 @@ export default function StructuredData() {
         legalName: "LoRicco & Co. LLC",
         url: SITE,
         description:
-          "LoRicco & Co. is the New Haven, Connecticut practice of Richard T. LoRicco, an attorney and software engineer. He builds websites and apps, trains teams to use AI and builds it into their work, takes on legal research and technical consulting for law firms, and advises startups and small businesses.",
+          "LoRicco & Co. is the New Haven, Connecticut company of Richard T. LoRicco, an attorney and software engineer. He builds websites and apps, trains teams to use AI and builds it into their work, takes on legal research and technical consulting for law firms, and works with startups and small businesses on the business and the product.",
         email: "admin@loriccoandco.com",
         address: {
           "@type": "PostalAddress",
@@ -74,6 +75,7 @@ export default function StructuredData() {
           "https://x.com/richard_loricco",
         ],
         alumniOf: [
+          { "@type": "CollegeOrUniversity", name: "University of Miami School of Law" },
           { "@type": "CollegeOrUniversity", name: "University of Connecticut School of Business" },
           { "@type": "CollegeOrUniversity", name: "Quinnipiac University School of Law" },
         ],
@@ -81,7 +83,17 @@ export default function StructuredData() {
     ],
   };
 
-  const appsSchema = {
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(graph) }}
+    />
+  );
+}
+
+/* The six live apps, rendered on /apps only. Prices come from the App Store. */
+export function AppsStructuredData() {
+  const list = {
     "@context": "https://schema.org",
     "@type": "ItemList",
     name: "LoRicco & Co. Apps",
@@ -94,19 +106,18 @@ export default function StructuredData() {
       url: app.siteUrl,
       installUrl: app.appStoreUrl,
       description: `${app.tagline} ${app.description}`,
+      publisher: { "@id": `${SITE}/#business` },
+      offers: {
+        "@type": "Offer",
+        price: app.price && app.price !== "Free" ? app.price.replace("$", "") : "0",
+        priceCurrency: "USD",
+      },
     })),
   };
-
   return (
-    <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(graph) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(appsSchema) }}
-      />
-    </>
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(list) }}
+    />
   );
 }

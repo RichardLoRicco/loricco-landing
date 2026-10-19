@@ -46,8 +46,8 @@ export default function Contact() {
         <Reveal>
           <div className="pt-14">
             <p className="body-serif pretty max-w-2xl" style={{ fontSize: "1.2rem" }}>
-              Tell me who you are, what you&apos;re working on, and when you need it.
-              A few lines is enough. I&apos;ll reply with some questions, and if it
+              Include who you are, what you need, and when you need it. A few
+              lines is enough. I&apos;ll reply with some questions, and if it
               makes sense we&apos;ll set up a short call.
             </p>
 
@@ -77,9 +77,11 @@ export default function Contact() {
             </div>
 
             <p className="body-serif mt-8 max-w-xl" style={{ fontSize: "0.95rem", color: "var(--text-secondary)" }}>
-              For a legal matter, please reach me through{" "}
+              Writing to me doesn&apos;t make me your lawyer. For a legal matter,
+              please reach me through{" "}
               <a href="https://loriccolaw.com/" className="link-ink" target="_blank" rel="noopener noreferrer">
                 The LoRicco Law Firm
+                <span className="sr-only"> (opens in a new tab)</span>
               </a>
               , and leave out confidential details until we&apos;ve spoken.
             </p>

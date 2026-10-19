@@ -273,19 +273,6 @@ em {
   color: var(--text-secondary);
 }
 
-/* Drop cap for first editorial paragraph */
-.drop-cap::first-letter {
-  font-family: var(--ff-display);
-  font-weight: 700;
-  font-style: normal;
-  font-size: 4.5em;
-  line-height: 0.85;
-  float: left;
-  padding: 0.12em 0.12em 0 0;
-  margin-right: 0.02em;
-  color: var(--accent);
-  font-variation-settings: "opsz" 144, "SOFT" 0;
-}
 
 /* Small-caps label · our "legal citation" type */
 .label {
@@ -560,30 +547,8 @@ li:first-child > .service-row { border-top: 0; }
   .hero-eyebrow::before { display: none; }
 }
 
-/* A note that belongs to the ledger above it */
-.footnote {
-  border-top: 1px solid var(--rule-color);
-  padding-top: 1.5rem;
-}
 
 
-/* PR/bug pill (metadata chip) */
-.chip-meta {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  padding: 0.22rem 0.55rem;
-  font-family: var(--ff-mono);
-  font-size: 0.65rem;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  color: var(--text-muted);
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 2px;
-  text-transform: uppercase;
-  white-space: nowrap;
-}
 
 /* =============================================================
    Dateline bar (top-fixed, newspaper-style)
