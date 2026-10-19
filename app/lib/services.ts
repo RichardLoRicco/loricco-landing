@@ -35,17 +35,18 @@ export const services: Service[] = [
     title: "Legal and technical work for law firms",
     short: "legal and technical work",
     description:
-      "Law firms bring me in as a contract attorney when they need another lawyer on a matter without making a hire. I handle legal research, research memos, and contract drafting. When a case turns on digital evidence, I read the discovery, interpret carrier and platform records, explain in writing what they show, and prepare questions for opposing experts. That consulting is structured with work-product protection in mind. I'm admitted in Connecticut, and I take legal work from law firms only.",
+      "Law firms bring me in as a contract attorney when they need another lawyer on a matter without making a hire. I handle legal research, research memos, and contract drafting. When a case turns on digital evidence, I read the discovery, interpret carrier and platform records, explain in writing what they show, and prepare questions for opposing experts. That consulting is structured with work-product protection in mind. I'm admitted in Connecticut.",
   },
   {
     title: "Business and startup advice",
     short: "business and startup advice",
     description:
       "I review pitch decks, financial projections, and go-to-market plans for startups and small businesses, and when there's a product behind them, its architecture and code. This is business and technical advice, not legal advice.",
-    // Richard's call (2026-10-19): anyone who needs a lawyer goes to the firm.
-    // The relationship stays visible ("of counsel") so the pointer isn't misleading.
+    // Richard's call (2026-10-19): legal work for anyone other than a law firm is
+    // engaged through the firm, where he is of counsel. The relationship stays
+    // visible so the pointer is not misleading.
     referral: {
-      before: "If you need a lawyer, I'll refer you to ",
+      before: "If you need legal work, I take it on through ",
       linkText: "The LoRicco Law Firm",
       href: "https://loriccolaw.com/",
       after: " in New Haven, where I'm of counsel.",

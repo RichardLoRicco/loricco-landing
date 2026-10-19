@@ -216,8 +216,8 @@ function Featured({ app }: { app: StudioApp }) {
       className={`${theme.surface} featured-panel relative overflow-hidden border border-(--ft-border) text-(--ft-text)`}
       style={{ ...themeVars(theme), borderRadius: "var(--radius-lg)" }}
     >
-      <div className="relative grid gap-10 p-6 sm:p-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:gap-6 lg:p-12">
-        <div className="flex flex-col">
+      <div className="relative grid min-w-0 grid-cols-1 gap-10 p-6 sm:p-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:gap-6 lg:p-12">
+        <div className="flex min-w-0 flex-col">
           <p className="flex items-center gap-3 font-mono text-[0.68rem] tracking-[0.2em] text-(--ft-accent) uppercase">
             <span>{theme.kicker[0]}</span>
             <span className="h-px w-8 bg-(--ft-accent) opacity-40" aria-hidden="true" />
@@ -279,8 +279,8 @@ function Featured({ app }: { app: StudioApp }) {
                 href={app.siteUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label={`${app.name} website, ${new URL(app.siteUrl).host} (opens in a new tab)`}
-                className="btn bg-(--ft-btn) text-(--ft-btn-text) hover:bg-(--ft-btn-hover) hover:text-(--ft-btn-hover-text) focus-visible:outline-(--ft-accent)"
+                aria-label={`Visit the ${app.name} site (opens in a new tab)`}
+                className="btn max-w-full whitespace-normal text-center bg-(--ft-btn) text-(--ft-btn-text) hover:bg-(--ft-btn-hover) hover:text-(--ft-btn-hover-text) focus-visible:outline-(--ft-accent)"
               >
                 Visit the {app.name} site &rarr;
               </a>

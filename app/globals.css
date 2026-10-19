@@ -624,7 +624,7 @@ li:first-child > .service-row { border-top: 0; }
 }
 /* Below 360px the email cannot fit; the menu's Get in touch opens the same address */
 @media (max-width: 359px) {
-  .dateline-link { display: none; }
+  .dateline .dateline-link { display: none; }
 }
 .dateline-link {
   color: var(--text-muted);

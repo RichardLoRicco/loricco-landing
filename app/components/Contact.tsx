@@ -77,8 +77,11 @@ export default function Contact() {
             </div>
 
             <p className="body-serif mt-8 max-w-xl" style={{ fontSize: "0.95rem", color: "var(--text-secondary)" }}>
-              If you&apos;re writing about a legal matter, please leave out
-              confidential details until we&apos;ve spoken.
+              For a legal matter, please reach me through{" "}
+              <a href="https://loriccolaw.com/" className="link-ink" target="_blank" rel="noopener noreferrer">
+                The LoRicco Law Firm
+              </a>
+              , and leave out confidential details until we&apos;ve spoken.
             </p>
           </div>
         </Reveal>

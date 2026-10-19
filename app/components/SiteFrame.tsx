@@ -43,7 +43,7 @@ export default function SiteFrame({ project }: { project: Project }) {
       href={project.url}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label={`${project.name}, ${project.host}. Opens in a new tab.`}
+      aria-label={`Visit ${project.host}, ${project.name} (opens in a new tab)`}
       className="site-preview-trigger filing filing-interactive group block overflow-hidden"
       data-scrolling={scrolling || undefined}
       data-touch={touched || undefined}

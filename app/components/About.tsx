@@ -37,7 +37,7 @@ export default function About() {
               LoRicco &amp; Co. is my practice. I&apos;m an attorney admitted in
               Connecticut and a software engineer, and I hold an MBA. I&apos;m also of
               counsel to The LoRicco Law Firm in New Haven, which is a separate
-              business. Because I work in all three fields, a client whose problem
+              business and where legal matters go. Because I work in all three fields, a client whose problem
               touches more than one of them only has to explain it once.
             </p>
 
