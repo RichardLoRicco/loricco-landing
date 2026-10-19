@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Reveal from "./Reveal";
-import { apps, counts, featuredApp, pad2, spell, type AppStatus, type FeaturedTheme, type StudioApp } from "../lib/apps";
+import { apps, counts, featuredApp, spell, type AppStatus, type FeaturedTheme, type StudioApp } from "../lib/apps";
 
 const gridApps = apps.filter((a) => a !== featuredApp);
 const liveGrid = gridApps.filter((a) => a.status === "live");
@@ -12,24 +12,6 @@ const statusLabel: Record<AppStatus, string> = {
   review: "In review",
   development: "In dev",
 };
-
-const statusDot: Record<AppStatus, string> = {
-  live: "#4ea35c",
-  review: "#d0a03a",
-  development: "var(--text-faint)",
-};
-
-function StatusChip({ status, label }: { status: AppStatus; label?: string }) {
-  return (
-    <span className="chip-meta">
-      <span
-        aria-hidden="true"
-        style={{ width: 5, height: 5, borderRadius: 9999, background: statusDot[status] }}
-      />
-      {label ?? statusLabel[status]}
-    </span>
-  );
-}
 
 /* App icons are full-bleed squares; the iOS mask is applied here. */
 function AppIcon({ app, size }: { app: StudioApp; size: number }) {
@@ -70,7 +52,7 @@ function AppLinks({ app }: { app: StudioApp }) {
           className="link-accent meta"
           style={{ color: "var(--accent)" }}
         >
-          App Store &rarr;
+          App Store
         </a>
       )}
       {app.siteUrl && (
@@ -82,7 +64,7 @@ function AppLinks({ app }: { app: StudioApp }) {
           className="link-accent meta"
           style={{ color: "var(--text-primary)" }}
         >
-          Website &rarr;
+          Website
         </a>
       )}
     </div>
@@ -102,13 +84,9 @@ function meta(app: StudioApp) {
   card out in one row (identity, description, details) so it never sits in a
   grid with empty cells beside it.
 */
-function AppCard({ app, index, wide = false }: { app: StudioApp; index: number; wide?: boolean }) {
+function AppCard({ app, wide = false }: { app: StudioApp; wide?: boolean }) {
   return (
-    <article className="filing filing-interactive flex h-full flex-col overflow-hidden">
-      <div className="flex items-center justify-between gap-3 border-b border-[var(--border)] px-6 py-4">
-        <span className="meta">No. {pad2(index + 1)}</span>
-        <StatusChip status={app.status} label={app.status === "live" ? "Live on App Store" : undefined} />
-      </div>
+    <article className="filing flex h-full flex-col overflow-hidden">
       <div
         className={`flex flex-1 flex-col p-6 ${
           wide ? "md:grid md:grid-cols-[minmax(0,1fr)_minmax(0,1.3fr)_minmax(0,1fr)] md:items-start md:gap-10" : ""
@@ -140,17 +118,12 @@ function AppCard({ app, index, wide = false }: { app: StudioApp; index: number; 
 }
 
 /* In development: the personal site's numbered editorial list. */
-function DevRow({ app, index }: { app: StudioApp; index: number }) {
+function DevRow({ app }: { app: StudioApp }) {
   return (
     <div className="grid grid-cols-[auto_1fr] items-start gap-5 border-b border-[var(--rule-color)] py-6">
       <AppIcon app={app} size={44} />
       <div className="min-w-0">
-        <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-          <span className="meta" style={{ color: "var(--accent)" }}>
-            {pad2(index + 1)}
-          </span>
-          <h4 style={{ fontSize: "1.35rem", lineHeight: 1.1 }}>{app.name}</h4>
-        </div>
+        <h4 style={{ fontSize: "1.35rem", lineHeight: 1.1 }}>{app.name}</h4>
         <p className="serif-italic mt-1" style={{ fontSize: "1rem" }}>
           {app.tagline}
         </p>
@@ -338,13 +311,12 @@ function Featured({ app }: { app: StudioApp }) {
   );
 }
 
-function GroupHeading({ id, label, count }: { id: string; label: string; count: number }) {
+function GroupHeading({ id, label }: { id: string; label: string }) {
   return (
-    <div className="mb-8 flex items-baseline justify-between gap-4 border-b border-[var(--rule-color)] pb-4">
+    <div className="mb-8 border-b border-[var(--rule-color)] pb-4">
       <h3 id={id} style={{ fontSize: "clamp(1.5rem, 2.2vw, 2rem)" }}>
         {label}
       </h3>
-      <span className="meta">{pad2(count)}</span>
     </div>
   );
 }
@@ -369,48 +341,12 @@ export default function Studio() {
           </div>
         </div>
 
-        <div className="grid gap-10 pt-10 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)] lg:items-end lg:gap-20">
-          <p className="body-serif pretty max-w-2xl" style={{ fontSize: "1.15rem" }}>
-            {capitalize(spell(counts.live))} are live on the App Store, {spell(counts.review)} is
-            in App Review, and {spell(counts.development)} more are in development. I build them and
-            handle App Store review, subscriptions, analytics, and support. I do the same work for
-            clients who need an app built.
-          </p>
-
-          {/* The sentence beside it gives the same three numbers, so phones skip the ledger */}
-          <dl
-            className="hidden grid-cols-3 gap-x-6 sm:grid"
-            style={{
-              borderTop: "1px solid var(--rule-color)",
-              borderBottom: "1px solid var(--rule-color)",
-              padding: "1.25rem 0",
-            }}
-          >
-            {(
-              [
-                ["Live", counts.live],
-                ["In review", counts.review],
-                ["In dev", counts.development],
-              ] as const
-            ).map(([label, n]) => (
-              <div key={label}>
-                <dt className="meta">{label}</dt>
-                <dd
-                  className="mt-1"
-                  style={{
-                    fontFamily: "var(--ff-display)",
-                    fontSize: "2rem",
-                    lineHeight: 1,
-                    fontVariantNumeric: "tabular-nums",
-                    color: label === "Live" ? "var(--accent)" : "var(--text-primary)",
-                  }}
-                >
-                  {pad2(n)}
-                </dd>
-              </div>
-            ))}
-          </dl>
-        </div>
+        {/* The review clause only appears while an app is actually in review */}
+        <p className="body-serif pretty mt-10 max-w-2xl" style={{ fontSize: "1.15rem" }}>
+          {capitalize(spell(counts.live))} are live on the App Store
+          {counts.review > 0 && <>, {spell(counts.review)} {counts.review === 1 ? "is" : "are"} in App Review,</>}
+          {" "}and {spell(counts.development)} more are in development.
+        </p>
 
         {featuredApp && (
           <Reveal className="mt-14">
@@ -419,22 +355,16 @@ export default function Studio() {
         )}
 
         <div className="mt-20" role="group" aria-labelledby="studio-live">
-          <GroupHeading id="studio-live" label="On the App Store" count={liveGrid.length} />
-          {/*
-            Six-column track on desktop: the first two cards take half a row each and
-            the rest a third, so five apps fill two rows with no empty cell. On tablets
-            an odd last card spans the full row.
-          */}
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-6">
+          <GroupHeading id="studio-live" label="On the App Store" />
+          {/* Three across on desktop, two on tablets; an odd last card on tablets spans the row */}
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {liveGrid.map((app, i) => (
               <Reveal
                 key={app.slug}
                 delay={(i % 3) * 80}
-                className={`${i < 2 ? "lg:col-span-3" : "lg:col-span-2"} ${
-                  i === liveGrid.length - 1 && liveGrid.length % 2 === 1 ? "md:col-span-2 lg:col-span-2" : ""
-                }`}
+                className={i === liveGrid.length - 1 && liveGrid.length % 2 === 1 ? "md:col-span-2 lg:col-span-1" : undefined}
               >
-                <AppCard app={app} index={i} />
+                <AppCard app={app} />
               </Reveal>
             ))}
           </div>
@@ -442,40 +372,23 @@ export default function Studio() {
 
         {reviewGrid.length > 0 && (
           <div className="mt-20" role="group" aria-labelledby="studio-review">
-            <GroupHeading id="studio-review" label="In App Review" count={reviewGrid.length} />
+            <GroupHeading id="studio-review" label="In App Review" />
             <div className={`grid gap-6 ${reviewGrid.length > 1 ? "md:grid-cols-2 xl:grid-cols-3" : ""}`}>
               {reviewGrid.map((app, i) => (
                 <Reveal key={app.slug} delay={(i % 3) * 80}>
-                  <AppCard app={app} index={liveGrid.length + i} wide={reviewGrid.length === 1} />
+                  <AppCard app={app} wide={reviewGrid.length === 1} />
                 </Reveal>
               ))}
             </div>
           </div>
         )}
 
-        <div
-          role="group"
-          aria-labelledby="studio-dev"
-          className="mt-20 grid gap-8 border-t border-[var(--rule-color)] pt-10 lg:grid-cols-[14rem_minmax(0,1fr)] lg:gap-14 xl:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] xl:gap-16"
-        >
-          <header className="flex flex-col gap-4 lg:sticky lg:top-[calc(var(--dateline-h)+var(--nav-h)+2rem)] lg:self-start">
-            <div className="flex items-center gap-3">
-              <StatusChip status="development" label="In development" />
-              <span className="meta">{pad2(devGrid.length)}</span>
-            </div>
-            <h3 id="studio-dev" style={{ fontSize: "clamp(1.75rem, 2.6vw, 2.25rem)" }}>
-              In <span className="serif-italic">development</span>.
-            </h3>
-            <p className="body-serif" style={{ fontSize: "0.98rem" }}>
-              <em>Why it&apos;s on this page:</em> the advice I give clients on product and
-              engineering has been tested on my own apps first.
-            </p>
-          </header>
-
+        <div className="mt-20" role="group" aria-labelledby="studio-dev">
+          <GroupHeading id="studio-dev" label="In development" />
           <ol className="grid grid-cols-1 gap-x-10 md:grid-cols-2">
             {devGrid.map((app, i) => (
               <Reveal as="li" key={app.slug} delay={(i % 2) * 60}>
-                <DevRow app={app} index={i} />
+                <DevRow app={app} />
               </Reveal>
             ))}
           </ol>

@@ -1,14 +1,5 @@
-import Image from "next/image";
-import { liveApps } from "../lib/apps";
 
 const EMAIL = "admin@loriccoandco.com";
-
-/* The footer row shows the apps that are live on the App Store. */
-const appLinks = liveApps.map((app) => ({
-  name: app.name,
-  icon: app.icon,
-  url: app.siteUrl ?? app.appStoreUrl ?? "#studio",
-}));
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -20,9 +11,7 @@ export default function Footer() {
         style={{ borderTop: "1px solid var(--rule-color)" }}
       >
         <div>
-          <p className="meta">Signed</p>
           <p
-            className="mt-3"
             style={{
               fontFamily: "var(--ff-display)",
               fontSize: "clamp(2.5rem, 6vw, 4rem)",
@@ -36,29 +25,6 @@ export default function Footer() {
             RTL
           </p>
         </div>
-
-        <div className="flex min-w-0 flex-wrap items-center gap-x-4 gap-y-2">
-          <span className="meta">The studio</span>
-          <div className="flex flex-wrap items-center gap-2.5">
-            {appLinks.map((app) => (
-              <a
-                key={app.name}
-                href={app.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group p-1"
-                aria-label={`${app.name}, opens in a new tab`}
-              >
-                <span
-                  className="block h-8 w-8 overflow-hidden rounded-[22.5%] transition-transform duration-200 group-hover:-translate-y-0.5"
-                  style={{ border: "1px solid var(--border)" }}
-                >
-                  <Image src={app.icon} alt="" width={32} height={32} sizes="32px" className="h-full w-full object-cover" />
-                </span>
-              </a>
-            ))}
-          </div>
-        </div>
       </div>
 
       <div
@@ -69,7 +35,7 @@ export default function Footer() {
           LoRicco <em>&amp;</em> Co.
         </p>
         <p className="marginalia">
-          &copy; {year} LoRicco &amp; Co. LLC. All rights reserved.
+          &copy; {year} LoRicco &amp; Co. LLC
         </p>
         <a href={`mailto:${EMAIL}`} className="dateline-link meta">
           {EMAIL}

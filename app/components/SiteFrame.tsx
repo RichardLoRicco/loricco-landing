@@ -51,15 +51,8 @@ export default function SiteFrame({ project }: { project: Project }) {
       onPointerCancel={onPointerCancel}
       onClick={onClick}
     >
-      <div className="flex items-center justify-between gap-3 px-5 py-4">
+      <div className="px-5 py-4">
         <span className="meta">Exhibit {project.exhibit}</span>
-        <span className="chip-meta">
-          <span
-            aria-hidden="true"
-            style={{ width: 5, height: 5, borderRadius: 9999, background: "#4ea35c" }}
-          />
-          Live
-        </span>
       </div>
 
       <div className="site-preview aspect-[16/10] border-y border-[var(--border)]">

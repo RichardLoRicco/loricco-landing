@@ -16,8 +16,8 @@ export type Project = {
 /*
   Real, non-privileged website work. Website engagements aren't covered by the
   work-product posture that keeps consulting matters off this page.
-  Lighthouse figures are mobile runs from 2026-09-02; the full-page captures
-  are from 2026-09-03. Refresh both when the sites change materially.
+  Lighthouse figures are the median of three mobile runs on 2026-10-19; the full-page captures
+  are from 2026-10-19. Refresh both when the sites change materially.
 */
 const projects: Project[] = [
   {
@@ -27,14 +27,14 @@ const projects: Project[] = [
     host: "omnicanhelp.com",
     fullPage: "/work/omni-full.jpg",
     fullPageAlt:
-      "Full homepage of omnicanhelp.com: headline reading Physical therapy, aquatic therapy and chiropractic care, followed by service cards, a warm-water therapy pool section, and five Connecticut office locations",
+      "Homepage of omnicanhelp.com, headed Physical therapy, aquatic therapy and chiropractic care, with its services, warm-water pool, and five Connecticut offices",
     description:
-      "A physical, aquatic, and chiropractic therapy practice with five Connecticut offices. I rebuilt the Squarespace site as a bilingual Next.js site with an appointment-request form running on HIPAA-eligible AWS infrastructure, and I handle content and AI-search visibility for the practice.",
-    lighthouse: [94, 100, 100, 100],
+      "A physical therapy, aquatic therapy, and chiropractic practice with five Connecticut offices. I replaced its Squarespace site with a new one in English and Spanish, built so patients can find the nearest office and call it.",
+    lighthouse: [97, 100, 100, 100],
     data: [
       ["Live since", "Aug 2026"],
       ["Languages", "EN · ES"],
-      ["Stack", "Next.js · AWS"],
+      ["Stack", "Next.js · Vercel"],
     ],
   },
   {
@@ -44,10 +44,10 @@ const projects: Project[] = [
     host: "loriccolaw.com",
     fullPage: "/work/loriccolaw-full.jpg",
     fullPageAlt:
-      "Full homepage of loriccolaw.com: headline reading Three generations of New Haven injury attorneys, followed by selected verdicts and settlements, practice areas, and the attorneys",
+      "Homepage of loriccolaw.com, headed Three generations of New Haven attorneys, with a photo of the firm's attorneys and its practice areas",
     description:
-      "A personal injury and criminal defense firm that has practiced in New Haven since 1956. I rebuilt the outdated site as a bilingual Next.js site, kept the URLs and rankings it already had, and added a compliance-reviewed blog and pages for the surrounding towns. I also handle the firm's content and AI-search visibility.",
-    lighthouse: [100, 100, 100, 100],
+      "My family's firm, a general practice in New Haven since 1956. I rebuilt its outdated site in English and Spanish, kept its existing URLs, and added a compliance-reviewed blog and pages for the surrounding towns.",
+    lighthouse: [99, 100, 100, 100],
     data: [
       ["Live since", "May 2026"],
       ["Languages", "EN · ES"],
@@ -77,7 +77,8 @@ export default function Work() {
         </div>
 
         <p className="body-serif pretty mt-10 max-w-2xl" style={{ fontSize: "1.15rem" }}>
-          Websites I&apos;ve rebuilt and continue to maintain.
+          Websites I&apos;ve rebuilt and still maintain, including their content
+          and search work.
         </p>
 
         <div className="mt-16 flex flex-col gap-20 lg:gap-28">
@@ -101,7 +102,7 @@ export default function Work() {
                   </p>
 
                   <div className="mt-8">
-                    <p className="meta">Lighthouse &middot; mobile, Sep 2026</p>
+                    <p className="meta">Lighthouse &middot; mobile, Oct 2026</p>
                     <dl className="work-scores mt-3">
                       {project.lighthouse.map((score, j) => (
                         <div key={scoreLabels[j]}>
@@ -130,18 +131,6 @@ export default function Work() {
             );
           })}
         </div>
-
-        <Reveal>
-          <p className="marginalia footnote mt-14 max-w-2xl" style={{ textTransform: "none", letterSpacing: "0.02em" }}>
-            Lighthouse figures are mobile runs from September 2026 (performance,
-            accessibility, best practices, SEO). Consulting matters for counsel
-            are not shown here, for the reasons described{" "}
-            <a href="#about" className="link-ink">
-              below
-            </a>
-            .
-          </p>
-        </Reveal>
       </div>
     </section>
   );

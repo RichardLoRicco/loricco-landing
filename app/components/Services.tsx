@@ -1,95 +1,46 @@
 import Reveal from "./Reveal";
 import { counts, spell } from "../lib/apps";
 
+const capitalize = (s: string) => s[0].toUpperCase() + s.slice(1);
+
 type Service = {
-  section: string;
   title: string;
-  outcome: string;
   description: string;
-  offerings: string[];
-  /** A second link under "Email about this", to proof elsewhere on the page. */
+  /** A second link beside "Email about this", to proof elsewhere on the page. */
   seeAlso?: { href: string; label: string };
 };
 
 const services: Service[] = [
   {
-    section: "01",
     title: "Websites & AI Tools",
-    outcome: "You own the site and accounts",
     description:
-      "I rebuild outdated websites without throwing away the search rankings they already have. After launch, I can maintain the site, publish content, improve how it appears in Google and AI answers, and build AI tools for intake or routine work. The domain, code, content, and accounts stay in your name.",
-    offerings: [
-      "Website rebuilds without losing rankings",
-      "Ongoing site care and content",
-      "Visibility in Google and AI answers",
-      "AI tools for intake and routine work",
-    ],
+      "I rebuild outdated websites for law firms and small businesses. Before anything changes, I inventory the URLs and search rankings the site already has and plan the move around keeping them. After launch I can maintain the site, publish content, work on how it shows up in Google and in AI answers, and build AI tools for intake or routine work. The domain, code, content, and accounts stay in your name.",
   },
   {
-    section: "02",
     title: "Web & Mobile Apps",
-    outcome: "A shipped app you own",
     // The count comes from the Studio list, so this sentence stays true as apps ship.
-    description: `I build iPhone apps and web apps, from the first version through App Store review and launch. I've taken ${spell(counts.live)} of my own apps through that process, including subscriptions, analytics, and support, and you can see them in the Studio section below. I can also pick up an app that's stalled or add features to one you already have. The developer accounts and the App Store listing stay in your name.`,
-    offerings: [
-      "iPhone apps",
-      "Web apps and internal tools",
-      "App Store launch & subscriptions",
-      "Features for an existing app",
-    ],
+    description: `I build iPhone apps and web apps, from the first version through App Store review and launch. ${capitalize(spell(counts.live))} of my own are on the App Store, so I've handled review, subscriptions, analytics, and support for real apps. I can also take over an app that has stalled or add features to one you already have. The developer accounts and the App Store listing stay in your name.`,
     seeAlso: { href: "#studio", label: "See the apps I've built" },
   },
   {
-    section: "03",
     title: "AI Education & Training",
-    outcome: "Staff who use the tools",
     description:
-      "Training for lawyers and small-business teams on what AI tools do well, where they fail, and how to use them without creating a compliance problem. The sessions use examples from the systems I build and run every day.",
-    offerings: [
-      "Law-firm workshops",
-      "Small-business sessions",
-      "Written workflow guides",
-      "Follow-up office hours",
-    ],
+      "I train lawyers and small-business teams on what AI tools do well, where they fail, and how to use them without creating a compliance problem. The sessions use examples from systems I build and run every day, and each one comes with a written guide and follow-up office hours.",
   },
   {
-    section: "04",
     title: "Technical Consulting for Law Firms",
-    outcome: "Analysis counsel can use",
     description:
-      "When a case turns on technology, I work for the attorney. I read the discovery, interpret carrier and platform records, and explain what the records show in writing. The engagement is structured with work-product protection in mind. I also advise firms on their own technology decisions.",
-    offerings: [
-      "Digital evidence & discovery analysis",
-      "Technical memos for counsel",
-      "Questions for opposing experts",
-      "Firm technology guidance",
-    ],
+      "When a case turns on technology, I work for the attorney. I read the discovery, interpret carrier and platform records, explain in writing what the records show, and prepare questions for opposing experts. The engagement is structured with work-product protection in mind. I also advise firms on their own technology decisions.",
   },
   {
-    section: "05",
     title: "Contract Legal Work for Law Firms",
-    outcome: "Extra capacity when you need it",
     description:
-      "Firms bring me in when they need another attorney on a matter without making a hire. I take on legal research, research memos, and drafting, and I return work your attorneys can review and use. I'm admitted in Connecticut.",
-    offerings: [
-      "Legal research",
-      "Research memos",
-      "Litigation & contract drafting",
-      "Single projects or ongoing help",
-    ],
+      "Firms bring me in when they need another attorney on a matter without making a hire. I handle legal research, research memos, and litigation and contract drafting, for a single project or on an ongoing basis. I'm admitted in Connecticut.",
   },
   {
-    section: "06",
     title: "Business & Startup Advisory",
-    outcome: "A second opinion",
     description:
-      "I advise startups and business owners on pitch decks, financial projections, competitive analysis, go-to-market strategy, and architecture reviews. I read the deck, the contract, and the codebase myself, so the business, legal, and technical questions get answered by the same person.",
-    offerings: [
-      "Pitch decks & projections",
-      "Competitive analysis",
-      "Go-to-market strategy",
-      "Architecture & code reviews",
-    ],
+      "I review pitch decks, financial projections, and go-to-market plans for startups and small businesses. When there's a product behind them, I review its architecture and code as well.",
   },
 ];
 
@@ -111,51 +62,28 @@ export default function Services() {
           </div>
         </div>
 
-        <p className="body-serif pretty mt-10 max-w-2xl" style={{ fontSize: "1.15rem" }}>
-          I handle each engagement myself. There is no account manager between
-          us and no junior staff doing the work.
-        </p>
 
-        <ol className="mt-14">
+        <ol className="mt-12">
           {services.map((service, i) => (
             <Reveal as="li" key={service.title} delay={i * 60}>
-              <article className="service-row group">
-                <p className="meta" style={{ color: "var(--accent)" }}>
-                  {service.section}
-                </p>
-
+              <article className="service-row">
+                <h3 className="service-title">{service.title}</h3>
                 <div>
-                  <h3 className="service-title">{service.title}</h3>
-                  <p className="body-serif pretty mt-4 max-w-2xl" style={{ fontSize: "1.05rem" }}>
+                  <p className="body-serif pretty max-w-2xl" style={{ fontSize: "1.05rem" }}>
                     {service.description}
                   </p>
-                </div>
-
-                <div>
-                  <p className="meta">Outcome</p>
-                  <p className="serif-italic mt-1" style={{ fontSize: "1.15rem" }}>
-                    {service.outcome}
-                  </p>
-                  <ul className="offerings" aria-label={`${service.title} includes`}>
-                    {service.offerings.map((offering, j) => (
-                      <li key={offering} style={{ "--i": j } as React.CSSProperties}>
-                        {offering}
-                      </li>
-                    ))}
-                  </ul>
-                  <div className="mt-6 flex flex-wrap gap-x-6 gap-y-3">
+                  <div className="mt-4 flex flex-wrap gap-x-6 gap-y-2 body-serif" style={{ fontSize: "1rem" }}>
                     {/* A ready-made subject line, so nobody starts from a blank email */}
                     <a
                       href={`mailto:admin@loriccoandco.com?subject=${encodeURIComponent(service.title)}`}
-                      className="link-accent meta"
-                      style={{ color: "var(--accent)" }}
+                      className="link-ink"
                       aria-label={`Email about this: ${service.title}`}
                     >
-                      Email about this &rarr;
+                      Email about this
                     </a>
                     {service.seeAlso && (
-                      <a href={service.seeAlso.href} className="link-accent meta" style={{ color: "var(--text-primary)" }}>
-                        {service.seeAlso.label} &darr;
+                      <a href={service.seeAlso.href} className="link-ink">
+                        {service.seeAlso.label}
                       </a>
                     )}
                   </div>
