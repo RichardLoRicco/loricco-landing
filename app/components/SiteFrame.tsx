@@ -60,7 +60,7 @@ export default function SiteFrame({ project }: { project: Project }) {
           src={project.fullPage}
           alt={project.fullPageAlt}
           width={1000}
-          height={3281}
+          height={project.fullPageHeight}
           sizes="(min-width: 1024px) 680px, calc(100vw - 2.5rem)"
         />
       </div>

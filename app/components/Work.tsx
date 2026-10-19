@@ -7,6 +7,8 @@ export type Project = {
   url: string;
   host: string;
   fullPage: string;
+  /** Pixel height of the capture (all captures are 1000px wide). */
+  fullPageHeight: number;
   fullPageAlt: string;
   description: string;
   lighthouse: [number, number, number, number];
@@ -26,6 +28,7 @@ const projects: Project[] = [
     url: "https://www.omnicanhelp.com/",
     host: "omnicanhelp.com",
     fullPage: "/work/omni-full.jpg",
+    fullPageHeight: 3281,
     fullPageAlt:
       "Homepage of omnicanhelp.com, headed Physical therapy, aquatic therapy and chiropractic care, with its services, warm-water pool, and five Connecticut offices",
     description:
@@ -43,10 +46,13 @@ const projects: Project[] = [
     url: "https://loriccolaw.com/",
     host: "loriccolaw.com",
     fullPage: "/work/loriccolaw-full.jpg",
+    // Stops above the firm's verdicts block on purpose: next to my own legal
+    // services, those results could read as mine (attorney-advertising rules).
+    fullPageHeight: 1330,
     fullPageAlt:
-      "Homepage of loriccolaw.com, headed Three generations of New Haven attorneys, with a photo of the firm's attorneys and its practice areas",
+      "Top of the loriccolaw.com homepage, headed Three generations of New Haven attorneys, above a photo of the firm's attorneys",
     description:
-      "My family's firm, a general practice in New Haven since 1956. I rebuilt its outdated site in English and Spanish, kept its existing URLs, and added a compliance-reviewed blog and pages for the surrounding towns.",
+      "A general practice firm my family has run in New Haven since 1956. I'm one of its attorneys, and it's a separate business from LoRicco & Co. I rebuilt its outdated site in English and Spanish, kept its existing URLs, and added a compliance-reviewed blog and pages for the surrounding towns.",
     lighthouse: [99, 100, 100, 100],
     data: [
       ["Live since", "May 2026"],
