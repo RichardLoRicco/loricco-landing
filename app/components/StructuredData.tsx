@@ -1,146 +1,90 @@
 import { liveApps } from "../lib/apps";
+import { services } from "../lib/services";
 
+const SITE = "https://loriccoandco.com";
+
+/*
+  One graph: the site, the business, and its principal, linked by @id.
+  - Organization, not ProfessionalService (deprecated on schema.org) and never
+    LegalService: this is not a law firm, and the markup must not suggest one.
+  - The offer catalog is built from the same list as the visible Services rows,
+    and each description is the visible paragraph word for word (Google's
+    structured-data policy: markup describes what readers can see).
+*/
 export default function StructuredData() {
-  const businessSchema = {
+  const graph = {
     "@context": "https://schema.org",
-    "@type": "ProfessionalService",
-    "@id": "https://loriccoandco.com/#business",
-    name: "LoRicco & Co",
-    url: "https://loriccoandco.com",
-    description:
-      "LoRicco & Co rebuilds and operates websites, develops AI tools, trains lawyers and small businesses, analyzes digital evidence for counsel, and advises startups. The principal is a Connecticut-admitted attorney, MBA, and software engineer. The studio also publishes iOS apps.",
-    email: "admin@loriccoandco.com",
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: "New Haven",
-      addressRegion: "CT",
-      addressCountry: "US",
-    },
-    areaServed: "United States",
-    founder: {
-      "@type": "Person",
-      name: "Richard T. LoRicco",
-      jobTitle: "Principal: Attorney (LL.M., J.D., MBA) and Software Engineer",
-      image: "https://loriccoandco.com/portrait-bw.jpg",
-      url: "https://www.richardloricco.com",
-      sameAs: [
-        "https://www.linkedin.com/in/richard-loricco-esq",
-        "https://github.com/RichardLoRicco",
-        "https://x.com/richard_loricco",
-      ],
-      alumniOf: [
-        {
-          "@type": "CollegeOrUniversity",
-          name: "University of Connecticut School of Business",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": `${SITE}/#website`,
+        url: SITE,
+        name: "LoRicco & Co.",
+        alternateName: ["LoRicco and Co", "loriccoandco"],
+        publisher: { "@id": `${SITE}/#business` },
+      },
+      {
+        "@type": "Organization",
+        "@id": `${SITE}/#business`,
+        name: "LoRicco & Co.",
+        legalName: "LoRicco & Co. LLC",
+        url: SITE,
+        description:
+          "LoRicco & Co. is the New Haven, Connecticut practice of Richard T. LoRicco, an attorney and software engineer. He builds websites and apps, trains teams to use AI and builds it into their work, takes on legal research and technical consulting for law firms, and advises startups and small businesses.",
+        email: "admin@loriccoandco.com",
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: "New Haven",
+          addressRegion: "CT",
+          addressCountry: "US",
         },
-        {
-          "@type": "CollegeOrUniversity",
-          name: "Quinnipiac University School of Law",
+        areaServed: "United States",
+        founder: { "@id": `${SITE}/#richard` },
+        sameAs: [
+          "https://x.com/richard_loricco",
+          "https://www.tiktok.com/@loriccoandco",
+          "https://www.youtube.com/@richardloricco",
+          "https://linktr.ee/richardloricco",
+        ],
+        hasOfferCatalog: {
+          "@type": "OfferCatalog",
+          name: "Services",
+          itemListElement: services.map((service) => ({
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name: service.title,
+              description: service.description,
+              provider: { "@id": `${SITE}/#business` },
+            },
+          })),
         },
-      ],
-    },
-    sameAs: [
-      "https://x.com/richard_loricco",
-      "https://www.tiktok.com/@loriccoandco",
-      "https://www.youtube.com/@richardloricco",
-      "https://linktr.ee/richardloricco",
+      },
+      {
+        "@type": "Person",
+        "@id": `${SITE}/#richard`,
+        name: "Richard T. LoRicco",
+        jobTitle: "Attorney and software engineer",
+        image: `${SITE}/portrait-bw.jpg`,
+        url: "https://www.richardloricco.com",
+        worksFor: { "@id": `${SITE}/#business` },
+        sameAs: [
+          "https://www.linkedin.com/in/richard-loricco-esq",
+          "https://github.com/RichardLoRicco",
+          "https://x.com/richard_loricco",
+        ],
+        alumniOf: [
+          { "@type": "CollegeOrUniversity", name: "University of Connecticut School of Business" },
+          { "@type": "CollegeOrUniversity", name: "Quinnipiac University School of Law" },
+        ],
+      },
     ],
-    knowsAbout: [
-      "Website redesign and SEO-safe migration",
-      "Search engine optimization",
-      "AI-search visibility (answer engine optimization, generative engine optimization)",
-      "Content strategy and attorney-advertising compliance",
-      "AI agents and workflow automation",
-      "AI education and training for lawyers and small businesses",
-      "Litigation technology and digital evidence consulting",
-      "Software architecture",
-      "iOS app development",
-      "Business and startup strategy",
-    ],
-    hasOfferCatalog: {
-      "@type": "OfferCatalog",
-      name: "Services",
-      itemListElement: [
-        {
-          "@type": "Offer",
-          itemOffered: {
-            "@type": "Service",
-            name: "Website Rebuilds with SEO-Safe Migration",
-            description:
-              "Website redesigns for law firms, professional practices, and local businesses, including URL preservation, redirects, structured data, and Search Console setup.",
-          },
-        },
-        {
-          "@type": "Offer",
-          itemOffered: {
-            "@type": "Service",
-            name: "Content & AI-Search Visibility",
-            description:
-              "Ongoing content, local SEO, and work to improve how a business appears in search engines and AI-generated answers, with attorney-advertising review for law firms.",
-          },
-        },
-        {
-          "@type": "Offer",
-          itemOffered: {
-            "@type": "Service",
-            name: "AI Agents & Integration",
-            description:
-              "AI tools for law firms and small businesses, including intake, follow-up, research, documentation, and internal workflows.",
-          },
-        },
-        {
-          "@type": "Offer",
-          itemOffered: {
-            "@type": "Service",
-            name: "Web & Mobile App Development",
-            description:
-              "iPhone apps and web apps built from the first version through App Store review and launch, including subscriptions and analytics, plus features for existing apps. The client keeps the developer accounts and App Store listing.",
-          },
-        },
-        {
-          "@type": "Offer",
-          itemOffered: {
-            "@type": "Service",
-            name: "AI Education & Training",
-            description:
-              "AI workshops for lawyers and small-business teams covering day-to-day use, common failures, and compliance concerns.",
-          },
-        },
-        {
-          "@type": "Offer",
-          itemOffered: {
-            "@type": "Service",
-            name: "Technical Consulting for Law Firms",
-            description:
-              "Digital evidence and discovery analysis, written explanations of technical records, questions for opposing experts, and advice on law-firm technology. Retained by counsel and structured as non-testifying consulting with work-product protection in mind.",
-          },
-        },
-        {
-          "@type": "Offer",
-          itemOffered: {
-            "@type": "Service",
-            name: "Contract Legal Work for Law Firms",
-            description:
-              "Legal research, research memos, and litigation and contract drafting for law firms that need another attorney on a matter, by a Connecticut-admitted attorney.",
-          },
-        },
-        {
-          "@type": "Offer",
-          itemOffered: {
-            "@type": "Service",
-            name: "Business & Startup Advisory",
-            description:
-              "Pitch decks, financial projections, competitive analysis, architecture reviews, and go-to-market strategy for startups and small businesses.",
-          },
-        },
-      ],
-    },
   };
 
   const appsSchema = {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    name: "LoRicco & Co Apps",
+    name: "LoRicco & Co. Apps",
     itemListElement: liveApps.map((app, i) => ({
       "@type": "SoftwareApplication",
       position: i + 1,
@@ -157,7 +101,7 @@ export default function StructuredData() {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(businessSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(graph) }}
       />
       <script
         type="application/ld+json"
