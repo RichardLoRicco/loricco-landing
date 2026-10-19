@@ -15,8 +15,7 @@ export default function HowWorkStarts() {
       <div className="page-gutter">
         <div className="section-head">
           <div>
-            <p className="section-num">03 &middot; How work starts</p>
-            <h2 id="how-work-starts-title" className="mt-3 balance">
+            <h2 id="how-work-starts-title" className="balance">
               How work <span className="serif-italic">starts</span>.
             </h2>
           </div>

@@ -24,7 +24,7 @@ export default function About() {
       <div className="page-gutter">
         <div className="section-head">
           <div>
-            <p className="section-num">04 &middot; About</p>
+            <p className="section-num">03 &middot; About</p>
             <h2 className="mt-3 balance">
               About the <span className="serif-italic">principal</span>.
             </h2>
@@ -33,7 +33,7 @@ export default function About() {
 
         <div className="grid gap-12 pt-14 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)] lg:gap-20">
           <Reveal>
-            <p className="drop-cap body-serif pretty" style={{ fontSize: "1.2rem", lineHeight: 1.65 }}>
+            <p className="body-serif pretty" style={{ fontSize: "1.2rem", lineHeight: 1.65 }}>
               LoRicco &amp; Co. is my practice. I&apos;m an attorney admitted in
               Connecticut and a software engineer, and I hold an MBA. I&apos;m also of
               counsel to The LoRicco Law Firm in New Haven, which is a separate

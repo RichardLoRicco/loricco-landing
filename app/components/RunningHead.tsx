@@ -10,7 +10,9 @@ import { SECTIONS, useActiveSection } from "./ActiveSection";
 export default function RunningHead() {
   const active = useActiveSection();
   const section = SECTIONS.find((s) => s.id === active);
-  const text = section ? `§ ${section.num} · ${section.label}` : "LoRicco & Co. LLC · New Haven, CT";
+  const text = section
+    ? section.num ? `§ ${section.num} · ${section.label}` : section.label
+    : "LoRicco & Co. LLC · New Haven, CT";
 
   return (
     <span className="dateline-middle" aria-hidden={section ? true : undefined}>
@@ -38,7 +40,7 @@ export function DatelineCredentials() {
       </span>
       {section && (
         <span key={section.id} className="running-head dateline-run-phone" aria-hidden="true">
-          &sect; {section.num} &middot; {section.label}
+          {section.num ? <>&sect; {section.num} &middot; {section.label}</> : section.label}
         </span>
       )}
     </span>

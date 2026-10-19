@@ -36,7 +36,7 @@ export default function Contact() {
       <div className="page-gutter">
         <div className="section-head">
           <div>
-            <p className="section-num">05 &middot; Contact</p>
+            <p className="section-num">04 &middot; Contact</p>
             <h2 className="mt-3 balance">
               Tell me what <span className="serif-italic">you&apos;re working on</span>.
             </h2>

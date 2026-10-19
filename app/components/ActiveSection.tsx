@@ -14,9 +14,10 @@ import { createContext, useContext, useEffect, useState, type ReactNode } from "
 export const SECTIONS = [
   { id: "services", num: "01", label: "Services", nav: true },
   { id: "work", num: "02", label: "Work", nav: true },
-  { id: "how-work-starts", num: "03", label: "How work starts", nav: false },
-  { id: "about", num: "04", label: "About", nav: true },
-  { id: "contact", num: "05", label: "Contact", nav: true },
+  // Unnumbered: a short coda to Work, so the numbered sections stay 01 to 04
+  { id: "how-work-starts", num: "", label: "How work starts", nav: false },
+  { id: "about", num: "03", label: "About", nav: true },
+  { id: "contact", num: "04", label: "Contact", nav: true },
 ] as const;
 
 export type SectionId = (typeof SECTIONS)[number]["id"];

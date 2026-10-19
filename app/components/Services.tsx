@@ -23,7 +23,7 @@ export default function Services() {
           {services.map((service, i) => (
             <Reveal as="li" key={service.title} delay={i * 60}>
               <article className="service-row">
-                <h3 className="service-title">{service.title}</h3>
+                <h3 className="service-title balance">{service.title}</h3>
                 <div>
                   <p className="body-serif pretty max-w-2xl" style={{ fontSize: "1.05rem" }}>
                     {service.description}
