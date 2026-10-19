@@ -42,15 +42,5 @@ export const services: Service[] = [
     short: "business and startup work",
     description:
       "Startups can hire me for much of what an early team needs. I build pitch decks, financial projections, and go-to-market plans, work as a product manager, and set up how the product gets built, or build it myself. I do the same for small businesses starting something new. This is business and technical work, not legal advice.",
-    // Richard's call (2026-10-19): legal work for anyone other than a law firm is
-    // engaged through the firm, where he is an attorney (the firm's own site lists
-    // him as "Attorney"; keep both sites in step). The relationship stays
-    // visible so the pointer is not misleading.
-    referral: {
-      before: "If you need legal work, I can take it on, or bring in the right attorney, through ",
-      linkText: "The LoRicco Law Firm",
-      href: "https://loriccolaw.com/",
-      after: " in New Haven, where I'm an attorney.",
-    },
   },
 ];
