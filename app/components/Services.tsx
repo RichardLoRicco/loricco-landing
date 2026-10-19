@@ -63,7 +63,7 @@ export default function Services() {
         </div>
 
 
-        <ol className="mt-12">
+        <ol className="mt-2">
           {services.map((service, i) => (
             <Reveal as="li" key={service.title} delay={i * 60}>
               <article className="service-row">
