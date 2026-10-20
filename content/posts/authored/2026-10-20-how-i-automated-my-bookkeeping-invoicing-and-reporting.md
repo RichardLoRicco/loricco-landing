@@ -35,7 +35,7 @@ I'm a developer, and I'd build the same safeguard into any system that touches m
 
 ## What's underneath
 
-The bank is Mercury. Every business dollar goes in and out of the LLC's account there. QuickBooks Online, on the entry-level plan, is the books of record for invoices, sales tax, receivables, and the profit and loss, and it pulls the Mercury transactions in through its own bank feed connection to Mercury, so I can see and categorize my Mercury transactions right inside QuickBooks. Mercury and QuickBooks both have connectors for Claude (MCP servers, if you want the technical term), so Claude can read the bank and work in the books directly.
+I bank with Mercury. Strictly speaking it isn't a bank. It's a financial technology company, and the accounts sit at its partner banks, which are FDIC insured. It's built for startups and online businesses, and it works like software, with an API and connections to the accounting tools I already use, which is a big part of why it fits this setup. Every business dollar goes in and out of the LLC's account there. QuickBooks Online, on the entry-level plan, is the books of record for invoices, sales tax, receivables, and the profit and loss, and it pulls the Mercury transactions in through its own bank feed connection to Mercury, so I can see and categorize my Mercury transactions right inside QuickBooks. Mercury and QuickBooks both have connectors for Claude (MCP servers, if you want the technical term), so Claude can read the bank and work in the books directly.
 
 I don't keep the books in a spreadsheet. A spreadsheet is fine for a month of cleanup, but if something gets counted twice in one, I don't want to find that out in April.
 
