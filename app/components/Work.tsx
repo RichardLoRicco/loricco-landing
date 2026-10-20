@@ -1,5 +1,8 @@
+import Image from "next/image";
+import Link from "next/link";
 import Reveal from "./Reveal";
 import SiteFrame from "./SiteFrame";
+import { liveApps } from "../lib/apps";
 
 export type Project = {
   name: string;
@@ -7,6 +10,8 @@ export type Project = {
   url: string;
   host: string;
   fullPage: string;
+  /** Pixel height of the capture (all captures are 1000px wide). */
+  fullPageHeight: number;
   fullPageAlt: string;
   description: string;
   lighthouse: [number, number, number, number];
@@ -16,8 +21,8 @@ export type Project = {
 /*
   Real, non-privileged website work. Website engagements aren't covered by the
   work-product posture that keeps consulting matters off this page.
-  Lighthouse figures are mobile runs from 2026-09-02; the full-page captures
-  are from 2026-09-03. Refresh both when the sites change materially.
+  Lighthouse figures are the median of three mobile runs on 2026-10-19; the full-page captures
+  are from 2026-10-19. Refresh both when the sites change materially.
 */
 const projects: Project[] = [
   {
@@ -26,15 +31,16 @@ const projects: Project[] = [
     url: "https://www.omnicanhelp.com/",
     host: "omnicanhelp.com",
     fullPage: "/work/omni-full.jpg",
+    fullPageHeight: 3281,
     fullPageAlt:
-      "Full homepage of omnicanhelp.com: headline reading Physical therapy, aquatic therapy and chiropractic care, followed by service cards, a warm-water therapy pool section, and five Connecticut office locations",
+      "Homepage of omnicanhelp.com, headed Physical therapy, aquatic therapy and chiropractic care, with its services, warm-water pool, and five Connecticut offices",
     description:
-      "A physical, aquatic, and chiropractic therapy practice with five Connecticut offices. I rebuilt the Squarespace site as a bilingual Next.js site with an appointment-request form running on HIPAA-eligible AWS infrastructure, and I handle content and AI-search visibility for the practice.",
-    lighthouse: [94, 100, 100, 100],
+      "A physical therapy, aquatic therapy, and chiropractic practice with five Connecticut offices. I replaced its Squarespace site with a new one in English and Spanish, built so patients can find the nearest office and call it.",
+    lighthouse: [97, 100, 100, 100],
     data: [
       ["Live since", "Aug 2026"],
       ["Languages", "EN · ES"],
-      ["Stack", "Next.js · AWS"],
+      ["Stack", "Next.js · Vercel"],
     ],
   },
   {
@@ -43,11 +49,14 @@ const projects: Project[] = [
     url: "https://loriccolaw.com/",
     host: "loriccolaw.com",
     fullPage: "/work/loriccolaw-full.jpg",
+    // Stops above the firm's verdicts block on purpose: next to my own legal
+    // services, those results could read as mine (attorney-advertising rules).
+    fullPageHeight: 1330,
     fullPageAlt:
-      "Full homepage of loriccolaw.com: headline reading Three generations of New Haven injury attorneys, followed by selected verdicts and settlements, practice areas, and the attorneys",
+      "Top of the loriccolaw.com homepage, headed Three generations of New Haven attorneys, above a photo of the firm's attorneys",
     description:
-      "A personal injury and criminal defense firm that has practiced in New Haven since 1956. I rebuilt the outdated site as a bilingual Next.js site, kept the URLs and rankings it already had, and added a compliance-reviewed blog and pages for the surrounding towns. I also handle the firm's content and AI-search visibility.",
-    lighthouse: [100, 100, 100, 100],
+      "A general practice firm in New Haven since 1956, where I'm an attorney. It's a separate business from LoRicco & Co. I rebuilt its outdated site in English and Spanish, kept its existing URLs, and added pages for the surrounding towns and a blog with every post reviewed by an attorney at the firm before it goes up.",
+    lighthouse: [99, 100, 100, 100],
     data: [
       ["Live since", "May 2026"],
       ["Languages", "EN · ES"],
@@ -62,7 +71,7 @@ export default function Work() {
   return (
     <section
       id="work"
-      aria-label="Selected client work"
+      aria-label="Client work"
       className="relative"
       style={{ padding: "var(--space-section) 0" }}
     >
@@ -71,13 +80,14 @@ export default function Work() {
           <div>
             <p className="section-num">02 &middot; Work</p>
             <h2 className="mt-3 balance">
-              Selected client <span className="serif-italic">work</span>.
+              Client <span className="serif-italic">work</span>.
             </h2>
           </div>
         </div>
 
         <p className="body-serif pretty mt-10 max-w-2xl" style={{ fontSize: "1.15rem" }}>
-          Websites I&apos;ve rebuilt and continue to maintain.
+          I rebuilt both of these sites and still maintain them, along with their
+          content and search work.
         </p>
 
         <div className="mt-16 flex flex-col gap-20 lg:gap-28">
@@ -101,7 +111,7 @@ export default function Work() {
                   </p>
 
                   <div className="mt-8">
-                    <p className="meta">Lighthouse &middot; mobile, Sep 2026</p>
+                    <p className="meta">Lighthouse &middot; mobile, Oct 2026</p>
                     <dl className="work-scores mt-3">
                       {project.lighthouse.map((score, j) => (
                         <div key={scoreLabels[j]}>
@@ -131,16 +141,39 @@ export default function Work() {
           })}
         </div>
 
+        {/* The apps as proof that the app work ships; the full list lives on /apps */}
         <Reveal>
-          <p className="marginalia footnote mt-14 max-w-2xl" style={{ textTransform: "none", letterSpacing: "0.02em" }}>
-            Lighthouse figures are mobile runs from September 2026 (performance,
-            accessibility, best practices, SEO). Consulting matters for counsel
-            are not shown here, for the reasons described{" "}
-            <a href="#about" className="link-ink">
-              below
-            </a>
-            .
-          </p>
+          <div className="mt-20 border-t border-[var(--rule-color)] pt-10">
+            <h3 style={{ fontSize: "clamp(1.5rem, 2.2vw, 2rem)" }}>Apps I&apos;ve shipped</h3>
+            <ul className="mt-6 grid grid-cols-2 gap-x-6 gap-y-5 sm:grid-cols-3 lg:grid-cols-6">
+              {liveApps.map((app) => (
+                <li key={app.slug}>
+                  <a
+                    href={app.appStoreUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group flex items-center gap-3"
+                    aria-label={`${app.name} on the App Store (opens in a new tab)`}
+                  >
+                    <span
+                      className="block h-11 w-11 shrink-0 overflow-hidden rounded-[22.5%]"
+                      style={{ border: "1px solid var(--border)" }}
+                    >
+                      <Image src={app.icon} alt="" width={44} height={44} sizes="44px" className="h-full w-full object-cover" />
+                    </span>
+                    <span className="body-serif transition-colors group-hover:text-[var(--accent)]" style={{ fontSize: "1rem" }}>
+                      {app.name}
+                    </span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+            <p className="body-serif mt-8" style={{ fontSize: "1rem" }}>
+              <Link href="/apps" className="link-ink">
+                More about the apps
+              </Link>
+            </p>
+          </div>
         </Reveal>
       </div>
     </section>

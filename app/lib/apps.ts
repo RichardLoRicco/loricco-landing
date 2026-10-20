@@ -93,6 +93,7 @@ export const apps: StudioApp[] = [
     price: "$2.99",
     priceNote: "once",
     since: "Oct 2026",
+    featured: true,
     featuredTheme: {
       surface: "featured-sky",
       border: "#232a5c",
@@ -305,7 +306,6 @@ export const apps: StudioApp[] = [
     siteUrl: "https://scrombie.loriccoandco.com/",
     price: "Free",
     priceNote: "Pro optional",
-    featured: true,
     // Colours from scrombie/Sources/Support/Theme.swift, as on scrombie.loriccoandco.com.
     featuredTheme: {
       surface: "featured-scrombie",
@@ -369,7 +369,6 @@ export const counts = {
 };
 
 /** "05" style figures, as the rest of the page prints them. */
-export const pad2 = (n: number) => String(n).padStart(2, "0");
 
 /** Spelled-out small numbers for running copy. */
 export function spell(n: number): string {

@@ -36,7 +36,7 @@ export default function Contact() {
       <div className="page-gutter">
         <div className="section-head">
           <div>
-            <p className="section-num">06 &middot; Contact</p>
+            <p className="section-num">04 &middot; Contact</p>
             <h2 className="mt-3 balance">
               Tell me what <span className="serif-italic">you&apos;re working on</span>.
             </h2>
@@ -46,10 +46,9 @@ export default function Contact() {
         <Reveal>
           <div className="pt-14">
             <p className="body-serif pretty max-w-2xl" style={{ fontSize: "1.2rem" }}>
-              Send me a note about the website, the team, the case, or the
-              business. I&apos;ll reply with a few questions, and if it makes
-              sense we&apos;ll set up a short call and I&apos;ll follow up with
-              a written review.
+              Include who you are, what you need, and when you need it. A few
+              lines is enough. I&apos;ll reply with some questions, and if it
+              makes sense we&apos;ll set up a short call.
             </p>
 
             {/* The address itself, set large, as on the personal site. It is the mailto. */}
@@ -72,8 +71,15 @@ export default function Contact() {
               <span role="status" className="sr-only">
                 {copied ? "Email address copied" : ""}
               </span>
-              <p className="meta">Replies &middot; usually one business day</p>
+              <p className="body-serif" style={{ fontSize: "1rem" }}>
+                I usually reply within one business day.
+              </p>
             </div>
+
+            <p className="body-serif mt-8 max-w-xl" style={{ fontSize: "0.95rem", color: "var(--text-secondary)" }}>
+              Writing to me doesn&apos;t make me your lawyer. If it&apos;s about a legal
+              matter, please leave out confidential details until we&apos;ve spoken.
+            </p>
           </div>
         </Reveal>
       </div>

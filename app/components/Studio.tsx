@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Reveal from "./Reveal";
-import { apps, counts, featuredApp, pad2, spell, type AppStatus, type FeaturedTheme, type StudioApp } from "../lib/apps";
+import { apps, counts, featuredApp, spell, type AppStatus, type FeaturedTheme, type StudioApp } from "../lib/apps";
 
 const gridApps = apps.filter((a) => a !== featuredApp);
 const liveGrid = gridApps.filter((a) => a.status === "live");
@@ -12,24 +12,6 @@ const statusLabel: Record<AppStatus, string> = {
   review: "In review",
   development: "In dev",
 };
-
-const statusDot: Record<AppStatus, string> = {
-  live: "#4ea35c",
-  review: "#d0a03a",
-  development: "var(--text-faint)",
-};
-
-function StatusChip({ status, label }: { status: AppStatus; label?: string }) {
-  return (
-    <span className="chip-meta">
-      <span
-        aria-hidden="true"
-        style={{ width: 5, height: 5, borderRadius: 9999, background: statusDot[status] }}
-      />
-      {label ?? statusLabel[status]}
-    </span>
-  );
-}
 
 /* App icons are full-bleed squares; the iOS mask is applied here. */
 function AppIcon({ app, size }: { app: StudioApp; size: number }) {
@@ -70,7 +52,7 @@ function AppLinks({ app }: { app: StudioApp }) {
           className="link-accent meta"
           style={{ color: "var(--accent)" }}
         >
-          App Store &rarr;
+          App Store
         </a>
       )}
       {app.siteUrl && (
@@ -82,7 +64,7 @@ function AppLinks({ app }: { app: StudioApp }) {
           className="link-accent meta"
           style={{ color: "var(--text-primary)" }}
         >
-          Website &rarr;
+          Website
         </a>
       )}
     </div>
@@ -102,13 +84,9 @@ function meta(app: StudioApp) {
   card out in one row (identity, description, details) so it never sits in a
   grid with empty cells beside it.
 */
-function AppCard({ app, index, wide = false }: { app: StudioApp; index: number; wide?: boolean }) {
+function AppCard({ app, wide = false }: { app: StudioApp; wide?: boolean }) {
   return (
-    <article className="filing filing-interactive flex h-full flex-col overflow-hidden">
-      <div className="flex items-center justify-between gap-3 border-b border-[var(--border)] px-6 py-4">
-        <span className="meta">No. {pad2(index + 1)}</span>
-        <StatusChip status={app.status} label={app.status === "live" ? "Live on App Store" : undefined} />
-      </div>
+    <article className="filing flex h-full flex-col overflow-hidden">
       <div
         className={`flex flex-1 flex-col p-6 ${
           wide ? "md:grid md:grid-cols-[minmax(0,1fr)_minmax(0,1.3fr)_minmax(0,1fr)] md:items-start md:gap-10" : ""
@@ -117,7 +95,7 @@ function AppCard({ app, index, wide = false }: { app: StudioApp; index: number; 
         <div className="flex items-center gap-4">
           <AppIcon app={app} size={56} />
           <div className="min-w-0">
-            <h4 style={{ fontSize: "clamp(1.5rem, 2.2vw, 1.85rem)", lineHeight: 1 }}>{app.name}</h4>
+            <h3 style={{ fontSize: "clamp(1.5rem, 2.2vw, 1.85rem)", lineHeight: 1 }}>{app.name}</h3>
             <p className="serif-italic mt-1" style={{ fontSize: "1.05rem" }}>
               {app.tagline}
             </p>
@@ -140,17 +118,12 @@ function AppCard({ app, index, wide = false }: { app: StudioApp; index: number; 
 }
 
 /* In development: the personal site's numbered editorial list. */
-function DevRow({ app, index }: { app: StudioApp; index: number }) {
+function DevRow({ app }: { app: StudioApp }) {
   return (
     <div className="grid grid-cols-[auto_1fr] items-start gap-5 border-b border-[var(--rule-color)] py-6">
       <AppIcon app={app} size={44} />
       <div className="min-w-0">
-        <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-          <span className="meta" style={{ color: "var(--accent)" }}>
-            {pad2(index + 1)}
-          </span>
-          <h4 style={{ fontSize: "1.35rem", lineHeight: 1.1 }}>{app.name}</h4>
-        </div>
+        <h3 style={{ fontSize: "1.35rem", lineHeight: 1.1 }}>{app.name}</h3>
         <p className="serif-italic mt-1" style={{ fontSize: "1rem" }}>
           {app.tagline}
         </p>
@@ -243,8 +216,8 @@ function Featured({ app }: { app: StudioApp }) {
       className={`${theme.surface} featured-panel relative overflow-hidden border border-(--ft-border) text-(--ft-text)`}
       style={{ ...themeVars(theme), borderRadius: "var(--radius-lg)" }}
     >
-      <div className="relative grid gap-10 p-6 sm:p-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:gap-6 lg:p-12">
-        <div className="flex flex-col">
+      <div className="relative grid min-w-0 grid-cols-1 gap-10 p-6 sm:p-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:gap-6 lg:p-12">
+        <div className="flex min-w-0 flex-col">
           <p className="flex items-center gap-3 font-mono text-[0.68rem] tracking-[0.2em] text-(--ft-accent) uppercase">
             <span>{theme.kicker[0]}</span>
             <span className="h-px w-8 bg-(--ft-accent) opacity-40" aria-hidden="true" />
@@ -254,12 +227,9 @@ function Featured({ app }: { app: StudioApp }) {
           <div className="mt-7 flex items-center gap-4">
             <AppIcon app={app} size={64} />
             <div>
-              <h3 id={`featured-${app.slug}`} style={{ fontSize: "1.9rem", color: "var(--ft-text)" }}>
+              <h2 id={`featured-${app.slug}`} style={{ fontSize: "1.9rem", color: "var(--ft-text)" }}>
                 {app.name}
-              </h3>
-              <p className="mt-1.5 font-mono text-[0.65rem] tracking-[0.12em] text-(--ft-label) uppercase">
-                {statusLabel[app.status]}
-              </p>
+              </h2>
             </div>
           </div>
 
@@ -300,17 +270,31 @@ function Featured({ app }: { app: StudioApp }) {
             </div>
           </dl>
 
-          {app.siteUrl && (
-            <div className="mt-8">
-              <a
-                href={app.siteUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`${app.name} website, ${new URL(app.siteUrl).host} (opens in a new tab)`}
-                className="btn bg-(--ft-btn) text-(--ft-btn-text) hover:bg-(--ft-btn-hover) hover:text-(--ft-btn-hover-text) focus-visible:outline-(--ft-accent)"
-              >
-                Visit the {app.name} site &rarr;
-              </a>
+          {(app.siteUrl || app.appStoreUrl) && (
+            <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
+              {app.siteUrl && (
+                <a
+                  href={app.siteUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Visit the ${app.name} site (opens in a new tab)`}
+                  className="btn max-w-full whitespace-normal text-center bg-(--ft-btn) text-(--ft-btn-text) hover:bg-(--ft-btn-hover) hover:text-(--ft-btn-hover-text) focus-visible:outline-(--ft-accent)"
+                >
+                  Visit the {app.name} site &rarr;
+                </a>
+              )}
+              {/* Featuring an app removes its grid card, so its App Store link lives here */}
+              {app.appStoreUrl && (
+                <a
+                  href={app.appStoreUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`View ${app.name} on the App Store (opens in a new tab)`}
+                  className="font-mono text-[0.72rem] tracking-[0.12em] text-(--ft-text) uppercase underline decoration-(--ft-accent) underline-offset-4 hover:text-(--ft-accent)"
+                >
+                  View on the App Store
+                </a>
+              )}
             </div>
           )}
         </div>
@@ -338,78 +322,67 @@ function Featured({ app }: { app: StudioApp }) {
   );
 }
 
-function GroupHeading({ id, label, count }: { id: string; label: string; count: number }) {
+function GroupHeading({ id, label }: { id: string; label: string }) {
   return (
-    <div className="mb-8 flex items-baseline justify-between gap-4 border-b border-[var(--rule-color)] pb-4">
-      <h3 id={id} style={{ fontSize: "clamp(1.5rem, 2.2vw, 2rem)" }}>
+    <div className="mb-8 border-b border-[var(--rule-color)] pb-4">
+      <h2 id={id} style={{ fontSize: "clamp(1.5rem, 2.2vw, 2rem)" }}>
         {label}
-      </h3>
-      <span className="meta">{pad2(count)}</span>
+      </h2>
     </div>
   );
 }
 
 const capitalize = (s: string) => s[0].toUpperCase() + s.slice(1);
 
+/* Grid spans for the live cards (see the grid comment in Studio below). */
+function liveCardSpan(i: number, n: number) {
+  const lastRow = n % 3;
+  const inLastRow = lastRow !== 0 && i >= n - lastRow;
+  const lg = !inLastRow ? "lg:col-span-2" : lastRow === 2 ? "lg:col-span-3" : "lg:col-span-6";
+  const md = i === n - 1 && n % 2 === 1 ? "md:col-span-2" : "";
+  return `${md} ${lg}`.trim();
+}
+
+/*
+  The /apps page body: the studio's own apps, as proof that the app work ships.
+  The homepage shows only the live icons (Work.tsx) and links here.
+*/
 export default function Studio() {
   return (
     <section
-      id="studio"
-      aria-label="The studio"
+      id="apps"
+      aria-labelledby="apps-title"
       className="relative"
-      style={{ padding: "var(--space-section) 0" }}
+      style={{ padding: "calc(var(--nav-h) + 4rem) 0 var(--space-section)" }}
     >
       <div className="page-gutter">
         <div className="section-head">
           <div>
-            <p className="section-num">04 &middot; Studio</p>
-            <h2 className="mt-3 balance">
-              I also build and ship my own <span className="serif-italic">apps</span>.
-            </h2>
+            <p className="section-num">Apps</p>
+            <h1 id="apps-title" className="mt-3 balance" style={{ fontSize: "clamp(2.5rem, 5.6vw, 5rem)", lineHeight: 0.96 }}>
+              I build iPhone and web apps,{" "}
+              <br className="hidden sm:block" />
+              <span className="serif-italic" style={{ fontVariationSettings: '"opsz" 144, "SOFT" 60' }}>
+                and I&apos;ve shipped my own.
+              </span>
+            </h1>
           </div>
         </div>
 
-        <div className="grid gap-10 pt-10 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)] lg:items-end lg:gap-20">
-          <p className="body-serif pretty max-w-2xl" style={{ fontSize: "1.15rem" }}>
-            {capitalize(spell(counts.live))} are live on the App Store, {spell(counts.review)} is
-            in App Review, and {spell(counts.development)} more are in development. I build them and
-            handle App Store review, subscriptions, analytics, and support. That work informs the
-            product advice I give clients.
+        <div className="mt-10 max-w-2xl">
+          {/* The review clause only appears while an app is actually in review */}
+          <p className="body-serif pretty" style={{ fontSize: "1.15rem" }}>
+            I build iPhone and web apps and handle subscriptions, analytics, and
+            support. For iPhone apps, I also take care of App Store review and launch.{" "}
+            {capitalize(spell(counts.live))} of mine are live on the App Store
+            {counts.review > 0 && <>, {spell(counts.review)} {counts.review === 1 ? "is" : "are"} in App Review,</>}
+            {" "}and {spell(counts.development)} more are in development. If you need an app
+            built or want features added to one you already have,{" "}
+            <a href="mailto:admin@loriccoandco.com?subject=Web%20and%20mobile%20apps" className="link-ink">
+              email me
+            </a>
+            .
           </p>
-
-          {/* The sentence beside it gives the same three numbers, so phones skip the ledger */}
-          <dl
-            className="hidden grid-cols-3 gap-x-6 sm:grid"
-            style={{
-              borderTop: "1px solid var(--rule-color)",
-              borderBottom: "1px solid var(--rule-color)",
-              padding: "1.25rem 0",
-            }}
-          >
-            {(
-              [
-                ["Live", counts.live],
-                ["In review", counts.review],
-                ["In dev", counts.development],
-              ] as const
-            ).map(([label, n]) => (
-              <div key={label}>
-                <dt className="meta">{label}</dt>
-                <dd
-                  className="mt-1"
-                  style={{
-                    fontFamily: "var(--ff-display)",
-                    fontSize: "2rem",
-                    lineHeight: 1,
-                    fontVariantNumeric: "tabular-nums",
-                    color: label === "Live" ? "var(--accent)" : "var(--text-primary)",
-                  }}
-                >
-                  {pad2(n)}
-                </dd>
-              </div>
-            ))}
-          </dl>
         </div>
 
         {featuredApp && (
@@ -419,22 +392,20 @@ export default function Studio() {
         )}
 
         <div className="mt-20" role="group" aria-labelledby="studio-live">
-          <GroupHeading id="studio-live" label="On the App Store" count={liveGrid.length} />
+          <GroupHeading id="studio-live" label="On the App Store" />
           {/*
-            Six-column track on desktop: the first two cards take half a row each and
-            the rest a third, so five apps fill two rows with no empty cell. On tablets
-            an odd last card spans the full row.
+            Six-column track on desktop: cards take a third of a row, and a short last
+            row is spread out (two cards take half each, one takes the full row) so
+            no cell sits empty. On tablets an odd last card spans the row.
           */}
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-6">
             {liveGrid.map((app, i) => (
               <Reveal
                 key={app.slug}
                 delay={(i % 3) * 80}
-                className={`${i < 2 ? "lg:col-span-3" : "lg:col-span-2"} ${
-                  i === liveGrid.length - 1 && liveGrid.length % 2 === 1 ? "md:col-span-2 lg:col-span-2" : ""
-                }`}
+                className={liveCardSpan(i, liveGrid.length)}
               >
-                <AppCard app={app} index={i} />
+                <AppCard app={app} />
               </Reveal>
             ))}
           </div>
@@ -442,40 +413,23 @@ export default function Studio() {
 
         {reviewGrid.length > 0 && (
           <div className="mt-20" role="group" aria-labelledby="studio-review">
-            <GroupHeading id="studio-review" label="In App Review" count={reviewGrid.length} />
+            <GroupHeading id="studio-review" label="In App Review" />
             <div className={`grid gap-6 ${reviewGrid.length > 1 ? "md:grid-cols-2 xl:grid-cols-3" : ""}`}>
               {reviewGrid.map((app, i) => (
                 <Reveal key={app.slug} delay={(i % 3) * 80}>
-                  <AppCard app={app} index={liveGrid.length + i} wide={reviewGrid.length === 1} />
+                  <AppCard app={app} wide={reviewGrid.length === 1} />
                 </Reveal>
               ))}
             </div>
           </div>
         )}
 
-        <div
-          role="group"
-          aria-labelledby="studio-dev"
-          className="mt-20 grid gap-8 border-t border-[var(--rule-color)] pt-10 lg:grid-cols-[14rem_minmax(0,1fr)] lg:gap-14 xl:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] xl:gap-16"
-        >
-          <header className="flex flex-col gap-4 lg:sticky lg:top-[calc(var(--dateline-h)+var(--nav-h)+2rem)] lg:self-start">
-            <div className="flex items-center gap-3">
-              <StatusChip status="development" label="In development" />
-              <span className="meta">{pad2(devGrid.length)}</span>
-            </div>
-            <h3 id="studio-dev" style={{ fontSize: "clamp(1.75rem, 2.6vw, 2.25rem)" }}>
-              In <span className="serif-italic">development</span>.
-            </h3>
-            <p className="body-serif" style={{ fontSize: "0.98rem" }}>
-              <em>Why it&apos;s on this page:</em> the advice I give clients on product and
-              engineering has been tested on my own apps first.
-            </p>
-          </header>
-
+        <div className="mt-20" role="group" aria-labelledby="studio-dev">
+          <GroupHeading id="studio-dev" label="In development" />
           <ol className="grid grid-cols-1 gap-x-10 md:grid-cols-2">
             {devGrid.map((app, i) => (
               <Reveal as="li" key={app.slug} delay={(i % 2) * 60}>
-                <DevRow app={app} index={i} />
+                <DevRow app={app} />
               </Reveal>
             ))}
           </ol>

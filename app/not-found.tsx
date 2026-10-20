@@ -2,7 +2,7 @@ import Link from "next/link";
 import Dateline from "./components/Dateline";
 
 export const metadata = {
-  title: "Page not found | LoRicco & Co",
+  title: "Page not found | LoRicco & Co.",
   robots: { index: false },
   alternates: { canonical: null },
 };

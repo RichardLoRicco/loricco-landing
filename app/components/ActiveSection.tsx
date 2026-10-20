@@ -7,16 +7,17 @@ import { createContext, useContext, useEffect, useState, type ReactNode } from "
   thin band near the top third of the viewport and reports which section is
   crossing it, so the navbar can highlight it and the dateline can name it.
   `num` and `label` match the "§ 0n · Label" line in each section's heading;
-  keep them in step.
+  keep them in step. `nav: false` keeps a short section out of the navbar
+  while the running head still names it.
 */
 
 export const SECTIONS = [
-  { id: "services", num: "01", label: "Services" },
-  { id: "work", num: "02", label: "Work" },
-  { id: "process", num: "03", label: "Process" },
-  { id: "studio", num: "04", label: "Studio" },
-  { id: "about", num: "05", label: "About" },
-  { id: "contact", num: "06", label: "Contact" },
+  { id: "services", num: "01", label: "Services", nav: true },
+  { id: "work", num: "02", label: "Work", nav: true },
+  // Unnumbered: a short coda to Work, so the numbered sections stay 01 to 04
+  { id: "how-work-starts", num: "", label: "How work starts", nav: false },
+  { id: "about", num: "03", label: "About", nav: true },
+  { id: "contact", num: "04", label: "Contact", nav: true },
 ] as const;
 
 export type SectionId = (typeof SECTIONS)[number]["id"];

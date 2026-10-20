@@ -1,5 +1,6 @@
 import { getAllPosts } from "@/content/posts";
 import { liveApps } from "@/app/lib/apps";
+import { services } from "@/app/lib/services";
 import { EMAIL, absoluteUrl } from "@/app/lib/site";
 
 /*
@@ -24,36 +25,32 @@ export function GET() {
     entry(post.title, `/blog/${post.slug}`, `${post.description} (Published ${post.publishedAt})`),
   );
   const apps = liveApps.map((app) =>
-    entry(app.name, (app.siteUrl ?? app.appStoreUrl ?? "/#studio") as `https://${string}`, `${app.tagline} ${app.description}`),
+    entry(app.name, (app.siteUrl ?? app.appStoreUrl ?? "/apps") as `https://${string}`, `${app.tagline} ${app.description}`),
   );
 
+  // The summary repeats the Organization description in StructuredData.tsx,
+  // and the service lines come from the same list the Services section renders.
   const body = `# LoRicco & Co.
 
-> The solo practice of Richard T. LoRicco in New Haven, Connecticut: a Connecticut-admitted attorney, MBA, and software engineer who rebuilds and operates websites, builds AI tools, trains lawyers and small-business teams, does technical consulting for counsel, and publishes iOS apps.
+> LoRicco & Co. is the New Haven, Connecticut company of Richard T. LoRicco, an attorney and software engineer. He builds websites and apps, trains teams to use AI and builds it into their work, takes on legal research and technical consulting for law firms, and works with startups and small businesses on the business and the product.
 
 Email: ${EMAIL}
 Base: New Haven, CT
 
 ## Services
 
-${[
-  entry("Websites & AI Tools", "/#services", "Website rebuilds that keep existing search rankings, ongoing site care and content, visibility in Google and AI answers, and AI tools for intake and routine work. The client owns the domain, code, content, and accounts."),
-  entry("AI Education & Training", "/#services", "Workshops for lawyers and small-business teams on what AI tools do well, where they fail, and how to use them without creating a compliance problem."),
-  entry("Technical Consulting for Law Firms", "/#services", "Digital evidence and discovery analysis, technical memos for counsel, questions for opposing experts, and firm technology guidance."),
-  entry("Contract Legal Work for Law Firms", "/#services", "Legal research, research memos, and litigation and contract drafting by a Connecticut-admitted attorney."),
-  entry("Business & Startup Advisory", "/#services", "Pitch decks, projections, competitive analysis, go-to-market strategy, and architecture reviews."),
-].join("\n")}
+${services.map((service) => entry(service.title, "/#services", service.description)).join("\n")}
 
 ## Work
 
 ${[
   entry("Work", "/#work", "Client websites the practice has rebuilt and operates, with their Lighthouse scores."),
-  entry("Process", "/#process", "How an engagement runs: discovery, strategy, design system, build, and launch."),
+  entry("How work starts", "/#how-work-starts", "Every engagement starts with a short call, then a written review of where things stand, which the client can act on with LoRicco & Co. or with someone else."),
 ].join("\n")}
 
 ## Apps
 
-Published by the studio on the App Store.
+Published by the studio on the App Store. The full list is at ${absoluteUrl("/apps")}.
 
 ${apps.join("\n")}
 

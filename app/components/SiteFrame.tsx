@@ -43,7 +43,7 @@ export default function SiteFrame({ project }: { project: Project }) {
       href={project.url}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label={`${project.name}, ${project.host}. Opens in a new tab.`}
+      aria-label={`Visit ${project.host}, ${project.name} (opens in a new tab)`}
       className="site-preview-trigger filing filing-interactive group block overflow-hidden"
       data-scrolling={scrolling || undefined}
       data-touch={touched || undefined}
@@ -51,15 +51,8 @@ export default function SiteFrame({ project }: { project: Project }) {
       onPointerCancel={onPointerCancel}
       onClick={onClick}
     >
-      <div className="flex items-center justify-between gap-3 px-5 py-4">
+      <div className="px-5 py-4">
         <span className="meta">Exhibit {project.exhibit}</span>
-        <span className="chip-meta">
-          <span
-            aria-hidden="true"
-            style={{ width: 5, height: 5, borderRadius: 9999, background: "#4ea35c" }}
-          />
-          Live
-        </span>
       </div>
 
       <div className="site-preview aspect-[16/10] border-y border-[var(--border)]">
@@ -67,7 +60,7 @@ export default function SiteFrame({ project }: { project: Project }) {
           src={project.fullPage}
           alt={project.fullPageAlt}
           width={1000}
-          height={3281}
+          height={project.fullPageHeight}
           sizes="(min-width: 1024px) 680px, calc(100vw - 2.5rem)"
         />
       </div>
