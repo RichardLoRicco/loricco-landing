@@ -11,8 +11,8 @@ tags:
   - "Agents"
   - "Bookkeeping"
 faqs:
-  - question: "Does an AI file your taxes?"
-    answer: "No. Claude prepares the worksheet and fills in the return in the state portal, but it doesn't submit it. I review the return, and then I submit and pay it myself."
+  - question: "Does Claude file your taxes?"
+    answer: "No. For Connecticut sales tax, Claude checks QuickBooks and fills in the state return in the state's portal, but it doesn't submit it. I review the return, and then I submit and pay it myself. It hasn't prepared or filed my income taxes. On that side, all it does is keep QuickBooks current."
   - question: "What does this setup cost?"
     answer: "QuickBooks Online on the entry-level plan, Mercury as the bank (no base fee for how I use it), Todoist, and the Claude subscription I already pay for because of client work. I don't have a bookkeeper yet, but I plan to have one review the chart of accounts once there are a few more months of real transactions."
   - question: "Could a small law firm or a local business do this?"
@@ -33,11 +33,9 @@ Claude doesn't do anything that reaches someone outside my business until I've c
 
 I'm a developer, and this is the safeguard I'd put in any system that touches money or other people. If Claude gets something wrong, I'll see it before it reaches a client or the state, and usually before it's saved.
 
-The scheduled sales-tax routine is stricter, because it only reads. It isn't allowed to click Save inside QuickBooks. When it opens a payment to read the date and the amount, it leaves through Cancel. The only things it's allowed to do are read through a few read-only tools, post a comment on a Todoist task, and create a Gmail draft. If it needs anything else, it stops and waits for me.
-
 ## What's underneath
 
-The bank is Mercury. Every business dollar goes in and out of the LLC's account there. QuickBooks Online, on the entry-level plan, is the books of record for invoices, sales tax, receivables, and the profit and loss, and it pulls the Mercury transactions in through the bank feed. Mercury and QuickBooks both have connectors for Claude (MCP servers, if you want the technical term), so Claude can read the bank and work in the books directly.
+The bank is Mercury. Every business dollar goes in and out of the LLC's account there. QuickBooks Online, on the entry-level plan, is the books of record for invoices, sales tax, receivables, and the profit and loss, and it pulls the Mercury transactions in through its own bank feed connection to Mercury, so I can see and categorize my Mercury transactions right inside QuickBooks. Mercury and QuickBooks both have connectors for Claude (MCP servers, if you want the technical term), so Claude can read the bank and work in the books directly.
 
 I don't keep the books in a spreadsheet. A spreadsheet is fine for a month of cleanup, but if something gets counted twice in one, I don't want to find that out in April.
 
@@ -61,15 +59,17 @@ This is the routine that's turned out to be the most useful so far.
 
 Connecticut taxes different kinds of work at different rates, so what I owe each month depends on which payments actually arrived and how each one splits. That's a reconciliation problem, and reconciliation is easy to put off until the end of the month, or the month after. The tax itself is already on every invoice, because QuickBooks calculates it when the invoice is created, and QuickBooks totals what I collected for the month.
 
-The routine is a Claude Code scheduled task, and it runs read-only. It pulls every payment, opens each one just long enough to read the date and the amount applied, then goes to Mercury and lists every deposit. It matches payments to deposits in both directions, one to one. A deposit with no QuickBooks payment behind it is the first thing it flags, because that's the case where the return would come out wrong. Then it builds the worksheet, rounds the way the form rounds, and compares its own figure to what QuickBooks says was collected. If there's a difference it can't explain, even a small one, the status is NEEDS REVIEW instead of READY, and it shows me both numbers rather than choosing one.
+The routine is a Claude Code scheduled task. While it's working out the tax and confirming it, it only reads QuickBooks and the bank. It pulls every payment from QuickBooks, opens each one just long enough to read the date and the amount applied, then goes to Mercury and lists every deposit. It matches payments to deposits in both directions, one to one. A deposit with no QuickBooks payment behind it is the first thing it flags, because that's the case where the return would come out wrong. Then it builds the worksheet, rounds the way the form rounds, and compares its own figure to what QuickBooks says was collected. If there's a difference it can't explain, even a small one, the status is NEEDS REVIEW instead of READY, and it shows me both numbers rather than choosing one.
 
 It also checks that last month's payment to the state actually went through, that the bank feed isn't stale, and whether any new vendor showed up that I need to make a decision on. It lists the vendor and leaves the decision to me.
 
-Then I file. Claude goes over the worksheet with me, opens the state's tax portal in my browser through Claude in Chrome, and fills in the return. It doesn't submit it. I review the return and confirm everything, and then I submit and pay it myself.
+The filing is the part that isn't read-only. Claude goes over the worksheet with me, opens the state's tax portal in my browser through Claude in Chrome, and fills in the return. It doesn't submit it. I review the return and confirm everything, and then I submit and pay it myself.
 
 ## Where I come in
 
 Every invoice goes out because I sent it, and every return is filed because I submitted it. When the worksheet or the reconciliation flags something, I'm the one who decides what to do about it. I also sign in to the bank, the books, and the state portal myself, because the routines never get credentials.
+
+Setting the money side up this way has let me spend more of my time on the other parts of the business, the work that brings in revenue, and the business runs more efficiently for it.
 
 ## What's next
 
