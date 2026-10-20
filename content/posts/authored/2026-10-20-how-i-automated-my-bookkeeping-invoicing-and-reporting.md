@@ -25,7 +25,7 @@ On the 12th of every month, at eight in the morning, a worksheet shows up as a c
 
 In its first month it did the matching, the math, and the list of things I needed to check.
 
-Most of the money side of this business works that way now, or is heading there. I run a one-person practice. I build websites, AI systems, and software for small firms and local businesses, I do consulting for law firms, startups, and small businesses, and I publish a few apps on the side. Clients pay me to automate the tedious parts of their operations, so it would be a little embarrassing if my own books were a pile of receipts in a drawer. At some point I pointed the same tools at my own bookkeeping, invoicing, and reporting.
+Most of the money side of this business works that way now, or is heading there. I run a one-person practice. I build websites, AI systems, and software for small firms and local businesses, I do consulting for law firms, startups, and small businesses, and I publish a few apps on the side. Clients pay me to automate the tedious parts of their operations, so it would be a little embarrassing if my own books were a pile of receipts in a drawer. At some point I pointed the same tools at my own bookkeeping, invoicing, and reporting, and I'm never going back.
 
 ## The one rule
 
