@@ -31,13 +31,13 @@ Most of the money side of this business works that way now, or is heading there.
 
 Nothing I've automated moves money, files a return, sends an invoice, or changes the books. The routines read and calculate, and anything they draft comes to me to approve.
 
-I'm a developer, and this is the safeguard I'd put in any system that touches money. An agent that only reads can still get a worksheet wrong, and I'll catch that when I review it. An agent that could write to the books could be wrong there, and I might not notice. So the sales-tax routine isn't allowed to click Save inside QuickBooks. When it opens a payment to read the date and the amount, it leaves through Cancel. The only things it's allowed to do are read through a few read-only tools, post a comment on a Todoist task, and create a Gmail draft. If it needs anything else, it stops and waits for me.
+I'm a developer, and this is the safeguard I'd put in any system that touches money. An agent that only reads can still get a worksheet wrong, and I'll catch that when I review it. If an agent could change the books, I might not catch a mistake. So the sales-tax routine isn't allowed to click Save inside QuickBooks. When it opens a payment to read the date and the amount, it leaves through Cancel. The only things it's allowed to do are read through a few read-only tools, post a comment on a Todoist task, and create a Gmail draft. If it needs anything else, it stops and waits for me.
 
 ## What's underneath
 
 The bank is Mercury. Every business dollar goes in and out of the LLC's account there. I attach receipts to the transaction in the Mercury app, and if the vendor name doesn't explain the charge, I add a one-line note. QuickBooks Online, on the entry-level plan, is the books of record for invoices, sales tax, receivables, and the profit and loss, and it pulls the Mercury transactions in through the bank feed.
 
-The next thing I want to build on this layer is a routine that goes through every Mercury transaction, matches it to QuickBooks, proposes the category and the receipt, and hands me the batch to approve. It would run under the same rule as everything else, and I'd still approve what it proposes.
+Next, I want to build a routine that goes through every Mercury transaction, matches it to QuickBooks, proposes the category and the receipt, and hands me the batch to approve. It would run under the same rule as everything else, and I'd still approve what it proposes.
 
 I don't keep the books in a spreadsheet. A spreadsheet is fine for a month of cleanup, but if something gets counted twice in one, I don't want to find that out in April.
 
@@ -71,6 +71,6 @@ Then there's the monthly close, meaning going through every transaction, attachi
 
 Three routines are written down and not running yet.
 
-One is the monthly close, prepared as a batch. A Claude Code task would walk the month's Mercury transactions, propose matches and categories, list what's missing a receipt, and hand me one approval pass. Another is a Monday-morning check that reads the books and the inbox and tells me what's past due, what's gone quiet, and what's due in the next two weeks. The last is a monthly report for each client I work with every month, drafted from what actually shipped and what the numbers did, that I'd review and send with the invoice. I'll write about each one once it has actually run for a month.
+One is the monthly close, prepared as a batch. A Claude Code task would walk the month's Mercury transactions, propose matches and categories, list what's missing a receipt, and hand me one approval pass. Another is a Monday-morning check that reads the books and the inbox and tells me what's past due, what's gone quiet, and what's due in the next two weeks. The last is a monthly report for each ongoing client, drafted from what actually shipped and what the numbers did, which I'd review and send with the invoice. I'll write about each one once it has actually run for a month.
 
 If you run a small firm or a local business and the money side is still a shoebox you deal with in April, I wouldn't start with AI. I'd start by writing down what you actually do each month. Once that's on paper, automating it is the easy part.
