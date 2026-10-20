@@ -18,7 +18,7 @@ faqs:
   - question: "Could a small law firm or a local business do this?"
     answer: "Probably, but the software is the smaller part of it. Most of the work in my setup was writing down, in plain words, what I actually do each month and what the rules are. Once that existed, giving it to an agent was straightforward."
   - question: "Can Claude change your books?"
-    answer: "Only after I confirm it. Through the QuickBooks connector it creates invoices and fixes categories, but it shows me each change first and nothing is saved until I say yes. It can't send an invoice, and nothing that goes to a client, a vendor, or the state happens without me. The sales-tax routine is stricter and only reads."
+    answer: "Only after I confirm it. It creates invoices through the QuickBooks connector and categorizes and reconciles transactions, but it shows me each change first and nothing is saved until I say yes. It can't send an invoice, and nothing that goes to a client, a vendor, or the state happens without me. The sales-tax routine is stricter and only reads."
 ---
 
 On the 12th of every month, at eight in the morning, a worksheet shows up as a comment on a Todoist task called "File and Pay Sales Use Tax." It has last month's Connecticut return worked out line by line, every client payment matched to a bank deposit, and a status at the top: READY, NEEDS REVIEW, or INCOMPLETE. I read it with my coffee. If it says READY, I log in to the state portal, enter the numbers, and pay.
@@ -49,9 +49,9 @@ I've looked at the other options for this, Muse and OpenAI's agent tools among t
 
 ## The 25th: invoices
 
-On the 25th, Claude creates the month's client invoices in QuickBooks through the connector, with the lines, the tax, and the due date. It can't send them. A Todoist task reminds me the same morning, and I open each invoice, check it against what the engagement actually says, and send it myself. It takes a few minutes a month, and I'd rather keep those minutes than send a client a wrong invoice.
+On the 25th, QuickBooks creates the month's client invoices from recurring templates, with the lines, the tax, and the due date filled in, and Claude builds any others through the QuickBooks connector. Nothing sends by itself, and Claude can't send them. A Todoist task reminds me the same morning, and I open each invoice, check it against what the engagement actually says, and send it myself. It takes a few minutes a month, and I'd rather keep those minutes than send a client a wrong invoice.
 
-The steps Claude follows, the reminder, and the check I do are all written down, so the 25th works the same way every month whether or not I remember it.
+The templates, the steps Claude follows, the reminder, and the check I do are all written down, so the 25th works the same way every month whether or not I remember it.
 
 ## The 12th: sales tax
 
