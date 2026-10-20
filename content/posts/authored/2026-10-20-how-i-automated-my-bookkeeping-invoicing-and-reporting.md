@@ -4,7 +4,7 @@ slug: "how-i-automated-my-bookkeeping-invoicing-and-reporting"
 description: "I run a one-person practice. Here's how the money side works now: what an agent prepares each month, what I still do myself, what's next, and why nothing gets filed or sent without me."
 metaTitle: "How I Automated My Bookkeeping, Invoicing, and Reporting"
 metaDescription: "How a one-person practice handles invoicing, sales tax, and bookkeeping with agents that prepare the work and a person who signs off on all of it."
-publishedAt: "2026-10-15"
+publishedAt: "2026-10-20"
 series: "Running the practice on agents"
 tags:
   - "Practice"
@@ -23,7 +23,7 @@ faqs:
 
 On the 12th of every month, at eight in the morning, a worksheet shows up as a comment on a Todoist task called "File and Pay Sales Use Tax." It has last month's Connecticut return worked out line by line, every client payment matched to a bank deposit, and a status at the top: READY, NEEDS REVIEW, or INCOMPLETE. I read it with coffee. If it says READY, I log in to the state portal, enter the numbers, and pay.
 
-That's the idea, anyway. The first month it took three tries, and I was signed in to everything by nine. It still did the legwork. The matching, the math, and the list of things to check were all done before I sat down, and that's the part I never want to do by hand again.
+In its first month it did the legwork: the matching, the math, and the list of things to check. That's the part I never want to do by hand again.
 
 Most of the money side of this business works that way now, or is heading there. I run a one-person practice, building websites, AI systems, and software for small firms and local businesses, and I publish a few apps on the side. Clients pay me to automate the tedious parts of their operations, so it would be a little embarrassing if my own books were a pile of receipts in a drawer. At some point I pointed the same tools at my own bookkeeping, invoicing, and reporting. This is what that looks like today, what I still do myself, and what's next.
 
@@ -63,7 +63,7 @@ It also checks that last month's payment to the state actually went through, tha
 
 ## What I still do by hand
 
-More than the opening paragraph suggests, and on purpose. I approve and send every invoice. I file and pay every return. When the worksheet flags something, I'm the one who looks at it and decides. I sign in to the bank, the books, and the state portal myself, because the routines never get credentials, which is also why the first run stalled until I showed up.
+More than the opening paragraph suggests, and on purpose. I approve and send every invoice. I file and pay every return. When the worksheet flags something, I'm the one who looks at it and decides. I sign in to the bank, the books, and the state portal myself, because the routines never get credentials.
 
 And then there's the monthly close: going through every transaction, attaching what's missing, reconciling the account, reading the P&L. I don't have a routine for that yet. Right now it happens in pieces, mostly when the sales-tax worksheet flags a stale feed or an unrecorded charge, which is a reminder, not a system. I'm not proud of that part. It's also the next thing on the list.
 
