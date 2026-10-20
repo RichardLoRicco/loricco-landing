@@ -17,8 +17,8 @@ faqs:
     answer: "QuickBooks Online on the entry-level plan, Mercury as the bank (no base fee for how I use it), Todoist, and the Claude subscription I already pay for because of client work. I don't have a bookkeeper yet, but I plan to have one review the chart of accounts once there are a few more months of real transactions."
   - question: "Could a small law firm or a local business do this?"
     answer: "Probably, but the software is the smaller part of it. Most of the work in my setup was writing down, in plain words, what I actually do each month and what the rules are. Once that existed, giving it to an agent was straightforward."
-  - question: "Why don't you let the agents write to QuickBooks?"
-    answer: "Because I'm a developer, and a system that touches money should have a safeguard that doesn't depend on the agent getting it right. Keeping it read-only is a cheap one. If the agent gets a worksheet wrong, I catch it when I review, and nothing in the books has changed."
+  - question: "Can Claude change your books?"
+    answer: "Only after I confirm it. Through the QuickBooks connector it creates invoices and fixes categories, but it shows me each change first and nothing is saved until I say yes. It can't send an invoice, and nothing that goes to a client, a vendor, or the state happens without me. The sales-tax routine is stricter and only reads."
 ---
 
 On the 12th of every month, at eight in the morning, a worksheet shows up as a comment on a Todoist task called "File and Pay Sales Use Tax." It has last month's Connecticut return worked out line by line, every client payment matched to a bank deposit, and a status at the top: READY, NEEDS REVIEW, or INCOMPLETE. I read it with my coffee. If it says READY, I log in to the state portal, enter the numbers, and pay.
@@ -29,27 +29,29 @@ Most of the money side of this business works that way now, or is heading there.
 
 ## The one rule
 
-Nothing I've automated moves money, files a return, sends an invoice, or changes the books. The routines read and calculate, and anything they draft comes to me to approve.
+Claude doesn't do anything that reaches someone outside my business until I've confirmed it. That covers filing a return with the state, sending an invoice to a client, paying a vendor, and sending an email. Inside the business it does a lot of the work. It creates my invoices, categorizes transactions, and reconciles the bank against QuickBooks, and even there it shows me each change and waits for me to confirm it before anything is saved.
 
-I'm a developer, and this is the safeguard I'd put in any system that touches money. An agent that only reads can still get a worksheet wrong, and I'll catch that when I review it. If an agent could change the books, I might not catch a mistake. So the sales-tax routine isn't allowed to click Save inside QuickBooks. When it opens a payment to read the date and the amount, it leaves through Cancel. The only things it's allowed to do are read through a few read-only tools, post a comment on a Todoist task, and create a Gmail draft. If it needs anything else, it stops and waits for me.
+I'm a developer, and this is the safeguard I'd put in any system that touches money or other people. If Claude gets something wrong, I see it before it's saved, and well before it reaches a client or the state.
+
+The sales-tax routine is stricter, because it only reads. It isn't allowed to click Save inside QuickBooks. When it opens a payment to read the date and the amount, it leaves through Cancel. The only things it's allowed to do are read through a few read-only tools, post a comment on a Todoist task, and create a Gmail draft. If it needs anything else, it stops and waits for me.
 
 ## What's underneath
 
-The bank is Mercury. Every business dollar goes in and out of the LLC's account there. I attach receipts to the transaction in the Mercury app, and if the vendor name doesn't explain the charge, I add a one-line note. QuickBooks Online, on the entry-level plan, is the books of record for invoices, sales tax, receivables, and the profit and loss, and it pulls the Mercury transactions in through the bank feed.
+The bank is Mercury. Every business dollar goes in and out of the LLC's account there. QuickBooks Online, on the entry-level plan, is the books of record for invoices, sales tax, receivables, and the profit and loss, and it pulls the Mercury transactions in through the bank feed. Mercury and QuickBooks both have connectors for Claude (MCP servers, if you want the technical term), so Claude can read the bank and work in the books directly.
 
-Next, I want to build a routine that goes through every Mercury transaction, matches it to QuickBooks, proposes the category and the receipt, and hands me the batch to approve. It would run under the same rule as everything else, and I'd still approve what it proposes.
+That's how I do my reconciliation. Claude goes through the Mercury transactions, matches each one to what's in QuickBooks, makes sure everything is categorized properly, and checks that QuickBooks reflects what's actually in the bank. It shows me what it found and what it wants to change, and I review it and confirm each change before it's made.
 
 I don't keep the books in a spreadsheet. A spreadsheet is fine for a month of cleanup, but if something gets counted twice in one, I don't want to find that out in April.
 
-Every routine I've built runs on Claude Code, as a scheduled task in the desktop app. It reaches the bank and the books through my own signed-in browser, using the Claude in Chrome extension, and through QuickBooks' API connector, and it talks to me through Todoist and Gmail. There's no custom code in any of it. Each routine is a Markdown file in a private repo that says what to read, what to compute, what to flag, and what it isn't allowed to touch. The same repo holds the rest of the rules, like the chart of accounts, how to record a client lunch versus a laptop, and how an owner draw gets labeled so it never looks like an expense. Anything recurring gets written down the same way, with the date it happens and the steps. If I want to change what happens on the 12th, I edit the file. The scheduled task just points at it.
+Every routine I've built runs on Claude Code, as a scheduled task in the desktop app. It reaches the bank and the books through the Mercury and QuickBooks connectors, and through my own signed-in browser with the Claude in Chrome extension when it needs a screen the connector doesn't cover, and it talks to me through Todoist and Gmail. There's no custom code in any of it. Each routine is a Markdown file in a private repo that says what to read, what to compute, what to flag, and what it isn't allowed to touch. The same repo holds the rest of the rules, like the chart of accounts, how to record a client lunch versus a laptop, and how an owner draw gets labeled so it never looks like an expense. Anything recurring gets written down the same way, with the date it happens and the steps. If I want to change what happens on the 12th, I edit the file. The scheduled task just points at it.
 
 I've looked at the other options for this, Muse and OpenAI's agent tools among them, and I keep coming back to Claude. For this kind of work, reading a bank feed and a set of invoices and reconciling them without inventing anything, Anthropic's Opus 5.5 and Fable models are the ones I trust right now. That could change. Until an agent like Muse or Grokbot ships a model I enjoy working with as much and trust as much, I'm staying with Anthropic.
 
 ## The 25th: invoices
 
-Monthly client invoices are created by QuickBooks recurring templates on the 25th. The template fills in the lines, the tax, and the due date, and a Todoist task reminds me the same morning. I open each one, check it against what the engagement actually says, and approve it, and then the invoice and the email go out. It takes a few minutes a month, and I'd rather keep those minutes than send a client a wrong invoice.
+On the 25th, Claude creates the month's client invoices in QuickBooks through the connector, with the lines, the tax, and the due date. It can't send them. A Todoist task reminds me the same morning, and I open each invoice, check it against what the engagement actually says, and send it myself. It takes a few minutes a month, and I'd rather keep those minutes than send a client a wrong invoice.
 
-The template, the reminder, and the check I do are all written down, so the 25th works the same way every month whether or not I remember it.
+The steps Claude follows, the reminder, and the check I do are all written down, so the 25th works the same way every month whether or not I remember it.
 
 ## The 12th: sales tax
 
@@ -65,12 +67,12 @@ It also checks that last month's payment to the state actually went through, tha
 
 I do more by hand than the opening suggests, and that's deliberate. I approve and send every invoice, and I file and pay every return. When the worksheet flags something, I'm the one who looks at it and decides what to do. I also sign in to the bank, the books, and the state portal myself, because the routines never get credentials.
 
-Then there's the monthly close, meaning going through every transaction, attaching whatever's missing, reconciling the account, and reading the P&L. I don't have a routine for that yet. Right now it happens in pieces, mostly when the sales-tax worksheet flags a stale feed or an unrecorded charge. I'm not proud of that, but it's the next thing on the list.
+Then there's the monthly close, meaning going through every transaction, reconciling the account, and reading the P&L. Claude does the reconciliation with me, but it isn't a scheduled routine yet. I sit down and start it, and I read the P&L myself.
 
 ## What's next
 
 Three routines are written down and not running yet.
 
-One is the monthly close, prepared as a batch. A Claude Code task would walk the month's Mercury transactions, propose matches and categories, list what's missing a receipt, and hand me one approval pass. Another is a Monday-morning check that reads the books and the inbox and tells me what's past due, what's gone quiet, and what's due in the next two weeks. The last is a monthly report for each ongoing client, drafted from what actually shipped and what the numbers did, which I'd review and send with the invoice. I'll write about each one once it has actually run for a month.
+One is the monthly close as a scheduled routine, so the reconciliation I do with Claude now runs on its own and hands me one batch of changes to confirm. Another is a Monday-morning check that reads the books and the inbox and tells me what's past due, what's gone quiet, and what's due in the next two weeks. The last is a monthly report for each ongoing client, drafted from what actually shipped and what the numbers did, which I'd review and send with the invoice. I'll write about each one once it has actually run for a month.
 
 If you run a small firm or a local business and the money side is still a shoebox you deal with in April, I wouldn't start with AI. I'd start by writing down what you actually do each month. Once that's on paper, automating it is the easy part.
