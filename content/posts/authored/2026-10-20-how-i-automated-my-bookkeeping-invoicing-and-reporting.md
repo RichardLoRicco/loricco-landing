@@ -12,16 +12,16 @@ tags:
   - "Bookkeeping"
 faqs:
   - question: "Does an AI file your taxes?"
-    answer: "No. The routine prepares a worksheet, and I file and pay in the state portal myself. It doesn't have access to any tool that can file a return, move money, or change the books."
+    answer: "No. Claude prepares the worksheet and fills in the return in the state portal, but it doesn't submit it. I review the return, and then I submit and pay it myself."
   - question: "What does this setup cost?"
     answer: "QuickBooks Online on the entry-level plan, Mercury as the bank (no base fee for how I use it), Todoist, and the Claude subscription I already pay for because of client work. I don't have a bookkeeper yet, but I plan to have one review the chart of accounts once there are a few more months of real transactions."
   - question: "Could a small law firm or a local business do this?"
     answer: "Probably, but the software is the smaller part of it. Most of the work in my setup was writing down, in plain words, what I actually do each month and what the rules are. Once that existed, giving it to an agent was straightforward."
-  - question: "Can Claude change your books?"
-    answer: "Only after I confirm it. It creates invoices through the QuickBooks connector and categorizes and reconciles transactions, but it shows me each change first and nothing is saved until I say yes. It can't send an invoice, and nothing that goes to a client, a vendor, or the state happens without me. The sales-tax routine is stricter and only reads."
+  - question: "Does Claude change your books?"
+    answer: "Yes, with me. It creates invoices through the QuickBooks connector on its own, and I check each one before it goes out. For categories and the reconciliation, it goes over each change with me first, and nothing is saved until I say yes. Nothing that goes to a client, a vendor, or the state happens without me."
 ---
 
-On the 12th of every month, at eight in the morning, a worksheet shows up as a comment on a Todoist task called "File and Pay Sales Use Tax." It has last month's Connecticut return worked out line by line, every client payment matched to a bank deposit, and a status at the top: READY, NEEDS REVIEW, or INCOMPLETE. I read it with my coffee. If it says READY, I log in to the state portal, enter the numbers, and pay.
+On the 12th of every month, at eight in the morning, a worksheet shows up as a comment on a Todoist task called "File and Pay Sales Use Tax." It has last month's Connecticut return worked out line by line, every client payment matched to a bank deposit, and a status at the top: READY, NEEDS REVIEW, or INCOMPLETE. I read it with my coffee. If it says READY, Claude opens the state portal and fills in the return, and I check it, submit it, and pay.
 
 In its first month it did the matching, the math, and the list of things I needed to check.
 
@@ -29,17 +29,15 @@ Most of the money side of this business works that way now, or is heading there.
 
 ## The one rule
 
-Claude doesn't do anything that reaches someone outside my business until I've confirmed it. That covers filing a return with the state, sending an invoice to a client, paying a vendor, and sending an email. Inside the business it does a lot of the work. It creates my invoices, categorizes transactions, and reconciles the bank against QuickBooks, and even there it shows me each change and waits for me to confirm it before anything is saved.
+Claude doesn't do anything that reaches someone outside my business until I've confirmed it. That covers filing a return with the state, sending an invoice to a client, paying a vendor, and sending an email. Inside the business it does a lot of the work. It creates my invoices, categorizes transactions, and reconciles the bank against QuickBooks. Most of those changes it goes over with me first, and nothing is saved until I say yes. Invoices are the exception. It creates them on its own, and I check each one before it goes out.
 
-I'm a developer, and this is the safeguard I'd put in any system that touches money or other people. If Claude gets something wrong, I see it before it's saved, and well before it reaches a client or the state.
+I'm a developer, and this is the safeguard I'd put in any system that touches money or other people. If Claude gets something wrong, I'll see it before it reaches a client or the state, and usually before it's saved.
 
-The sales-tax routine is stricter, because it only reads. It isn't allowed to click Save inside QuickBooks. When it opens a payment to read the date and the amount, it leaves through Cancel. The only things it's allowed to do are read through a few read-only tools, post a comment on a Todoist task, and create a Gmail draft. If it needs anything else, it stops and waits for me.
+The scheduled sales-tax routine is stricter, because it only reads. It isn't allowed to click Save inside QuickBooks. When it opens a payment to read the date and the amount, it leaves through Cancel. The only things it's allowed to do are read through a few read-only tools, post a comment on a Todoist task, and create a Gmail draft. If it needs anything else, it stops and waits for me.
 
 ## What's underneath
 
 The bank is Mercury. Every business dollar goes in and out of the LLC's account there. QuickBooks Online, on the entry-level plan, is the books of record for invoices, sales tax, receivables, and the profit and loss, and it pulls the Mercury transactions in through the bank feed. Mercury and QuickBooks both have connectors for Claude (MCP servers, if you want the technical term), so Claude can read the bank and work in the books directly.
-
-That's how I do my reconciliation. Claude goes through the Mercury transactions, matches each one to what's in QuickBooks, makes sure everything is categorized properly, and checks that QuickBooks reflects what's actually in the bank. It shows me what it found and what it wants to change, and I review it and confirm each change before it's made.
 
 I don't keep the books in a spreadsheet. A spreadsheet is fine for a month of cleanup, but if something gets counted twice in one, I don't want to find that out in April.
 
@@ -53,26 +51,28 @@ On the 25th, QuickBooks creates the month's client invoices from recurring templ
 
 The templates, the steps Claude follows, the reminder, and the check I do are all written down, so the 25th works the same way every month whether or not I remember it.
 
+## Reconciling the bank
+
+Once a month I reconcile Mercury against QuickBooks with Claude. It's on a schedule, but I sit down and go through it myself. Claude looks at each Mercury transaction and what's in QuickBooks, matches them up, and proposes a category for anything that needs one. When it isn't sure what a transaction was for, it asks me, and we talk it through before it picks a category. By the end, QuickBooks should reflect what's actually in the bank, and nothing Claude changes is saved until I've said yes.
+
 ## The 12th: sales tax
 
 This is the routine that's turned out to be the most useful so far.
 
-Connecticut taxes different kinds of work at different rates, so what I owe each month depends on which payments actually arrived and how each one splits. That's a reconciliation problem, and reconciliation is easy to put off until the end of the month, or the month after.
+Connecticut taxes different kinds of work at different rates, so what I owe each month depends on which payments actually arrived and how each one splits. That's a reconciliation problem, and reconciliation is easy to put off until the end of the month, or the month after. The tax itself is already on every invoice, because QuickBooks calculates it when the invoice is created, and QuickBooks totals what I collected for the month.
 
 The routine is a Claude Code scheduled task, and it runs read-only. It pulls every payment, opens each one just long enough to read the date and the amount applied, then goes to Mercury and lists every deposit. It matches payments to deposits in both directions, one to one. A deposit with no QuickBooks payment behind it is the first thing it flags, because that's the case where the return would come out wrong. Then it builds the worksheet, rounds the way the form rounds, and compares its own figure to what QuickBooks says was collected. If there's a difference it can't explain, even a small one, the status is NEEDS REVIEW instead of READY, and it shows me both numbers rather than choosing one.
 
 It also checks that last month's payment to the state actually went through, that the bank feed isn't stale, and whether any new vendor showed up that I need to make a decision on. It lists the vendor and leaves the decision to me.
 
-## What I still do by hand
+Then I file. Claude goes over the worksheet with me, opens the state's tax portal in my browser through Claude in Chrome, and fills in the return. It doesn't submit it. I review the return and confirm everything, and then I submit and pay it myself.
 
-I do more by hand than the opening suggests, and that's deliberate. I approve and send every invoice, and I file and pay every return. When the worksheet flags something, I'm the one who looks at it and decides what to do. I also sign in to the bank, the books, and the state portal myself, because the routines never get credentials.
+## Where I come in
 
-Then there's the monthly close, meaning going through every transaction, reconciling the account, and reading the P&L. Claude does the reconciliation with me, but it isn't a scheduled routine yet. I sit down and start it, and I read the P&L myself.
+Every invoice goes out because I sent it, and every return is filed because I submitted it. When the worksheet or the reconciliation flags something, I'm the one who decides what to do about it. I also sign in to the bank, the books, and the state portal myself, because the routines never get credentials.
 
 ## What's next
 
-Three routines are written down and not running yet.
-
-One is the monthly close as a scheduled routine, so the reconciliation I do with Claude now runs on its own and hands me one batch of changes to confirm. Another is a Monday-morning check that reads the books and the inbox and tells me what's past due, what's gone quiet, and what's due in the next two weeks. The last is a monthly report for each ongoing client, drafted from what actually shipped and what the numbers did, which I'd review and send with the invoice. I'll write about each one once it has actually run for a month.
+Two routines are written down and not running yet. One is a Monday-morning check that reads the books and the inbox and tells me what's past due, what's gone quiet, and what's due in the next two weeks. The other is a monthly report for each ongoing client, drafted from what actually shipped and what the numbers did, which I'd review and send with the invoice. I'll write about each one once it has actually run for a month.
 
 If you run a small firm or a local business and the money side is still a shoebox you deal with in April, I wouldn't start with AI. I'd start by writing down what you actually do each month. Once that's on paper, automating it is the easy part.
