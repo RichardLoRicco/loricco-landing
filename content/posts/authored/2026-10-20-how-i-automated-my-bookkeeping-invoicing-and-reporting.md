@@ -31,7 +31,7 @@ Most of the money side of this business works that way now, or is heading there.
 
 Claude doesn't do anything that reaches someone outside my business until I've confirmed it. That covers filing a return with the state, sending an invoice to a client, paying a vendor, and sending an email. Inside the business, however, it does a lot of the work. It creates my invoices, categorizes transactions, and reconciles the bank against QuickBooks. Most of those changes it goes over with me first, and nothing is saved until I say yes. Invoices are the exception. It creates them on its own, and I check each one before it goes out.
 
-I'm a developer, and this is the safeguard I'd put in any system that touches money or other people. If Claude gets something wrong, I'll see it before it reaches a client or the state, and usually before it's saved.
+I'm a developer, and I'd build the same safeguard into any system that touches money or other people. The safeguard is a person who has to approve anything before it goes out, and in my business that person is me. If Claude gets something wrong, I'll see it before it reaches a client or the state, and usually before it's saved.
 
 ## What's underneath
 
