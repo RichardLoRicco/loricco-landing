@@ -63,7 +63,7 @@ The routine is a Claude Code scheduled task. While it's working out the tax and 
 
 It also checks that last month's payment to the state actually went through, that the bank feed isn't stale, and whether any new vendor showed up that I need to make a decision on. It lists the vendor and leaves the decision to me.
 
-The filing is the part that isn't read-only. Claude goes over the worksheet with me, opens the state's tax portal in my browser through Claude in Chrome, and fills in the return. It doesn't submit it. I review the return and confirm everything, and then I submit and pay it myself.
+When it's time to file, Claude goes over the worksheet with me, opens the state's tax portal in my browser through Claude in Chrome, and fills in the return. It doesn't submit it. I review the return and confirm everything, and then I submit and pay it myself.
 
 ## Where I come in
 
