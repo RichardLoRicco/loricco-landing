@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { SECTIONS, useActiveSection } from "./ActiveSection";
@@ -21,6 +22,7 @@ function navLinks(onHome: boolean) {
 export default function Navbar() {
   const pathname = usePathname();
   const onHome = pathname === "/";
+  const onBlog = pathname === "/blog" || pathname.startsWith("/blog/");
   const links = navLinks(onHome);
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -71,6 +73,9 @@ export default function Navbar() {
                 <span>{label}</span>
               </a>
             ))}
+            <Link href="/blog" aria-current={onBlog ? "page" : undefined} className="nav-link">
+              <span>Blog</span>
+            </Link>
             <div className="ml-2 flex items-center gap-3 pl-3" style={{ borderLeft: "1px solid var(--border)" }}>
               <ThemeToggle />
               <a href={`mailto:${EMAIL}`} className="btn btn-primary nav-cta">
@@ -127,6 +132,15 @@ export default function Navbar() {
               </span>
             </a>
           ))}
+          <Link
+            href="/blog"
+            aria-current={onBlog ? "page" : undefined}
+            onClick={() => setMenuOpen(false)}
+            className="nav-link"
+            style={{ justifyContent: "space-between" }}
+          >
+            <span>Blog</span>
+          </Link>
           <div
             style={{
               display: "flex",
